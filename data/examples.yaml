@@ -1,0 +1,298 @@
+---
+- title: Hello, World!
+  code: |
+    ```inko
+    import std::stdio::stdout
+
+    # This will print "Hello, world!"
+    # to STDOUT.
+    stdout.print('Hello, world!')
+    ```
+- title: Process communication
+  code: |
+    ```inko
+    import std::process
+    import std::stdio::stdout
+
+    let pid = process.spawn {
+      let message = process.receive as String
+
+      # This will print "ping" to STDOUT.
+      stdout.print(message)
+
+      process.send(pid: 0, message: 'pong')
+    }
+
+    process.send(pid: pid, message: 'ping')
+
+    let response = process.receive as String
+
+    # This will print "pong" to STDOUT.
+    stdout.print(response)
+    ```
+
+- title: Type safe process communication
+  code: |
+    ```inko
+    import std::process
+
+    let sender = process.channel lambda (receiver) {
+      let number = receiver.receive
+
+      # Here the compiler knows that
+      # "number" is always an Integer:
+      number + 5
+    }
+
+    # This is OK:
+    sender.send(2)
+
+    # This will produce a type error:
+    sender.send('oops')
+    ```
+
+- title: Generic types
+  code: |
+    ```inko
+    object CustomArray!(T) {
+      def init {
+        let @values: Array!(T) = []
+      }
+
+      def push(value: T) -> T {
+        @values.push(value)
+      }
+    }
+
+    let array = CustomArray.new
+
+    # This is OK:
+    array.push(10)
+
+    # This will produce a type error:
+    array.push('oops')
+    ```
+
+- title: Error handling
+  code: |
+    ```inko
+    import std::error::StandardError
+    import std::stdio::stderr
+
+    def withdraw(euros: Integer) !! StandardError {
+      euros.negative?.if_true {
+        throw StandardError
+          .new('Invalid number of Euros!')
+      }
+
+      # ...
+    }
+
+    # "withdraw" might throw a "StandardError",
+    # so we *must* use "try" when using "withdraw".
+    try withdraw(euros: 5)
+
+    # We can also handle the error, if needed:
+    try withdraw(euros: 5) else (error) {
+      stderr.print(error.message)
+    }
+
+    # "try!" terminates the program upon
+    # encountering an error:
+    try! withdraw(euros: 5)
+    ```
+
+- title: Reading from a file
+  code: |
+    ```inko
+    import std::fs::file
+    import std::stdio::stdout
+
+    # This will open a file in read-only
+    # mode. The use of "try!" causes the
+    # program to abort (= a panic) if the
+    # file could not be opened.
+    let readme =
+      try! file.read_only('README.md')
+
+    let content =
+      try! readme.read_string
+
+    stdout.print(content)
+    ```
+
+- title: Type safe file operations
+  code: |
+    ```inko
+    import std::fs::file
+
+    let readme =
+      try! file.read_only('README.md')
+
+    # This will produce a type error, since
+    # the file is opened in read-only mode.
+    readme.write_string('oops')
+
+    # This also won't work, because we can
+    # not remove a read-only file.
+    readme.remove
+    ```
+
+- title: Unit testing
+  code: |
+    ```inko
+    import std::test
+    import std::test::assert
+
+    test.group 'Integer.+', do (group) {
+      group.test 'Summing two Integers', {
+        try assert.equal(1 + 2, 3)
+      }
+    }
+
+    test.run
+    ```
+
+- title: Implementing traits
+  code: |
+    ```inko
+    import std::conversion::ToString
+    import std::stdio::stdout
+
+    object Person impl ToString {
+      def init(name: String) {
+        let @name = name
+      }
+
+      def to_string -> String {
+        @name
+      }
+    }
+
+    let person = Person.new('Alice')
+
+    # This will print "Alice" to STDOUT:
+    stdout.print(person)
+    ```
+
+- title: Gradual typing
+  code: |
+    ```inko
+    def static(a: Integer, b: Integer) -> Integer {
+      a + b
+    }
+
+    def dynamic(a, b) {
+      a + b
+    }
+
+    # This is OK, and will produce "7":
+    static(2, 5)
+
+    # This will produce a type error:
+    static(2, 'oops')
+
+    # This is OK, because the arguments
+    # of "dynamic" are dynamically typed:
+    dynamic(2, 5)
+
+    # This is also OK:
+    dynamic('hello', ' world')
+
+    # This will produce a runtime error,
+    # because `Integer + String` is not valid:
+    dynamic(2, 'oops')
+    ```
+
+- title: Handling Nil values
+  code: |
+    ```inko
+    # ?User means we may return a User, or Nil.
+    def find(email: String) -> ?User {
+      # ...
+    }
+
+    def update(user: User) {
+      # ...
+    }
+
+    let user = find('alice@example.com')
+
+    # This will return the username if a User
+    # was returned, or Nil if "user" is Nil:
+    user.username
+
+    # This will produce a type error, because
+    # neither User nor Nil responds to "oops":
+    user.oops
+
+    # This won't work, because "user" might
+    # be Nil:
+    update(user)
+
+    # This is OK, because `*user` tells the
+    # compiler that we are passing a User
+    # instead of a ?User:
+    user.if_true {
+      update(*user)
+    }
+    ```
+
+- title: Factorial
+  code: |
+    ```inko
+    # Inko supports tail call elimination, so this
+    # method will not overflow the call stack.
+    def fact(number: Integer, acc = 1) -> Integer {
+      number.zero?.if_true {
+        # This will return from the method, also
+        # known as a "block return".
+        return acc
+      }
+
+      fact(number - 1, acc * number)
+    }
+
+    fact(15) # => 1307674368000
+    ```
+
+- title: Loops
+  code: |
+    ```inko
+    import std::stdio::stdout
+
+    let mut number = 0
+
+    { number < 10 }.while_true {
+      stdout.print('This loop will run 10 times')
+
+      number += 10
+    }
+
+    {
+      stdout.print('This is an infinite loop.')
+    }.loop
+    ```
+
+- title: Iterating over collections
+  code: |
+    ```inko
+    import std::stdio::stdout
+
+    let numbers = [10, 20, 30]
+
+    # "each" allows us to easily iterate over
+    # a collection:
+    numbers.each do (number) {
+      stdout.print(number)
+    }
+
+    # Using "iter" we can obtain an external,
+    # composable iterator:
+    let new_numbers = numbers
+      .iter
+      .map do (num) { num * 2 }
+      .to_array
+
+    new_numbers # => [20, 40, 60]
+    ```

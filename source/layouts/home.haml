@@ -1,0 +1,75 @@
+!!!
+%html{ lang: 'en' }
+  %head
+    = partial('head',
+      locals: { keywords: current_page.data.tags,
+                description: current_page.data.description })
+  %body
+    .top
+      %header.grid
+        .logo
+          🐦 Inko
+        .expand-menu
+          %a{ href: '#' }
+            ☰
+        %nav.main-menu
+          %ul
+            %li
+              %a.active(href="#")
+                Home
+            %li
+              %a(href="#")
+                About
+            %li
+              %a(href="#")
+                Documentation
+            %li
+              %a(href="#")
+                Community
+            %li
+              %a(href="#")
+                News
+
+    .jumbotron
+      .grid
+        .introduction
+          %h1
+            Safe and concurrent object-oriented programming, without the
+            headaches.
+
+          %p
+            Inko is a programming language for writing concurrent
+            object-oriented programs. Lorem ipsum dolor sit amet. This is just
+            dummy text because I haven't really thought this out yet.
+
+          %p
+            Here is another paragraph of random text, mostly to see how this
+            section behaves when there's quite some text to display.
+
+          %a.button.green(href="#")
+            Download Inko
+          %a.button(href="#")
+            Learn more
+        .code-examples
+          %select{ title: 'Choose a code example to display' }
+            - data.examples.each_with_index do |example, index|
+              %option{ 'data-example' => example['title'],
+              selected: index.zero? ? 'selected' : nil }
+                = example['title']
+
+          - data.examples.each_with_index do |example, index|
+            .example{ 'data-example' => example['title'],
+            class: index.zero? ? 'visible' : nil }
+              = markdown(example['code'])
+
+    .features
+      .grid
+        - data.features.each do |feature|
+          %section
+            %h1
+              = feature['icon']
+              = feature['title']
+            = markdown(feature['body'])
+            %p
+              %a{ href: feature['url'], title: 'Learn more about this feature' }
+                Learn more

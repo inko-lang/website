@@ -1,0 +1,30 @@
+select {
+  font-size: .8rem;
+}
+
+.button {
+  background: lighten($blue, 7%);
+  border: 1px solid darken($blue, 10%);
+  border-radius: 3px;
+  box-shadow: 0 2px 2px $button-shadow;
+  color: $white;
+  display: inline-block;
+  font-size: .9rem;
+  font-weight: bold;
+  margin: 0 $text-bottom-margin / 2 $text-bottom-margin 0;
+  padding: 10px;
+  text-decoration: none;
+
+  &:hover {
+    background: $blue;
+  }
+}
+
+.button.green {
+  background: darken($green, 5%);
+  border: 1px solid darken($green, 18%);
+
+  &:hover {
+    background: darken($green, 15%);
+  }
+}

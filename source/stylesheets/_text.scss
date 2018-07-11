@@ -1,0 +1,68 @@
+html {
+  font-family: 'Open Sans', sans-serif;
+  font-size: 12px;
+  line-height: 1.5;
+
+  @media #{$media-wide} {
+    font-size: 16px;
+  }
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+h5 {
+  font-size: .8rem;
+}
+
+h6 {
+  font-size: .7rem;
+}
+
+p {
+  margin-bottom: $text-bottom-margin;
+}
+
+ul,
+ol {
+  margin-bottom: $text-bottom-margin;
+  padding-left: $text-left-margin;
+}
+
+ul li {
+  list-style: disc inside;
+}
+
+ol li {
+  list-style: decimal inside;
+}
+
+blockquote {
+  font-style: italic;
+  margin: 0 $text-left-margin;
+}
+
+pre {
+  font-size: 0.8rem;
+  line-height: 1.3;
+  margin-left: $text-left-margin;
+  white-space: pre-wrap;
+}
+
+p code,
+li code {
+  color: $code-red;
+}
