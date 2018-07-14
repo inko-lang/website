@@ -9,7 +9,6 @@
 // Bar at the top, containing the logo and navigation menu.
 .top {
   border-bottom: 1px solid $grey;
-  min-height: 70px;
 
   header {
     align-items: center;
@@ -19,11 +18,15 @@
       grid-template-columns: 1fr 3fr;
     }
   }
+
+  .grid {
+    grid-gap: 0;
+  }
 }
 
 // Logo displayed at the top left of the website.
 .logo {
-  font-size: 38px;
+  font-size: 3rem;
   font-weight: bold;
   line-height: 65px;
 }

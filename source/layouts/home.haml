@@ -14,42 +14,21 @@
             ☰
         %nav.main-menu
           %ul
-            %li
-              %a.active(href="#")
-                Home
-            %li
-              %a(href="#")
-                About
-            %li
-              %a(href="#")
-                Documentation
-            %li
-              %a(href="#")
-                Community
-            %li
-              %a(href="#")
-                News
+            - data.menu.each do |link|
+              %li
+                = link_to(link['title'], link['url'])
 
     .jumbotron
       .grid
         .introduction
           %h1
-            Safe and concurrent object-oriented programming, without the
-            headaches.
+            = data.jumbotron.title
 
-          %p
-            Inko is a programming language for writing concurrent
-            object-oriented programs. Lorem ipsum dolor sit amet. This is just
-            dummy text because I haven't really thought this out yet.
+          = markdown(data.jumbotron.body)
 
-          %p
-            Here is another paragraph of random text, mostly to see how this
-            section behaves when there's quite some text to display.
-
-          %a.button.green(href="#")
-            Download Inko
-          %a.button(href="#")
-            Learn more
+          - data.jumbotron.buttons.each do |button|
+            %a.button{ class: button['color'], href: button[:url] }
+              = button['text']
         .code-examples
           %select{ title: 'Choose a code example to display' }
             - data.examples.each_with_index do |example, index|
@@ -63,13 +42,9 @@
               = markdown(example['code'])
 
     .features
+      %h1
       .grid
         - data.features.each do |feature|
           %section
-            %h1
-              = feature['icon']
-              = feature['title']
+            %h1= feature['title']
             = markdown(feature['body'])
-            %p
-              %a{ href: feature['url'], title: 'Learn more about this feature' }
-                Learn more

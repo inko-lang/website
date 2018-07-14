@@ -1,10 +1,35 @@
 (function() {
     "use strict";
 
+    let show_example = function(select) {
+        let value = select.value;
+
+        document
+            .querySelector('.code-examples .example.visible')
+            .classList
+            .remove('visible');
+
+        document
+            .querySelector(`.code-examples .example[data-example="${value}"]`)
+            .classList
+            .add('visible');
+    };
+
+    let show_random_example = function(select) {
+        let options = select.querySelectorAll('option');
+        let index = Math.floor(Math.random() * options.length);
+
+        options[index].selected = true
+
+        show_example(select);
+    };
+
     document.addEventListener('DOMContentLoaded', function() {
         document
             .querySelector('.expand-menu a')
-            .addEventListener('click', function() {
+            .addEventListener('click', function(event) {
+                event.preventDefault();
+
                 document
                     .querySelector('.main-menu')
                     .classList
@@ -13,18 +38,10 @@
 
         let select_example = document.querySelector('.code-examples select');
 
-        select_example.addEventListener('click', function() {
-            let value = select_example.value;
-
-            document
-                .querySelector('.code-examples .example.visible')
-                .classList
-                .remove('visible');
-
-            document
-                .querySelector(`.code-examples .example[data-example="${value}"]`)
-                .classList
-                .add('visible');
+        select_example.addEventListener('change', function(event) {
+            show_example(event.target);
         });
+
+        show_random_example(select_example);
     });
 })();

@@ -1,0 +1,55 @@
+---
+- title: Concurrent
+  body: |
+    Writing concurrent programs with Inko is easy. Its lightweight processes
+    allow you to run many processes concurrently, without having to worry about
+    using too many resources.
+
+    Processes don't share their memory, and communicate by passing messages,
+    which are deep copied. This removes the need for explicit synchronisation,
+    and makes data race conditions impossible.
+- title: Object-oriented
+  body: |
+    Inko is an object-oriented programming language, drawing heavy inspiration
+    from Smalltalk, Self, and Ruby. There are no statements used for
+    conditionals and loops, instead Inko uses message passing for (almost)
+    everything. This allows objects to control the behaviour of these kind of
+    expressions.
+
+    Named objects can be defined, similar to classes. Traits can be used to
+    define reusable behaviour and required methods. Inheritance is not supported,
+    preventing objects from being coupled together too tight.
+- title: Safe
+  body: |
+    Inko's error handling model forces you to handle runtime exceptions, such
+    as network timeouts, at the call site. This prevents exceptions from
+    occurring in unexpected places.
+
+    Critical errors, such as division by zero errors will terminate the program
+    immediately, known as a panic. By using panics for critical errors, instead
+    of exceptions, the amount of exceptions that need to be handled is
+    drastically reduced.
+- title: Gradually typed
+  body: |
+    Inko is gradually typed, with static typing being the default. This gives
+    you the safety of a statically typed language, and the option to exchange
+    this for the flexibility of a dynamically typed language.
+
+    Type inference removes the need for type annotations in many places. Generic
+    types can be defined, removing the need for duplicating code just to support
+    different types.
+- title: Garbage collected
+  body: |
+    Inko uses a high performance parallel garbage collector, based on
+    [Immix][immix]. Each process is garbage collected independently, removing
+    the need for a global stop-the-world phase. For most processes, garbage
+    collection should take no more than a few milliseconds.
+
+    [immix]: http://www.cs.utexas.edu/users/speedway/DaCapo/papers/immix-pldi-2008.pdf
+
+- title: Interpreted
+  body: |
+    Inko is an interpreted programming language, with a bytecode virtual machine
+    written in Rust. Bytecode is portable between CPU architectures and
+    operating systems, removing the need for compiling your program for
+    different architectures.

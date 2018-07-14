@@ -208,13 +208,9 @@
   code: |
     ```inko
     # ?User means we may return a User, or Nil.
-    def find(email: String) -> ?User {
-      # ...
-    }
+    def find(email: String) -> ?User { }
 
-    def update(user: User) {
-      # ...
-    }
+    def update(user: User) { }
 
     let user = find('alice@example.com')
 
@@ -223,17 +219,14 @@
     user.username
 
     # This will produce a type error, because
-    # neither User nor Nil responds to "oops":
+    # neither User doesn't respond to "oops":
     user.oops
 
-    # This won't work, because "user" might
-    # be Nil:
+    # This won't work, because "update" takes a User, and not a ?User.
     update(user)
 
-    # This is OK, because `*user` tells the
-    # compiler that we are passing a User
-    # instead of a ?User:
     user.if_true {
+      # `*user` tells the compiler to treat "user" as a User, not a ?User.
       update(*user)
     }
     ```

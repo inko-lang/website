@@ -1,5 +1,5 @@
 select {
-  font-size: .8rem;
+  font-size: 1rem;
 }
 
 .button {
@@ -12,7 +12,7 @@ select {
   font-size: .9rem;
   font-weight: bold;
   margin: 0 $text-bottom-margin / 2 $text-bottom-margin 0;
-  padding: 10px;
+  padding: 0.5rem;
   text-decoration: none;
 
   &:hover {
