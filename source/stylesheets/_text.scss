@@ -4,7 +4,7 @@ html {
   line-height: 1.5;
 
   @media #{$media-wide} {
-    font-size: 14px;
+    font-size: 16px;
   }
 }
 
@@ -39,7 +39,7 @@ p {
 ul,
 ol {
   margin-bottom: $text-bottom-margin;
-  padding-left: $text-left-margin;
+  padding-left: 0;
 }
 
 ul li {
@@ -65,4 +65,13 @@ pre {
 p code,
 li code {
   color: $code-red;
+}
+
+a {
+  color: $link-color;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
 }

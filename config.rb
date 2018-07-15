@@ -8,8 +8,8 @@ page '/*.xml', layout: false
 page '/*.json', layout: false
 page '/*.txt', layout: false
 page '/*.ico', layout: false
-page '/', layout: :home
 page '/404.html', layout: :'404', directory_index: false
+page '/', layout: :home
 
 Time.zone = 'UTC'
 

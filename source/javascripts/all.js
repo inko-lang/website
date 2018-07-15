@@ -38,10 +38,12 @@
 
         let select_example = document.querySelector('.code-examples select');
 
-        select_example.addEventListener('change', function(event) {
-            show_example(event.target);
-        });
+        if ( select_example ) {
+            select_example.addEventListener('change', function(event) {
+                show_example(event.target);
+            });
 
-        show_random_example(select_example);
+            show_random_example(select_example);
+        }
     });
 })();

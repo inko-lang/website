@@ -1,0 +1,12 @@
+.top
+  %header.grid
+    .logo
+      Inko
+    .expand-menu
+      %a{ href: '#' }
+        ☰
+    %nav.main-menu
+      %ul
+        - data.menu.each do |link|
+          %li
+            = link_to(link['title'], link['url'])

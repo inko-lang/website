@@ -2,21 +2,10 @@
 %html{ lang: 'en' }
   %head
     = partial('head',
-      locals: { keywords: current_page.data.tags,
+      locals: { keywords: current_page.data.keywords,
                 description: current_page.data.description })
   %body
-    .top
-      %header.grid
-        .logo
-          🐦 Inko
-        .expand-menu
-          %a{ href: '#' }
-            ☰
-        %nav.main-menu
-          %ul
-            - data.menu.each do |link|
-              %li
-                = link_to(link['title'], link['url'])
+    = partial('top')
 
     .jumbotron
       .grid
@@ -42,9 +31,10 @@
               = markdown(example['code'])
 
     .features
-      %h1
       .grid
         - data.features.each do |feature|
           %section
             %h1= feature['title']
             = markdown(feature['body'])
+
+    = partial('footer')

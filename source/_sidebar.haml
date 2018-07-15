@@ -1,0 +1,7 @@
+%aside.sidebar
+  - data.sidebar.each do |section|
+    %section
+      %h1= section['title']
+      %ul
+        - section['links'].each do |link|
+          %li= link_to(link['title'], link['url'])

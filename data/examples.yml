@@ -4,8 +4,7 @@
     ```inko
     import std::stdio::stdout
 
-    # This will print "Hello, world!"
-    # to STDOUT.
+    # This will print "Hello, world!" to STDOUT.
     stdout.print('Hello, world!')
     ```
 - title: Process communication

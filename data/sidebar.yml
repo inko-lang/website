@@ -1,0 +1,19 @@
+---
+- title: Learn
+  links:
+    - title: Install Inko
+      url: '#'
+    - title: Browse the documentation
+      url: '#'
+    - title: 'Read the manual'
+      url: '#'
+- title: Integration
+  links:
+    - title: Vim
+      url: https://gitlab.com/inko-lang/inko.vim
+- title: Contribute
+  links:
+    - title: Source code repository
+      url: '#'
+    - title: Issue tracker
+      url: '#'

@@ -1,0 +1,18 @@
+!!!
+%html{ lang: 'en' }
+  %head
+    = partial('head',
+      locals: { keywords: current_page.data.keywords,
+                description: current_page.data.description })
+  %body
+    = partial('top')
+
+    .page
+      .grid
+        %article
+          %header
+            %h1= current_page.data.title
+          = yield
+        = partial('sidebar')
+
+    = partial('footer')
