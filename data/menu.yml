@@ -1,13 +1,13 @@
 ---
 - title: Home
-  url: '/'
+  url: /
 - title: About
-  url: '/about'
+  url: /about
 - title: Documentation
-  url: '#'
+  url: /documentation
 - title: Community
-  url: '#'
+  url: /community
 - title: Contribute
-  url: '#'
+  url: /contribute
 - title: News
-  url: '#'
+  url: /news

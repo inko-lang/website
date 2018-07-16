@@ -2,10 +2,10 @@
 title: Safe and concurrent object-oriented programming, without the headaches.
 buttons:
   - text: Install
-    url: '#'
+    url: /install
     color: 'green'
-  - text: 'Learn more'
-    url: '#'
+  - text: Learn more
+    url: /about
 body: |
   Inko is a gradually-typed, safe, object-oriented programming languages for
   writing concurrent programs. By using lightweight isolated processes, data

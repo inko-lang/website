@@ -2,11 +2,11 @@
 - title: Learn
   links:
     - title: Install Inko
-      url: '#'
+      url: /install
     - title: Browse the documentation
-      url: '#'
+      url: /documentation
     - title: 'Read the manual'
-      url: '#'
+      url: https://manual.inko-lang.org
 - title: Integration
   links:
     - title: Vim
@@ -14,6 +14,12 @@
 - title: Contribute
   links:
     - title: Source code repository
-      url: '#'
+      url: https://gitlab.com/inko-lang/inko
     - title: Issue tracker
-      url: '#'
+      url: https://gitlab.com/inko-lang/inko/issues
+- title: Participate
+  links:
+    - title: /r/inko on Reddit
+      url: https://www.reddit.com/r/inko/
+    - title: Chat on Gitter
+      url: https://gitter.im/inko-lang/Lobby

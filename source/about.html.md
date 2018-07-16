@@ -20,6 +20,8 @@ years the goals of the language were narrowed down to what it is today. This
 took many iterations, with both the syntax and language as a whole changing
 frequently over the years.
 
+## Features
+
 Inko brings several features to the table to address issues found in many other
 languages. For example, instead of using shared memory, every process uses its
 own heap. This removes the need for having to worry about synchronisation access
@@ -36,10 +38,18 @@ to:
 1. Gradual typing, allowing you to choose between the safety of static typing
    and the flexibility of dynamic typing.
 
+By combining these features, we hope to provide a programming language that
+allows one to write concurrent object-oriented programs, without the headaches.
+
+## Inspiration
+
 Inko draws inspiration from many other languages, such as: Smalltalk, Self,
 Ruby, Erlang, and Rust. Some of Inko's features are borrowed from these
 languages. For example, the concurrency model is heavily inspired by Erlang, and
 the use of message passing for `if` and the likes is taken from Smalltalk.
 
-By combining all this, we hope to provide a programming language that allows one
-to write concurrent object-oriented programs, without the headaches.
+## Getting started
+
+Interested in getting started with Inko? First make sure to [install
+Inko](/install), then head over to the [documentation](/documentation) to find
+out more.
