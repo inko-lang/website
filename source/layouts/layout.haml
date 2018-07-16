@@ -4,7 +4,7 @@
     = partial('head',
       locals: { keywords: current_page.data.keywords,
                 description: current_page.data.description })
-  %body
+  %body{ class: current_page.data.html_class }
     = partial('top')
 
     .page

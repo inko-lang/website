@@ -5,7 +5,9 @@
       url: /install
     - title: Browse the documentation
       url: /documentation
-    - title: 'Read the manual'
+    - title: Find answers in the FAQ
+      url: /faq
+    - title: Read the manual
       url: https://manual.inko-lang.org
 - title: Integration
   links:
