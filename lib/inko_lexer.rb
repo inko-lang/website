@@ -17,8 +17,8 @@ module Rouge
       state :root do
         rule(/\s+/m, Text::Whitespace)
         rule(/#.*$/, Comment::Single)
-        rule(/"[^"]+"/, Str::Double)
-        rule(/'[^']+'/, Str::Single)
+        rule(/"[^"]*"/, Str::Double)
+        rule(/'[^']*'/, Str::Single)
         rule(/-?(?:0|[1-9]\d*)\.\d+(?:e[+-]?\d+)?/i, Num::Float)
         rule(/-?(?:0|[1-9]\d*)(?:e[+-]?\d+)?/i, Num::Integer)
 
