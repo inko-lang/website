@@ -199,6 +199,38 @@ user.if true: {
 }
 ```
 
+Inko uses gradual typing, with static typing being the default. This means that
+by default you get all the benefits (e.g. safety) of a statically typed
+language, but are free to trade this with the flexibility of a dynamically typed
+language. This allows you to for example build a prototype using dynamic typing,
+then switch to static typing when you have a better understanding of the
+variables involved.
+
+```inko
+def static(a: Integer, b: Integer) -> Integer {
+  a + b
+}
+
+def dynamic(a, b) {
+  a + b
+}
+
+# This is OK, and will produce "7":
+static(2, 5)
+
+# This will produce a type error:
+static(2, 'oops')
+
+# This is OK, because the arguments # of "dynamic" are dynamically typed:
+dynamic(2, 5)
+
+# This is also OK:
+dynamic('hello', ' world')
+
+# This will produce a runtime error, # because `Integer + String` is not valid:
+dynamic(2, 'oops')
+```
+
 Last but not least, most of Inko is written in Inko itself. For example, this is
 the implementation of `String.starts_with?`:
 
