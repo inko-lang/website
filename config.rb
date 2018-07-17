@@ -45,7 +45,7 @@ end
 activate :directory_indexes
 
 activate :s3_sync do |s3|
-  s3.bucket = 'TODO'
+  s3.bucket = 'inko-lang.org'
   s3.region = 'eu-west-1'
   s3.acl = 'public-read'
   s3.index_document = 'index.html'
