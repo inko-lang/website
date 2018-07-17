@@ -8,7 +8,7 @@ page '/*.xml', layout: false
 page '/*.json', layout: false
 page '/*.txt', layout: false
 page '/*.ico', layout: false
-page '/404.html', layout: :'404', directory_index: false
+page '/404.html', layout: :layout, directory_index: false
 page '/', layout: :home
 
 Time.zone = 'UTC'
@@ -54,7 +54,7 @@ end
 default_caching_policy max_age: 24 * 60 * 60
 
 activate :cloudfront do |cf|
-  cf.distribution_id = 'TODO'
+  cf.distribution_id = 'E2461OP4YFCUOQ'
   cf.access_key_id = ENV['AWS_ACCESS_KEY_ID']
   cf.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
 end
