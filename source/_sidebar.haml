@@ -5,3 +5,9 @@
       %ul
         - section['links'].each do |link|
           %li= link_to(link['title'], link['url'])
+  - unless blog.articles.empty?
+    %section
+      %h1 Recent news
+      %ul
+        - blog.articles.first(5).each do |article|
+          %li= link_to(article.title, article)

@@ -34,9 +34,11 @@ set :haml, format: :html5
 activate :syntax, line_numbers: false
 
 activate :blog do |blog|
-  blog.prefix = 'blog'
+  blog.prefix = 'news'
   blog.sources = '{title}.html'
   blog.permalink = '{title}/index.html'
+  blog.layout = 'news'
+  blog.summary_separator = '<!-- READ MORE -->'
 end
 
 activate :directory_indexes

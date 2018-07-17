@@ -9,10 +9,12 @@
 
     .page
       .grid
-        %article{ class: current_page.data.html_class }
+        %article.news-article
           %header
-            %h1= current_page.data.title
+            %h1= current_article.title
+            = partial('news_meta', locals: { article: current_article })
           = yield
+
         = partial('sidebar')
 
     = partial('footer')

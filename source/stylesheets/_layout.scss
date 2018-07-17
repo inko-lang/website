@@ -214,3 +214,23 @@
 .faq h3 {
   font-size: 1rem;
 }
+
+.news-index h1 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.news-meta {
+  color: $dark-grey;
+  font-size: .8rem;
+  margin: 0;
+}
+
+.news-article h1 {
+  margin-bottom: 0;
+}
+
+.news-article img {
+  display: block;
+  margin: 0 auto;
+}
