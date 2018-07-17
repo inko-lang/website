@@ -3,7 +3,8 @@
   %head
     = partial('head',
       locals: { keywords: current_page.data.keywords,
-                description: current_page.data.description })
+                description: current_page.data.description,
+                canonical: current_article.url })
   %body
     = partial('top')
 
