@@ -6,8 +6,11 @@ stages:
 deploy:
   image: ruby:2.5-alpine
   stage: deploy
+  variables:
+    DISTRIBUTION_ID: E2461OP4YFCUOQ
   before_script:
-    - apk add --update build-base nodejs tzdata
+    - echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
+    - apk add --update build-base nodejs tzdata aws-cli
     - gem install bundler --no-ri --no-rdoc
     - ruby --version
     - gem --version

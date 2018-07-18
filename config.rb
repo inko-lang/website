@@ -58,7 +58,7 @@ end
 default_caching_policy max_age: 24 * 60 * 60
 
 activate :cloudfront do |cf|
-  cf.distribution_id = 'E2461OP4YFCUOQ'
+  cf.distribution_id = ENV['DISTRIBUTION_ID']
   cf.access_key_id = ENV['AWS_ACCESS_KEY_ID']
   cf.secret_access_key = ENV['AWS_SECRET_ACCESS_KEY']
 end
