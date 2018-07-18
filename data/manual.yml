@@ -1,0 +1,30 @@
+---
+chapters:
+  - title: General
+    pages:
+      - /manual
+  - title: Syntax
+    pages:
+      - /manual/syntax/introduction
+      - /manual/syntax/encoding
+      - /manual/syntax/keywords
+      - /manual/syntax/identifiers
+      - /manual/syntax/instance-attributes
+      - /manual/syntax/comments
+      - /manual/syntax/constants-and-types
+      - /manual/syntax/let
+      - /manual/syntax/literals
+      - /manual/syntax/binary-expressions
+      - /manual/syntax/sending-messages
+      - /manual/syntax/reassignments
+      - /manual/syntax/slicing
+      - /manual/syntax/try
+      - /manual/syntax/imports
+      - /manual/syntax/compiler-directives
+  - title: Compiler
+    pages:
+      - /manual/compiler/introduction
+      - /manual/compiler/environment-variables
+      - /manual/compiler/directories
+  - title: Virtual machine
+    pages: []

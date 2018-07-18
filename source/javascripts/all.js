@@ -36,6 +36,17 @@
                     .toggle('visible');
             });
 
+        document
+            .querySelector('.expand-sidebar a')
+            .addEventListener('click', function(event) {
+                event.preventDefault();
+
+                document
+                    .querySelector('.sidebar')
+                    .classList
+                    .toggle('visible');
+            });
+
         let select_example = document.querySelector('.code-examples select');
 
         if ( select_example ) {

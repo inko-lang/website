@@ -8,7 +8,7 @@
     - title: Find answers in the FAQ
       url: /faq
     - title: Read the manual
-      url: https://manual.inko-lang.org
+      url: /manual
 - title: Integration
   links:
     - title: Vim

@@ -36,8 +36,7 @@ repositories. Some of the more commonly used ones are:
 * <https://gitlab.com/inko-lang/inko>: the repository containing the compiler,
   runtime, and virtual machine. Also used for reporting bugs, requesting
   features, and more.
-* <https://gitlab.com/inko-lang/website>: the source code of this website.
-  Issues related to the website (e.g. typos) should be reported here.
-* <https://gitlab.com/inko-lang/manual>: the source code of [the
-  manual](https://manual.inko-lang.org).
+* <https://gitlab.com/inko-lang/website>: the source code of this website,
+  including the manual. Issues related to the website (e.g. typos) should be
+  reported here.
 * <https://gitlab.com/inko-lang/inko.vim>: Vim support for Inko.

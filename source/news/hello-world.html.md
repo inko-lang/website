@@ -17,10 +17,10 @@ There is still a lot of work to do on the website, but hopefully the current
 state of it is good enough to serve as a starting point for those interested in
 learning more about Inko.
 
-The [manual](https://manual.inko-lang.org) is a guide for both new and
-experienced users, covering a wide range of topics related to Inko, how to use
-it, its internals, and more. There is also an [FAQ](/faq), providing answers to
-many frequently asked questions.
+The [manual](/manual) is a guide for both new and experienced users, covering a
+wide range of topics related to Inko, how to use it, its internals, and more.
+There is also an [FAQ](/faq), providing answers to many frequently asked
+questions.
 
 We are also taking the first steps towards building a healthy community,
 starting with the official [subreddit](https://www.reddit.com/r/inko/), and a
