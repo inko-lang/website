@@ -33,6 +33,6 @@ Tyson is still hard at work, but we do already have one sketch to illustrate
 what Konni will (roughly) look like (click on the image to view the full sized
 image):
 
-[![Konni the cyber parrot](hello-world/konni-sketch.thumb.jpg)](hello-world/konni-sketch.jpg "View full image")
+[![Konni the cyber parrot](/images/hello-world/konni-sketch.thumb.jpg)](/images/hello-world/konni-sketch.jpg "View full image")
 
 A logo will be created once the designs are complete.
