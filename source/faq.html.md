@@ -417,3 +417,22 @@ them.
 Aside from any bugs preventing this from happening, yes. Inko makes use of
 Rust's drop semantics to ensure that when a program terminates all of its
 resources (memory, sockets, etc) are cleaned up before shutting down.
+
+### How many processes can run concurrently and in parallel?
+
+The virtual machine has two thread pools: one for executing regular processes,
+and one for processes that may perform blocking operations, such as reading from
+a file. These pools are known as the primary and secondary pool respectively.
+
+By default, both pools use a number of threads equal to the number of _logical_
+CPU cores. This means that a CPU with 8 logical cores can run 16 processes
+concurrently: 8 on the primary pool, and 8 on secondary pool.
+
+Note that we say _concurrently_ opposed to _in parallel_. This is because it's
+up to the CPU to decide how many of these threads are running in parallel.
+
+### Can I change the number of threads used by the VM?
+
+Yes. The environment variables `INKO_PRIMARY_THREADS` and
+`INKO_SECONDARY_THREADS` can be used to control the number of threads used for
+the primary and secondary pool.
