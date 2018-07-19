@@ -24,28 +24,23 @@
         show_example(select);
     };
 
+    let bind_expander = function(button_expr, expand_expr) {
+        let button = document.querySelector(button_expr);
+
+        if ( !button ) {
+            return;
+        }
+
+        button.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            document.querySelector(expand_expr).classList.toggle('visible');
+        });
+    }
+
     document.addEventListener('DOMContentLoaded', function() {
-        document
-            .querySelector('.expand-menu a')
-            .addEventListener('click', function(event) {
-                event.preventDefault();
-
-                document
-                    .querySelector('.main-menu')
-                    .classList
-                    .toggle('visible');
-            });
-
-        document
-            .querySelector('.expand-sidebar a')
-            .addEventListener('click', function(event) {
-                event.preventDefault();
-
-                document
-                    .querySelector('.sidebar')
-                    .classList
-                    .toggle('visible');
-            });
+        bind_expander('.expand-menu a', '.main-menu');
+        bind_expander('.expand-sidebar a', '.sidebar');
 
         let select_example = document.querySelector('.code-examples select');
 
