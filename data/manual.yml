@@ -3,6 +3,9 @@ chapters:
   - title: General
     pages:
       - /manual
+  - title: Getting started
+    pages:
+      - /manual/getting-started/hello-world
   - title: Syntax
     pages:
       - /manual/syntax/introduction
