@@ -180,6 +180,7 @@
 
   article {
     grid-row: 2;
+    max-width: 690px;
 
     h1 {
       @media #{$media-narrow} {
