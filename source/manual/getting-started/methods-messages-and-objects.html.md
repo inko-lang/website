@@ -68,6 +68,15 @@ Here, despite the default argument value's type being `Integer`, we specify the
 type to be `Numeric`. If the given type is not compatible with the default
 argument's type, the compiler will produce an error.
 
+By default, arguments can not be reassigned. To allow this, you can define the
+arguments as mutable:
+
+```inko
+def example(mut number = 10) {
+  number = 20
+}
+```
+
 ### Throw type
 
 If a method throws an error, it must specify the error type in the method
