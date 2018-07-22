@@ -7,6 +7,7 @@ chapters:
     pages:
       - /manual/getting-started/hello-world
       - /manual/getting-started/methods-messages-and-objects
+      - /manual/getting-started/instance-attributes
   - title: Syntax
     pages:
       - /manual/syntax/introduction
