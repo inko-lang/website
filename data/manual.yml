@@ -9,6 +9,7 @@ chapters:
       - /manual/getting-started/methods-messages-and-objects
       - /manual/getting-started/variables
       - /manual/getting-started/instance-attributes
+      - /manual/getting-started/modules
   - title: Syntax
     pages:
       - /manual/syntax/introduction
