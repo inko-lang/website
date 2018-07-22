@@ -25,34 +25,23 @@ characters, should be treated as a single comment. For example, this is a single
 comment:
 
 ```inko
----
-title: This is the first line of the comment.
----
----
-title: This is the second line of the comment.
----
+# This is the first line of the comment.
+# This is the second line of the comment.
 ```
 
 Here both lines are treated as a single comment. Empty lines between comments
 are ignored, meaning the following is still treated as a single comment:
 
 ```inko
----
-title: This is the first line of the comment.
----
+# This is the first line of the comment.
 
-
----
-title: This is the second line of the comment.
----
+# This is the second line of the comment.
 ```
 
 The following example shows two separate comments:
 
 ```inko
----
-title: This is the first comment.
----
+# This is the first comment.
 10 # This is a second, separate comment.
 ```
 
@@ -63,9 +52,7 @@ Regular comments start with a `#`, and stop at the end of the line.
 Example:
 
 ```inko
----
-title: This is a regular comment.
----
+# This is a regular comment.
 ```
 
 ## Documentation comments
