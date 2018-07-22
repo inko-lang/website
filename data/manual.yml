@@ -6,6 +6,7 @@ chapters:
   - title: Getting started
     pages:
       - /manual/getting-started/hello-world
+      - /manual/getting-started/methods-messages-and-objects
   - title: Syntax
     pages:
       - /manual/syntax/introduction
