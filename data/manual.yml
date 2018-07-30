@@ -3,6 +3,7 @@ chapters:
   - title: General
     pages:
       - /manual
+      - /manual/ienv
   - title: Getting started
     pages:
       - /manual/getting-started/hello-world
