@@ -11,6 +11,7 @@ chapters:
       - /manual/getting-started/variables
       - /manual/getting-started/instance-attributes
       - /manual/getting-started/modules
+      - /manual/getting-started/types
   - title: Syntax
     pages:
       - /manual/syntax/introduction
