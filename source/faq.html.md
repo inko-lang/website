@@ -292,6 +292,40 @@ the runtime.
 You should never use these instructions directly, as they are not part of the
 public API and may change (or be removed) at any time.
 
+### Does Inko support sum types and/or enums?
+
+No. Traits remove the need for sum types and enums.
+
+### Does Inko support pattern matching like many functional languages?
+
+No. Pattern matching based on type (patterns) is something we feel does not
+belong in an object oriented programming language. You should use traits
+instead.
+
+Having said that, this doesn't mean you can't check what kind of object you are
+dealing with. Using the `std::reflection` module we can do this if truly
+necessary:
+
+```inko
+import std::reflection
+
+reflection.kind_of?('hello', String).if_true {
+  # ...
+}
+```
+
+However, code such as this should be avoided as much as possible.
+
+### Does Inko use pass by value, or pass by reference?
+
+Pass by value, but all values are pointers to heap allocated objects. This means
+that passing an object to a method will result in that method using a copy of
+_the pointer_, not the object it points to.
+
+### Does Inko have any move semantics similar to Rust?
+
+No.
+
 ## The compiler
 
 ### Why is the compiler written in Ruby?
@@ -411,6 +445,13 @@ Keep in mind that this clean up will not happen the moment an object is garbage
 collected, instead it will happen at some future point in time. This means it's
 best to explicitly dispose of external resources the moment you no longer need
 them.
+
+### Is finalisation deterministic?
+
+No. Once an object is garbage collected, it may be finalised at any given point
+in time. The only guarantee is that _if_ an object is garbage collected, if will
+be finalised before the program terminates, unless a bug or panic prevents this
+from happening.
 
 ### Does the virtual machine guarantee resources are cleaned up upon termination?
 
