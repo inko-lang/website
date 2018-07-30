@@ -8,23 +8,89 @@ keywords:
 description: How to install Inko on your computer.
 ---
 
+1. TOC
+{:toc}
+
 Inko is currently still in the early stages of development. Unfortunately, this
 means that the installation procedure is a bit more complicated than we would
-like it to be. Currently the only available installation is installing from
-source, but we aim to provide more (and easier) methods in the future.
+like it to be, depending on your platform.
 
-## Source Installation
+## Officially supported platforms
 
-To install from source you will need:
+Inko aims to support Linux, BSD, Mac OS, and Windows. Automated testing is
+currently only set up for Linux. As a result, we can't guarantee that Inko will
+actually work on platforms other than Linux.
 
-1. Git
-1. Ruby 2.4 or newer with RubyGems, as the compiler is currently written in
-   Ruby.
-1. Rust 1.28 nightly or newer. Stable Rust is unfortunately not supported at the
-   moment.
-1. Make 4.0 or newer
+## Installing using ienv (recommended)
 
-Assuming these requirements are met, first we need to clone the Git repository:
+[ienv](https://gitlab.com/inko-lang/ienv) is the official version manager of
+Inko. Using ienv you can easily install, remove, and use different versions of
+Inko during development.
+
+### Requirements
+
+Ienv currently only supports Unix platforms, and requires the following
+software:
+
+* Bash 4.0 or newer
+* Curl
+* Grep
+* (GNU) coreutils
+* (GNU) findutils
+* Make 4.0 or newer
+* rustc 1.20 or newer
+* Ruby 2.3 or newer (for the compiler)
+
+When installing Inko from source using ienv, a nightly build of Rust/Cargo 1.28
+or newer is required.
+
+### Installing ienv
+
+To use ienv, we must first install it. The easiest way to install ienv is to
+clone its Git repository:
+
+    git clone https://gitlab.com/inko-lang/ienv.git ~/.local/share/ienv
+
+Now you need to add the `ienv` executable to your PATH for your shell of choice.
+For Bash you would add the following to `~/.bashrc`:
+
+    export PATH="${PATH}:$HOME/.local/share/ienv/bin"
+
+For [Fish](https://fishshell.com/), add the following to
+`~/.config/fish/config.fish`:
+
+    set -x PATH $PATH $HOME/.local/share/ienv/bin
+
+### Installing Inko using ienv
+
+Once installed, you can install versions of Inko as follows:
+
+    ienv install 0.1.0
+
+This would install version 0.1.0 of Inko.
+
+Whenever possible, ienv will use precompiled packages. This removes the need for
+having to compile the virtual machine, which in turn makes the installation
+procedure easier and faster. If no precompiled package is available, ienv will
+install Inko from source instead.
+
+You can list installed versions by running the `list` command:
+
+    ienv list
+
+Known versions (= the ones you can install) can be displayed using the `known`
+command:
+
+    ienv known
+
+For more information and the available commands, run `ienv --help`, or refer to
+[ienv's README](https://gitlab.com/inko-lang/ienv/blob/master/README.md).
+
+## Installing from Git
+
+Installing from source has the same requirements as installing from source using
+ienv. Assuming these requirements are met, first we need to clone the Git
+repository:
 
 ```bash
 git clone https://gitlab.com/inko-lang/inko.git
@@ -44,7 +110,5 @@ make install PREFIX=~/.local
 ```
 
 This will then install Inko in `~/.local`. The IVM executable will then be
-located in `~/.local/bin/ivm`, and the runtime will be in `~/.local/lib/inko`.
-
-The compiler is always installed using the `gem` command, regardless of what
-value `PREFIX` is set to.
+located in `~/.local/bin/ivm`, and the runtime and compiler will be in
+`~/.local/lib/inko`.
