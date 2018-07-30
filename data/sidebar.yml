@@ -21,6 +21,8 @@
       url: https://gitlab.com/inko-lang/inko/issues
 - title: Participate
   links:
+    - title: Forums
+      url: https://discourse.inko-lang.org/
     - title: /r/inko on Reddit
       url: https://www.reddit.com/r/inko/
     - title: Chat on Matrix
