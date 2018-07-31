@@ -170,3 +170,7 @@ object Person {
 
 Person.new.number # => 10
 ```
+
+When assigning a value to a module variable, the variable will be assigned a
+_copy_ of the value. This is because module variables are stored on a separate
+heap, instead of a process' local heap.
