@@ -17,9 +17,10 @@ like it to be, depending on your platform.
 
 ## Officially supported platforms
 
-Inko aims to support Linux, BSD, Mac OS, and Windows. Automated testing is
-currently only set up for Linux. As a result, we can't guarantee that Inko will
-actually work on platforms other than Linux.
+Inko supports any Unix-like platform, such as Linux, Mac OS, or BSD. Technically
+Inko also works on Windows, but installing from source requires a Linux
+compatibility layer such as [MSYS2](http://www.msys2.org/) or [Linux for
+Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
 
 ## Installing using ienv (recommended)
 
