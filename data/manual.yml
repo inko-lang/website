@@ -13,6 +13,7 @@ chapters:
       - /manual/getting-started/modules
       - /manual/getting-started/types
       - /manual/getting-started/iterators
+      - /manual/getting-started/concurrent-programming
   - title: Syntax
     pages:
       - /manual/syntax/introduction
