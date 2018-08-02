@@ -39,11 +39,8 @@ software:
 * (GNU) coreutils
 * (GNU) findutils
 * Make 4.0 or newer
-* rustc 1.20 or newer
+* Rust 1.28 or newer
 * Ruby 2.3 or newer (for the compiler)
-
-When installing Inko from source using ienv, a nightly build of Rust/Cargo 1.28
-or newer is required.
 
 ### Installing ienv
 
