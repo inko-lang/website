@@ -41,4 +41,6 @@ chapters:
       - /manual/compiler/directives
       - /manual/compiler/type-inference
   - title: Virtual machine
-    pages: []
+    pages:
+      - /manual/virtual-machine/introduction
+      - /manual/virtual-machine/bytecode
