@@ -38,5 +38,6 @@ chapters:
       - /manual/compiler/environment-variables
       - /manual/compiler/directories
       - /manual/compiler/optimisations
+      - /manual/compiler/directives
   - title: Virtual machine
     pages: []
