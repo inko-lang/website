@@ -2,6 +2,14 @@
 title: Hello, world!
 ---
 
+## Table of contents
+{:.no_toc}
+
+1. TOC
+{:toc}
+
+## Introduction
+
 Let's start with the most basic Inko program one can write: "hello world". This
 is a program that does one simple thing: print the text "Hello, world!" to
 the command line (STDOUT to be exact), then exit.

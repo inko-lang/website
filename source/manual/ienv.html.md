@@ -2,8 +2,13 @@
 title: Using ienv
 ---
 
+## Table of contents
+{:.no_toc}
+
 1. TOC
 {:toc}
+
+## Introduction
 
 [ienv](https://gitlab.com/inko-lang/ienv) is Inko's official version manager,
 written in Bash. The installation instructions for ienv can be found on the

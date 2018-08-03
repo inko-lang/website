@@ -2,6 +2,14 @@
 title: Iterators
 ---
 
+## Table of contents
+{:.no_toc}
+
+1. TOC
+{:toc}
+
+## Introduction
+
 Iterators are used for iterating over the values of a collection, such as an
 `Array` or `HashMap`. Typically a programming language will use one of two
 iterator types:

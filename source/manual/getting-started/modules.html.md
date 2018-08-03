@@ -2,6 +2,14 @@
 title: Modules
 ---
 
+## Table of contents
+{:.no_toc}
+
+1. TOC
+{:toc}
+
+## Introduction
+
 A module is a namespace, isolated from other modules. Modules can define
 methods, types, or run code directly. Modules can be defined as children of
 other modules, in which case you refer to them using the syntax

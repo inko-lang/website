@@ -8,6 +8,8 @@ title: Methods, messages, and objects
 1. TOC
 {:toc}
 
+## Introduction
+
 In Inko we use objects for storing state, methods for defining sequences of
 code to execute, and messages to run those sequences of code. While usually a
 message maps to a method with the same name, this isn't always the case.

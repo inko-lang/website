@@ -2,8 +2,16 @@
 title: Types
 ---
 
+## Table of contents
+{:.no_toc}
+
 1. TOC
 {:toc}
+
+## Introduction
+
+Inko comes with various types that are available by default. Some of these types
+are defined in the runtime, while others only exist at compile time.
 
 ## Numeric types
 
