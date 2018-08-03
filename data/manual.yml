@@ -39,5 +39,6 @@ chapters:
       - /manual/compiler/directories
       - /manual/compiler/optimisations
       - /manual/compiler/directives
+      - /manual/compiler/type-inference
   - title: Virtual machine
     pages: []
