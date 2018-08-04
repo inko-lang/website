@@ -46,3 +46,4 @@ chapters:
       - /manual/virtual-machine/configuration
       - /manual/virtual-machine/bytecode
       - /manual/virtual-machine/instructions
+      - /manual/virtual-machine/scheduling
