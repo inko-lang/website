@@ -43,5 +43,6 @@ chapters:
   - title: Virtual machine
     pages:
       - /manual/virtual-machine/introduction
+      - /manual/virtual-machine/configuration
       - /manual/virtual-machine/bytecode
       - /manual/virtual-machine/instructions
