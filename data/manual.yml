@@ -44,3 +44,4 @@ chapters:
     pages:
       - /manual/virtual-machine/introduction
       - /manual/virtual-machine/bytecode
+      - /manual/virtual-machine/instructions
