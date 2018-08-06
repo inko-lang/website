@@ -4,8 +4,8 @@ buttons:
   - text: Install
     url: /install
     color: 'green'
-  - text: Learn more
-    url: /about
+  - text: Get started
+    url: /manual/getting-started/hello-world/
 body: |
   Inko is a gradually-typed, safe, object-oriented programming languages for
   writing concurrent programs. By using lightweight isolated processes, data

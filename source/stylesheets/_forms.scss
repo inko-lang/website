@@ -19,13 +19,13 @@ select {
     background: $blue;
     text-decoration: none;
   }
-}
 
-.button.green {
-  background: darken($green, 5%);
-  border: 1px solid darken($green, 18%);
+  &.green {
+    background: darken($green, 5%);
+    border: 1px solid darken($green, 18%);
 
-  &:hover {
-    background: darken($green, 15%);
+    &:hover {
+      background: darken($green, 15%);
+    }
   }
 }
