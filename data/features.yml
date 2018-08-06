@@ -35,9 +35,9 @@
     you the safety of a statically typed language, and the option to exchange
     this for the flexibility of a dynamically typed language.
 
-    Type inference removes the need for type annotations in many places. Generic
-    types can be defined, removing the need for duplicating code just to support
-    different types.
+    The use of gradual typing allows you to scale from a simple prototype, all
+    the way to a large scale project, without having to switch to a different
+    programming language.
 - title: Garbage collected
   body: |
     Inko uses a high performance parallel garbage collector, based on
