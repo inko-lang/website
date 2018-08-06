@@ -4,6 +4,7 @@ chapters:
     pages:
       - /manual
       - /manual/ienv
+      - /manual/inko-compared-to-other-languages
   - title: Getting started
     pages:
       - /manual/getting-started/hello-world
