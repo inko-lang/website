@@ -12,3 +12,6 @@ body: |
   race conditions can not occur. The syntax is easy to learn and remember, and
   thanks to its error handling model you will never have to worry about
   unexpected runtime errors.
+
+  Inko runs on 64 bits Linux, BSD, Mac OS, and Windows. 32 bits platforms may
+  work, though they are not officially supported at this time.
