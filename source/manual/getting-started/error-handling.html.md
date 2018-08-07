@@ -208,6 +208,26 @@ include (but are not limited to):
   message _and_ doesn't implement the `unknown_message` method.
 * Trying to set the value of an out of bounds byte array index.
 
+To illustrate, take the following program:
+
+```inko
+import std::byte_array::ByteArray
+
+let bytes = ByteArray.new([10, 20])
+
+bytes[3] = 10
+```
+
+When executed it will panic with the following output (the file paths have been
+trimmed to enhance readability):
+
+```
+Stack trace (the most recent call comes last):
+  0: "test.inko", line 5, in "main"
+  1: "runtime/std/byte_array.inko", line 240, in "[]="
+Process 0 panicked: Byte array index 3 is out of bounds
+```
+
 The use of panics for critical errors greatly reduces the amount of exceptions
 you need to handle, making error handling more pleasant.
 
