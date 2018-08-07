@@ -220,7 +220,7 @@ it yields control back to the scheduler. This means an infinite loop will
 prevent the thread running the actor from doing any other work.
 
 Inko's scheduler is preemptive, meaning every process is given a fair share of
-execution time. As a result, long runing code such as infinite loops will never
+execution time. As a result, long running code such as infinite loops will never
 prevent a thread from doing other work indefinitely.
 
 [immix]: http://www.cs.utexas.edu/users/speedway/DaCapo/papers/immix-pldi-2008.pdf
