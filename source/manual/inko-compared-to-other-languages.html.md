@@ -167,4 +167,60 @@ time, preventing other threads from performing their work.
 Inko uses its own preemptive scheduler, and guarantees that every process is
 given a fair share of execution time.
 
+## Comparing with Pony
+
+[Pony](https://www.ponylang.org/) is an object-oriented programming language
+built on the actor model. Pony uses "capabilities" to make certain operations
+secure. The definition of a "capability" described in ["Chapter 4:
+Capabilities"](https://tutorial.ponylang.org/capabilities/) of the Pony
+tutorial.
+
+### Execution model
+
+Pony is a compiled language using LLVM, whereas Inko is an interpreted language.
+Both Inko and Pony use a separate program for compilation, inkoc and ponyc
+respectively.
+
+### Paradigm
+
+Both Pony and Inko are object-oriented programming languages.
+
+### Multitasking
+
+Pony uses actors, which are defined similar to objects in Inko. This is similar
+to Inko processes, though the way you define them differs a bit. To the best of
+our knowledge, Pony requires you to define your actor before you can use it,
+whereas in Inko you can spawn a process at any point in time.
+
+### Memory
+
+To the best of our knowledge, Pony uses separate heaps for actors, although we
+haven't been able to confirm this. Memory is managed using a garbage collector,
+although garbage collection does not run while an actor is performing a
+"behaviour". A behaviour is basically an asynchronous method call. While this
+may result in higher application throughput, it can also easily lead to an actor
+exhausting memory.
+
+Pony's advice for dealing with this appears to come down to "Just don't it".
+For example, from the [Garbage collection
+guide](https://tutorial.ponylang.org/gotchas/garbage-collection.html):
+
+> Long loops in behaviors are a good way to exhaust memory. Don't do it. If you
+> want to execute something in such a fashion, use a Timer.
+
+Inko uses a separate heap for every process, and garbage collection _can_ occur
+while the process is performing work. The impact of this on application
+throughput should be minimal, as most (large) processes won't be suspended for
+more than roughly 5 milliseconds per garbage collection cycle.
+
+### Scheduler
+
+Pony's scheduler is not preemptive, meaning an actor will continue to run until
+it yields control back to the scheduler. This means an infinite loop will
+prevent the thread running the actor from doing any other work.
+
+Inko's scheduler is preemptive, meaning every process is given a fair share of
+execution time. As a result, long runing code such as infinite loops will never
+prevent a thread from doing other work indefinitely.
+
 [immix]: http://www.cs.utexas.edu/users/speedway/DaCapo/papers/immix-pldi-2008.pdf
