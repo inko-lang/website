@@ -218,7 +218,7 @@
     user.username
 
     # This will produce a type error, because
-    # neither User doesn't respond to "oops":
+    # User doesn't respond to "oops":
     user.oops
 
     # This won't work, because "update" takes a User, and not a ?User.
