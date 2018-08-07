@@ -110,3 +110,16 @@ make install PREFIX=~/.local
 This will then install Inko in `~/.local`. The IVM executable will then be
 located in `~/.local/bin/ivm`, and the runtime and compiler will be in
 `~/.local/lib/inko`.
+
+When installing from source, you need to manually tell the `inko` or `inkoc`
+executable where the runtime (the core plus standard library) is located. The
+easiest way of doing this is by setting `INKOC_HOME` to the directory containing
+the runtime. For example, if Inko is installed in `~/.local/share/inko` you
+would use this variable as follows:
+
+```inko
+INKOC_HOME=~/.local/share/inko/lib/inko inko program_here.inko
+```
+
+To persist this variable you can add it to your shell's configuration file such
+as `~/.bashrc` for Bash, and `~/.config/fish/config.fish` for Fish.
