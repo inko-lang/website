@@ -201,7 +201,7 @@ although garbage collection does not run while an actor is performing a
 may result in higher application throughput, it can also easily lead to an actor
 exhausting memory.
 
-Pony's advice for dealing with this appears to come down to "Just don't it".
+Pony's advice for dealing with this appears to come down to "Just don't do it".
 For example, from the [Garbage collection
 guide](https://tutorial.ponylang.org/gotchas/garbage-collection.html):
 
