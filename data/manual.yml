@@ -16,6 +16,7 @@ chapters:
       - /manual/getting-started/iterators
       - /manual/getting-started/concurrent-programming
       - /manual/getting-started/optional-values
+      - /manual/getting-started/error-handling
   - title: Syntax
     pages:
       - /manual/syntax/introduction
