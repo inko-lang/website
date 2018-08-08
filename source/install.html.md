@@ -63,9 +63,16 @@ For [Fish](https://fishshell.com/), add the following to
 
 Once installed, you can install versions of Inko as follows:
 
-    ienv install 0.1.0
+    ienv install 0.2.0
 
-This would install version 0.1.0 of Inko.
+This would install version 0.2.0 of Inko.
+
+ienv will not automatically set a version to use for you, instead you need to do
+so manually. This can be done by running the following
+
+    ienv default 0.2.0
+
+This will set `0.2.0` as the default version.
 
 Whenever possible, ienv will use precompiled packages. This removes the need for
 having to compile the virtual machine, which in turn makes the installation
