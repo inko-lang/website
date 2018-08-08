@@ -3,7 +3,7 @@ title: Optimisations
 ---
 
 ## Table of contents
-{:no_toc}
+{:.no_toc}
 
 1. TOC
 {:toc}
