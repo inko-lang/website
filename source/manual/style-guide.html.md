@@ -183,6 +183,51 @@ test.group('This is a test group', do (g) {
 })
 ```
 
+When the number of arguments don't fit on a single line, place every argument on
+their own line like so:
+
+```inko
+some_object.some_message_name(
+  10,
+  20,
+  30
+)
+```
+
+The use of a trailing comma for the last argument should be avoided.
+
+## Message chains
+
+When chaining multiple messages together that don't fit on a single line,
+place every message on a separate line:
+
+```inko
+foo
+  .bar
+  .baz
+```
+
+## Binary expressions
+
+When sending a message to the _result_ of a binary expression, place the message
+on the next line and indent it with two space:
+
+```inko
+# Bad
+(10 > 5).if_true {
+  # ...
+}
+
+# Good
+10 > 5
+  .if_true {
+    # ...
+  }
+```
+
+Inko will parse both examples the same way, but the second example saves us from
+having to wrap the expression in parenthesis.
+
 ## Keyword arguments
 
 When passing a single argument, prefer the use of positional arguments:
