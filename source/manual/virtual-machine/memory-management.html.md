@@ -174,6 +174,16 @@ means you don't have to (for example) close a file handle, though it is strongly
 recommended you do so as soon as you no longer need the object. These guarantees
 may be broken due to a bug, so it's best to not rely on them too much.
 
+### Prefetching
+
+The garbage collector uses [data prefetching][data-prefetching] when tracing
+through live objects, based on the paper ["Effective Prefetch for Mark-Sweep
+Garbage Collection"][prefetching-paper]. This can improve performance of tracing
+live objects by up to 30% in the best case, compared to not using prefetching.
+
+This feature is only enabled when building IVM using a nightly build of Rust, as
+Rust's [std::intrinsics][intrinsics] module is only available on nightly builds.
+
 ## Process heaps
 
 Each process has two heaps: the process heap, and the mailbox heap. The process
@@ -264,3 +274,6 @@ allocated on the permanent heap when the VM parses a bytecode file.
 [tagged-pointers]: https://en.wikipedia.org/wiki/Tagged_pointer
 [src-immix]: https://gitlab.com/inko-lang/inko/tree/master/vm/src/immix
 [src-gc]: https://gitlab.com/inko-lang/inko/tree/master/vm/src/gc
+[data-prefetching]: https://en.wikipedia.org/wiki/Cache_prefetching
+[prefetching-paper]: http://users.cecs.anu.edu.au/~steveb/downloads/pdf/pf-ismm-2007.pdf
+[intrinsics]: https://doc.rust-lang.org/std/intrinsics/index.html
