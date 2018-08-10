@@ -248,7 +248,7 @@ garbage collector, as all objects are of an identical size.
 
 ## Allocation optimisations
 
-Integers that fit in a 63 bits signed integer are not heap allocated, instead
+Integers that fit in a 62 bits signed integer are not heap allocated, instead
 IVM uses [tagged pointers][tagged-pointers]. 64 bits integers are heap
 allocated, while integers larger than 64 bits are allocated as arbitrary
 precision integers. When an integer is tagged, the first lower bit of the
