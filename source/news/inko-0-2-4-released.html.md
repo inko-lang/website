@@ -1,6 +1,6 @@
 ---
 title: Inko 0.2.4 released
-date: 2018-09-09 22:30:00 UTC
+date: 2018-09-09 19:00:00 UTC
 description: Inko 0.2.4 released
 ---
 
