@@ -192,6 +192,81 @@ Methods that convert one type into another should be prefixed with `to_`,
 followed by a short name of the type. Examples include `to_array`, `to_string`,
 `to_coordinates`, etc.
 
+## Defining methods
+
+Methods are defined using the `def` keyword. If a method does not take any
+arguments, leave out the parentheses:
+
+```inko
+# Good
+def example {}
+
+# Bad
+def example() {}
+```
+
+If a method definition does not fit on a single line, place every argument on a
+separate line, followed by a comma. The last argument should also be followed by
+a comma:
+
+```inko
+def example(
+  foo,
+  bar,
+) {
+
+}
+```
+
+If a throw or return type is given, place them on the same line as the closing
+parenthesis, if possible:
+
+```inko
+def example(
+  foo,
+  bar,
+) !! ErrorType -> ReturnType {
+
+}
+```
+
+If this doesn't fit, place both types on their own line, at the same indentation
+level as the closing parenthesis:
+
+```inko
+def example(
+  foo,
+  bar,
+)
+!! ErrorType
+-> ReturnType {
+
+}
+```
+
+In all cases it's best to avoid code like this.
+
+Type arguments should be placed on the same line as the method name.
+
+```inko
+def example!(A, B)(foo: A, bar: B) {
+
+}
+```
+
+If this doesn't fit, the same rules apply as used for regular arguments:
+
+```inko
+def example!(
+  A,
+  B,
+)(foo: A, bar: B) {
+
+}
+```
+
+Again, such code is best avoided, as it can be a bit hard to read.
+
 ## Parentheses
 
 Inko allows you to omit parentheses when sending a message. When sending a
