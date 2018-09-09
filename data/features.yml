@@ -28,7 +28,9 @@
     Critical errors, such as division by zero errors will terminate the program
     immediately, known as a panic. By using panics for critical errors, instead
     of exceptions, the amount of exceptions that need to be handled is
-    drastically reduced.
+    drastically reduced. If necessary, panics can be scoped to single processes,
+    by registering a block of code to run upon a panic. Once this block
+    finishes, only the panicking process will be terminated.
 - title: Gradually typed
   body: |
     Inko is gradually typed, with static typing being the default. This gives

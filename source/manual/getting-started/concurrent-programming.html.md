@@ -525,13 +525,29 @@ If you have worked with Erlang or Elixir before, you may wonder if there is a
 way to monitor a process. Currently there isn't, and it's likely this will not
 be added. Inko's error handling model prevents unexpected runtime errors from
 occurring, removing the need for process monitoring. Panics in turn terminate
-the entire program and are not meant to be monitored from another Inko process,
-as panics are the result of software bugs, and software bugs should not be
-ignored.
+the entire program by default, and are not meant to be monitored from another
+Inko process, as panics are the result of software bugs, and software bugs
+should not be ignored.
 
 If you want one process to act upon another process terminating, simply have the
-process send a message upon termination. You can also use `process.status` to
-receive the status of a process:
+process send a message upon termination. You can do so by registering a panic
+handler in the process:
+
+```inko
+import std::process
+
+let child = process.spawn {
+  let parent = process.receive as Integer
+
+  process.panicking do (error) {
+    process.send(pid: parent, message: error)
+  }
+}
+
+process.send(pid: child, message: process.current)
+```
+
+You can also use `process.status` to receive the status of a process:
 
 ```inko
 import std::process

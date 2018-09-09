@@ -196,9 +196,9 @@ The block provided to the `else` keyword _can_ contain multiple expressions.
 
 ## Panics
 
-Panics are critical errors that terminate the entire program upon being
-triggered. These kind of errors should only be used when there is nothing that
-can be done during runtime. Examples of operations that may trigger a panic
+Panics are critical errors that by default terminate the entire program upon
+being triggered. These kind of errors should only be used when there is nothing
+that can be done during runtime. Examples of operations that may trigger a panic
 include (but are not limited to):
 
 * Dividing by zero.
@@ -230,6 +230,29 @@ Process 0 panicked: Byte array index 3 is out of bounds
 
 The use of panics for critical errors greatly reduces the amount of exceptions
 you need to handle, making error handling more pleasant.
+
+If you want a panic to only terminate the process that triggered it, you'll need
+to register a panic handler using `std::process.panicking`. This is a block that
+will be executed whenever a panic is triggered, after which the process will
+terminate. The argument passed to this block is an error message as a `String`.
+
+If a process does not define its own panic handler, the global panic handler
+will be used. This panic handler can be overwritten using `std::vm.panicking`:
+
+```inko
+import std::vm
+import std::stdio::stderr
+
+vm.panicking {
+  stderr.print('oops, we ran into a panic!')
+}
+```
+
+Note that you can not restore the global panic handler after you have redefined
+it. Also keep in mind that if you overwrite the global panic handler, Inko will
+_not_ terminate the program for you, as this is done by the default global
+handler. This means that if you still want to terminate the program, you have to
+do so manually using `std::vm.exit`:
 
 ## When to use panics versus exceptions
 
