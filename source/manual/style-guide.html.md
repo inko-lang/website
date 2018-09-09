@@ -53,6 +53,52 @@ it:
 }
 ```
 
+## Literals
+
+Array and HashMap literals should not include whitespace after the open tag and
+before the closing tag:
+
+```inko
+# Good
+[10, 20, 30]
+
+%['a': 10, 'b': 20]
+
+# Bad
+[ 10, 20, 30 ]
+
+%[ 'a': 10, 'b': 20 ]
+```
+
+When a literal does not fit on a single line, place every value on a separate
+line, and use a trailing comma for the last value:
+
+```inko
+# Good
+[
+  10,
+  20,
+  30,
+]
+
+%[
+  'a': 10,
+  'b': 20,
+]
+
+# Bad
+[
+  10,
+  20,
+  30
+]
+
+%[
+  'a': 10,
+  'b': 20
+]
+```
+
 ## Naming
 
 Constants use PascalCase for naming, such as `ByteArray` and `String`:
@@ -146,10 +192,10 @@ Methods that convert one type into another should be prefixed with `to_`,
 followed by a short name of the type. Examples include `to_array`, `to_string`,
 `to_coordinates`, etc.
 
-## Parenthesis
+## Parentheses
 
-Inko allows you to omit parenthesis when sending a message. When sending a
-message without arguments, leave out the parenthesis:
+Inko allows you to omit parentheses when sending a message. When sending a
+message without arguments, leave out the parentheses:
 
 ```inko
 # Good
@@ -159,7 +205,7 @@ message without arguments, leave out the parenthesis:
 [10, 20, 30].first()
 ```
 
-When passing one or more arguments, include parenthesis:
+When passing one or more arguments, include parentheses:
 
 ```inko
 # Good
@@ -169,11 +215,26 @@ When passing one or more arguments, include parenthesis:
 'hello'.slice 0, 1
 ```
 
-If the last argument is a block, leave out the parenthesis:
+If the only argument is a block, leave out the the parentheses:
 
 ```inko
 # Good
-test.group 'This is a test group', do (g) {
+[10, 20, 30].each do (number) {
+  # ...
+}
+
+# Bad
+[10, 20, 30].each(do (number) {
+  # ...
+})
+```
+
+If multiple arguments are provided, and the last one is a block, use parentheses
+and place the block outside them:
+
+```inko
+# Good
+test.group('This is a test group') do (g) {
 
 }
 
@@ -181,6 +242,11 @@ test.group 'This is a test group', do (g) {
 test.group('This is a test group', do (g) {
 
 })
+
+# Also bad
+test.group 'This is a test group', do (g) {
+
+}
 ```
 
 When the number of arguments don't fit on a single line, place every argument on
@@ -190,11 +256,32 @@ their own line like so:
 some_object.some_message_name(
   10,
   20,
+  30,
+)
+```
+
+When spreading arguments across multiple lines, end the last argument with a
+comma:
+
+```inko
+# Good
+some_object.some_message_name(
+  10,
+  20,
+  30,
+)
+
+# Bad
+some_object.some_message_name(
+  10,
+  20,
   30
 )
 ```
 
-The use of a trailing comma for the last argument should be avoided.
+By using a trailing comma, adding a new argument arguments is easier as you
+don't need to first add a comma to the current last argument, before adding a
+new argument. When removing lines this also leads to smaller diffs.
 
 ## Message chains
 
@@ -226,7 +313,7 @@ on the next line and indent it with two space:
 ```
 
 Inko will parse both examples the same way, but the second example saves us from
-having to wrap the expression in parenthesis.
+having to wrap the expression in parentheses.
 
 ## Keyword arguments
 
