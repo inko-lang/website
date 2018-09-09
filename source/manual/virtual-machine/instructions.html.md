@@ -1137,7 +1137,7 @@ This instruction takes the following arguments:
 4. An integer indicating the number of keyword arguments.
 5. A variable list of positional arguments.
 6. A variable list of keyword argument and value pairs. The keyword argument
-names must be interned strings.
+   names must be interned strings.
 
 ### SetArray
 
@@ -1471,5 +1471,144 @@ Gets the system time's offset to UTC in seconds.
 
 This instruction takes one argument: the register to store the offset in as an
 integer.
+
+### EnvGet
+
+Reads the value of an environment variable.
+
+This instruction requires two arguments:
+
+1. The register to store the value in, as a string or nil.
+2. The register containing the name of the environment variable, as a string.
+
+The result will be nil if the environment variable is not set.
+
+### EnvSet
+
+Sets the value of an environment variable.
+
+This instruction requires three arguments:
+
+1. The register to store the new value in, as a string.
+1. The register containing the name of the environment variable, as a string.
+1. The register containing the new value, as a string.
+
+### EnvRemove
+
+Removes an environment variable.
+
+This instruction requires two arguments:
+
+1. The register to store the result in, which is currently always nil.
+1. The register containing the name of the environment variable to remove, as a
+   string.
+
+### EnvHomeDirectory
+
+Gets the home directory of the current user.
+
+This instruction only requires a single argument: the register to store the home
+directory in, as a string.
+
+It's possible the home directory is not set, in which case the result of this
+instruction will be nil.
+
+### EnvTempDirectory
+
+Gets the temporary directory of the system.
+
+This instruction only requires a single argument: the register to store the
+temporary directory in, as a string.
+
+### EnvGetWorkingDirectory
+
+Gets the current working directory.
+
+This instruction only requires a single argument: the register to store the
+working directory in, as a string.
+
+This instruction may throw an IO error message as a string.
+
+### EnvSetWorkingDirectory
+
+Changes the current working directory.
+
+This instruction requires two arguments:
+
+1. The register to store the new working directory in.
+1. The register containing the new working directory.
+
+This instruction may throw an IO error message as a string.
+
+### EnvArguments
+
+Gets the command-line arguments passed to the running program.
+
+This instruction only requires a single argument: the register to store the
+command-line arguments in, as an array of strings.
+
+### BlockGetReceiver
+
+Gets the receiver of a block.
+
+This instruction only requires one argument: the register to store the receiver
+in.
+
+### BlockSetReceiver
+
+Sets the receiver of a block.
+
+This instruction requires two arguments:
+
+1. The register to store the new receiver in.
+1. The register containing the new receiver.
+
+Most blocks have a receiver by default. One exception are blocks executed when
+loading a module. In this case BlockSetReceiver can be used to manually set a
+receiver.
+
+### RunBlockWithReceiver
+
+Executes a block with a specific receiver.
+
+This instruction requires at least three arguments:
+
+1. The register to store the return value in.
+1. The register containing the block to run.
+1. The register containing the receiver.
+3. An integer indicating the number of positional arguments.
+4. An integer indicating the number of keyword arguments.
+5. A variable list of positional arguments.
+6. A variable list of keyword argument and value pairs. The keyword argument
+   names must be interned strings.
+
+See the RunBlock instruction for more information.
+
+### ProcessSetPanicHandler
+
+Sets a panic handler for the current process.
+
+This instruction requires two arguments:
+
+1. The register to store the new panic handler in.
+1. The register containing the new panic handler.
+
+### ProcessAddDeferToCaller
+
+Defers the execution of a block in the scope of the caller.
+
+This instruction requires two arguments:
+
+1. The register to store the deferred block in.
+1. The register containing the deferred block to schedule.
+
+### SetDefaultPanicHandler
+
+Sets a new default panic handler.
+
+This instruction requires two arguments:
+
+1. The register to store the new panic handler in.
+1. The register containing the new panic handler.
 
 [tac]: https://en.wikipedia.org/wiki/Three-address_code
