@@ -65,7 +65,7 @@ behaviour:
 * Deliberate intimidation, stalking or following (online or in person).
 * Advocating for, or encouraging, any of the above behavior.
 * Sustained disruption of community events, including talks and presentations.
-* pamming, trolling, flaming, baiting or other attention-stealing behavior is
+* Spamming, trolling, flaming, baiting or other attention-stealing behavior is
   not welcome.
 
 ## Reporting abuse
