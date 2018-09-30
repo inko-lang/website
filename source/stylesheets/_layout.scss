@@ -28,7 +28,18 @@
 .logo {
   font-size: 3rem;
   font-weight: bold;
-  line-height: 65px;
+  line-height: 60px;
+  margin: 5px 0;
+
+  img {
+    display: none;
+    float: left;
+
+    @media #{$media-wide} {
+      display: inline;
+      grid-template-columns: 1fr 3fr;
+    }
+  }
 }
 
 // The main navigation menu.
