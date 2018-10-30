@@ -10,9 +10,8 @@ title: Instructions
 
 ## Introduction
 
-IVM has quite a few instructions, 139 at the time of writing to be exact. Some
-of these instructions are rather low-level, while others are high-level
-instructions such as `DirectoryList`.
+IVM has quite a few instructions. Some of these instructions are rather
+low-level, while others are high-level instructions such as `DirectoryList`.
 
 The instruction set is a register based instruction set, based on
 [Three-address code][tac].
@@ -576,12 +575,6 @@ This instruction requires two arguments:
 1. The register to store the result in.
 2. The register of the float to convert.
 
-### GetArrayPrototype
-
-Stores the array prototype in a register.
-
-This instruction requires one argument: the register to store the prototype in.
-
 ### GetAttribute
 
 Gets an attribute from an object and stores it in a register.
@@ -603,31 +596,12 @@ This instruction requires two arguments:
 1. The register to store the attribute names in.
 2. The register containing the object for which to get all attributes names.
 
-### GetBlockPrototype
-
-Stores the block prototype in a register.
-
-This instruction requires one argument: the register to store the prototype in.
-
-### GetBooleanPrototype
-
-Sets the prototype of booleans in a register.
-
-This instruction only requires one argument: the register to store the prototype
-in.
-
 ### GetFalse
 
 Sets a "false" value in a register.
 
 This instruction requires only one argument: the register to store the object
 in.
-
-### GetFloatPrototype
-
-Stores the float prototype in a register.
-
-This instruction requires one argument: the register to store the prototype in.
 
 ### GetGlobal
 
@@ -637,12 +611,6 @@ This instruction requires two arguments:
 
 1. The register to store the global's value in.
 2. The global variable index to get the value from.
-
-### GetIntegerPrototype
-
-Stores the integer prototype in a register.
-
-This instruction requires one argument: the register to store the prototype in.
 
 ### GetLocal
 
@@ -659,12 +627,6 @@ Sets the nil singleton in a register.
 
 This instruction requires only one argument: the register to store the object
 in.
-
-### GetObjectPrototype
-
-Stores the object prototype in a register.
-
-This instruction requires one argument: the register to store the prototype in.
 
 ### GetParentLocal
 
@@ -687,12 +649,6 @@ This instruction requires two arguments:
 2. The register containing the object to get the prototype from.
 
 If no prototype was found, nil is set in the register instead.
-
-### GetStringPrototype
-
-Stores the string prototype in a register.
-
-This instruction requires one argument: the register to store the prototype in.
 
 ### GetToplevel
 
@@ -1015,10 +971,27 @@ message to display.
 
 ### Platform
 
-Returns the type of the platform as an integer.
+Returns the type of the platform as a string.
 
 This instruction requires one argument: a register to store the resulting
-platform ID in.
+platform name in.
+
+The possible values produced by this instruction are:
+
+* android
+* bitrig
+* dragonfly
+* freebsd
+* ios
+* linux
+* macos
+* netbsd
+* openbsd
+* unix
+* unknown
+* windows
+
+If the platform can not be determined, "unknown" will be used.
 
 ### ProcessCurrentPid
 
@@ -1611,5 +1584,179 @@ This instruction requires two arguments:
 
 1. The register to store the new panic handler in.
 1. The register containing the new panic handler.
+
+### GetBuiltinPrototype
+
+Retrieves the prototype for a built-in type.
+
+This instruction requires two arguments:
+
+1. The register to store the prototype in.
+1. The register containing an integer that indicates what kind of prototype to
+   retrieve.
+
+For the second argument, the following values can be used:
+
+| Value   | Prototype
+|:--------|:----------
+| 0       | Object
+| 1       | Integer
+| 2       | Float
+| 3       | String
+| 4       | Array
+| 5       | Block
+| 6       | Boolean
+| 7       | ReadOnlyFile
+| 8       | WriteOnlyFile
+| 9       | ReadWriteFile
+| 10      | ByteArray
+| 11      | Hasher
+| 12      | Library
+| 13      | Function
+| 14      | Pointer
+
+### LibraryOpen
+
+Opens a C library, panicking if the library can not be found.
+
+This instruction requires two arguments:
+
+1. The register to store the resulting library in. The object stored will be an
+   instance of the built-in Library type.
+1. The register containing one or more names to use for finding the library.
+
+If no names are given, this instruction will panic. If one or more names are
+given, this instruction will try to find a corresponding library for every name,
+stopping once it finds a library.
+
+For example, when the names `['libc.so', 'libc.so.6']` are given, this
+instruction will first try `'libc.so'`, then `'libc.so.6'` if `'libc.so'` could
+not be found.
+
+### FunctionAttach
+
+Loads a C function from a library and prepares it for use.
+
+This instruction requires five arguments:
+
+1. The register to store the function in, as an instance of the built-in
+   Function type.
+1. The register containing the Library to load the function from.
+1. The register containing the name of the function to load, as a String.
+1. The register containing an array that specifies the argument types.
+1. The register containing an integer that specifies the return type.
+
+Argument and return types are specified using integers. The following values and
+their corresponding C types are available:
+
+| Integer value | C type           | Inko Type
+|:--------------|:-----------------|:--------------------------------
+| 0             | `void`           | Nil
+| 1             | `void *`         | Pointer
+| 2             | `double`         | Float
+| 3             | `float`          | Float
+| 4             | `char`           | Integer
+| 5             | `short`          | Integer
+| 6             | `int`            | Integer
+| 7             | `long`           | Integer
+| 8             | `unsigned char`  | Integer
+| 9             | `unsigned short` | Integer
+| 10            | `unsigned int`   | Integer
+| 11            | `unsigned long`  | Integer
+| 12            | `*char`          | String
+| 13            | `*char`          | ByteArray
+| 14            | `size_t`         | Integer
+
+Using an invalid function name will result in a panic.
+
+### FunctionCall
+
+Calls a function with a fixed number of arguments.
+
+This instruction requires three arguments:
+
+1. The register to store the result in.
+1. The register containing the Function to call.
+1. The register containing the arguments to pass, as an array of objects.
+
+Supplying an invalid number of arguments or incorrect argument types will result
+in a panic.
+
+### PointerAttach
+
+Loads a variable from a library and stores a pointer to it in a register.
+
+This instruction requires three arguments:
+
+1. The register to store the result in, as an instance of the built-in Pointer
+   type.
+1. The register containing the Library to load the variable from.
+1. The register containing the name of the variable to load, as a String.
+
+Using an invalid variable name will result in a panic.
+
+### PointerRead
+
+Reads the value of a pointer into a specific type.
+
+This instruction requires three arguments:
+
+1. The register to store the result in.
+1. The register containing the Pointer to read from.
+1. The register containing an integer that specifies what type of data to read
+   the value into. See the `FunctionAttach` instruction for the available
+   values.
+
+This instruction will panic if an invalid type identifier is specified. Reading
+a value into a different type (e.g. reading a `char*` into an `unsigned long`)
+may result in platform specific or undefined behaviour.
+
+### PointerWrite
+
+Writes a value of a particular type to a pointer.
+
+This instruction requires four arguments:
+
+1. The register to store the written value in.
+1. The register containing the Pointer to write to.
+1. The register containing the type of value to write, as an integer.
+1. The register containing the object to write to the pointer.
+
+Writing an object that is not compatible with the type identifier will result in
+a panic.
+
+This instruction only supports the types described in the `FunctionAttach`
+instruction. Custom objects can not be written to a C pointer.
+
+### PointerFromAddress
+
+Creates a Pointer from an address specified in an Integer.
+
+This instruction requires two arguments:
+
+1. The register to store the Pointer into.
+1. The register containing the address, as an Integer.
+
+### ForeignTypeSize
+
+Obtains the size of a C type.
+
+This instruction requires two arguments:
+
+1. The register to store the size in, as an Integer.
+1. The register containing the C type identifier, as an Integer.
+
+The use of an invalid type identifier will result in a panic.
+
+### ForeignTypeAlignment
+
+Obtains the alignment of a C type.
+
+This instruction requires two arguments:
+
+1. The register to store the alignment in, as an Integer.
+1. The register containing the C type identifier, as an Integer.
+
+The use of an invalid type identifier will result in a panic.
 
 [tac]: https://en.wikipedia.org/wiki/Three-address_code
