@@ -1243,8 +1243,9 @@ the variable in.
 
 Sets the prototype of an object.
 
-This instruction requires two arguments:
+This instruction requires three arguments:
 
+1. The register to store the new prototype in.
 1. The register containing the object for which to set the prototype.
 2. The register containing the object to use as the prototype.
 
