@@ -17,10 +17,12 @@ like it to be, depending on your platform.
 
 ## Officially supported platforms
 
-Inko supports any Unix-like platform, such as Linux, Mac OS, or BSD. Technically
-Inko also works on Windows, but installing from source requires a Linux
+Inko supports any Unix-like platform, such as Linux, Mac OS, or BSD.
+
+Inko also supports Windows, but this requires the use of a Unix like
 compatibility layer such as [MSYS2](http://www.msys2.org/) or [Linux for
-Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10).
+Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10). Currently
+we only provide official support for MSYS2 environments.
 
 ## Installing using ienv (recommended)
 
@@ -41,6 +43,11 @@ software:
 * Make 4.0 or newer
 * Rust 1.28 or newer
 * Ruby 2.3 or newer (for the compiler)
+* autoconf
+* automake
+* texinfo
+* clang
+* libtool
 
 ### Installing ienv
 
