@@ -104,24 +104,6 @@ best set in a configuration file for your shell, such as `~/.bashrc` or
 The base URL of the mirror to use for downloading packages. Defaults to
 <https://releases.inko-lang.org/inko>.
 
-### IENV_PREFER_MUSL
-
-If [musl](https://www.musl-libc.org/) builds should be preferred over glibc
-builds. musl builds are more portable as they don't use dynamic linking.
-
-Defaults to true. To disable, set the environment variable to `'false'`. For
-example:
-
-```bash
-export IENV_PREFER_MUSL='false'
-```
-
-If you are using Fish, use the following instead:
-
-```bash
-set -x IENV_PREFER_MUSL 'false'
-```
-
 ## Directories and files
 
 ienv adheres to the [XDG base directory specification][xdg]. Specifically, it
