@@ -1007,14 +1007,15 @@ Receives a message for the current process.
 This instruction takes two arguments:
 
 1. The register to store the received message in.
-2. A timeout after which the process will resume, even if no message is
-received. If the register is set to nil or the value is negative the timeout is
-ignored.
+2. A timeout in seconds (as a float) after which the process will resume, even
+   if no message is received. Using a negative or non float value will result in
+   a panic.
 
 If no messages are available the current process will be suspended, and the
 instruction will be retried the next time the process is executed.
 
-If a timeout is given that expires the given register will be set to nil.
+A timeout of 0.0 is interpreted as no timeout, meaning the process will be
+suspended until a message is received, regardless of how long this takes.
 
 ### ProcessSendMessage
 
@@ -1035,7 +1036,7 @@ This instruction takes three arguments:
 1. The register to store the PID in.
 2. The register containing the Block to run in the process.
 3. The register containing the ID of the process pool to schedule the process
-on. Defaults to the ID of the primary pool.
+   on, as an integer.
 
 ### ProcessStatus
 
@@ -1051,8 +1052,8 @@ This instruction takes two arguments:
 Suspends the current process.
 
 This instruction takes one argument: a register containing the minimum amount of
-time (as an integer) the process should be suspended. If the register is set to
-nil or contains a negative value the timeout is ignored.
+seconds (as a float) the process should be suspended. Using a negative value or
+a non float value will result in a panic.
 
 ### ProcessTerminateCurrent
 
