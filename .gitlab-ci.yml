@@ -21,7 +21,6 @@ deploy:
   cache:
     paths:
       - vendor/ruby
-      - build
   only:
     - master
   environment:
