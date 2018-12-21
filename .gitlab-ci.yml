@@ -20,7 +20,7 @@ deploy:
     - rake deploy
   cache:
     paths:
-      - vendor
+      - vendor/ruby
   only:
     - master
   environment:
