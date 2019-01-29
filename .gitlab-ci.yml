@@ -11,7 +11,7 @@ deploy:
   before_script:
     - echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
     - apk add --update build-base nodejs tzdata aws-cli
-    - gem install bundler --no-ri --no-rdoc
+    - gem install bundler --no-doc
     - ruby --version
     - gem --version
     - bundle --version
