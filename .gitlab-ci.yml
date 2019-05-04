@@ -9,8 +9,8 @@ deploy:
   variables:
     DISTRIBUTION_ID: E2461OP4YFCUOQ
   before_script:
-    - echo 'http://dl-cdn.alpinelinux.org/alpine/edge/testing' >> /etc/apk/repositories
-    - apk add --update build-base nodejs tzdata aws-cli
+    - apk add --update build-base nodejs tzdata python3
+    - pip3 install awscli
     - gem install bundler --no-doc
     - ruby --version
     - gem --version
