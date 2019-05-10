@@ -14,7 +14,7 @@ task :news, :title do |_, args|
   title = args.title.strip
   filename = title
     .downcase
-    .gsub(/\s+/, '-')
+    .gsub(/[\s\.]+/, '-')
     .gsub(/[^\p{Word}\-]+/, '')
 
   File.open("source/news/#{filename}.html.md", 'w') do |handle|
