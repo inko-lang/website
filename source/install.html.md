@@ -41,7 +41,7 @@ software:
 * (GNU) coreutils
 * (GNU) findutils
 * Make 4.0 or newer
-* Rust 1.28 or newer
+* Rust 1.31 or newer, using the 2018 edition
 * Ruby 2.3 or newer (for the compiler)
 * autoconf
 * automake
