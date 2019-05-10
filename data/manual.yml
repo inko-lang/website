@@ -18,6 +18,7 @@ chapters:
       - /manual/getting-started/concurrent-programming
       - /manual/getting-started/optional-values
       - /manual/getting-started/error-handling
+      - /manual/getting-started/sockets
   - title: Syntax
     pages:
       - /manual/syntax/introduction
