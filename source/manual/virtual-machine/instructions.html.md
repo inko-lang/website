@@ -575,6 +575,15 @@ This instruction requires two arguments:
 1. The register to store the result in.
 2. The register of the float to convert.
 
+### FloatToBits
+
+Stores the bitwise representation of a float as an integer.
+
+This instruction requires two arguments:
+
+1. The register to store the Integer in.
+2. The register containing the float to convert.
+
 ### GetAttribute
 
 Gets an attribute from an object and stores it in a register.
@@ -921,15 +930,23 @@ This instruction requires two arguments:
 1. The register to store the result in (true or false).
 2. The local variable index to check.
 
-### MoveToPool
+### ProcessSetBlocking
 
-Moves the current process to the given pool.
+Marks or unmarks the current process as performing a blocking operation. When
+marking a process as blocking, the VM moves it to a secondary thread pool. When
+the mark is unset, the VM moves the process back to the primary thread pool.
 
-This instruction takes one argument: the register containing the pool ID to move
-to.
+This instruction takes one argument: a register containing a boolean that
+indicates the blocking state of the process.
 
-If the process is already running in the given pool this instruction does
+If the process is already running in the secondary pool, this instruction does
 nothing.
+
+### ProcessIdentifier
+
+Stores the unique identifier of a process in a register, as an integer.
+
+This instruction takes one argument: the register to store the identifier in.
 
 ### ObjectEquals
 
@@ -945,19 +962,6 @@ This instruction takes three arguments:
 3. The register containing the object to compare with.
 
 The result of this instruction is either boolean true, or false.
-
-### ObjectIsKindOf
-
-Checks if one object is a kind of another object.
-
-An object is considered a kind of another object when the object compared with
-is in the prototype chain of the object we're comparing.
-
-This instruction requires three arguments:
-
-1. The register to store the result in as a boolean.
-2. The register containing the object to compare.
-3. The register containing the object to compare with.
 
 ### Panic
 
@@ -993,12 +997,11 @@ The possible values produced by this instruction are:
 
 If the platform can not be determined, "unknown" will be used.
 
-### ProcessCurrentPid
+### ProcessCurrent
 
-Gets the PID of the currently running process.
+Stores the currently running process in the given register.
 
-This instruction requires one argument: the register to store the PID in (as an
-integer).
+This instruction requires one argument: the register to store the process in.
 
 ### ProcessReceiveMessage
 
@@ -1024,28 +1027,17 @@ Sends a message to a process.
 This instruction takes three arguments:
 
 1. The register to store the message in.
-2. The register containing the PID to send the message to.
+2. The register containing the process to send the message to.
 3. The register containing the message (an object) to send to the process.
 
 ### ProcessSpawn
 
 Spawns a new process.
 
-This instruction takes three arguments:
+This instruction requires two arguments:
 
-1. The register to store the PID in.
+1. The register to store the process in.
 2. The register containing the Block to run in the process.
-3. The register containing the ID of the process pool to schedule the process
-   on, as an integer.
-
-### ProcessStatus
-
-Gets the status of the given process as an integer.
-
-This instruction takes two arguments:
-
-1. The register to store the status in.
-2. The register containing the PID of the process to check.
 
 ### ProcessSuspendCurrent
 
@@ -1060,18 +1052,6 @@ a non float value will result in a panic.
 Terminates the current process.
 
 This instruction does not take any arguments.
-
-### PrototypeChainAttributeContains
-
-Checks if an object's attribute contains the given value.  This instruction will
-walk the prototype chain until a match is found or we run out of objects.
-
-This instruction requires 4 attributes:
-
-1. The register to set the result to as a boolean.
-2. The object whos prototype chain to check.
-3. The name of the attribute to check.
-4. The value to check in the attribute.
 
 ### RemoveAttribute
 
@@ -1402,6 +1382,24 @@ This instruction requires two arguments:
 1. The register to store the new string in.
 2. The register containing the input string.
 
+### StringToFloat
+
+Converts a string to a float.
+
+This instructino requires two arguments:
+
+1. The register to store the resulting float in.
+2. The register containing the string to convert.
+
+### StringToInteger
+
+Converts a string to an integer.
+
+This instructino requires two arguments:
+
+1. The register to store the resulting integer in.
+2. The register containing the string to convert.
+
 ### TailCall
 
 Performs a tail call on the current block.
@@ -1522,6 +1520,12 @@ Gets the command-line arguments passed to the running program.
 This instruction only requires a single argument: the register to store the
 command-line arguments in, as an array of strings.
 
+### EnvVariables
+
+Stores a list of all the environment variable names, as an array of strings.
+
+This instruction takes a single argument: the register to store the names in.
+
 ### BlockGetReceiver
 
 Gets the receiver of a block.
@@ -1577,6 +1581,21 @@ This instruction requires two arguments:
 1. The register to store the deferred block in.
 1. The register containing the deferred block to schedule.
 
+### ProcessPinThread
+
+Pins the running process to the current OS thread.
+
+This instruction requires a single argument: the register to store the result
+in. The result will be the `true` object if the process was pinned, and the
+`false` object if the process was already pinned.
+
+### ProcessUnpinThread
+
+Unpins the running process from the current OS thread.
+
+This instruction requires a single argument: the register to store the result
+in. The result is always the `nil` object.
+
 ### SetDefaultPanicHandler
 
 Sets a new default panic handler.
@@ -1615,6 +1634,9 @@ For the second argument, the following values can be used:
 | 12      | Library
 | 13      | Function
 | 14      | Pointer
+| 15      | Process
+| 16      | Socket
+| 17      | Unix domain socket
 
 ### LibraryOpen
 
@@ -1738,6 +1760,15 @@ This instruction requires two arguments:
 1. The register to store the Pointer into.
 1. The register containing the address, as an Integer.
 
+### PointerAddress
+
+Stores the address of a pointer as an integer.
+
+This instruction requires two arguments:
+
+1. The register to store the integer in.
+2. The register containing the pointer to obtain the address from.
+
 ### ForeignTypeSize
 
 Obtains the size of a C type.
@@ -1759,5 +1790,249 @@ This instruction requires two arguments:
 1. The register containing the C type identifier, as an Integer.
 
 The use of an invalid type identifier will result in a panic.
+
+### SocketAccept
+
+Accepts an incoming connection on a socket.
+
+This instruction requires two arguments:
+
+1. The register to store the resulting socket in.
+2. The register containing the socket that is accepting connections.
+
+This instruction may throw an IO error as a string.
+
+### SocketAddress
+
+Obtains the local or peer address of a socket.
+
+This instruction requires three arguments:
+
+1. The register to store the resulting address in.
+2. The register containing the socket to get the address from.
+3. The register containing an integer that indicates what kind of address to
+   receive. This must be `0` for the local address, and `1` for the peer
+   address; any other value is invalid.
+
+The resulting address is an array containing two values:
+
+1. The address (an IP, Unix socket path, etc) as a string.
+2. The port number as an integer. This will always be `0` for Unix domain
+   sockets.
+
+This instruction may throw an IO error as a string.
+
+### SocketBind
+
+Binds a socket to an address.
+
+This instruction requires four arguments:
+
+1. The register to store the result in.
+2. The register containing the socket to bind.
+3. The register containing the address to bind to, as a string.
+4. The register containing the port number to bind to, as an integer.
+
+For Unix domain sockets the value of the port register is ignored, but still
+required. It is recommended to always set this to `0` for Unix domain sockets.
+
+The result is always the `nil` object.
+
+This instruction may throw an IO error as a string.
+
+### SocketConnect
+
+Connects a socket to an address.
+
+This instruction requires four arguments:
+
+1. The register to store the result in.
+2. The register containing the socket to connect.
+3. The register containing the address to connect to, as a string.
+4. The register containing the port number to connect to, as an integer.
+
+For Unix domain sockets the value of the port register is ignored, but still
+required. It is recommended to always set this to `0` for Unix domain sockets.
+
+This instruction may throw an IO error as a string.
+
+### SocketCreate
+
+Creates a new socket.
+
+This instruction requires three arguments:
+
+1. The register to store the socket in.
+2. The register containing the socket domain, as an integer.
+3. The register containing the socket type, as an integer.
+
+The following values can be used for the socket domain argument (any other value
+is invalid):
+
+| Socket domain | Value
+|:--------------|:------
+| AF_INET       | `0`
+| AF_INET6      | `1`
+| AF_UNIX       | `2`
+
+The following values can be used for the socket type argument (any other value
+is invalid):
+
+| Socket type    | Value
+|:---------------|:------
+| SOCK_STREAM    | `0`
+| SOCK_DGRAM     | `1`
+| SOCK_SEQPACKET | `2`
+| SOCK_RAW       | `3`
+
+This instruction may throw an IO error as a string.
+
+### SocketGetOption
+
+Obtains the value of a socket option.
+
+This instruction requires three arguments:
+
+1. The register to store the option value in.
+2. The register containing the socket to get the option from.
+3. The register containing an integer indicating what option to retrieve.
+
+The following socket option values are available:
+
+| Socket option       | Value | Return type
+|:--------------------|:------|:-----------
+| IP_TTL              | `0`   | integer
+| IPV6_V6ONLY         | `1`   | boolean
+| TCP_NODELAY         | `2`   | boolean
+| SO_BROADCAST        | `3`   | boolean
+| SO_LINGER           | `4`   | float
+| SO_RCVBUF           | `5`   | integer
+| SO_SNDBUF           | `6`   | integer
+| TCP_KEEPALIVE       | `7`   | float
+| IP_MULTICAST_LOOP   | `8`   | boolean
+| IPV6_MULTICAST_LOOP | `9`   | boolean
+| IP_MULTICAST_TTL    | `10`  | integer
+| IPV6_MULTICAST_HOPS | `11`  | integer
+| IP_MULTICAST_IF     | `12`  | string (containing an IPv4 address)
+| IPV6_MULTICAST_IF   | `13`  | integer
+| IPV6_UNICAST_HOPS   | `14`  | integer
+| SO_REUSE_ADDRESS    | `15`  | boolean
+| SO_REUSE_PORT       | `16`  | boolean
+
+This instruction may throw an IO error as a string.
+
+### SocketSetOption
+
+Sets the value of a socket option.
+
+This instruction requires four arguments:
+
+1. The register to store the option value in.
+2. The register containing the socket to set the option for.
+3. The register containing an integer indicating what option to set.
+4. The register containing the value to set the option to.
+
+The options that can be set are the same available to `SocketGetOption`. The
+type of the value register should match the return type of the option in
+`SocketGetOption`. For example, to set `IP_MULTICAST_IF` you would have to
+provide the value as a string.
+
+This instruction may throw an IO error as a string.
+
+### SocketListen
+
+Marks a socket as listening, with a custom backlog.
+
+This instruction requires three arguments:
+
+1. The register to store the result in.
+2. The register containing the socket to mark as listening.
+3. The register containing the listen backlog, as an integer.
+
+The result is the listen backlog used for the socket.
+
+This instruction may throw an IO error as a string.
+
+### SocketRead
+
+Reads bytes from a connected socket into a byte array.
+
+This instruction requires four arguments:
+
+1. The register to store the number of bytes read in, as an integer.
+2. The register containing the socket to read from.
+3. The register containing a byte array to read bytes into.
+4. The register containing an integer indicating the number of bytes to read.
+
+Bytes read are _appended to_ the byte array, instead of overwriting its
+contents.
+
+This instruction may throw an IO error as a string.
+
+### SocketReceiveFrom
+
+Reads bytes from a socket into a byte array, returning the address the data was
+sent from.
+
+This instruction requires four arguments:
+
+1. The register to store the sender's address in, as an array.
+2. The register containing the socket to read from.
+3. The register containing a byte array to read bytes into.
+4. The register containing an integer indicating the number of bytes to read.
+
+The address produced is an array containing the following values:
+
+1. The address (an IP, Unix socket path, etc) as a string.
+2. The port number as an integer. This will always be `0` for Unix domain
+   sockets.
+
+This instruction may throw an IO error as a string.
+
+### SocketSendTo
+
+Sends the contents of a byte array to the given address.
+
+This instruction requires five arguments:
+
+1. The register to store the number of bytes read in, as an integer.
+2. The register containing the socket to use for sending the bytes.
+3. The register containing the byte array containing the bytes to send.
+4. The register containing the destination address as a string.
+5. The register containing the destination port number as an integer.
+
+For Unix domain sockets the port number should be set to `0`.
+
+This instruction may throw an IO error as a string.
+
+### SocketWrite
+
+Writes bytes to a connected socket.
+
+This instruction requires three arguments:
+
+1. The register to store the number of bytes written in, as an integer.
+2. The register containing the socket to write to.
+3. The register containing the byte array to write to the socket.
+
+This instruction may throw an IO error as a string.
+
+### SocketShutdown
+
+Shuts down a socket for reads, writes, or both.
+
+This instruction requires three arguments:
+
+1. The register to store the result in, which is always the `nil` object.
+2. The register containing the socket to shut down.
+3. The register containing an integer describing which halves to shut down.
+
+The following values can be used for the third argument:
+
+| Value | Meaning
+|:------|:----------------------------
+| 0     | Shuts down the reading half
+| 1     | Shuts down the writing half
+| 2     | Shuts down both the reading and writing halves
 
 [tac]: https://en.wikipedia.org/wiki/Three-address_code
