@@ -10,44 +10,26 @@
 - title: Process communication
   code: |
     ```inko
-    import std::process
+    import std::process::(self, Process)
     import std::stdio::stdout
 
-    let pid = process.spawn {
+    let child = process.spawn {
+      let parent = process.receive as Process
       let message = process.receive as String
 
       # This will print "ping" to STDOUT.
       stdout.print(message)
 
-      process.send(pid: 0, message: 'pong')
+      parent.send('pong')
     }
 
-    process.send(pid: pid, message: 'ping')
+    child.send(process.current)
+    child.send('ping')
 
     let response = process.receive as String
 
     # This will print "pong" to STDOUT.
     stdout.print(response)
-    ```
-
-- title: Type safe process communication
-  code: |
-    ```inko
-    import std::process
-
-    let sender = process.channel lambda (receiver) {
-      let number = receiver.receive
-
-      # Here the compiler knows that
-      # "number" is always an Integer:
-      number + 5
-    }
-
-    # This is OK:
-    sender.send(2)
-
-    # This will produce a type error:
-    sender.send('oops')
     ```
 
 - title: Generic types

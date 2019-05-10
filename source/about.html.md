@@ -35,12 +35,14 @@ its own heap, and processes communicate via message passing.
 import std::process
 import std::stdio::stdout
 
-let sender = process.channel!(String) lambda (receiver) {
+let proc = process.spawn do {
+  let message = process.receive as String
+
   # This will print "Hello world!" to STDOUT.
-  stdout.print(receiver.receive)
+  stdout.print(message)
 }
 
-sender.send('Hello world!')
+proc.send('Hello world!')
 ```
 
 The virtual machine uses preemptive multitasking, ensuring every process is

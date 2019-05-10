@@ -43,24 +43,23 @@ receive a message, then just terminate. First, let's start the new process:
 ```inko
 import std::process
 
-let pid = process.spawn {
+let proc = process.spawn {
 
 }
 ```
 
 By sending the message `spawn` to the `process` module we can start a new
 process. The argument we provide is a lambda that will be executed in the newly
-started process. The return value is the PID of the process, which we can later
-use to send messages to it. Each process is given a unique PID, although it is
-possible for a PID to be reused once the process it belonged to has been
-terminated.
+started process. The return value is a process object, which we can later
+use to send messages to it. Message passing does not rely on PIDs, instead it
+uses process objects.
 
 Now let's change our code so that our process waits for a message to arrive:
 
 ```inko
 import std::process
 
-let pid = process.spawn {
+let proc = process.spawn {
   process.receive
 }
 ```
@@ -74,29 +73,20 @@ When a process tries to receive a message, one of two things can happen:
    arrives.
 1. If there is a message, simply return it.
 
-So far we haven't sent a message yet to our process, so it will suspend itself
-and wait for us to send one. Let's send it a message:
+We haven't sent a message yet to our process, so it will suspend itself and wait
+for us to send one. Let's send it a message:
 
 ```inko
 import std::process
 
-let pid = process.spawn {
+let proc = process.spawn {
   process.receive
 }
 
-process.send(pid: pid, message: 'ping')
+proc.send('ping')
 ```
 
-Using `process.send` allows us to send a message to a process. When using the
-`send` message, we must provide two arguments:
-
-1. The PID of the process to send the message to.
-1. The message to send.
-
-In the above example we use explicit keyword arguments for `process.send`, but
-we could have left them out as well. It is considered a best practise to use
-explicit keyword arguments when supplying more than one argument, as this makes
-it easier to understand the meaning of the arguments.
+Using `Process.send` allows us to send a message to a process.
 
 ## Copying messages
 
@@ -118,343 +108,81 @@ copying typically won't be something you should worry about.
 
 ## Waiting for a response
 
-So far our program doesn't do a whole lot: we start a process, send it a
-message, then terminate. Let's change our program so that the started process
-sends a response back, and our main process waits for it to be received:
+Our program doesn't do a whole lot: we start a process, send it a message, then
+terminate. Let's change our program so that the started process sends a response
+back, and our main process waits for it to be received:
 
 ```inko
-import std::process
+import std::process::(self, Process)
 
-let pid = process.spawn {
-  process.receive
+let child = process.spawn {
+  let reply_to = process.receive as Process
 
-  process.send(pid: 0, message: 'pong')
+  reply_to.send('pong')
 }
 
-process.send(pid: pid, message: 'ping')
+child.send(process.current)
 
 process.receive
 ```
 
-Our started process now sends the message "pong" to the process with PID 0. But
-which process is that? Well, the process with PID 0 is simply the process that
-is started first. In our above example this is the same process that runs
-`process.spawn`, then waits for the "pong" message.
-
-While our program works, there's a bit of a problem: we always send our response
-to process 0, instead of the process that sent us the message. Let's change
-this!
-
-```inko
-import std::process
-
-let pid = process.spawn {
-  let pid = process.receive as Integer
-
-  process.send(pid: pid, message: 'pong')
-}
-
-process.send(pid: pid, message: process.current)
-
-process.receive
-```
+Here we start a new process, which will then wait until it receives a process
+object. Once received, it sends the `"pong"` message to it.
 
 This is quite a bit of a jump from the previous example, so let's discuss it
 step by step. We start our process as usual, which then runs the following:
 
 ```inko
-let pid = process.receive as Integer
+import std::process::(self, Process)
+```
+
+This imports the `std::process` module and makes it available as `process`,
+while also importing the `Process` constant from the same module and exposing it
+as `Process`. Next, we start our process:
+
+```inko
+let child = process.spawn {
+  # ...
+}
+```
+
+This starts a new process, and stores the process object in the `child` local
+variable. The first line this new process runs is the following:
+
+```inko
+let reply_to = process.receive as Process
 ```
 
 This line of code does two things:
 
 1. We wait for a message to arrive.
-2. We inform the compiler that our message is of type `Integer`.
+2. We inform the compiler that our message is of type `Process`.
 
 Step one is nothing new, but step two needs some explaining. When we use
 `process.receive`, the compiler is does not know what the type of the received
 message is. This is because a process can receive messages from many other
 processes, possibly using different types. As a result, the return type of
-`process.receive` is `Dynamic`. To further explain, let's look at the next line:
+`process.receive` is `Dynamic`.
+
+Next we have the following:
 
 ```inko
-process.send(pid: pid, message: 'pong')
+reply_to.send('pong')
 ```
 
-Here we pass the `pid` variable as the PID to send the message to. This variable
-contains the PID that was sent to us. The `pid:` argument of `process.send`
-takes an `Integer`, but `process.receive` returns a `Dynamic`. We can't pass a
-`Dynamic` to an `Integer`, so we have to cast it. We do this by using the `as`
-keyword, which is used like so:
+Here we send a message to the process stored in `reply_to`, which in our example
+is also the process that started the child process.
+
+Finally, we have the following two lines:
 
 ```inko
-expression as TypeToCastTo
-```
-
-Finally, we have the following line:
-
-```inko
-process.send(pid: pid, message: process.current)
-```
-
-Here we use `process.current` to return the PID of the currently running
-process, which happens to be process 0 in this case. We then use this value as
-the message to send, allowing the receiving process to send a response back to
-us.
-
-## Type safe process communication
-
-Using dynamic types for messages can get tricky rather quickly, especially once
-we start sending more complex types of messages such as custom objects. Let's
-say we want to send both the PID of the sender, a message, and have the receiver
-_only_ send back "pong" if the input message was "ping". In this case we would
-end up with something like this:
-
-```inko
-import std::process
-
-object Message {
-  def init(sender: Integer, message: String) {
-    let @sender = sender
-    let @message = message
-  }
-
-  def sender -> Integer {
-    @sender
-  }
-
-  def message -> String {
-    @message
-  }
-}
-
-let pid = process.spawn {
-  let message = process.receive as Message
-
-  message.message == 'ping'
-    .if_true {
-      process.send(pid: message.sender, message: 'pong')
-    }
-}
-
-let message = Message.new(process.current, 'ping')
-
-process.send(pid: pid, message: message)
+child.send(process.current)
 
 process.receive
 ```
 
-That's quite a lot! We define a custom `Message` object that we will use for
-storing the PID, and our message (a `String`). We then create a new instance of
-our `Message` object, and send this to the receiving process.
-
-While this program will work, it is not type safe. For example, nothing is
-stopping us from changing our code to do the following:
-
-```inko
-import std::process
-
-object Message {
-  def init(sender: Integer, message: String) {
-    let @sender = sender
-    let @message = message
-  }
-
-  def sender -> Integer {
-    @sender
-  }
-
-  def message -> String {
-    @message
-  }
-}
-
-let pid = process.spawn {
-  let message = process.receive as Message
-
-  message.message == 'ping'
-    .if_true {
-      process.send(pid: message.sender, message: 'pong')
-    }
-}
-
-process.send(pid: pid, message: 'oh no, this will break!')
-```
-
-If we try to run this, we'll be presented with a rather scary looking runtime
-error:
-
-```
-Stack trace (the most recent call comes last):
-  0: "/tmp/test.inko", line 21, in "<block>"
-Process 1 panicked: ObjectValue::as_block() called on a non block object
-```
-
-Runtime errors are currently not yet very helpful, but what this means is that
-we tried to send `message` (in the receiver) to something that did not respond
-to it. This is because we are sending a message of type `String`, and not of
-type `Message`.
-
-Fortunately, we can fix this! To do so, we need to use a different method:
-`process.channel`. This method will start a process for us, but only allow us to
-send it messages of a given type, which we provide when using `process.channel`.
-Let's change our example to use this new approach:
-
-```inko
-import std::process
-
-object Message {
-  def init(sender: Integer, message: String) {
-    let @sender = sender
-    let @message = message
-  }
-
-  def sender -> Integer {
-    @sender
-  }
-
-  def message -> String {
-    @message
-  }
-}
-
-let sender = process.channel!(Message) lambda (receiver) {
-  let message = receiver.receive
-
-  message.message == 'ping'
-    .if_true {
-      process.send(pid: message.sender, message: 'pong')
-    }
-}
-
-let message = Message.new(process.current, 'ping')
-
-sender.send(message)
-
-process.receive
-```
-
-Let's go through this step by step. First we have the following:
-
-```inko
-let sender = process.channel!(Message) lambda (receiver) {
-  # ...
-}
-```
-
-The `process.channel` method is quite different from `process.spawn`. Instead of
-just taking a block and executing it, it requires us to provide:
-
-1. The type of the message that we will be sending, as a type argument. This is
-   done using `process.channel!(Message)`.
-1. A lambda that takes a single argument called a "receiver".
-
-A "receiver" is an object of type `std::process::Receiver`, and is aware of the
-type of message it will be receiving.
-
-When using `process.channel`, the return type is not an `Integer` but a
-`std::process::Sender`. This is an object that knows the PID of the process to
-send a message to, and the type of the messages it will be sending.
-
-To make use of these objects, we use `sender.send` and `receiver.receive` in the
-above example, instead of `process.send` and `process.receive`. Because both the
-sender and receiver are aware of the message types, we no longer have to cast
-anything when receiving a message. This API also makes sending messages type
-safe. Let's say we change our program to the following:
-
-```inko
-import std::process
-
-object Message {
-  def init(sender: Integer, message: String) {
-    let @sender = sender
-    let @message = message
-  }
-
-  def sender -> Integer {
-    @sender
-  }
-
-  def message -> String {
-    @message
-  }
-}
-
-let sender = process.channel!(Message) lambda (receiver) {
-  let message = receiver.receive
-
-  message.message == 'ping'
-    .if_true {
-      process.send(pid: message.sender, message: 'pong')
-    }
-}
-
-sender.send('this will not work!')
-
-process.receive
-```
-
-If we try to run this, we will be presented with the following compiler error:
-
-```
-ERROR: Expected a value of type "Message" instead of "String"
-  --> /tmp/test.inko on line 27, column 13
-    |
- 27 | sender.send('this will not work!')
-    |             ^
-```
-
-The same is the case if we try to use our received message in an incompatible
-way:
-
-```inko
-import std::process
-
-object Message {
-  def init(sender: Integer, message: String) {
-    let @sender = sender
-    let @message = message
-  }
-
-  def sender -> Integer {
-    @sender
-  }
-
-  def message -> String {
-    @message
-  }
-}
-
-let sender = process.channel!(Message) lambda (receiver) {
-  let message = receiver.receive
-
-  message.example == 'ping'
-    .if_true {
-      process.send(pid: message.sender, message: 'pong')
-    }
-}
-
-let message = Message.new(process.current, 'ping')
-
-sender.send(message)
-
-process.receive
-```
-
-This will result in the following compiler error:
-
-```
-ERROR: The type "Message" does not respond to the message "example"
-  --> /tmp/test.inko on line 21, column 11
-    |
- 21 |   message.example == 'ping'
-    |           ^
-```
-
-In both cases the type safe API provided by `process.channel` protects us from
-sending the wrong kind of data to a process, and ensures the receiver is aware
-of the message type, thereby removing the need for casting it to the desired
-type.
+Here we send the child process the process object of the currently running
+process, then wait for the child process to reply.
 
 ## Timeouts
 
@@ -470,32 +198,6 @@ process.receive(1_000)
 When running this, our program will wait for 1000 milliseconds (= 1 second) for
 a message to arrive. If no message is received, `Nil` is returned and our
 program will continue.
-
-## Conditional receives
-
-Sometimes a process has to receive messages of radically different types. In
-this case one can use `process.receive_if` to _only_ receive a message if it
-meets our requirements. For example, we can use this to only receive messages of
-type `String`:
-
-```inko
-import std::process
-import std::reflection
-
-let pid = process.spawn {
-  process.receive_if do (message) {
-    reflection.kind_of?(message, String)
-  }
-}
-
-process.send(pid: pid, 'ping')
-```
-
-Here we use `reflection.kind_of?` to check if `message` is of type `String`. If
-a message does not meet our criteria, _it is dropped_.
-
-Because `process.receive_if` returns a value of type `Dynamic`, explicit type
-casts may be required depending on how you act upon the returned value.
 
 ## Blocking operations
 
@@ -534,28 +236,15 @@ process send a message upon termination. You can do so by registering a panic
 handler in the process:
 
 ```inko
-import std::process
+import std::process::(self, Process)
 
 let child = process.spawn {
-  let parent = process.receive as Integer
+  let parent = process.receive as Process
 
   process.panicking do (error) {
-    process.send(pid: parent, message: error)
+    parent.send(error)
   }
 }
 
-process.send(pid: child, message: process.current)
+child.send(process.current)
 ```
-
-You can also use `process.status` to receive the status of a process:
-
-```inko
-import std::process
-
-process.status(process.current) # => 1, meaning it is running
-```
-
-Keep in mind that if a process has been terminated, it's PID _might_ be reused
-in the future. This means that the value returned by `process.status` is not
-guaranteed to be 100% accurate, although it will take quite a while before a PID
-is reused.
