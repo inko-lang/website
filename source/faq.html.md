@@ -474,6 +474,5 @@ up to the CPU to decide how many of these threads are running in parallel.
 
 ### Can I change the number of threads used by the VM?
 
-Yes. The environment variables `INKO_PRIMARY_THREADS` and
-`INKO_SECONDARY_THREADS` can be used to control the number of threads used for
-the primary and secondary pool.
+Yes. The environment variables `INKO_CONCURRENCY` can be used to control the
+number of threads it will use for its various thread pools.

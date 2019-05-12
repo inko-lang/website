@@ -28,37 +28,11 @@ file, it will try to find it in one of these directories.
 
 ## Environment variables
 
-### INKO_PRIMARY_THREADS
+### INKO_CONCURRENCY
 
-An integer specifying the number of threads to use for the primary thread pool.
-
-Defaults to the number of logical CPU cores.
-
-### INKO_SECONDARY_THREADS
-
-An integer specifying the number of threads to use for the secondary thread
-pool.
+An integer specifying the number of threads to use for the various thread pools.
 
 Defaults to the number of logical CPU cores.
-
-### INKO_GC_THREADS
-
-An integer specifying the number of threads to use for the garbage collector.
-
-Defaults to `2`.
-
-### INKO_FINALIZER_THREADS
-
-An integer specifying the number of threads to use for finalising objects.
-
-Defaults to `2`.
-
-### INKO_GENERIC_PARALLEL_THREADS
-
-An integer specifying the number of threads to use for various parallel
-operations, such as scanning the stack of a process to garbage collect.
-
-Defaults to the number of physical CPU cores.
 
 ### INKO_REDUCTIONS
 
@@ -66,13 +40,6 @@ An integer specifying the number of reductions that take place before a process
 is suspended.
 
 Defaults to `1000`.
-
-### INKO_SUSPENSION_CHECK_INTERVAL
-
-An integer specifying the number of milliseconds to wait between checking for
-suspended processes.
-
-Defaults to `100` (milliseconds).
 
 ### INKO_YOUNG_THRESHOLD
 
