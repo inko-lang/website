@@ -19,13 +19,13 @@ written in Bash. The installation instructions for ienv can be found on the
 To install a version of Inko, run the `install` command:
 
 ```bash
-ienv install 0.1.0
+ienv install 0.4.0
 ```
 
 To remove a version:
 
 ```bash
-ienv remove 0.1.0
+ienv remove 0.4.0
 ```
 
 To list all installed versions:
@@ -49,13 +49,13 @@ ienv clean
 Setting the default version to use:
 
 ```bash
-ienv default 0.1.0
+ienv default 0.4.0
 ```
 
 Running an Inko command using a specific version:
 
 ```bash
-ienv run 0.1.0 -- ivm --version
+ienv run 0.4.0 -- ivm --version
 ```
 
 If you have configured a default version using `ienv default`, then you can
@@ -81,7 +81,7 @@ directory specific version, create a file called `inko-version` and add the
 desired version to it. For example:
 
 ```bash
-echo '0.1.0' > inko-version
+echo '0.4.0' > inko-version
 ```
 
 You can then use the `run` command as follows to use the directory override:
