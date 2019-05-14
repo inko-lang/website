@@ -14,6 +14,7 @@ chapters:
       - /manual/getting-started/instance-attributes
       - /manual/getting-started/modules
       - /manual/getting-started/types
+      - /manual/getting-started/traits
       - /manual/getting-started/iterators
       - /manual/getting-started/concurrent-programming
       - /manual/getting-started/optional-values

@@ -139,6 +139,21 @@ object Person {
 Person.new
 ```
 
+## Trait types
+
+Traits are used for defining a common interface across types, and optionally
+provide default method implementations for these types. Traits are created using
+the `trait` keyword:
+
+```inko
+trait ToString {
+  # ...
+}
+```
+
+For more information, refer to the [Traits](/manual/getting-started/traits)
+guides.
+
 ## Dynamic types
 
 The `Dynamic` type is a special type that only exists at compile time. When
