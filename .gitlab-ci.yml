@@ -1,8 +1,8 @@
 ---
 
 stages:
-  - deploy
   - automation
+  - deploy
 
 deploy:
   image: ruby:2.5-alpine
