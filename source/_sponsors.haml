@@ -1,0 +1,20 @@
+%table.sponsors-table
+  %thead
+    %tr
+      %th.sponsor-logo
+      %th Sponsor
+      %th Total
+      %th Sponsor since
+  %tbody
+    - sorted_sponsors(tier) do |member|
+      %tr
+        %td.sponsor-logo
+          - if member['image'] && !member['image'].empty?
+            %img{src: member['image'], alt: member['name'], width: 40}
+        %td
+          %a{href: member['website'], title: member['name']}
+            = member['name']
+        %td
+          &euro; #{member['total_donated'].round}
+        %td
+          = format_date(member['created_at'])

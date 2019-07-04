@@ -2,6 +2,7 @@
 
 stages:
   - deploy
+  - automation
 
 deploy:
   image: ruby:2.5-alpine
@@ -26,3 +27,26 @@ deploy:
   environment:
     name: production
     url: https://inko-lang.org
+
+sponsors:
+  image: ruby:2.5-alpine
+  stage: automation
+  before_script:
+    - apk add --update build-base tzdata
+    - gem install bundler --no-doc
+    - ruby --version
+    - gem --version
+    - bundle --version
+    - bundle install --path vendor --retry=3
+  script:
+    - rake deploy
+  cache:
+    paths:
+      - vendor/ruby
+  script:
+    - bundle exec rake sponsors:commit
+  only:
+    refs:
+      - schedules
+    variables:
+      - $UPDATE_SPONSORS

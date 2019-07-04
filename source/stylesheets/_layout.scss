@@ -166,20 +166,6 @@
   }
 }
 
-.features {
-  .grid {
-    grid-template-columns: 1fr;
-
-    @media #{$media-wide} {
-      grid-template-columns: 1fr 1fr;
-    }
-  }
-
-  h1 {
-    font-size: 1.5rem;
-  }
-}
-
 .page {
   box-shadow: inset 0 1px 2px $top-shadow;
 

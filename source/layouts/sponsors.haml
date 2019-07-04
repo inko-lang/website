@@ -1,0 +1,37 @@
+!!!
+%html{ lang: 'en' }
+  %head
+    = partial('head',
+      locals: { canonical: current_page.url })
+  %body
+    = partial('top')
+
+    .page
+      .grid
+        %article{ class: current_page.data.html_class }
+          %header
+            %h1
+              = current_page.data.title
+          = yield
+
+          - if total_sponsors.positive?
+            %p
+              We currently have <strong>#{total_sponsors} sponsors</strong>,
+              with an annual budget of <strong>&euro;#{annual_budget}</strong>.
+
+          %a{href: config[:open_collective], title: 'Donate via Open Collective', class: 'button no-bottom-margin'}
+            Donate via Open Collective
+
+          - if sponsors?
+            %h2 Sponsors
+            %p Sponsors are those who have pledged &euro;100 or more per month.
+            = partial('sponsors', locals: { tier: sponsors_for_tier('Sponsor') })
+
+          - if backers?
+            %h2 Backers
+            %p Backers are those who have pledged &euro;5 or more per month.
+            = partial('sponsors', locals: { tier: sponsors_for_tier('Backer') })
+
+        = partial('sidebar')
+
+    = partial('footer')

@@ -12,7 +12,7 @@ select {
   font-size: .9rem;
   font-weight: bold;
   margin: 0 $text-bottom-margin / 2 $text-bottom-margin 0;
-  padding: 0.5rem;
+  padding: .5rem;
   text-decoration: none;
 
   &:hover {
@@ -27,5 +27,9 @@ select {
     &:hover {
       background: darken($green, 15%);
     }
+  }
+
+  &.no-bottom-margin {
+    margin-bottom: 0;
   }
 }

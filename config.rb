@@ -3,6 +3,7 @@
 require 'lib/inko_lexer'
 require 'lib/ebnf_lexer'
 require 'uglifier'
+require 'time'
 
 Haml::TempleEngine.disable_option_validator!
 
@@ -20,6 +21,7 @@ Time.zone = 'UTC'
 set :website_title, 'Inko Programming Language'
 set :website_author, 'Yorick Peterse'
 set :website_url, 'https://inko-lang.org'
+set :open_collective, 'https://opencollective.com/inko-lang'
 set :feed_url, "#{config[:website_url]}/feed.xml"
 set :markdown_engine, :kramdown
 
@@ -58,7 +60,7 @@ end
 default_caching_policy max_age: 24 * 60 * 60
 
 configure :development do
-  activate :livereload
+  activate :livereload, host: 'localhost'
 end
 
 configure :build do
@@ -67,6 +69,7 @@ configure :build do
   activate :asset_hash
 end
 
+# rubocop: disable Metrics/BlockLength
 helpers do
   def markdown(text)
     Tilt['markdown'].new(config.markdown) { text }.render(self)
@@ -77,4 +80,39 @@ helpers do
 
     link_to(page.data.title, page)
   end
+
+  def sorted_sponsors(tier, &block)
+    tier
+      .sort { |a, b| b['total_donated'] <=> a['total_donated'] }
+      .each(&block)
+  end
+
+  def sponsors_for_tier(tier)
+    data.sponsors[tier] || []
+  end
+
+  def total_sponsors
+    data.sponsors.reduce(0) do |total, (_, members)|
+      total + members.length
+    end
+  end
+
+  def sponsors?
+    sponsors_for_tier('Sponsor').any?
+  end
+
+  def backers?
+    sponsors_for_tier('Backer').any?
+  end
+
+  def annual_budget
+    data.sponsors.reduce(0) do |total, (_, members)|
+      total + members.sum { |member| member['total_donated'] }
+    end
+  end
+
+  def format_date(date)
+    Date.strptime(date, '%Y-%m-%d %H:%M').strftime('%B %e, %Y')
+  end
 end
+# rubocop: enable Metrics/BlockLength

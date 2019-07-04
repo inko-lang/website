@@ -1,0 +1,14 @@
+%section
+  %h1 Sponsors
+
+  .sponsors.grid
+    - sorted_sponsors(sponsors_for_tier('Sponsor')) do |member|
+      - if member['image'] && !member['image'].empty?
+        .sponsor
+          %a{href: member['website'], title: member['name']}
+            .sponsor-logo
+              %img{src: member['image'], width: 100, alt: truncate(member['name'])}
+    .sponsor
+      %a{href: config[:open_collective], title: 'Become a sponsor'}
+        .placeholder
+          Your logo for &euro;100/month

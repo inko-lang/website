@@ -32,9 +32,13 @@
 
     .features
       .grid
-        - data.features.each do |feature|
-          %section
-            %h1= feature['title']
+        %section
+          %h1 Features
+          - data.features.each do |feature|
+            %h2= feature['title']
             = markdown(feature['body'])
+
+    .grid
+      = partial('homepage_sponsors')
 
     = partial('footer')
