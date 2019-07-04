@@ -15,16 +15,13 @@ task :news, :title do |_, args|
       ---
       title: #{title}
       date: #{Time.now.utc.strftime('%Y-%m-%d %H:%M:%S %Z')}
-      keywords:
-        - TODO
-      description: TODO
       ---
 
       A brief summary of the article.
 
       <!-- READ MORE -->
 
-      The rest of the article
+      The rest of the article.
     TEMPLATE
   end
 end
