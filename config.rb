@@ -88,11 +88,11 @@ helpers do
   end
 
   def sponsors_for_tier(tier)
-    data.sponsors[tier] || []
+    data.sponsors['tiers'][tier] || []
   end
 
   def total_sponsors
-    data.sponsors.reduce(0) do |total, (_, members)|
+    data.sponsors['tiers'].reduce(0) do |total, (_, members)|
       total + members.length
     end
   end
@@ -106,9 +106,7 @@ helpers do
   end
 
   def annual_budget
-    data.sponsors.reduce(0) do |total, (_, members)|
-      total + members.sum { |member| member['total_donated'] }
-    end
+    data.sponsors['budget'].floor
   end
 
   def format_date(date)

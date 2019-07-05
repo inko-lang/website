@@ -47,7 +47,8 @@ class SponsorData
     end
   end
 
-  URL = 'https://opencollective.com/%<project>s/members.json'
+  PROJECT_URL = 'https://opencollective.com/%<project>s.json'
+  MEMBERS_URL = 'https://opencollective.com/%<project>s/members.json'
   ROOT = Pathname.new(File.expand_path('..', __dir__))
   SOURCE = ROOT.join('source')
   YAML_FILE = ROOT.join('data/sponsors.yml')
@@ -59,6 +60,7 @@ class SponsorData
 
   def update
     sponsors = sponsors_per_tier
+    budget = annual_budget
 
     sponsors.each do |_, members|
       Parallel.each(members, in_threads: Etc.nprocessors) do |member|
@@ -67,7 +69,7 @@ class SponsorData
     end
 
     File.open(YAML_FILE, 'w') do |file|
-      file.write(YAML.dump(sponsors))
+      file.write(YAML.dump('budget' => budget, 'tiers' => sponsors))
     end
   end
 
@@ -113,12 +115,29 @@ class SponsorData
     per_tier
   end
 
+  def annual_budget
+    response = HTTP.get(project_url)
+
+    if response.status != 200
+      raise 'Failed to obtain the project data from Open Collective: ' \
+        "#{response.reason}"
+    end
+
+    json = JSON.parse(response.body)
+
+    json.fetch('yearlyIncome') / 100.0
+  end
+
+  def members_url
+    format(MEMBERS_URL, project: @project)
+  end
+
   def project_url
-    format(URL, project: @project)
+    format(PROJECT_URL, project: @project)
   end
 
   def api_data
-    response = HTTP.get(project_url)
+    response = HTTP.get(members_url)
 
     if response.status != 200
       raise "Failed to obtain the data from Open Collective: #{response.reason}"
