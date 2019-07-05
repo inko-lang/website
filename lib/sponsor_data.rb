@@ -77,7 +77,7 @@ class SponsorData
     yaml = YAML.safe_load(File.read(YAML_FILE))
     keep = Set.new
 
-    yaml.each do |_, members|
+    yaml['tiers'].each do |_, members|
       members.each do |member|
         next if member['image'].nil?
 
