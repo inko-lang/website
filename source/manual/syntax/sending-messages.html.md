@@ -1,6 +1,7 @@
 ---
 title: Sending messages
 ---
+<!-- vale off -->
 
 Syntax:
 

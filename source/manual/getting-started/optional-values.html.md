@@ -1,6 +1,7 @@
 ---
 title: Optional and Nil values
 ---
+<!-- vale off -->
 
 ## Table of contents
 {:.no_toc}

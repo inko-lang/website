@@ -118,7 +118,7 @@ number!
 
 A potential big change we are considering is the removal of array and hash map
 literals. Arrays are created using square brackets, such as `[10, 20, 30]`. Hash
-map literals use the syntax `%[key: value]`, which was taken from Elixir. While
+map literals use the syntax `%[key: value]`, which is taken from Elixir. While
 some languages use curly braces (e.g. `{key => value}` in Ruby), Inko already
 uses these for closures. We could have used the syntax `[key: value]`, but this
 would require the parser to perform a lookahead to determine if it's parsing an

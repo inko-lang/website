@@ -8,6 +8,7 @@ keywords:
   - nightly
 description: Inko now supports building using stable Rust.
 ---
+<!-- vale off -->
 
 With the release of [Rust 1.28][rust-1.28], Inko can now be built using stable
 Rust, instead of requiring Rust nightly.

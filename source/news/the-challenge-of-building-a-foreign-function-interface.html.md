@@ -9,6 +9,7 @@ description: >
   An overview of the challenges faced when building a Foreign Function
   Interface.
 ---
+<!-- vale off -->
 
 In [Inko 0.3.0][inko 0.3.0] we introduced a Foreign Function Interface for
 interfacing with C. In this article we'll take a look at the challenges faced

@@ -1,6 +1,7 @@
 ---
 title: Let
 ---
+<!-- vale off -->
 
 Syntax:
 

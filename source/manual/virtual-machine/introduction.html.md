@@ -1,6 +1,7 @@
 ---
 title: Introduction
 ---
+<!-- vale off -->
 
 Inko's virtual machine ("IVM" for short) is a register based, bytecode virtual
 machine, written in [Rust](https://www.rust-lang.org/). IVM uses preemptive

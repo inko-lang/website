@@ -1,6 +1,7 @@
 ---
 title: Constants and types
 ---
+<!-- vale off -->
 
 Syntax:
 

@@ -1,6 +1,7 @@
 ---
 title: Concurrent programming
 ---
+<!-- vale off -->
 
 ## Table of contents
 {:.no_toc}

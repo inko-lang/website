@@ -6,6 +6,7 @@ keywords:
   - community
 description: The Inko community code of conduct.
 ---
+<!-- vale off -->
 
 A community consists out of many different people with different backgrounds,
 genders, races, opinions, and so forth. This means that sometimes conflicts can

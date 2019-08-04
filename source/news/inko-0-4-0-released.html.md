@@ -3,6 +3,7 @@ title: Inko 0.4.0 released
 date: 2019-05-10 22:10:13 UTC
 description: Inko 0.4.0 has been released
 ---
+<!-- vale off -->
 
 Inko 0.4.0 has been released, with features such as: a new scheduler, support
 for non-blocking sockets, and a simplified API for sending messages to

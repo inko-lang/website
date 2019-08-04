@@ -1,6 +1,7 @@
 ---
 title: Literals
 ---
+<!-- vale off -->
 
 Syntax:
 

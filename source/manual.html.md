@@ -1,6 +1,7 @@
 ---
 title: Manual Introduction
 ---
+<!-- vale off -->
 
 The Inko manual covers many aspects of Inko, such as: the syntax, how to use the
 compiler, error handling, and much more. The manual is suitable for both

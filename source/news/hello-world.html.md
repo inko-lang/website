@@ -7,6 +7,7 @@ keywords:
   - introduction
 description: Introducing the Inko website and manual.
 ---
+<!-- vale off -->
 
 We are pleased to announce that as of today, Inko finally has its own website
 and a manual.

@@ -7,6 +7,7 @@ keywords:
   - participate
 description: Learn more about how to participate in the Inko community.
 ---
+<!-- vale off -->
 
 A healthy community is very important for any programming language, and Inko is
 no exception. We are committed to providing a friendly, safe and welcoming

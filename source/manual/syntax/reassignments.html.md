@@ -1,6 +1,7 @@
 ---
 title: Reassignments
 ---
+<!-- vale off -->
 
 Syntax:
 

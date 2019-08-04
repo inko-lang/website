@@ -3,6 +3,7 @@ title: Inko 0.4.1 released
 date: 2019-05-15 00:24:34 UTC
 description: Inko 0.4.1 has been released
 ---
+<!-- vale off -->
 
 Inko 0.4.1 has been released, fixing a bug that would occur when connecting to
 to an address using the socket API.

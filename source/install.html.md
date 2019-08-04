@@ -7,6 +7,7 @@ keywords:
   - installation
 description: How to install Inko on your computer.
 ---
+<!-- vale off -->
 
 1. TOC
 {:toc}

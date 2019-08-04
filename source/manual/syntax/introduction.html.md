@@ -1,6 +1,7 @@
 ---
 title: Syntax
 ---
+<!-- vale off -->
 
 Inko's syntax is fairly straightforward. This section describes the various
 aspects of the syntax. This section is meant for developers to better understand

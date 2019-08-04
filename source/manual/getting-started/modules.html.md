@@ -1,6 +1,7 @@
 ---
 title: Modules
 ---
+<!-- vale off -->
 
 ## Table of contents
 {:.no_toc}

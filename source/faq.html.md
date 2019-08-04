@@ -7,6 +7,7 @@ keywords:
   - frequently asked
 description: Frequently asked questions about the Inko programming language.
 ---
+<!-- vale off -->
 
 1. TOC
 {:toc}

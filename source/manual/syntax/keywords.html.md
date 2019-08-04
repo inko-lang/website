@@ -1,6 +1,7 @@
 ---
 title: Keywords
 ---
+<!-- vale off -->
 
 Syntax:
 

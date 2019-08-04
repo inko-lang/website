@@ -1,6 +1,7 @@
 ---
 title: Instance attributes
 ---
+<!-- vale off -->
 
 Objects defined using the `object` keyword can define so called "instance
 attributes", sometimes also called "instance variables". An "instance attribute"

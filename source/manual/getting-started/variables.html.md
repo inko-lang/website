@@ -1,6 +1,7 @@
 ---
 title: Variables
 ---
+<!-- vale off -->
 
 There are three types of variables that can be defined:
 

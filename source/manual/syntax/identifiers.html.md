@@ -1,6 +1,7 @@
 ---
 title: Identifiers
 ---
+<!-- vale off -->
 
 Syntax:
 

@@ -1,6 +1,7 @@
 ---
 title: Iterators
 ---
+<!-- vale off -->
 
 ## Table of contents
 {:.no_toc}

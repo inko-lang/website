@@ -3,6 +3,7 @@ title: Inko 0.3.0 released
 date: 2018-11-24 20:00:00 UTC
 description: Inko 0.3.0 has been released
 ---
+<!-- vale off -->
 
 Inko 0.3.0 has been released.
 

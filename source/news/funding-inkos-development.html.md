@@ -2,6 +2,7 @@
 title: Funding Inko's development
 date: 2019-07-04 16:50:39 UTC
 ---
+<!-- vale off -->
 
 To sustain the development of Inko and cover any hosting costs, we now accept
 donations on [Open Collective][open collective]. Our first goal is to cover the

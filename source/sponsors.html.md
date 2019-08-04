@@ -3,6 +3,7 @@ title: Sponsors
 created_at: 2019-07-02
 layout: sponsors
 ---
+<!-- vale off -->
 
 To support the development of Inko, we use [Open
 Collective](https://opencollective.com) to receive donations and cover hosting

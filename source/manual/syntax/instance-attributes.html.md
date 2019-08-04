@@ -1,6 +1,7 @@
 ---
 title: Instance attributes
 ---
+<!-- vale off -->
 
 Syntax:
 

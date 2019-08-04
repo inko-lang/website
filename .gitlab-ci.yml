@@ -1,8 +1,37 @@
 ---
 
 stages:
+  - docker
+  - lint
   - automation
   - deploy
+
+.docker: &docker
+  stage: docker
+  services:
+    - docker:dind
+  image: docker:git
+  script:
+    - ./docker/build "${CI_REGISTRY_IMAGE}:${IMAGE}" docker/${IMAGE}/Dockerfile
+
+docker:vale:
+  <<: *docker
+  variables:
+    IMAGE: vale
+  only:
+    changes:
+      - docker/vale/Dockerfile
+
+lint:vale:
+  image: registry.gitlab.com/inko-lang/website:vale
+  stage: lint
+  before_script:
+    - vale --version
+  script:
+    - vale --no-wrap --sort source/
+  only:
+    changes:
+      - source/**/*.html.md
 
 deploy:
   image: ruby:2.5-alpine

@@ -1,6 +1,7 @@
 ---
 title: Comments
 ---
+<!-- vale off -->
 
 Syntax:
 

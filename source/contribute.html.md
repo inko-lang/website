@@ -6,6 +6,7 @@ keywords:
   - gitlab
 description: How to contribute to the Inko programming language.
 ---
+<!-- vale off -->
 
 Would you like to contribute to the development of Inko? Great! Inko is free and
 open source software, so you are free to do so! If you are not sure how to get

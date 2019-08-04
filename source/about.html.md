@@ -7,6 +7,7 @@ keywords:
   - about
 description: About the Inko Programming language.
 ---
+<!-- vale off -->
 
 Inko is an object-oriented programming language, focusing on making it fun and
 easy to write concurrent programs, without the headaches. It tries to achieve

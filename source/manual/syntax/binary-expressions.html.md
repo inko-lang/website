@@ -1,6 +1,7 @@
 ---
 title: Binary expressions
 ---
+<!-- vale off -->
 
 Syntax:
 

@@ -1,6 +1,7 @@
 ---
 title: Methods, messages, and objects
 ---
+<!-- vale off -->
 
 ## Table of contents
 {:.no_toc}

@@ -1,6 +1,7 @@
 ---
 title: Slicing
 ---
+<!-- vale off -->
 
 Syntax:
 

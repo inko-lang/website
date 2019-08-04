@@ -1,6 +1,7 @@
 ---
 title: Hello, world!
 ---
+<!-- vale off -->
 
 ## Table of contents
 {:.no_toc}

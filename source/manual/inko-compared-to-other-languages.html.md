@@ -1,6 +1,7 @@
 ---
 title: Inko compared to other languages
 ---
+<!-- vale off -->
 
 ## Table of contents
 {:.no_toc}

@@ -7,6 +7,7 @@ keywords:
   - ienv
 description: Introducing the Inko version manager.
 ---
+<!-- vale off -->
 
 Inko now has an official version manager, making it much easier to install Inko
 in a development environment.

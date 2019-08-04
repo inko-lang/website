@@ -1,6 +1,7 @@
 ---
 title: Imports
 ---
+<!-- vale off -->
 
 Syntax:
 

@@ -7,6 +7,7 @@ keywords:
 description: |
   Documentation and other resources to help you get started with Inko.
 ---
+<!-- vale off -->
 
 For both new and experiences users, [the manual](/manual) will be very helpful.
 This manual discusses a wide range of topics such as:

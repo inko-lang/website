@@ -1,6 +1,7 @@
 ---
 title: Directories
 ---
+<!-- vale off -->
 
 Inkoc needs a variety of files located in different places, such as the Inko
 runtime and any third-party modules. The following directories are currently
