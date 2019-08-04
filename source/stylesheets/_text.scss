@@ -49,7 +49,9 @@ ul li {
 }
 
 ol li {
-  list-style: decimal inside;
+  list-style: decimal outside;
+  margin-bottom: 5px;
+  margin-left: 1rem;
 }
 
 blockquote {
