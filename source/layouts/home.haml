@@ -30,13 +30,14 @@
             class: index.zero? ? 'visible' : nil }
               = markdown(example['code'])
 
-    .features
+    .highlights
       .grid
-        %section
-          %h1 Features
-          - data.features.each do |feature|
-            %h2= feature['title']
-            = markdown(feature['body'])
+        - data.highlights.each do |highlight|
+          %section
+            %h1= highlight['title']
+            %ul
+              - highlight['items'].each do |item|
+                %li= item['text']
 
     .grid
       = partial('homepage_sponsors')

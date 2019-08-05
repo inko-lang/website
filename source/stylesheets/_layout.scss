@@ -208,6 +208,7 @@
 
   li {
     list-style-type: none;
+    margin-left: 0;
   }
 }
 
@@ -279,4 +280,14 @@
 
 .visible {
   display: block;
+}
+
+.highlights {
+  .grid {
+    grid-template-columns: 1fr;
+
+    @media #{$media-wide} {
+      grid-template-columns: 3fr 3fr;
+    }
+  }
 }

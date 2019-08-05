@@ -45,7 +45,9 @@ ol {
 }
 
 ul li {
-  list-style: disc inside;
+  list-style: disc outside;
+  margin-bottom: 5px;
+  margin-left: 1rem;
 }
 
 ol li {

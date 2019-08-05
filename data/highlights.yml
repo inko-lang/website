@@ -1,0 +1,23 @@
+---
+- title: Features
+  items:
+    - text: Lightweight processes that don't share memory.
+    - text: Object-oriented.
+    - text: Composition instead of inheritance.
+    - text: Explicit handling of exceptions at the call site.
+    - text: Gradually typed.
+    - text: Parallel garbage collection per process.
+    - text: Bytecode that is OS and architecture independent.
+    - text: Requires only 5MB of disk space for the runtime and VM.
+    - text: Free and Open Source, forever.
+    - text: Built-in unit testing framework.
+- title: Supported platforms
+  items:
+    - text: Linux.
+    - text: Windows 10 or newer.
+    - text: Mac OS Sierra or newer.
+    - text: |
+        FreeBSD, OpenBSD, and others should work, but are not officially
+        supported at this time.
+    - text: |
+        Only x86-64 platforms are officially supported.
