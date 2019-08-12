@@ -67,8 +67,6 @@ sponsors:
     - gem --version
     - bundle --version
     - bundle install --path vendor --retry=3
-  script:
-    - rake deploy
   cache:
     paths:
       - vendor/ruby
