@@ -27,11 +27,11 @@ bundle exec rake sponsors:update sponsors:prune_logos
 
 info 'Committing changes (if any)'
 
-git add --all source/images/sponsors data/sponsors.yml >/dev/null 2>&1
+git add --all source/images/sponsors data/sponsors.yml
 
 if git commit \
     -m 'Update sponsors data' \
-    --author 'Inko <gitlab@inko-lang.org>' >/dev/null 2>&1
+    --author 'Inko <gitlab@inko-lang.org>'
 then
     for i in {1..3}
     do
