@@ -94,7 +94,7 @@ When defining an object, you can implement one or more traits right away:
 
 ```inko
 trait ToString {
-  def to_string -> to_string
+  def to_string -> String
 }
 
 object Person impl ToString {
@@ -111,7 +111,7 @@ OBJECT`, like so:
 
 ```inko
 trait ToString {
-  def to_string -> to_string
+  def to_string -> String
 }
 
 object Person {
