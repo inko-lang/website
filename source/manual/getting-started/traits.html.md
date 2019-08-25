@@ -160,7 +160,7 @@ trait ToString {
   def to_string -> String
 }
 
-def convert_to_string(value: ToString) -> ToString {
+def convert_to_string(value: ToString) -> String {
   value.to_string
 }
 ```
@@ -173,7 +173,7 @@ trait ToString {
   def to_string -> String
 }
 
-def convert_to_string(value: ToString) -> ToString {
+def convert_to_string(value: ToString) -> String {
   value.to_string    # OK
   value.to_uppercase # not OK, since ToString.to_uppercase does not exist
 }
