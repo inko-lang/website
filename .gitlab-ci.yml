@@ -52,7 +52,7 @@ deploy:
     paths:
       - vendor/ruby
   only:
-    - master
+    - master@inko-lang/website
   environment:
     name: production
     url: https://inko-lang.org
