@@ -32,6 +32,7 @@ bundle exec rake sponsors:update sponsors:prune_logos
 
 info 'Committing changes (if any)'
 
+git checkout --quiet master
 git add --all source/images/sponsors data/sponsors.yml
 
 if git commit -m 'Update sponsors data'
