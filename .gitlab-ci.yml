@@ -19,6 +19,8 @@ docker:vale:
   variables:
     IMAGE: vale
   only:
+    refs:
+      - master
     changes:
       - docker/vale/Dockerfile
 
