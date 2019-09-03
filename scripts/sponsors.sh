@@ -19,6 +19,11 @@ then
     eval "$(ssh-agent -s)"
 
     ssh-add ~/.ssh/id_ed25519
+
+    info 'Configuring Git'
+
+    git config --global user.email noreply@inko-lang.org
+    git config --global user.name 'Inko bot'
 fi
 
 info 'Updating sponsors data'
@@ -29,9 +34,7 @@ info 'Committing changes (if any)'
 
 git add --all source/images/sponsors data/sponsors.yml
 
-if git commit \
-    -m 'Update sponsors data' \
-    --author 'Inko <gitlab@inko-lang.org>'
+if git commit -m 'Update sponsors data'
 then
     for i in {1..3}
     do
