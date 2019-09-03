@@ -63,3 +63,5 @@ function update() {
         info 'Nothing to commit'
     fi
 }
+
+update
