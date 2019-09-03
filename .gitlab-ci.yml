@@ -61,7 +61,7 @@ sponsors:
   image: ruby:2.5-alpine
   stage: automation
   before_script:
-    - apk add --update build-base bash openssh imagemagick
+    - apk add --update build-base bash openssh imagemagick git
     - gem install bundler --no-doc
     - ruby --version
     - gem --version
