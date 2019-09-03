@@ -21,6 +21,8 @@ docker:vale:
   only:
     refs:
       - master
+    except:
+      - schedules
     changes:
       - docker/vale/Dockerfile
 
@@ -31,6 +33,8 @@ lint:vale:
     - vale --version
   script:
     - vale --no-wrap --sort source/
+  except:
+    - schedules
   only:
     changes:
       - source/**/*.html.md
