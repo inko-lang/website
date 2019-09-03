@@ -18,11 +18,11 @@ docker:vale:
   <<: *docker
   variables:
     IMAGE: vale
+  except:
+    - schedules
   only:
     refs:
       - master
-    except:
-      - schedules
     changes:
       - docker/vale/Dockerfile
 
