@@ -46,46 +46,7 @@ def example(first: Integer, second: Integer) {}
 example(second: 10, first: 20) # This will not be optimised.
 ```
 
-## HashMap literals
-
-HashMap literals are just syntax sugar in Inko. For example, this:
-
-```inko
-%[ 'a': 10 ]
-```
-
-Is parsed into this:
-
-```inko
-HashMap.from_array(['a'], [10])
-```
-
-Because allocating two `Array` objects just to create a `HashMap` is not very
-efficient, the compiler will optimise this into the following:
-
-```inko
-let hash_map = HashMap.new
-
-hash_map['a'] = 10
-```
-
-Here the `hash_map` local variable is just used as an example, the compiler
-won't actually use a local variable for this, instead it will directly store the
-`HashMap` in a virtual machine register.
-
 ## Array literals
-
-Similar to HashMap literals, Array literals are syntax sugar. For example, this:
-
-```inko
-[10, 20, 30]
-```
-
-Is parsed into this:
-
-```inko
-Array.new(10, 20, 30)
-```
 
 The compiler in turn will optimise literal occurrences of `Array.new` into a
 specialised virtual machine instruction "SetArray". This instruction removes the

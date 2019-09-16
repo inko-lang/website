@@ -12,8 +12,8 @@ title: Iterators
 ## Introduction
 
 Iterators are used for iterating over the values of a collection, such as an
-`Array` or `HashMap`. Typically a programming language will use one of two
-iterator types:
+`Array` or `Map`. Typically a programming language will use one of two iterator
+types:
 
 1. Internal iterators: iterators where the iteration is controlled by a method,
    usually by executing some sort of callback (e.g. a block).
@@ -41,7 +41,7 @@ collection. For example, we can iterate over the values of an `Array` by sending
 ```inko
 import std::stdio::stdout
 
-[10, 20, 30].each do (number) {
+Array.new(10, 20, 30).each do (number) {
   stdout.print(number)
 }
 ```
@@ -51,7 +51,7 @@ We can also do this using external iterators:
 ```inko
 import std::stdio::stdout
 
-[10, 20, 30].iter.each do (number) {
+Array.new(10, 20, 30).iter.each do (number) {
   stdout.print(number)
 }
 ```
@@ -60,7 +60,7 @@ Using external iterators gives us more control. For example, we can simply take
 the first value (skipping all the others) like so:
 
 ```inko
-let array = [10, 20, 30]
+let array = Array.new(10, 20, 30)
 
 array.iter.next # => 10
 ```
@@ -68,7 +68,7 @@ array.iter.next # => 10
 Because external iterators are lazy, this would never iterate over the values
 `20` and `30`.
 
-## Implementing iterators
+## Implementing iterators using the Iterator trait
 
 Implementing your own iterators is done in two steps:
 
@@ -84,13 +84,16 @@ object to store a single value, called a `Node`:
 
 ```inko
 object Node {
+  @value: Integer
+  @next: ?Node
+
   def init(value: Integer) {
-    let @value = value
+    @value = value
 
     # The next node can either be a Node, or Nil, hence we use `?Node` as the
     # type. We specify the type explicitly, otherwise the compiler will infer
     # the type of `@next` as `Nil`.
-    let mut @next: ?Node = Nil
+    @next = Nil
   }
 
   def next -> ?Node {
@@ -111,9 +114,12 @@ Next, let's define our `LinkedList` object that stores these `Node` objects:
 
 ```inko
 object LinkedList {
+  @head: ?Node
+  @tail: ?Node
+
   def init {
-    let mut @head: ?Node = Nil
-    let mut @tail: ?Node = Nil
+    @head = Nil
+    @tail = Nil
   }
 
   def head -> ?Node {
@@ -123,13 +129,16 @@ object LinkedList {
   def push(value: Integer) {
     let node = Node.new(value)
 
-    @tail.if true: {
-      @tail.next = node
-      @tail = node
-    }, false: {
-      @head = node
-      @tail = node
-    }
+    @tail.if(
+      true: {
+        @tail.next = node
+        @tail = node
+      },
+      false: {
+        @head = node
+        @tail = node
+      }
+    )
   }
 }
 ```
@@ -148,11 +157,15 @@ and define an `iter` message for our `LinkedList` object:
 # Iterator is a generic type, and in this case takes a single type argument: the
 # type of the values returned by the iterator. In this case our type of the
 # values is `Integer`.
-object LinkedListIterator impl Iterator!(Integer) {
-  def init(list: LinkedList) {
-    let mut @node: ?Node = list.head
-  }
+object LinkedListIterator {
+  @node: ?Node
 
+  def init(list: LinkedList) {
+    @node = list.head
+  }
+}
+
+impl Iterator!(Integer) for LinkedListIterator {
   # This will return the next value from the iterator, if any.
   def next -> ?Node {
     let node = @node
@@ -166,11 +179,7 @@ object LinkedListIterator impl Iterator!(Integer) {
 
   # This will return True if a value is available, False otherwise.
   def next? -> Boolean {
-    @node.if true: {
-      True
-    }, false: {
-      False
-    }
+    @node.if(true: { True }, false: { False })
   }
 }
 
@@ -223,9 +232,103 @@ list.push(20)
 
 let iter = list.iter
 
-# Because of a bug in the compiler (https://gitlab.com/inko-lang/inko/issues/117)
-# we need to manually annotate the block's argument for the time being.
-iter.each do (node: Node) {
+iter.each do (node) {
   stdout.print(node.value) # => 10, 20
+}
+```
+
+## Implementing iterators using the Enumerator type
+
+Creating an iterator using the Iterator trait is a bit verbose. To make this
+easier, Inko provides the `Enumerator` type in the `std::iterator` module. Using
+this type we can implement our linked list iterator as follows:
+
+```inko
+import std::iterator::(Enumerator, Iterator)
+
+object Node {
+  @value: Integer
+  @next: ?Node
+
+  def init(value: Integer) {
+    @value = value
+    @next = Nil
+  }
+
+  def next -> ?Node {
+    @next
+  }
+
+  def next=(node: Node) {
+    @next = node
+  }
+
+  def value -> Integer {
+    @value
+  }
+}
+
+object LinkedList {
+  @head: ?Node
+  @tail: ?Node
+
+  def init {
+    @head = Nil
+    @tail = Nil
+  }
+
+  def head -> ?Node {
+    @head
+  }
+
+  def push(value: Integer) {
+    let node = Node.new(value)
+
+    @tail.if(
+      true: {
+        @tail.next = node
+        @tail = node
+      },
+      false: {
+        @head = node
+        @tail = node
+      }
+    )
+  }
+
+  def iter -> Iterator!(Node) {
+    let mut node = @head
+
+    Enumerator.new(
+      while: { node.if(true: { True }, false: { False }) },
+      yield: {
+        let current = node
+
+        node = node.next
+
+        current
+      }
+    )
+  }
+}
+```
+
+Here the iterator code has been reduced from many lines of code to just the
+following:
+
+```inko
+def iter -> Iterator!(Node) {
+  let mut node = @head
+
+  Enumerator.new(
+    while: { node.if(true: { True }, false: { False }) },
+    yield: {
+      let current = node
+
+      node = node.next
+
+      current
+    }
+  )
 }
 ```

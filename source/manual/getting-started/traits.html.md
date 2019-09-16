@@ -83,40 +83,14 @@ trait ToQuotedString: ToString {
 
 ## Implementing traits
 
-Traits are implemented in one of two ways:
-
-1. When defining an object using the `object` keyword.
-1. Using the `impl` keyword after an object has been defined.
-
-### Implementing traits when defining objects
-
-When defining an object, you can implement one or more traits right away:
+Implementing a trait is done using the syntax `impl TRAIT for OBJECT`, like so:
 
 ```inko
 trait ToString {
   def to_string -> String
 }
 
-object Person impl ToString {
-  def to_string -> String {
-    'Person'
-  }
-}
-```
-
-### Implementing traits separately
-
-Implementing a trait separately is done using the syntax `impl TRAIT for
-OBJECT`, like so:
-
-```inko
-trait ToString {
-  def to_string -> String
-}
-
-object Person {
-
-}
+object Person {}
 
 impl ToString for Person {
   def to_string -> String {
@@ -146,7 +120,7 @@ trait ToArray!(T) {
 
 impl ToArray!(Integer) for Integer {
   def to_array -> Array!(T) {
-    [self]
+    Array.new(self)
   }
 }
 ```

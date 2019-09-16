@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 require 'lib/inko_lexer'
-require 'lib/ebnf_lexer'
 require 'uglifier'
 require 'time'
 

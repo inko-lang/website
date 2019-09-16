@@ -205,7 +205,7 @@ let listener = try! TcpListener.new(ip: '127.0.0.1', port: 8080)
   let proc = process.spawn {
     let client = process.receive as TcpStream
     let reply = 'Hello, HTTP!'
-    let output = StringBuffer.new([
+    let output = StringBuffer.new(
       "HTTP/1.1 200 OK\r\n",
       "Content-Type: text/plain\r\n",
       'Content-Length: ',
@@ -214,7 +214,7 @@ let listener = try! TcpListener.new(ip: '127.0.0.1', port: 8080)
       "Connection: close\r\n",
       "\r\n",
       reply
-    ])
+    )
 
     try! client.write_string(output.to_string)
     try! client.shutdown
@@ -256,7 +256,7 @@ let mut to_start = 4
 
     {
       let client = try! listener.accept
-      let output = StringBuffer.new([
+      let output = StringBuffer.new(
         "HTTP/1.1 200 OK\r\n",
         "Content-Type: text/plain\r\n",
         'Content-Length: ',
@@ -265,7 +265,7 @@ let mut to_start = 4
         "Connection: close\r\n",
         "\r\n",
         reply
-      ])
+      )
 
       try! client.write_string(output.to_string)
       try! client.shutdown

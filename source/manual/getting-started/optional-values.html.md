@@ -24,10 +24,10 @@ the amount of conditionals necessary when dealing with optional values.
 Let's say we have the following nested `Array`:
 
 ```inko
-numbers = [
-  [10, 20, 30],
-  [40, 50, 60]
-]
+numbers = Array.new(
+  Array.new(10, 20, 30),
+  Array.new(40, 50, 60)
+)
 ```
 
 Given this `Array` we want to:
@@ -43,7 +43,7 @@ Ruby we would write the following code to obtain our value:
 numbers = [
   [10, 20, 30],
   [40, 50, 60]
-]
+)
 
 if numbers[1]
   numbers[1][2]
@@ -59,10 +59,10 @@ In Inko we don't need to worry about any of this, meaning we can write the
 following without encountering any errors:
 
 ```inko
-numbers = [
-  [10, 20, 30],
-  [40, 50, 60]
-]
+numbers = Array.new(
+  Array.new(10, 20, 30),
+  Array.new(40, 50, 60)
+)
 
 numbers[1][2]
 ```
@@ -78,7 +78,7 @@ using messages that are supported by `T`. For example, the following is not
 valid code as `String` does not respond to `foo`:
 
 ```inko
-let people = ['alice']
+let people = Array.new('alice')
 
 people[0].foo
 ```
@@ -96,14 +96,14 @@ def greet(name: String) {
   stdout.print('Hello ' + name)
 }
 
-let people = ['alice']
+let people = Array.new('alice')
 
 greet(people[0])
 ```
 
 This is invalid because `people[0]` might return `Nil`, and `greet` only accepts
-a `String`. To deal with such cases you can use the `*` prefix operator, known
-as the "unpack" operator. This operator tells the compiler that instead of
+a `String`. To deal with such cases you can use the `!` postfix operator, known
+as the "not-Nil" operator. This operator tells the compiler that instead of
 dealing with `?T` we are dealing with a `T`. Using this operator should always
 be paired with a conditional, as no runtime checks are performed:
 
@@ -114,11 +114,11 @@ def greet(name: String) {
   stdout.print('Hello ' + name)
 }
 
-let people = ['alice']
+let people = Array.new('alice')
 let person = people[0]
 
 person.if_true {
-  greet(*person)
+  greet(person!)
 }
 ```
 

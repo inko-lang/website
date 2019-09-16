@@ -37,9 +37,9 @@ argument).
 
 ## Arrays and hash maps
 
-Two collection types are available by default: `Array`, and `HashMap`. An
-`Array` is used for storing a list of values of the same type. A `HashMap` is a
-hash map used to map keys of type `K` to values of type `V`.
+Two collection types are available by default: `Array`, and `Map`. An `Array` is
+used for storing a list of values of the same type. A `Map` is a hash map used
+to map keys of type `K` to values of type `V`.
 
 These collections can be used in type signatures like any other generic type:
 
@@ -48,7 +48,7 @@ def take_array_of_integers(array: Array!(Integer)) {
 
 }
 
-def take_hash_map_mapping_strings_to_integers(map: HashMap!(String, Integer)) {
+def take_hash_map_mapping_strings_to_integers(map: Map!(String, Integer)) {
 
 }
 ```

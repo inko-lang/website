@@ -36,7 +36,7 @@ its own heap, and processes communicate via message passing.
 import std::process
 import std::stdio::stdout
 
-let proc = process.spawn do {
+let proc = process.spawn {
   let message = process.receive as String
 
   # This will print "Hello world!" to STDOUT.
@@ -120,18 +120,22 @@ trait Greet {
   }
 }
 
-object Person impl Greet {
-  def init(name: String) {
-    # This is an instance attribute, called an "instance variable" in languages
-    # such as Ruby and Smalltalk. These variables are available to instances of
-    # the object that defines them (a Person instance in this case).
-    #
-    # Instance attributes can not be accessed outside of an object. Instead, you
-    # have to define a method that returns an instance attribute, should you
-    # want to expose the value.
-    let @name = name
-  }
+object Person {
+  # This is an instance attribute, called an "instance variable" in languages
+  # such as Ruby and Smalltalk. These variables are available to instances of
+  # the object that defines them (a Person instance in this case).
+  #
+  # Instance attributes can not be accessed outside of an object. Instead, you
+  # have to define a method that returns an instance attribute, should you
+  # want to expose the value.
+  @name: String
 
+  def init(name: String) {
+    @name = name
+  }
+}
+
+impl Greet for Person {
   def name -> String {
     @name
   }
@@ -140,33 +144,6 @@ object Person impl Greet {
 let alice = Person.new('Alice')
 
 alice.greet # => 'Hello Alice'
-```
-
-Traits can be implemented for previously defined objects, allowing you to extend
-their behaviour.
-
-```inko
-import std::conversion::ToString
-
-object Person {
-  def init(name: String) {
-    let @name = name
-  }
-
-  def name -> String {
-    @name
-  }
-}
-
-impl ToString for Person {
-  def to_string -> String {
-    @name
-  }
-}
-
-let alice = Person.new('Alice')
-
-alice.to_string # => 'Alice'
 ```
 
 Instead of using statements, Inko uses message passing for (almost) everything.
@@ -195,11 +172,7 @@ object NullUser {
 let user = NullUser.new
 
 # This would print "nay" to STDOUT.
-user.if true: {
-  stdout.print('yay')
-}, false: {
-  stdout.print('nay')
-}
+user.if(true: { stdout.print('yay') }, false: { stdout.print('nay') })
 ```
 
 Inko uses gradual typing, with static typing being the default. This means that
@@ -239,10 +212,9 @@ the implementation of `String.starts_with?`:
 
 ```inko
 def starts_with?(prefix: String) -> Boolean {
-  prefix.length > length
-    .if_true {
-      return False
-    }
+  (prefix.length > length).if_true {
+    return False
+  }
 
   slice(0, prefix.length) == prefix
 }

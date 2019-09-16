@@ -43,61 +43,15 @@ it:
 
 ```inko
 # Good
-[10, 20, 30].each do (number) {
+Array.new(10, 20, 30).each do (number) {
 
 }
 
 # Bad
-[10, 20, 30].each do (number)
+Array.new(10, 20, 30).each do (number)
 {
 
 }
-```
-
-## Literals
-
-Array and HashMap literals should not include whitespace after the open tag and
-before the closing tag:
-
-```inko
-# Good
-[10, 20, 30]
-
-%['a': 10, 'b': 20]
-
-# Bad
-[ 10, 20, 30 ]
-
-%[ 'a': 10, 'b': 20 ]
-```
-
-When a literal does not fit on a single line, place every value on a separate
-line, and use a trailing comma for the last value:
-
-```inko
-# Good
-[
-  10,
-  20,
-  30,
-]
-
-%[
-  'a': 10,
-  'b': 20,
-]
-
-# Bad
-[
-  10,
-  20,
-  30
-]
-
-%[
-  'a': 10,
-  'b': 20
-]
 ```
 
 ## Naming
@@ -270,18 +224,32 @@ Again, such code is best avoided, as it can be a bit hard to read.
 
 ## Parentheses
 
-Inko allows you to omit parentheses when sending a message. When sending a
-message without arguments, leave out the parentheses:
+Inko allows you to leave out the parentheses when:
+
+1. No arguments are provided.
+2. Only one argument is provided, and the argument is a closure or lambda.
+
+When sending a message without arguments, leave out the parentheses:
 
 ```inko
 # Good
-[10, 20, 30].first
+Array.new(10, 20, 30).first
 
 # Bad
-[10, 20, 30].first()
+Array.new(10, 20, 30).first()
 ```
 
-When passing one or more arguments, include parentheses:
+When using one argument, use parentheses:
+
+```inko
+# Good
+'hello'.ends_with?('lo')
+
+# Bad
+'hello'.ends_with? 'lo'
+```
+
+When using multiple arguments, also use parentheses:
 
 ```inko
 # Good
@@ -295,12 +263,12 @@ If the only argument is a block, leave out the the parentheses:
 
 ```inko
 # Good
-[10, 20, 30].each do (number) {
+Array.new(10, 20, 30).each do (number) {
   # ...
 }
 
 # Bad
-[10, 20, 30].each(do (number) {
+Array.new(10, 20, 30).each(do (number) {
   # ...
 })
 ```
@@ -370,37 +338,16 @@ foo
   .baz
 ```
 
-## Binary expressions
-
-When sending a message to the _result_ of a binary expression, place the message
-on the next line and indent it with two space:
-
-```inko
-# Bad
-(10 > 5).if_true {
-  # ...
-}
-
-# Good
-10 > 5
-  .if_true {
-    # ...
-  }
-```
-
-Inko will parse both examples the same way, but the second example saves us from
-having to wrap the expression in parentheses.
-
 ## Keyword arguments
 
 When passing a single argument, prefer the use of positional arguments:
 
 ```inko
 # Good
-[10, 20, 30].remove_at(0)
+Array.new(10, 20, 30).remove_at(0)
 
 # Also fine, though a bit redundant.
-[10, 20, 30].remove_at(index: 0)
+Array.new(10, 20, 30).remove_at(index: 0)
 ```
 
 When passing multiple arguments, use keyword arguments:
@@ -413,20 +360,17 @@ When passing multiple arguments, use keyword arguments:
 'hello'.slice(0, 2)
 ```
 
-Keyword arguments may be left out when using a DSL, such as the one provided by
-`std::test`, and it's clear enough what the meaning of the arguments are:
+When passing one argument in parentheses, and a block outside the parentheses,
+omit the use of keyword arguments:
 
 ```inko
-# Good
-test.group 'This is the description of the group', do (g) {
-
-}
-
-# Bad: the use of keyword arguments is a bit redundant here.
-test.group name: 'This is the description of the group', body: do (g) {
+test.group('This is the description of the group') do (g) {
 
 }
 ```
+
+If using keyword arguments makes the code easier to read, favour the use of
+keyword arguments, even if this would clash with the above guidelines.
 
 ## Comments
 
@@ -439,28 +383,22 @@ should be a short summary. This summary should be roughly one sentence and
 describe the purpose of the item. For example:
 
 ```inko
-## A Person can be used for storing details of a single person, such as their
-## name and address.
+# A Person can be used for storing details of a single person, such as their
+# name and address.
 object Person {
 
 }
 ```
 
-For types and methods, use `##` instead of `#`. Modules should be documented
-using `#!`:
+Don't use comments to describe what the code does, as the code itself should
+make this clear.
+
+When documenting a module, start the comment on the first line of the module,
+before any imports:
 
 ```inko
-#! This is the documentation of the entire module. Just like other comments, it
-#! can span multiple lines as long as every line starts with a #!
-
-## A Person can be used for storing details of a single person, such as their
-## name and address.
-object Person {
-  def init(name: String) {
-    ## The name of the person.
-    let @name = name
-  }
-}
+# The documentation of the module goes here.
+import std::stdio::stdout
 ```
 
 ## Imports
@@ -485,10 +423,22 @@ If `self` is imported, it should come first:
 
 ```inko
 # Good
-import std::fs::file::(self, FilePath)
+import std::fs::file::(self, ReadOnlyFile)
 
 # Bad
-import std::fs::file::(FilePath, self)
+import std::fs::file::(ReadOnlyFile, self)
+```
+
+Avoid importing both a wildcard and specific symbols from a module. Instead,
+explicitly import all the symbols you need:
+
+```inko
+# Bad
+import std::fs::file::*
+import std::fs::file::(ReadOnlyFile as RoFile)
+
+# Good
+import std::fs::file::(ReadOnlyFile as RoFile, ... as ...)
 ```
 
 ## Modules
@@ -503,8 +453,10 @@ Example:
 
 ```inko
 object Person {
+  @name: String
+
   def init(name: String) {
-    let @name = name
+    @name = name
   }
 }
 
@@ -546,12 +498,12 @@ The return type of a block should not be specified unless required otherwise:
 
 ```inko
 # Good
-[10, 20, 30].each do (number) {
+Array.new(10, 20, 30).each do (number) {
 
 }
 
 # Bad: the compiler can just infer the return type for us.
-[10, 20, 30].each do (number) -> Integer {
+Array.new(10, 20, 30).each do (number) -> Integer {
   10
 }
 ```
@@ -602,38 +554,8 @@ try {
 }
 ```
 
-## Implementing traits
+## Iterators
 
-When defining an object, it is preferred to immediately implement any desired
-traits:
-
-```inko
-# Good
-object Person impl ToString {}
-
-# Bad
-object Person {}
-
-impl ToString for Person {}
-```
-
-If the `object ... impl` line is too long to fit on a single line, place every
-trait name on their own line like so:
-
-```inko
-object Person impl
-  Foo,
-  Bar,
-  Baz {
-
-}
-```
-
-When implementing a trait for a previously defined object, use the `impl ...
-for` syntax:
-
-```inko
-impl ToString for Person {
-
-}
-```
+Instead of manually implementing iterators using `std::iterator::Iterator`, use
+`std::iterator::Enumerator`. This makes it easier to implement iterators, and
+requires less code compared to using the `Iterator` trait.

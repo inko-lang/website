@@ -6,6 +6,7 @@ chapters:
       - /manual/ienv
       - /manual/inko-compared-to-other-languages
       - /manual/style-guide
+      - /manual/syntax
   - title: Getting started
     pages:
       - /manual/getting-started/hello-world
@@ -20,31 +21,12 @@ chapters:
       - /manual/getting-started/optional-values
       - /manual/getting-started/error-handling
       - /manual/getting-started/sockets
-  - title: Syntax
-    pages:
-      - /manual/syntax/introduction
-      - /manual/syntax/encoding
-      - /manual/syntax/keywords
-      - /manual/syntax/identifiers
-      - /manual/syntax/instance-attributes
-      - /manual/syntax/comments
-      - /manual/syntax/constants-and-types
-      - /manual/syntax/let
-      - /manual/syntax/literals
-      - /manual/syntax/binary-expressions
-      - /manual/syntax/sending-messages
-      - /manual/syntax/reassignments
-      - /manual/syntax/slicing
-      - /manual/syntax/try
-      - /manual/syntax/imports
-      - /manual/syntax/compiler-directives
   - title: Compiler
     pages:
       - /manual/compiler/introduction
       - /manual/compiler/environment-variables
       - /manual/compiler/directories
       - /manual/compiler/optimisations
-      - /manual/compiler/directives
       - /manual/compiler/type-inference
   - title: Virtual machine
     pages:

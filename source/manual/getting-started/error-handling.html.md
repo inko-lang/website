@@ -47,11 +47,10 @@ Throwing an error is done using the `throw` keyword:
 
 ```inko
 def withdraw_money(amount: Integer) !! String -> Integer {
-  amount.positive?.if true: {
-    amount
-  }, false: {
-    throw 'You can not withdraw a negative amount of money!'
-  }
+  amount.positive?.if(
+    true: { amount },
+    false: { throw 'You can not withdraw a negative amount of money!' }
+  )
 }
 ```
 
@@ -65,11 +64,10 @@ When using _just_ `try`, the error will be re-raised:
 
 ```inko
 def withdraw_money(amount: Integer) !! String -> Integer {
-  amount.positive?.if true: {
-    amount
-  }, false: {
-    throw 'You can not withdraw a negative amount of money!'
-  }
+  amount.positive?.if(
+    true: { amount },
+    false: { throw 'You can not withdraw a negative amount of money!' }
+  )
 }
 
 def transfer_money(amount: Integer) !! String -> Integer {
@@ -86,11 +84,10 @@ define a type to throw:
 
 ```inko
 def withdraw_money(amount: Integer) !! String -> Integer {
-  amount.positive?.if true: {
-    amount
-  }, false: {
-    throw 'You can not withdraw a negative amount of money!'
-  }
+  amount.positive?.if(
+    true: { amount },
+    false: { throw 'You can not withdraw a negative amount of money!' }
+  )
 }
 
 def transfer_money(amount: Integer) -> Integer {
@@ -110,11 +107,10 @@ Using this we can change the above example to the following:
 
 ```inko
 def withdraw_money(amount: Integer) !! String -> Integer {
-  amount.positive?.if true: {
-    amount
-  }, false: {
-    throw 'You can not withdraw a negative amount of money!'
-  }
+  amount.positive?.if(
+    true: { amount },
+    false: { throw 'You can not withdraw a negative amount of money!' }
+  )
 }
 
 def transfer_money(amount: Integer) -> Integer {
@@ -130,11 +126,10 @@ change our code to the following:
 
 ```inko
 def withdraw_money(amount: Integer) !! String -> Integer {
-  amount.positive?.if true: {
-    amount
-  }, false: {
-    throw 'You can not withdraw a negative amount of money!'
-  }
+  amount.positive?.if(
+    true: { amount },
+    false: { throw 'You can not withdraw a negative amount of money!' }
+  )
 }
 
 def transfer_money(amount: Integer) !! String -> Integer {
@@ -157,11 +152,10 @@ cases you can use the `try!` keyword:
 
 ```inko
 def withdraw_money(amount: Integer) !! String -> Integer {
-  amount.positive?.if true: {
-    amount
-  }, false: {
-    throw 'You can not withdraw a negative amount of money!'
-  }
+  amount.positive?.if(
+    true: { amount },
+    false: { throw 'You can not withdraw a negative amount of money!' }
+  )
 }
 
 def transfer_money(amount: Integer) -> Integer {
@@ -214,7 +208,7 @@ To illustrate, take the following program:
 ```inko
 import std::byte_array::ByteArray
 
-let bytes = ByteArray.new([10, 20])
+let bytes = ByteArray.new(10, 20)
 
 bytes[3] = 10
 ```

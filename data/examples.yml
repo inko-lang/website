@@ -36,8 +36,10 @@
   code: |
     ```inko
     object CustomArray!(T) {
+      @values: Array!(T)
+
       def init {
-        let @values: Array!(T) = []
+        @values = Array.new
       }
 
       def push(value: T) -> T {
@@ -125,8 +127,8 @@
     import std::test
     import std::test::assert
 
-    test.group 'Integer.+', do (group) {
-      group.test 'Summing two Integers', {
+    test.group('Integer.+') do (group) {
+      group.test('Summing two Integers') {
         try assert.equal(1 + 2, 3)
       }
     }
@@ -140,11 +142,15 @@
     import std::conversion::ToString
     import std::stdio::stdout
 
-    object Person impl ToString {
-      def init(name: String) {
-        let @name = name
-      }
+    object Person {
+      @name: String
 
+      def init(name: String) {
+        @name = name
+      }
+    }
+
+    impl ToString for Person {
       def to_string -> String {
         @name
       }
@@ -207,8 +213,8 @@
     update(user)
 
     user.if_true {
-      # `*user` tells the compiler to treat "user" as a User, not a ?User.
-      update(*user)
+      # `user!` tells the compiler to treat "user" as a User, not a ?User.
+      update(user!)
     }
     ```
 
@@ -253,7 +259,7 @@
     ```inko
     import std::stdio::stdout
 
-    let numbers = [10, 20, 30]
+    let numbers = Array.new(10, 20, 30)
 
     # "each" allows us to easily iterate over
     # a collection:
@@ -268,5 +274,5 @@
       .map do (num) { num * 2 }
       .to_array
 
-    new_numbers # => [20, 40, 60]
+    new_numbers # => Array.new(20, 40, 60)
     ```

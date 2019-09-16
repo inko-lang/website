@@ -284,11 +284,12 @@ This instruction may throw an IO error as a string.
 
 Opens a file handle in a particular mode (read-only, write-only, etc).
 
-This instruction requires X arguments:
+This instruction requires four arguments:
 
 1. The register to store the file object in.
-2. The path to the file to open.
-3. The register containing an integer that specifies the file open mode.
+1. The register containing the prototype to use for the resulting file object.
+1. The path to the file to open.
+1. The register containing an integer that specifies the file open mode.
 
 The available file modes supported are as follows:
 
@@ -697,7 +698,7 @@ This instruction takes two arguments:
 1. The instruction index to jump to if a register is set.
 2. The register to check.
 
-### HasherFinish
+### HasherToHash
 
 Returns the hash for the values written to a hasher.
 
@@ -710,8 +711,12 @@ This instruction requires two arguments:
 
 Creates a new hasher.
 
-This instruction requires only one argument: the register to store the object
-in.
+This instruction requires four arguments:
+
+1. The register to store the hasher in.
+1. The register containing the prototype to use for the hasher.
+1. The register containing the first key for the random state, as an integer.
+1. The register containing the second key for the random state, as an integer.
 
 ### HasherWrite
 
@@ -719,7 +724,7 @@ Hashes an object
 
 This instruction requires three arguments:
 
-1. The register to store the result in, this is always `nil`.
+1. The register to store the result in, this is the value that is hashed.
 2. The register containing the hasher to use.
 3. The register containing the object to hash.
 
@@ -730,6 +735,17 @@ The following objects can be hashed:
 3. Floats
 4. strings
 5. Permanent objects
+
+### HasherReset
+
+Resets the internal state of a hasher.
+
+This instruction takes two arguments:
+
+1. The register to store the result in.
+2. The register containing the hasher to reset.
+
+The resulting value is the hasher provided as the second argument.
 
 ### IntegerAdd
 
@@ -1002,7 +1018,10 @@ If the platform can not be determined, "unknown" will be used.
 
 Stores the currently running process in the given register.
 
-This instruction requires one argument: the register to store the process in.
+This instruction requires two arguments:
+
+1. The register to store the process in.
+1. The register containing the object to use as the prototype for the process.
 
 ### ProcessReceiveMessage
 
@@ -1035,10 +1054,11 @@ This instruction takes three arguments:
 
 Spawns a new process.
 
-This instruction requires two arguments:
+This instruction requires three arguments:
 
 1. The register to store the process in.
-2. The register containing the Block to run in the process.
+1. The register containing the prototype to use for the process.
+1. The register containing the Block to run in the process.
 
 ### ProcessSuspendCurrent
 
@@ -1643,10 +1663,10 @@ For the second argument, the following values can be used:
 
 Opens a C library, panicking if the library can not be found.
 
-This instruction requires two arguments:
+This instruction requires three arguments:
 
-1. The register to store the resulting library in. The object stored will be an
-   instance of the built-in Library type.
+1. The register to store the resulting library in.
+1. The register containing the prototype to use for the library object.
 1. The register containing one or more names to use for finding the library.
 
 If no names are given, this instruction will panic. If one or more names are
@@ -1661,10 +1681,10 @@ not be found.
 
 Loads a C function from a library and prepares it for use.
 
-This instruction requires five arguments:
+This instruction requires siz arguments:
 
-1. The register to store the function in, as an instance of the built-in
-   Function type.
+1. The register to store the function in.
+1. The register containing the prototype to use for the function object.
 1. The register containing the Library to load the function from.
 1. The register containing the name of the function to load, as a String.
 1. The register containing an array that specifies the argument types.
@@ -1697,11 +1717,12 @@ Using an invalid function name will result in a panic.
 
 Calls a function with a fixed number of arguments.
 
-This instruction requires three arguments:
+This instruction requires four arguments:
 
 1. The register to store the result in.
 1. The register containing the Function to call.
 1. The register containing the arguments to pass, as an array of objects.
+1. The register containing the prototype to use when allocating a pointer object.
 
 Supplying an invalid number of arguments or incorrect argument types will result
 in a panic.
@@ -1710,10 +1731,10 @@ in a panic.
 
 Loads a variable from a library and stores a pointer to it in a register.
 
-This instruction requires three arguments:
+This instruction requires four arguments:
 
-1. The register to store the result in, as an instance of the built-in Pointer
-   type.
+1. The register to store the result in.
+1. The register containing the prototype to use for the pointer object.
 1. The register containing the Library to load the variable from.
 1. The register containing the name of the variable to load, as a String.
 
@@ -1723,9 +1744,11 @@ Using an invalid variable name will result in a panic.
 
 Reads the value of a pointer into a specific type.
 
-This instruction requires three arguments:
+This instruction requires four arguments:
 
 1. The register to store the result in.
+1. The register containing the prototype to use when allocating a pointer
+   object.
 1. The register containing the Pointer to read from.
 1. The register containing an integer that specifies what type of data to read
    the value into. See the `FunctionAttach` instruction for the available
@@ -1756,9 +1779,10 @@ instruction. Custom objects can not be written to a C pointer.
 
 Creates a Pointer from an address specified in an Integer.
 
-This instruction requires two arguments:
+This instruction requires three arguments:
 
 1. The register to store the Pointer into.
+1. The register containing the prototype to use for the pointer object.
 1. The register containing the address, as an Integer.
 
 ### PointerAddress
@@ -1796,10 +1820,11 @@ The use of an invalid type identifier will result in a panic.
 
 Accepts an incoming connection on a socket.
 
-This instruction requires two arguments:
+This instruction requires three arguments:
 
 1. The register to store the resulting socket in.
-2. The register containing the socket that is accepting connections.
+1. The register containing the prototype to use for the socket object.
+1. The register containing the socket that is accepting connections.
 
 This instruction may throw an IO error as a string.
 
@@ -1864,8 +1889,9 @@ Creates a new socket.
 This instruction requires three arguments:
 
 1. The register to store the socket in.
-2. The register containing the socket domain, as an integer.
-3. The register containing the socket type, as an integer.
+1. The register containing the prototype to use for the socket object.
+1. The register containing the socket domain, as an integer.
+1. The register containing the socket type, as an integer.
 
 The following values can be used for the socket domain argument (any other value
 is invalid):
@@ -2035,5 +2061,46 @@ The following values can be used for the third argument:
 | 0     | Shuts down the reading half
 | 1     | Shuts down the writing half
 | 2     | Shuts down both the reading and writing halves
+
+### RandomNumber
+
+Generates a random number.
+
+This instruction takes two arguments:
+
+1. The register to store the result in.
+2. The type of number to produce.
+
+For the second argument, the following values can be used:
+
+| Value | Meaning
+|:------|:----------------------------
+| 0     | Generate a random integer
+| 1     | Generate a random incremental integer
+| 2     | Generate a random float
+
+### RandomRange
+
+Generates a random number in a range.
+
+This instruction takes three arguments:
+
+1. The register to store the result in.
+2. The register containing the minimum value, as an integer.
+3. The register containing the maximum value, as an integer.
+
+If the minimum or maximum value is a float, the resulting value will also be a
+float. Mixing of different types for the minimum and maximum values is not
+allowed.
+
+### RandomBytes
+
+Generates a sequence of random bytes.
+
+This instruction takes two arguments:
+
+1. The register to store the resulting byte array in.
+1. The register containing an integer describing the number of bytes to
+   generate.
 
 [tac]: https://en.wikipedia.org/wiki/Three-address_code

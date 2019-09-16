@@ -10,8 +10,8 @@ module Rouge
       mimetypes 'text/x-inko'
 
       KEYWORDS = %w[
-        object import trait let mut return self throw else impl for as do lambda
-        where try try!
+        as def do else for impl import lambda let mut object return self static
+        throw trait try try! where
       ].freeze
 
       state :root do
