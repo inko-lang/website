@@ -100,5 +100,5 @@ what directory contains our compiled bytecode files. The first positional
 argument (the path after the `-I` option and its value) is the bytecode file to
 execute. Keep in mind that the exact paths may differ on your own computer.
 
-Since this approach of running a program is a bit cumbersome, we using the
-`inko` executable instead.
+Since this approach of running a program is a bit cumbersome, we use the `inko`
+executable instead.
