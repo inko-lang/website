@@ -1,0 +1,28 @@
+digraph Flow {
+    node[shape=box]
+    graph[nodesep=1]
+
+    "Compiler process 1"[fillcolor="#EFA5CC" style=filled]
+    "Compiler process 2"[fillcolor="#EFA5CC" style=filled]
+    "Shard 1"[fillcolor="#BCDDAF" style=filled]
+    "Shard 2"[fillcolor="#BCDDAF" style=filled]
+    "Registry process"[fillcolor="#FDFFAF" style=filled]
+
+    subgraph process_1 {
+        {rank=same "Compiler process 1" "Shard 1"}
+
+        "Compiler process 1" -> "Registry process"[label=" 1: shard(std::string)"]
+        "Registry process" -> "Compiler process 1"[label="  2: shard = 2"]
+        "Compiler process 1" -> "Shard 1"[label="\n3: lookup(String)"]
+        "Shard 1" -> "Compiler process 1"[label="4: type ID = 2317"]
+    }
+
+    subgraph process_2 {
+        {rank=same "Compiler process 2" "Shard 2"}
+
+        "Compiler process 2" -> "Registry process"[label="  1: shard(std::integer)" style=dashed]
+        "Registry process" -> "Compiler process 2"[label="  2: shard = 4" style=dashed]
+        "Compiler process 2" -> "Shard 2"[label="3: lookup(Integer)" style=dashed]
+        "Shard 2" -> "Compiler process 2"[label="\n4: type ID = 42" style=dashed]
+    }
+}

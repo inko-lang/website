@@ -15,6 +15,8 @@ page '/manual.html', layout: :manual
 page '/manual/*', layout: :manual
 page '/', layout: :home
 
+ignore '*.dot'
+
 Time.zone = 'UTC'
 
 set :website_title, 'Inko Programming Language'
