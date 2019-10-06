@@ -1,0 +1,14 @@
+digraph Flow {
+    node[shape=box]
+    graph[nodesep=1]
+
+    "Compiler process 1"[fillcolor="#EFA5CC" style=filled]
+    "Compiler process 2"[fillcolor="#EFA5CC" style=filled]
+    "Type process"[fillcolor="#BCDDAF" style=filled]
+
+    "Compiler process 1" -> "Type process"[label=" 1: lookup(String)"]
+    "Type process" -> "Compiler process 1"[label="  2: type ID = 2317"]
+
+    "Compiler process 2" -> "Type process"[label="  1: lookup(Integer)" style=dashed]
+    "Type process" -> "Compiler process 2"[label=" 2: type ID = 42" style=dashed]
+}

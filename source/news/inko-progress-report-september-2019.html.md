@@ -167,11 +167,14 @@ these around will be expensive and is best avoided.
 
 A naive approach would be to spawn a single process that stores all type
 information. Processes that compile source code communicate with this process to
-get type information, check if one type is compatible with another, etc. The
-problem with this approach is that all these processes are limited by how fast
-this type database process can respond to messages. For a small program this
-might not matter, but for larger programs this may result in (some) of the work
-being performed in serial.
+get type information, check if one type is compatible with another, etc:
+
+![Serial type communication](/images/september-2019-progress-report/serial.svg)
+
+The problem with this approach is that all these processes are limited by how
+fast this type database process can respond to messages. For a small program
+this might not matter, but for larger programs this may result in (some) of the
+work being performed in serial.
 
 Our current idea is to instead use multiple processes called "shards" (inspired
 by the sharding of databases). Each shard _only_ stores type information;
@@ -182,7 +185,9 @@ that shard for obtaining type information. Once a module is looked up, a
 compiler process may cache it so it does not need to request it again from the
 registry. The registry process exists so we don't need to scan over all shards
 to determine which one owns a module. This would not perform well if the number
-of shards is large, or when looking up lots of unique modules.
+of shards is large, or when looking up lots of unique modules:
+
+![Linear module lookups](/images/september-2019-progress-report/modules.svg)
 
 Instead of shards sending (and thus copying) entire type data structures to
 compiler processes, they send type IDs. A type ID is a simple and lightweight
@@ -198,7 +203,7 @@ Y?", etc. The Rust compiler [uses a similar
 approach](https://rust-lang.github.io/rustc-guide/query.html). Using separate
 type shards and queries results in a flow of messages that looks like this:
 
-![Process communication flow](/images/september-2019-progress-report/flow.svg)
+![Parallel type communication](/images/september-2019-progress-report/parallel.svg)
 
 Registry operations are performed in serial, as there is only one registry
 process. Since these operations are simple (they are just hash lookups), they

@@ -1,0 +1,22 @@
+digraph Flow {
+    rankdir = RL
+    node[shape=box]
+
+    "Compiler process"[fillcolor="#EFA5CC" style=filled]
+    "Shard 1"[fillcolor="#BCDDAF" style=filled]
+    "Shard 2"[fillcolor="#BCDDAF" style=filled]
+    "Shard 3"[fillcolor="#BCDDAF" style=filled]
+    "Shard 4"[fillcolor="#BCDDAF" style=filled]
+
+    "Compiler process" -> "Shard 1"[label="1: module(std::integer)\n"]
+    "Shard 1" -> "Compiler process"[label="\n2: No"]
+
+    "Compiler process" -> "Shard 2"[label="\n3: module(std::integer)\n"]
+    "Shard 2" -> "Compiler process"[label="\n4: No"]
+
+    "Compiler process" -> "Shard 3"[label="\n5: module(std::integer)\n"]
+    "Shard 3" -> "Compiler process"[label="\n6: No"]
+
+    "Compiler process" -> "Shard 4"[label="\n7: module(std::integer)\n"]
+    "Shard 4" -> "Compiler process"[label="\n8: module ID = 42"]
+}
