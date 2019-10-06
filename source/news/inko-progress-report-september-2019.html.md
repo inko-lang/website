@@ -176,32 +176,33 @@ fast this type database process can respond to messages. For a small program
 this might not matter, but for larger programs this may result in (some) of the
 work being performed in serial.
 
-Our current idea is to instead use multiple processes called "shards" (inspired
-by the sharding of databases). Each shard _only_ stores type information;
-compilation is done by separate processes. A separate "registry" process is used
-to record which shard owns a certain module. To look up a type, a compiler
-process would request the shard for a given module that is imported, then use
-that shard for obtaining type information. Once a module is looked up, a
-compiler process may cache it so it does not need to request it again from the
-registry. The registry process exists so we don't need to scan over all shards
-to determine which one owns a module. This would not perform well if the number
-of shards is large, or when looking up lots of unique modules:
+Our current idea is to instead use multiple processes called "partitions"
+(inspired by the partitioning of databases). Each partition _only_ stores type
+information; compilation is done by separate processes. A separate "registry"
+process is used to record which partition owns a certain module. To look up a
+type, a compiler process would request the partition for a given module that is
+imported, then use that partition for obtaining type information. Once a module
+is looked up, a compiler process may cache it so it does not need to request it
+again from the registry. The registry process exists so we don't need to scan
+over all partition to determine which one owns a module. This would not perform
+well if the number of partition is large, or when looking up lots of unique
+modules:
 
 ![Linear module lookups](/images/september-2019-progress-report/modules.svg)
 
-Instead of shards sending (and thus copying) entire type data structures to
+Instead of partitions sending (and thus copying) entire type data structures to
 compiler processes, they send type IDs. A type ID is a simple and lightweight
 data structure that is cheap to copy, storing only the ID of the type and the ID
 of the module that owns the type. If needed they may send more complex data
 structures, but in all cases they will be optimised to make it cheap to copy
 them.
 
-Compiler processes communicate with these type shards by sending messages known
-as "queries" (taken again from databases). A query can be a message such as
-"Give me the argument type IDs of method X", "Does type X respond to message
+Compiler processes communicate with these type partitions by sending messages
+known as "queries" (taken again from databases). A query can be a message such
+as "Give me the argument type IDs of method X", "Does type X respond to message
 Y?", etc. The Rust compiler [uses a similar
 approach](https://rust-lang.github.io/rustc-guide/query.html). Using separate
-type shards and queries results in a flow of messages that looks like this:
+type partitions and queries results in a flow of messages that looks like this:
 
 ![Parallel type communication](/images/september-2019-progress-report/parallel.svg)
 
@@ -211,8 +212,8 @@ won't create a bottleneck. Compiler processes will cache these lookups locally,
 so frequently imported modules only need a single lookup per compiler process.
 The use of type IDs is similar to entities in an [Entity Component
 System](https://en.wikipedia.org/wiki/Entity_component_system). Compiler
-processes will use these type IDs and other data obtained from a type shard to
-perform type checking and inference.
+processes will use these type IDs and other data obtained from a type partition
+to perform type checking and inference.
 
 Type checking and inference is done by walking a desugared AST and annotating
 nodes with their type IDs. We also need to store data such as local variable
