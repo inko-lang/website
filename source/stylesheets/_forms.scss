@@ -29,6 +29,15 @@ select {
     }
   }
 
+  &.purple {
+    background: darken($purple, 5%);
+    border: 1px solid darken($purple, 18%);
+
+    &:hover {
+      background: darken($purple, 15%);
+    }
+  }
+
   &.no-bottom-margin {
     margin-bottom: 0;
   }

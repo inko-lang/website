@@ -22,7 +22,6 @@ Time.zone = 'UTC'
 set :website_title, 'Inko Programming Language'
 set :website_author, 'Yorick Peterse'
 set :website_url, 'https://inko-lang.org'
-set :open_collective, 'https://opencollective.com/inko-lang'
 set :feed_url, "#{config[:website_url]}/feed.xml"
 set :markdown_engine, :kramdown
 

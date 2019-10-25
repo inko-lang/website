@@ -8,6 +8,9 @@ buttons:
     url: /manual/getting-started/hello-world/
   - text: Git repository
     url: https://gitlab.com/inko-lang/inko
+  - text: Donate
+    url: /sponsors
+    color: purple
 body: |
   Inko is a gradually-typed, safe, object-oriented programming language for
   writing concurrent programs. By using lightweight isolated processes, data
