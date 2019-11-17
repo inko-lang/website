@@ -18,30 +18,20 @@ entry ["How does Immix work?"](/faq#header-how-does-immix-work).
 
 ## Allocator
 
-The allocator allocates memory in 32 KB blocks of aligned memory. This means
-that allocating an object for the first time will result in a 32 KB block being
+The allocator allocates memory in 8 KB blocks of aligned memory. This means that
+allocating an object for the first time will result in a 8 KB block being
 assigned to the process performing the allocation. Objects are allocated into
 these blocks using bump allocation.
 
 ## Garbage collector
 
 The garbage collector is a parallel, generational garbage collector. Multiple
-processes can be collected in parallel, and for every process its call stack is
-processed in parallel as well.
+processes can be collected in parallel, and objects are traced in parallel using
+a pool of OS threads.
 
 A process can not run while it is being garbage collected, but _only_ the
 process to garbage collect will be suspended, while all others can continue to
 run as normal.
-
-There are two types of garbage collectors in Inko:
-
-1. A process-local garbage collector.
-1. A mailbox garbage collector.
-
-The process-local garbage collector will perform garbage collection for the heap
-of a process, while the mailbox collector will _only_ garbage collect a process'
-mailbox. Both are garbage collected independently, but they can not be garbage
-collected at the same time for the same process.
 
 The source code for the Immix implementation and allocator can be found in
 [vm/src/immix][src-immix]. The various garbage collectors are located in
@@ -99,71 +89,10 @@ memory. This greatly speeds up garbage collection performance, but also poses a
 bit of a problem: if an object wraps a certain structure (e.g. a socket), we
 would leak that structure.
 
-IVM solves this by finalising such structures in a cooperative manner. At the
-end of a garbage collection cycle, the garbage collector will schedule blocks
-for finalisation if they have objects that need to be finalised. Which objects
-require finalisation is stored in a byte map. Finalising blocks is done in a
-separate thread pool.
-
-Because finalisation happens separately, it's possible that an allocator may try
-to allocate an object into an object slot that is being finalised. When this
-happens, the allocator will try to first finalise _all_ objects pending
-finalisation, then allocate the object. Finalising all pending objects means the
-first allocation may take a little longer, but also ensures that future
-allocations in the same block can be performed as fast as possible. The pseudo
-code for this roughly comes down to the following:
-
-```rust
-if is_finalizing() {
-  finalize_pending()
-}
-
-allocate()
-```
-
-The `is_finalizing()` routine uses an atomic boolean to determine if
-finalisation is necessary, removing the need for always having to use a more
-expensive mutex or spinlock:
-
-```rust
-// We load the boolean using LLVM's "Acquire" atomic ordering.
-finalizing.load(Ordering::Acquire)
-```
-
-The `finalize_pending()` routine is roughly implemented as follows:
-
-```rust
-let lock = acquire_finalization_lock()
-
-// It's possible the garbage collector finalised our block in the mean time. If
-// this is the case we'll just go back to allocating the object.
-if !is_finalizing() {
-  return
-}
-
-for object in current_block.objects() {
-  // Objects that have to be finalised have an entry set in a dedicated bitmap.
-  if should_finalize_object(object) {
-    // Here we deallocate the "value" the object wraps, such as a socket.
-    deallocate(object.value)
-
-    // Now that the object is finalised, we remove its entry from the bitmap.
-    remove_from_finalize_bitmap(object)
-  }
-}
-
-// Now that we have finalised the block we can update the atomic boolean, using
-// the "Release" ordering.
-finalizing_boolean.store(false, Ordering::Release)
-
-// Once we're done we unlock our lock. In Rust this is done for us automatically
-// once it goes out of scope.
-unlock(lock)
-```
-
-We call this cooperative finalisation, because both the garbage collector and
-allocator will cooperatively finalise objects. In most cases the garbage
-collector will finalize all objects before a block is used again.
+IVM solves this by finalising such structures when reusing their memory. When we
+are about to allocate a new object, we first check if the memory contains an
+object that has yet to be finalised. If so, we finalise it before overwriting
+the memory.
 
 Finalisation is not exposed to the language, instead it's a system used to
 reclaim memory of certain data structures (sockets, file handles, and so on),
@@ -171,25 +100,16 @@ without having to do this during a garbage collection cycle.
 
 The VM guarantees that any object that needs to be finalised will eventually be
 finalised. However, the VM does not guarantee _when_ this will happen. This
-means you don't have to (for example) close a file handle, though it is strongly
-recommended you do so as soon as you no longer need the object. These guarantees
-may be broken due to a bug, so it's best to not rely on them too much.
-
-### Prefetching
-
-The garbage collector uses [data prefetching][data-prefetching] when tracing
-through live objects, based on the paper ["Effective Prefetch for Mark-Sweep
-Garbage Collection"][prefetching-paper]. This can improve performance of tracing
-live objects by up to 30% in the best case, compared to not using prefetching.
+means you don't _have to_ (for example) close a file handle, though it is
+strongly recommended you do so as soon as you no longer need the object. These
+guarantees may be broken due to a bug, so it's best to not rely on them too
+much.
 
 ## Process heaps
 
-Each process has two heaps: the process heap, and the mailbox heap. The process
-heap is where objects for your program are allocated into. The mailbox heap is
-used for storing received messages. These messages are copied to the process
-heap when using the `ProcessReceive` instruction. This removes the need for
-synchronising access to the process heap, at the cost of requiring slightly more
-memory.
+Each process has its own heap, which allows the garbage collector to collect
+processes independently; without having to pause _all_ processes. When sending a
+message, the message is (deep) copied into the receiving process' heap.
 
 ## Permanent heap
 
@@ -223,19 +143,22 @@ so on. This produces the following layout:
 +----------------------+
 ```
 
-The prototype field is a tagged pointer, which can has the lower two bits set as
-follows:
+The attributes field is a tagged pointer, which can have the lower three bits set
+as follows:
 
-| Lower two bits | Meaning
-|:---------------|:-------------------------------------------------------------
-| `00`           | The field contains a regular pointer to the prototype.
-| `10`           | The field is a forwarding pointer that should be resolved.
+| Lower two bits  | Meaning
+|:----------------|:-------------------------------------------------------------
+| `000`           | The field contains a regular pointer to the attributes.
+| `001`           | The current object is in the process of being forwarded.
+| `010`           | The field is a forwarding pointer that should be resolved.
+| `100`           | This object has been remembered in the remembered set.
 
 Encoding this data directly into the attributes saves us an extra 8 bytes of
-memory per object.
+memory per object. Some of these bits can be combined. For example, if the lower
+three bits are `011` then it means the object is both remembered and being
+forwarded.
 
-The attributes field is a pointer to a HashMap, using FNV as the algorithm.
-These maps are 24 bytes in size, and they are only allocated when necessary.
+The attributes field is a pointer to a HashMap, allocated when necessary.
 
 The value is 16 bytes because it is a Rust enum, which contains both a pointer
 to the value and an 8 byte "tag" that specifies what kind of value is wrapped.
@@ -272,5 +195,3 @@ allocated on the permanent heap when the VM parses a bytecode file.
 [tagged-pointers]: https://en.wikipedia.org/wiki/Tagged_pointer
 [src-immix]: https://gitlab.com/inko-lang/inko/tree/master/vm/src/immix
 [src-gc]: https://gitlab.com/inko-lang/inko/tree/master/vm/src/gc
-[data-prefetching]: https://en.wikipedia.org/wiki/Cache_prefetching
-[prefetching-paper]: http://users.cecs.anu.edu.au/~steveb/downloads/pdf/pf-ismm-2007.pdf
