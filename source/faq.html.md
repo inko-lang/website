@@ -18,10 +18,10 @@ description: Frequently asked questions about the Inko programming language.
 
 "Inko" ("インコ") is Japanese for parakeet / parrot. Inko is an object oriented
 language that uses message passing. In a way, objects talk to each other, much
-like parrots can "talk" by mimicking the human voice. The creator of Inko also
-happens to like parrots.
+like parrots can "talk" by mimicking the human voice. We also happens to like
+parrots.
 
-### Who is the creator of Inko?
+### Who is the author of Inko?
 
 [Yorick Peterse](https://yorickpeterse.com/).
 
@@ -302,8 +302,8 @@ No.
 ### Why is the compiler written in Ruby?
 
 Currently Inko is not feature complete enough to write a compiler for itself.
-This meant the creator had to use a different language, and Ruby happened to be
-a language they were most comfortable with.
+This meant the we had to use a different language, and Ruby happened to be a
+language they were most comfortable with.
 
 ### Why not write the compiler in Rust, just like the VM?
 
@@ -329,11 +329,11 @@ Not at the moment, but we hope to add support for this one day.
 
 ### Why write the VM in Rust?
 
-While the creator has experience with other systems languages such as C, they
-did not feel comfortable writing a virtual machine in these languages. Rust
-makes it much harder to shoot yourself in the foot, comes with a nice package
-manager, built-in unit testing, type inference, and many other features not
-found in C or C++.
+While we have experience with other systems languages such as C, we do not feel
+comfortable writing a virtual machine in these languages. Rust makes it much
+harder to shoot yourself in the foot, comes with a nice package manager,
+built-in unit testing, type inference, and many other features not found in C or
+C++.
 
 ### Why use a garbage collector?
 
@@ -342,8 +342,8 @@ memory management, such as used by Rust, is less error prone but often more
 complicated to use. Garbage collection makes memory management easy (for the
 user), at the cost of (potentially) less efficient memory usage.
 
-The creator felt that using a garbage collector strikes a nice balance between
-good memory usage, and ease of use.
+We feel that using a garbage collector strikes a nice balance between good
+memory usage, and ease of use.
 
 ### What garbage collection algorithm is used?
 
@@ -393,7 +393,7 @@ to spawn a large number of green threads (known as "processes" in Inko), without
 using a lot of memory.
 
 The use of green threads does require a custom scheduler, which adds extra
-complexity. The creator felt that this trade-off was worth it, because it
+complexity. We feel that this trade-off was worth it, because it
 ultimately makes it much easier and less scary to run many concurrent processes.
 
 ### Does the virtual machine support finalisation?
@@ -445,5 +445,6 @@ up to the CPU to decide how many of these threads are running in parallel.
 
 ### Can I change the number of threads used by the VM?
 
-Yes. The environment variables `INKO_CONCURRENCY` can be used to control the
-number of threads it will use for its various thread pools.
+Yes. See [the documentation about environment
+variables](manual/virtual-machine/configuration/#header-environment-variables)
+for more information.
