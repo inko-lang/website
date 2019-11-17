@@ -18,8 +18,8 @@ is just the reducing of a counter until it reaches `0`.
 ## Pools
 
 Processes are executed in one of two thread pools: a primary pool, and a
-secondary pool. The primary pool is used for executing regular processes, while
-a secondary pool is used for executing processes that may perform blocking
+blocking pool. The primary pool is used for executing regular processes, while
+a blocking pool is used for executing processes that may perform blocking
 operations, such as reading from a file.
 
 Threads in these pools use [work stealing][work-stealing], though threads from

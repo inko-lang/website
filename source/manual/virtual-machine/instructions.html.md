@@ -950,13 +950,13 @@ This instruction requires two arguments:
 ### ProcessSetBlocking
 
 Marks or unmarks the current process as performing a blocking operation. When
-marking a process as blocking, the VM moves it to a secondary thread pool. When
+marking a process as blocking, the VM moves it to a blocking thread pool. When
 the mark is unset, the VM moves the process back to the primary thread pool.
 
 This instruction takes one argument: a register containing a boolean that
 indicates the blocking state of the process.
 
-If the process is already running in the secondary pool, this instruction does
+If the process is already running in the blocking pool, this instruction does
 nothing.
 
 ### ProcessIdentifier

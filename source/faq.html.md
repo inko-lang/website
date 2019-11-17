@@ -434,11 +434,11 @@ resources (memory, sockets, etc) are cleaned up before shutting down.
 
 The virtual machine has two thread pools: one for executing regular processes,
 and one for processes that may perform blocking operations, such as reading from
-a file. These pools are known as the primary and secondary pool respectively.
+a file. These pools are known as the primary and blocking pool respectively.
 
 By default, both pools use a number of threads equal to the number of _logical_
 CPU cores. This means that a CPU with 8 logical cores can run 16 processes
-concurrently: 8 on the primary pool, and 8 on secondary pool.
+concurrently: 8 on the primary pool, and 8 on blocking pool.
 
 Note that we say _concurrently_ opposed to _in parallel_. This is because it's
 up to the CPU to decide how many of these threads are running in parallel.
