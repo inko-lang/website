@@ -1,7 +1,6 @@
 ---
 title: Configuration
 ---
-<!-- vale off -->
 
 ## Table of contents
 {:.no_toc}
@@ -29,11 +28,33 @@ file, it will try to find it in one of these directories.
 
 ## Environment variables
 
-### INKO_CONCURRENCY
+### INKO_PRIMARY_THREADS
 
-An integer specifying the number of threads to use for the various thread pools.
+Controls the number of threads used for running regular processes.
 
 Defaults to the number of logical CPU cores.
+
+### INKO_BLOCKING_THREADS
+
+Controls the number of threads used for running processes that perform blocking
+operations.
+
+Defaults to the number of logical CPU cores.
+
+### INKO_GC_THREADS
+
+Controls the number of threads used in the fixed-size garbage collection
+coordination thread pool.
+
+Defaults to half the number of logical CPU cores.
+
+### INKO_TRACER_THREADS
+
+Controls the number of threads spawned for tracing objects. Each process
+collected will have its own pool of tracers, spawned when needed and terminated
+when all work is done.
+
+Defaults to half the number of logical CPU cores.
 
 ### INKO_REDUCTIONS
 
@@ -72,25 +93,7 @@ this value.
 
 Defaults to `1.5`.
 
-### INKO_MAILBOX_THRESHOLD
+### INKO_PRINT_GC_TIMINGS
 
-An integer specifying the amount of memory that can be allocated in the mailbox
-heap before triggering a mailbox garbage collection.
-
-Defaults to `32 768` (32 KB).
-
-### INKO_MAILBOX_GROWTH_FACTOR
-
-A float used to grow the mailbox heap's garbage collection threshold if the
-growth threshold is exceeded. The threshold is increased by multiplying it with
-this value.
-
-Defaults to `1.5`.
-
-### INKO_MAILBOX_GROWTH_THRESHOLD
-
-A float ranging from `0.0` (0%) to `1.0` (100%), specifying the percentage of
-memory that should still remain in use after a garbage collection cycle, before
-increasing the mailbox heap's garbage collection threshold.
-
-Defaults to `0.9`.
+When set to `"true"`, the VM will print garbage collection timings to STDERR.
+This is an internal option that may be removed at any time.
