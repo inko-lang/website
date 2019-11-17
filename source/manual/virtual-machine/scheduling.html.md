@@ -30,7 +30,7 @@ one pool can not steal processes to run from another pool.
 A process can be suspended due to a variety of reasons, such as a process
 consuming all reductions, or receiving a message when there aren't any.
 
-A separate thread called the "suspension worker" will periodically check if any
+A separate thread called the "timeout worker" will periodically check if any
 suspended processes need to be resumed again, moving them back into the right
 process pool when necessary.
 
