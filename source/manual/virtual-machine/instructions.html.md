@@ -1421,6 +1421,16 @@ This instructino requires two arguments:
 1. The register to store the resulting integer in.
 2. The register containing the string to convert.
 
+### StringByte
+
+Obtains a single byte from a string.
+
+This instruction requires three arguments:
+
+1. The register to store the resulting byte (as an integer) in.
+2. The register containing the string to read the byte from.
+3. The register containing the (byte) index of the byte to obtain.
+
 ### TailCall
 
 Performs a tail call on the current block.
