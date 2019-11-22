@@ -9,15 +9,12 @@ There are three types of variables that can be defined:
 1. Instance attributes
 1. Constants
 
-These variables are defined using the `let` keyword:
+Local variables and constants are defined using the `let` keyword. Instance
+attributes are defined in an object body, and assigned in its `init` method.
 
-```inko
-let local_variable = 10
-let @instance_attribute = 10
-let Constant = 10
-```
-
-Constants start with a capital letter.
+Local variables start with a lowercased letter, constants start with a capital
+letter. You can also prefix them with an underscore, which may be used to ignore
+warnings for unused variables.
 
 Variables can not be reassigned by default. To allow this, define a variable
 using `let mut` instead:

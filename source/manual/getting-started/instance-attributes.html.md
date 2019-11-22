@@ -12,16 +12,18 @@ name. To do so, we'd define our object like so:
 
 ```inko
 object Person {
+  @name: String
+
   def init(name: String) {
-    let @name = name
+    @name = name
   }
 }
 ```
 
-Instance attributes are defined using `let`, and the name of an instance
+Instance attributes are defined in the object body, and the name of an instance
 attribute starts with a `@`. In the above example we define an instance
-attribute called `@name`, with the type being `String` (as inferred from the
-`name` argument).
+attribute called `@name`, with the type being `String`. All instance attributes
+of an object must be set in its `init` method.
 
 Instance attributes are private to the object, meaning you can not access them
 directly from the outside. In other words, this is invalid:
@@ -34,8 +36,10 @@ To expose these attributes, you must define a method that returns them:
 
 ```inko
 object Person {
+  @name: String
+
   def init(name: String) {
-    let @name = name
+    @name = name
   }
 
   def name -> String {
@@ -48,38 +52,4 @@ You can then access the value by sending `name` to a `Person` instance:
 
 ```inko
 Person.new('Alice').name # => 'Alice'
-```
-
-Instance attributes can only be defined in the `init` method of an object, but
-they can be reassigned (should they be defined as mutable) anywhere. This means
-the following is invalid:
-
-```inko
-object Person {
-  def name=(name: String) -> String {
-    let @name = value
-  }
-
-  def name -> String {
-    @name
-  }
-}
-```
-
-Instead you should use this:
-
-```inko
-object Person {
-  def init(name: String) {
-    let mut @name = name
-  }
-
-  def name=(name: String) -> String {
-    @name = value
-  }
-
-  def name -> String {
-    @name
-  }
-}
 ```

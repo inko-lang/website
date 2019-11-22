@@ -90,11 +90,9 @@ def write_bytes(val) {}
 
 # Good
 let home_address = 'Foo Street'
-let @home_address = 'Foo Street'
 
 # Bad
 let homeAddress = 'Foo Street'
-let @homeAddress = 'Foo Street'
 ```
 
 ### Let constants
