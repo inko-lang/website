@@ -25,6 +25,8 @@ compatibility layer such as [MSYS2](http://www.msys2.org/) or [Linux for
 Windows](https://docs.microsoft.com/en-us/windows/wsl/install-win10). Currently
 we only provide official support for MSYS2 environments.
 
+Inko requires a 64-bits platform, 32-bits is not supported.
+
 ## Installing using ienv (recommended)
 
 [ienv](https://gitlab.com/inko-lang/ienv) is the official version manager of
