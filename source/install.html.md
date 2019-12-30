@@ -48,7 +48,6 @@ software:
 * Ruby 2.3 or newer (for the compiler)
 * autoconf
 * automake
-* texinfo
 * clang
 * libtool
 
