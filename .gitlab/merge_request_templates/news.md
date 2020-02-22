@@ -9,6 +9,5 @@
 ## After publishing
 
 * [ ] Submit to <https://www.reddit.com/r/inko/>
-* [ ] Submit to <https://discourse.inko-lang.org/c/announcements>
 * [ ] Tweet about it
 * [ ] Post a link to the article in the Matrix channel
