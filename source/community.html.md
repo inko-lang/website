@@ -7,10 +7,9 @@ keywords:
   - participate
 description: Learn more about how to participate in the Inko community.
 ---
-<!-- vale off -->
 
-A healthy community is very important for any programming language, and Inko is
-no exception. We are committed to providing a friendly, safe and welcoming
+A healthy community is important for any programming language, and Inko is no
+exception. We are committed to providing a friendly, safe and welcoming
 environment for all, regardless of level of experience, gender identity and
 expression, sexual orientation, disability, personal appearance, body size,
 race, ethnicity, age, religion, nationality, or other similar characteristic.
@@ -18,9 +17,8 @@ For more information, see the [code of conduct](/code-of-conduct).
 
 ## Services
 
-The following services are currently provided:
+The following services are provided:
 
-* The official [forum powered by Discourse](https://discourse.inko-lang.org/).
 * The official [sub-Reddit](https://www.reddit.com/r/inko/).
 * A [Matrix community](https://matrix.to/#/+inko:matrix.org) for chatting with
   fellow members of the Inko community.
@@ -39,5 +37,5 @@ connected:
 1. Click the link shown to join the discussion. This requires you to sign in to
    Riot/Matrix first.
 
-If you simply want to view the discussion, without joining, you can use
+If you want to view the discussion, without joining, you can use
 [view.matrix.org](https://view.matrix.org/room/!CENmKDnMngVwJJrTry:matrix.org/).
