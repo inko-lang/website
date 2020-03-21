@@ -100,7 +100,7 @@ class SponsorData
     api_data.each do |member|
       tier = member['tier']
 
-      next if !tier || !member['isActive']
+      next unless tier
 
       per_tier[tier] << {
         'id' => member['MemberId'],
@@ -108,7 +108,8 @@ class SponsorData
         'image' => member['image'],
         'website' => member['website'],
         'total_donated' => member['totalAmountDonated'],
-        'created_at' => member['createdAt']
+        'created_at' => member['createdAt'],
+        'last_donated_at' => member['lastTransactionAt']
       }
     end
 

@@ -4,7 +4,7 @@
       %th.sponsor-logo
       %th Sponsor
       %th Total
-      %th Sponsor since
+      %th Last donation
   %tbody
     - sorted_sponsors(tier) do |member|
       %tr
@@ -17,4 +17,4 @@
         %td
           &euro; #{member['total_donated'].round}
         %td
-          = format_date(member['created_at'])
+          = format_date(member['last_donated_at'])
