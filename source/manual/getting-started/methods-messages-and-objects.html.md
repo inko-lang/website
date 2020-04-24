@@ -1,7 +1,6 @@
 ---
 title: Methods, messages, and objects
 ---
-<!-- vale off -->
 
 ## Table of contents
 {:.no_toc}
@@ -12,8 +11,8 @@ title: Methods, messages, and objects
 ## Introduction
 
 In Inko we use objects for storing state, methods for defining sequences of
-code to execute, and messages to run those sequences of code. While usually a
-message maps to a method with the same name, this isn't always the case.
+code to execute, and messages to run those sequences of code. In most cases a
+message maps to a method with the same name, but this isn't always the case.
 
 ## Methods
 
@@ -25,7 +24,7 @@ def example {
 }
 ```
 
-Here we defined a method called "example". Methods can specify additional
+Here we defined a method called "example". Methods can specify extra
 information, such as: the arguments (and optionally their types), the return
 type, and the throw type.
 
@@ -57,9 +56,9 @@ def add(number = 0, add = 0) {
 }
 ```
 
-When a default argument is given, the type of the argument is inferred based on
-the value. If we want to specify a different type we can do so, as long as the
-type is compatible with the default value:
+When a default argument is given, the argument's type is inferred based on the
+value. If we want to specify a different type we can do so, as long as the type
+is compatible with the default value:
 
 ```inko
 def add(number: Numeric = 0, add: Numeric = 0) {
@@ -99,8 +98,8 @@ error.
 
 ### Return type
 
-By default, the return type of a method is dynamic. If we want to use a static
-type, we can define one using `-> Type`, with `Type` being the return type. For
+By default, a method's return type is dynamic. If we want to use a static type,
+we can define one using `-> Type`, with `Type` being the return type. For
 example:
 
 ```inko
@@ -124,11 +123,11 @@ doesn't return anything.
 
 ## Messages
 
-To execute a method, you must send a message to an object. Messages are
-identifiers such as `foo` and `foo_bar`. An object will decide how to respond to
-the message. In most cases the object will just run a method with the same name,
-but sometimes it may decide to run a different method. The object that the
-message is sent to is known as the "receiver".
+To call a method, you must send a message to an object. Messages are identifiers
+such as `foo` and `foo_bar`. An object will decide how to respond to the
+message. In most cases the object will just run a method with the same name, but
+sometimes it may decide to run a different method. The object that the message
+is sent to is known as the "receiver".
 
 For sending message Inko uses the syntax `receiver.message`, with `receiver`
 being the object the message is sent to, and `message` being the message name.
@@ -151,7 +150,7 @@ Sending a message to a specific object is done like so:
 ```
 
 When sending a message, you can leave out an explicit receiver. In this case the
-message will be sent to `self`:
+message is sent to `self`:
 
 ```inko
 # Both of these examples result in exactly the same code being run.
@@ -226,7 +225,7 @@ Person # This will return our Person object.
 
 Instead of using an object directly, we typically create a new "instance" of the
 object and then use that. An "instance" is a copy of the object, allowing you to
-modify it (if necessary) without modifying the original version. We create
+change it (if necessary) without modifying the original version. We create
 instances of objects by sending `new` to the object:
 
 ```inko
@@ -251,12 +250,33 @@ object Person {
 Person.new(10)
 ```
 
+Objects also allow you to define static methods. You do not need an instance of
+the object to call these methods:
+
+```inko
+object Person {
+  static def anonymous -> Person {
+    new('Anonymous')
+  }
+
+  def init(name: String) {
+    # ...
+  }
+}
+
+Person.anonymous
+```
+
+It's considered good practise for static methods to return instances of the
+objects they are defined on. If you have a static method that returns a
+different type, it's recommended to turn this into a module method instead (or a
+static method on the object that is returned).
+
 ## Objects versus Classes
 
-Objects are similar to classes found in other languages, but they are also quite
-different. Classes typically have "static methods", also known as "class
-methods". These are methods defined on a class and can be called without
-creating an instance of the class. Classes also typically support inheritance.
-
-Inko supports neither, and objects defined using the `object` keyword are just
-objects like any other. As a result, we refer to them simply as "objects".
+Objects in Inko are similar to classes found in other languages. Unlike other
+languages, Inko does not support class inheritance; instead relying on
+composition using traits. Types created using the `object` keyword are objects
+themselves, and you can send messages to them. To reinforce that objects are not
+just blueprints you can only use to create an instance, we use the term "object"
+instead of "class".
