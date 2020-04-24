@@ -252,7 +252,7 @@ import std::test::assert
 
 test.group('Integer.+') do (g) {
   g.test('Summing two Integers') {
-    try assert.equal(1 + 2, 3)
+    assert.equal(1 + 2, 3)
   }
 }
 
