@@ -1,8 +1,546 @@
-@import 'config';
 @import 'normalize';
-@import 'fonts';
-@import 'rouge';
-@import 'text';
-@import 'layout';
-@import 'forms';
-@import 'sponsors';
+
+$font: 'Open Sans', sans-serif;
+$code-font: monospace;
+$blue: #1cb6f9;
+$green: #9bdf63;
+$white: #fff;
+$light-grey: #fafafa;
+$yellow: #fff9b0;
+$grey: #ddd;
+$dark-grey: darken($grey, 50%);
+$purple: #d692ee;
+$text-color: #000;
+$code-green: #436023;
+$link-color: darken($blue, 10%);
+$button-shadow: rgba(0, 0, 0, .12);
+$top-shadow: rgba(0, 0, 0, .1);
+$text-bottom-margin: 20px;
+$text-left-margin: 20px;
+$media-wide: 'only screen and (min-width: 750px)';
+$media-narrow: 'only screen and (max-width: 750px)';
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 400;
+  src: local('Open Sans'),
+    local('OpenSans-Regular'),
+    url('../fonts/open-sans-v13-latin-ext_latin-regular.woff2') format('woff2'),
+    url('../fonts/open-sans-v13-latin-ext_latin-regular.woff') format('woff');
+}
+
+@font-face {
+  font-family: 'Open Sans';
+  font-style: normal;
+  font-weight: 600;
+  src: local('Open Sans SemiBold'),
+    local('OpenSans-SemiBold'),
+    url('../fonts/open-sans-semi-bold.woff2') format('woff2');
+}
+
+html {
+  font-family: $font;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+h1 {
+  font-size: 2rem;
+}
+
+h2 {
+  font-size: 1.5rem;
+}
+
+h3 {
+  font-size: 1.2rem;
+}
+
+h4 {
+  font-size: 1rem;
+}
+
+h5 {
+  font-size: .8rem;
+}
+
+h6 {
+  font-size: .7rem;
+}
+
+p {
+  margin-bottom: $text-bottom-margin;
+}
+
+ul,
+ol {
+  margin-bottom: $text-bottom-margin;
+  padding-left: 0;
+
+  ul,
+  ol {
+    margin-bottom: 0;
+    margin-left: $text-left-margin;
+  }
+}
+
+ul li {
+  list-style: disc outside;
+  margin-bottom: 5px;
+  margin-left: 1rem;
+}
+
+ol li {
+  list-style: decimal outside;
+  margin-bottom: 5px;
+  margin-left: 1rem;
+}
+
+blockquote {
+  font-style: italic;
+  margin: 0 $text-left-margin;
+}
+
+pre {
+  font-family: $code-font;
+  font-size: .8rem;
+  line-height: 1.3;
+  margin-left: $text-left-margin;
+  overflow-x: auto;
+  white-space: pre-wrap;
+}
+
+p code,
+li code,
+td code {
+  font-family: $font;
+  font-weight: bold;
+}
+
+a {
+  color: $link-color;
+  text-decoration: none;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+table {
+  border-spacing: 0;
+  text-align: left;
+  width: 100%;
+
+  td,
+  th {
+    border-bottom: 1px solid $grey;
+    min-width: 80px;
+    padding: 5px;
+  }
+}
+
+.highlight {
+  .k {
+    font-weight: bold;
+  }
+
+  .s,
+  .s1,
+  .s2 {
+    color: $code-green;
+  }
+
+  .mf,
+  .mh,
+  .mi,
+  .mo,
+  .il {
+    color: $link-color;
+  }
+
+  .c,
+  .cp,
+  .cm,
+  .cs,
+  .c1 {
+    color: lighten($text-color, 40%);
+  }
+}
+
+.grid {
+  display: grid;
+  grid-gap: 20px;
+  margin: 0 auto;
+  max-width: 940px;
+  padding: 0 10px;
+}
+
+// Bar at the top, containing the logo and navigation menu.
+.top {
+  border-bottom: 1px solid $grey;
+
+  header {
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+
+    @media #{$media-wide} {
+      grid-template-columns: 1fr 3fr;
+    }
+  }
+
+  .grid {
+    grid-gap: 0;
+  }
+}
+
+// Logo displayed at the top left of the website.
+.logo {
+  font-size: 3rem;
+  font-weight: bold;
+  line-height: 60px;
+  margin: 5px 0;
+
+  img {
+    display: none;
+    float: left;
+
+    @media #{$media-wide} {
+      display: inline;
+      grid-template-columns: 1fr 3fr;
+    }
+  }
+}
+
+// The main navigation menu.
+.expand-menu {
+  @media #{$media-wide} {
+    display: none;
+  }
+
+  a {
+    color: darken($grey, 50%);
+    float: right;
+    font-size: 1.8rem;
+    font-weight: bold;
+    padding: 10px;
+    text-decoration: none;
+  }
+}
+
+.main-menu {
+  display: none;
+  grid-column: 1 / -1;
+
+  @media #{$media-wide} {
+    display: block;
+    float: right;
+    grid-column: 2;
+  }
+}
+
+.main-menu ul {
+  margin: 0;
+  padding: 0;
+
+  @media #{$media-wide} {
+    float: right;
+  }
+
+  li {
+    list-style: none;
+    margin: 0;
+
+    @media #{$media-wide} {
+      display: inline-block;
+    }
+
+    &:last-child a {
+      padding-right: 0;
+    }
+  }
+
+  a {
+    color: $text-color;
+    display: block;
+    padding: 10px;
+    text-decoration: none;
+
+    &:hover {
+      color: $link-color;
+    }
+
+    &.active {
+      font-weight: bold;
+    }
+  }
+
+  &::after {
+    clear: both;
+    content: '';
+    display: block;
+  }
+}
+
+// Big block displayed on the homepage, including a short introduction to Inko
+// and a list of code samples.
+.jumbotron {
+  background: $light-grey;
+  box-shadow: inset 0 1px 2px $top-shadow;
+  padding: 20px 0;
+
+  .grid {
+    grid-template-columns: 1fr;
+
+    @media #{$media-wide} {
+      grid-template-columns: 3fr 2fr;
+    }
+  }
+
+  h1 {
+    font-size: 1.5rem;
+    margin-top: 0;
+
+    @media #{$media-wide} {
+      font-size: 1.8rem;
+    }
+  }
+
+  select {
+    font-size: .8rem;
+  }
+}
+
+.code-examples {
+  display: none;
+
+  @media #{$media-wide} {
+    display: block;
+  }
+
+  .example {
+    display: none;
+
+    pre {
+      background: $white;
+      border: 1px solid $grey;
+      font-size: 12px;
+      margin: $text-bottom-margin / 2 0 0;
+      overflow-y: auto;
+      padding: 10px;
+    }
+
+    &.visible {
+      display: block;
+    }
+  }
+}
+
+.page {
+  box-shadow: inset 0 1px 2px $top-shadow;
+
+  .grid {
+    @media #{$media-wide} {
+      grid-template-columns: 3fr 1fr;
+    }
+  }
+
+  article {
+    grid-row: 2;
+    max-width: 690px;
+
+    h1 {
+      @media #{$media-narrow} {
+        margin-top: 0;
+      }
+    }
+
+    @media #{$media-wide} {
+      grid-row: 1;
+    }
+  }
+}
+
+.sidebar {
+  display: none;
+  font-size: .9rem;
+  grid-row: 1;
+  margin-top: 10px;
+
+  @media #{$media-wide} {
+    display: block;
+    margin-top: 35px;
+  }
+
+  h1 {
+    font-size: 1rem;
+  }
+
+  li {
+    list-style-type: none;
+    margin-left: 0;
+  }
+}
+
+.footer {
+  border-top: 1px solid $grey;
+  font-size: .7rem;
+  margin-top: 10px;
+
+  footer {
+    text-align: center;
+  }
+
+  p {
+    margin: $text-bottom-margin / 2 0;
+  }
+}
+
+.faq h3 {
+  font-size: 1rem;
+}
+
+.news-index h1 {
+  font-size: 1.2rem;
+  margin: 0;
+}
+
+.news-meta {
+  color: $dark-grey;
+  font-size: .8rem;
+  margin: 0;
+}
+
+.news-article h1 {
+  margin-bottom: 0;
+}
+
+.news-article img {
+  display: block;
+  margin: 0 auto;
+}
+
+.missing-page {
+  text-align: center;
+
+  img {
+    margin-top: 20px;
+  }
+}
+
+.sidebar-manual {
+  ol li {
+    list-style: decimal inside;
+  }
+}
+
+.expand-sidebar {
+  margin-top: 20px;
+  text-align: center;
+
+  @media #{$media-wide} {
+    display: none;
+  }
+
+  a {
+    color: darken($grey, 50%);
+    padding: 20px 20px 20px 0;
+    text-decoration: none;
+  }
+}
+
+.visible {
+  display: block;
+}
+
+.highlights {
+  .grid {
+    grid-template-columns: 1fr;
+
+    @media #{$media-wide} {
+      grid-template-columns: 3fr 3fr;
+    }
+  }
+}
+
+select {
+  font-size: 1rem;
+}
+
+.button {
+  background: lighten($blue, 7%);
+  border: 1px solid darken($blue, 10%);
+  border-radius: 3px;
+  box-shadow: 0 2px 2px $button-shadow;
+  color: $white;
+  display: inline-block;
+  font-size: .9rem;
+  font-weight: bold;
+  margin: 0 $text-bottom-margin / 2 $text-bottom-margin 0;
+  padding: .5rem;
+  text-decoration: none;
+
+  &:hover {
+    background: $blue;
+    text-decoration: none;
+  }
+
+  &.green {
+    background: darken($green, 5%);
+    border: 1px solid darken($green, 18%);
+
+    &:hover {
+      background: darken($green, 15%);
+    }
+  }
+
+  &.purple {
+    background: darken($purple, 5%);
+    border: 1px solid darken($purple, 18%);
+
+    &:hover {
+      background: darken($purple, 15%);
+    }
+  }
+
+  &.no-bottom-margin {
+    margin-bottom: 0;
+  }
+}
+
+.sponsors-table {
+  .sponsor-logo {
+    min-width: 40px;
+    width: 40px;
+
+    img {
+      vertical-align: middle;
+    }
+  }
+}
+
+.sponsors {
+  grid-gap: 5px;
+  grid-template-columns: repeat(auto-fill, 100px);
+  margin-bottom: $text-bottom-margin;
+  padding: 0;
+
+  .sponsor-logo,
+  .placeholder {
+    align-items: center;
+    display: flex;
+    height: 100%;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .placeholder {
+    font-size: 14px;
+    height: 80px;
+    outline: 1px dashed $dark-grey;
+    outline-offset: -1px;
+    padding: 10px;
+    text-align: center;
+    width: 80px;
+  }
+}
