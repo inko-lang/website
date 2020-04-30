@@ -40,12 +40,12 @@ lint:vale:
       - source/**/*.html.md
 
 deploy:
-  image: ruby:2.5-alpine
+  image: ruby:2.7-alpine
   stage: deploy
   variables:
     DISTRIBUTION_ID: E2461OP4YFCUOQ
   before_script:
-    - apk add --update build-base nodejs tzdata python3 python3-dev
+    - apk add --update build-base nodejs tzdata python3 python3-dev git
     - pip3 install awscli
     - gem install bundler --no-doc
     - ruby --version
@@ -64,7 +64,7 @@ deploy:
     url: https://inko-lang.org
 
 sponsors:
-  image: ruby:2.5-alpine
+  image: ruby:2.7-alpine
   stage: automation
   before_script:
     - apk add --update build-base bash openssh imagemagick git
