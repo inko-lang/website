@@ -40,7 +40,7 @@ lint:vale:
       - source/**/*.html.md
 
 deploy:
-  image: ruby:2.7-alpine
+  image: ruby:2.6-alpine
   stage: deploy
   variables:
     DISTRIBUTION_ID: E2461OP4YFCUOQ
@@ -64,7 +64,7 @@ deploy:
     url: https://inko-lang.org
 
 sponsors:
-  image: ruby:2.7-alpine
+  image: ruby:2.6-alpine
   stage: automation
   before_script:
     - apk add --update build-base bash openssh imagemagick git
