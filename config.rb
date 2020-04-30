@@ -20,7 +20,7 @@ ignore '*.dot'
 Time.zone = 'UTC'
 
 set :website_title, 'Inko Programming Language'
-set :website_author, 'Yorick Peterse'
+set :website_author, 'The Inko Programming Language developers'
 set :website_url, 'https://inko-lang.org'
 set :feed_url, "#{config[:website_url]}/feed.xml"
 set :markdown_engine, :kramdown
@@ -111,6 +111,10 @@ helpers do
 
   def format_date(date)
     Date.strptime(date, '%Y-%m-%d %H:%M').strftime('%B %e, %Y')
+  end
+
+  def last_updated_at(path)
+    Time.at(Integer(`git log -1 --format=%ct #{path} 2>&1`.strip))
   end
 end
 # rubocop: enable Metrics/BlockLength
