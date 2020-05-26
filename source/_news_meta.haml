@@ -1,4 +1,4 @@
 %p.news-meta
   Published on:
-  %time{ datetime: article.date.to_time.iso8601 }
-    = article.date.to_time.strftime('%B %d, %Y')
+  %time{ datetime: article.date.to_time.utc.iso8601 }
+    = article.date.to_time.utc.strftime('%B %d, %Y')
