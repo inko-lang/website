@@ -44,6 +44,8 @@ deploy:
   stage: deploy
   variables:
     DISTRIBUTION_ID: E2461OP4YFCUOQ
+    BUCKET: inko-lang.org
+    AWS_DEFAULT_REGION: eu-west-1
   before_script:
     - apk add --update build-base nodejs tzdata python3 python3-dev git
     - pip3 install awscli
@@ -51,12 +53,13 @@ deploy:
     - ruby --version
     - gem --version
     - bundle --version
-    - bundle install --path vendor --retry=3
+    - bundle config set path vendor
+    - bundle install --retry=3 --jobs=$(nproc)
   script:
     - rake deploy
   cache:
     paths:
-      - vendor/ruby
+      - vendor
   only:
     - master@inko-lang/website
   environment:
@@ -72,10 +75,11 @@ sponsors:
     - ruby --version
     - gem --version
     - bundle --version
-    - bundle install --path vendor --retry=3
+    - bundle config set path vendor
+    - bundle install --retry=3 --jobs=$(nproc)
   cache:
     paths:
-      - vendor/ruby
+      - vendor
   script:
     - ./scripts/sponsors.sh
   only:
