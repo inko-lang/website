@@ -11,7 +11,7 @@ title: Inko compared to other languages
 
 ## Introduction
 
-Inko shares similaries with a variety of other languages. This can lead one to
+Inko shares similarities with a variety of other languages. This can lead one to
 wonder, what are the differences? This guide provides an unbiased overview of
 the differences between Inko and several other programming languages.
 
