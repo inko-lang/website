@@ -16,16 +16,39 @@ such as what indentation method to use, and when to use keyword arguments.
 
 ## Encoding
 
-Inko source files should be encoded in UTF-8.
+Inko source files must be encoded in UTF-8. The compiler does not support
+reading source files using a different encoding.
 
 ## Line endings
 
-Unix (`\n`) line endings should be used at all times.
+Unix (`\n`) line endings must be used at all times. Windows newlines (`\r`) are
+not supported.
 
 ## Line length
 
 Lines should be hard wrapped at 80 characters per line. It's OK if a line is a
-few characters longer, but only if wrapping it makes it less readable.
+few characters longer, but only if wrapping the line makes it less readable. For
+example, if a line's length is largely dominated by a string, then it's OK to
+keep that on a single line:
+
+```inko
+import std::test
+
+test.group('This is the name of a test group') do (g) {
+  # This is OK
+  g.test("This is the name of the test. These names can get pretty long, so it's OK to not wrap them") {
+
+  }
+
+  # This is not any better than just keeping the string on a single line.
+  g.test(
+    "This is the name of the test. These names can get pretty long, so " +
+      "it's OK to not wrap them"
+  ) {
+
+  }
+}
+```
 
 ## Indentation
 
