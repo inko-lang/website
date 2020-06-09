@@ -1,0 +1,6 @@
+User-agent: *
+
+Disallow: /documentation/*
+Disallow: /install/*
+
+Allow: /

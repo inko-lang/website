@@ -3,11 +3,15 @@ chapters:
   - title: General
     pages:
       - /manual
-      - /manual/ienv
       - /manual/inko-compared-to-other-languages
       - /manual/style-guide
       - /manual/syntax
   - title: Getting started
+    pages:
+      - /manual/install
+      - /manual/ienv
+      - /manual/editor-integration
+  - title: Guides
     pages:
       - /manual/getting-started/hello-world
       - /manual/getting-started/methods-messages-and-objects
