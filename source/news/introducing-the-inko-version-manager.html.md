@@ -37,5 +37,5 @@ For more information, refer to one of the following resources:
 
 * The [ienv repository](https://gitlab.com/inko-lang/ienv)
 * The [ienv manual page](/manual/ienv/)
-* The updated [installation guide](/install), which includes details on how to
-  install ienv.
+* The updated [installation guide](/manual/install), which includes details on
+  how to install ienv.

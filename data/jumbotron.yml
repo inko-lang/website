@@ -2,7 +2,7 @@
 title: Safe and concurrent object-oriented programming, without the headaches.
 buttons:
   - text: Install
-    url: /install
+    url: /manual/install
     color: 'green'
   - text: Get started
     url: /manual/getting-started/hello-world/
