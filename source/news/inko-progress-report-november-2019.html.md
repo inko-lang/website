@@ -66,9 +66,8 @@ different bits for the different states. This allowed us to fix two bugs:
 
 ## Array.join
 
-The method `join` has been added to the type `std::array::Array`. This method
-can be used to cast values to a `String` and join them together using a
-separator:
+The method `join` has been added to the type `std::array::Array`. This method is
+used to cast values to a `String` and join them together using a separator:
 
 ```inko
 let numbers = Array.new(10, 20, 30)

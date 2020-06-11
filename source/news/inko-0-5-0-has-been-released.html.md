@@ -335,7 +335,7 @@ the system's socket IO poller.
 
 ## Added Range.cover?
 
-The method `cover?` was added to `std::range::Range`. This method can be used to
+The method `cover?` was added to `std::range::Range`. This method is used to
 check if a `Range` includes a value, without having to iterate over all values
 in the range:
 
@@ -389,7 +389,7 @@ for Windows when using the GNU architecture. This means that if you are using
 [ienv][ienv] inside MSYS2 (or similar), you no longer need to compile the
 virtual machine from source.
 
-While these packages can be used outside of MSYS2 (they do not depend on MSYS2),
+While you can use these packages outside of MSYS2 (they do not depend on MSYS2),
 ienv does not work without a Unix-like environment (such as MSYS2).
 
 [changelog]: https://gitlab.com/inko-lang/inko/blob/v0.5.0/CHANGELOG.md#050-september-16-2019

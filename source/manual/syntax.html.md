@@ -41,7 +41,7 @@ The following identifiers are treated as keywords:
 * `try`
 * `where`
 
-Except for the `try!` keyword, all keywords can be used as method and message
+Except for the `try!` keyword, all keywords are available as method and message
 names. When using a keyword as a message, an explicit receiver is required:
 
 ```inko
@@ -365,8 +365,8 @@ process.spawn!(Integer)
 
 ## Reassignments
 
-Reassignment expressions can be used to reassign the value of a local variable
-or attribute:
+Reassignment expressions are used to reassign the value of a local variable or
+attribute:
 
 ```inko
 number = 20
@@ -403,7 +403,7 @@ expression, whereas the `else` body can contain multiple expressions.
 Imports start with the `import` keyword, and are followed by at least one
 identifier. Sub modules are separated using `::`, and the list of symbols to
 import (if any) is defined using `::(symbol, symbol, ...)`. Symbols can be
-aliased using `original as alias`. `self` can be used in the list of symbols to
+aliased using `original as alias`. You can use `self` in the list of symbols to
 import to refer to the module itself, allowing you to import the module itself
 along with any symbols.
 

@@ -1,0 +1,9 @@
+extends: substitution
+message: This is a typo, use '%s' instead
+level: error
+ignorecase: true
+swap:
+  lot's: lots
+  gotten: got
+  Mac OS: macOS
+  will is: is

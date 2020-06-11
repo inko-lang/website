@@ -11,7 +11,7 @@ module Rouge
 
       KEYWORDS = %w[
         as def do else for impl import lambda let mut object return self static
-        throw trait try try! where
+        throw trait try try! when
       ].freeze
 
       state :root do
@@ -19,11 +19,16 @@ module Rouge
         rule(/#.*$/, Comment::Single)
         rule(/"[^"]*"/, Str::Double)
         rule(/'[^']*'/, Str::Single)
-        rule(/-?(?:0|[1-9]\d*)\.\d+(?:e[+-]?\d+)?/i, Num::Float)
-        rule(/-?(?:0|[1-9]\d*)(?:e[+-]?\d+)?/i, Num::Integer)
 
-        rule(/(\.)(\w+)/) do
+        rule(/\d+\.\d+(e[+-]?\d+)?/i, Num::Float)
+        rule(/\d+(e[+-]?\d+)?/i, Num::Integer)
+
+        rule(/(\.)([a-z]+)/) do
           groups Punctuation, Name::Function
+        end
+
+        rule(/(match)(\()/) do
+          groups Keyword, Punctuation
         end
 
         rule(/(\w+)(\()/) do
