@@ -48,7 +48,7 @@ deploy:
     AWS_DEFAULT_REGION: eu-west-1
   before_script:
     - apk add --no-cache --update build-base nodejs tzdata python3
-      python3-dev aws-cli git libffi
+      python3-dev aws-cli git libffi libffi-dev
     - gem install bundler --no-doc
     - ruby --version
     - gem --version
