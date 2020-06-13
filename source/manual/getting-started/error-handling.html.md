@@ -199,8 +199,6 @@ include (but are not limited to):
 * Dividing by zero.
 * Trying to allocate new memory when the system doesn't have any remaining
   memory.
-* Sending a message to an object of type `Dynamic` that doesn't support the
-  message _and_ doesn't implement the `unknown_message` method.
 * Trying to set the value of an out of bounds byte array index.
 
 To illustrate, take the following program:

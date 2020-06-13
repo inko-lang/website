@@ -155,49 +155,6 @@ trait ToString {
 For more information, refer to the [Traits](/manual/getting-started/traits)
 guides.
 
-## Dynamic types
-
-The `Dynamic` type is a special type that only exists at compile time. When
-something is `Dynamic`, any other type can be passed to it. When defining
-methods you can simply leave out the argument types or return type, and they
-will be inferred as `Dynamic`:
-
-```inko
-def take_dynamic_value(value) {
-
-}
-```
-
-For `let` expressions you must define the type explicitly, because by default
-the type of a `let` binding is inferred based on the value:
-
-```inko
-let dynamic_value: Dynamic = 10
-```
-
-For closures and lambdas, the arguments will default to `Dynamic` _only_ if the
-closure or lambda is not directly passed as an argument:
-
-```inko
-let block = do (number) { number }
-
-some_method(block)
-```
-
-Here the `number` argument is inferred as `Dynamic`, because the compiler does
-not know what type to use when type checking the block. When passing the block
-directly, the compiler _can_ infer this:
-
-```inko
-def some_method(block: do (Integer)) {
-
-}
-
-some_method do (number) { number }
-```
-
-Here the `number` argument is inferred as an `Integer`.
-
 ## Self types
 
 The type `Self` can be used in a method in an object or trait to refer to the

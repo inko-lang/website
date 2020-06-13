@@ -1,11 +1,11 @@
 ---
 - title: Features
   items:
-    - text: Lightweight processes that don't share memory.
+    - text: Statically typed.
     - text: Object-oriented.
+    - text: Lightweight processes that don't share memory.
     - text: Composition instead of inheritance.
     - text: Explicit handling of exceptions at the call site.
-    - text: Gradually typed.
     - text: Parallel garbage collection per process.
     - text: Bytecode that is OS and architecture independent.
     - text: Requires only 5MB of disk space for the runtime and VM.

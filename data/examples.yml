@@ -162,35 +162,6 @@
     stdout.print(person)
     ```
 
-- title: Gradual typing
-  code: |
-    ```inko
-    def static(a: Integer, b: Integer) -> Integer {
-      a + b
-    }
-
-    def dynamic(a, b) {
-      a + b
-    }
-
-    # This is OK, and will produce "7":
-    static(2, 5)
-
-    # This will produce a type error:
-    static(2, 'oops')
-
-    # This is OK, because the arguments
-    # of "dynamic" are dynamically typed:
-    dynamic(2, 5)
-
-    # This is also OK:
-    dynamic('hello', ' world')
-
-    # This will produce a runtime error,
-    # because `Integer + String` is not valid:
-    dynamic(2, 'oops')
-    ```
-
 - title: Handling Nil values
   code: |
     ```inko
@@ -223,14 +194,17 @@
     ```inko
     # Inko supports tail call elimination, so this
     # method will not overflow the call stack.
-    def fact(number: Integer, acc = 1) -> Integer {
+    def fact(number: Integer, accumulator = 1) -> Integer {
       number.zero?.if_true {
         # This will return from the method, also
         # known as a "block return".
-        return acc
+        return accumulator
       }
 
-      fact(number - 1, acc * number)
+      fact(
+        number: number - 1,
+        accumulator: accumulator * number
+      )
     }
 
     fact(15) # => 1307674368000

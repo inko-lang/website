@@ -25,21 +25,11 @@ def example {
 ```
 
 Here we defined a method called "example". Methods can specify extra
-information, such as: the arguments (and optionally their types), the return
-type, and the throw type.
+information, such as: the arguments, the return type, and the throw type.
 
 ### Arguments
 
 We can define arguments like so:
-
-```inko
-def add(number, add) {
-
-}
-```
-
-Here we define two arguments: "number", and "add". The types of these arguments
-are dynamic, if we want to use static types we can define the types as follows:
 
 ```inko
 def add(number: Integer, add: Integer) {
@@ -47,8 +37,8 @@ def add(number: Integer, add: Integer) {
 }
 ```
 
-Here we define the types of the arguments as `Integer`. We can also define
-default values for arguments:
+Here we define two arguments: "number", and "add"; both of type "Integer". We
+can also define default values for arguments:
 
 ```inko
 def add(number = 0, add = 0) {
@@ -98,9 +88,9 @@ error.
 
 ### Return type
 
-By default, a method's return type is dynamic. If we want to use a static type,
-we can define one using `-> Type`, with `Type` being the return type. For
-example:
+A method's return type can be omitted. In this case, the return type is inferred
+as `Nil` and any values returned are ignored. You can specify your own type as
+follows:
 
 ```inko
 def example -> Integer {
@@ -108,9 +98,9 @@ def example -> Integer {
 }
 ```
 
-Here the method is defined as returning an `Integer`. If a method has a static
-return type, it _must_ return something that is compatible with that type. This
-means code such as the following is not valid:
+Here the method is defined as returning an `Integer`. The values returned by a
+method must be compatible with its return type. This means code such as the
+following is not valid:
 
 ```inko
 def example -> Integer {

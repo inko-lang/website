@@ -159,11 +159,9 @@ This line of code does two things:
 1. We wait for a message to arrive.
 2. We inform the compiler that our message is of type `Process`.
 
-Step one is nothing new, but step two needs some explaining. When we use
-`process.receive`, the compiler is does not know what the type of the received
-message is. This is because a process can receive messages from many other
-processes, possibly using different types. As a result, the return type of
-`process.receive` is `Dynamic`.
+Step one is nothing new, but step two needs some explaining. The return type of
+`process.receive` is `Any`, and we can't do much with that type on its own. To
+deal with this, we cast it to the type we want (`Process`).
 
 Next we have the following:
 

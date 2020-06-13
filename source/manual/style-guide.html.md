@@ -104,10 +104,10 @@ def toString {}
 # Arguments
 
 # Good
-def write_bytes(bytes) {}
+def write_bytes(bytes: ByteArray) {}
 
 # Bad: "val" is not a meaningful name.
-def write_bytes(val) {}
+def write_bytes(val: ByteArray) {}
 
 # Variables
 
@@ -187,8 +187,8 @@ a comma:
 
 ```inko
 def example(
-  foo,
-  bar,
+  foo: A,
+  bar: B,
 ) {
 
 }
@@ -199,8 +199,8 @@ parenthesis, if possible:
 
 ```inko
 def example(
-  foo,
-  bar,
+  foo: A,
+  bar: B,
 ) !! ErrorType -> ReturnType {
 
 }
@@ -211,8 +211,8 @@ level as the closing parenthesis:
 
 ```inko
 def example(
-  foo,
-  bar,
+  foo: A,
+  bar: B,
 )
 !! ErrorType
 -> ReturnType {
@@ -280,7 +280,7 @@ When using multiple arguments, also use parentheses:
 'hello'.slice 0, 1
 ```
 
-If the only argument is a block, leave out the the parentheses:
+If the only argument is a block, leave out the parentheses:
 
 ```inko
 # Good
@@ -529,16 +529,11 @@ Array.new(10, 20, 30).each do (number) -> Integer {
 }
 ```
 
-When defining a block before using it, specify the argument types _unless_ you
-want them to be dynamically typed:
+When defining a block before using it, you must specify the argument types
+explicitly:
 
 ```inko
-# Good
 let block = do (number: Integer) { number }
-
-# Technically fine if we're OK with "number" being of type Dynamic, but the
-# compiler won't protect us from using the argument in the wrong way.
-let block = do (number) { number }
 ```
 
 ## Error handling

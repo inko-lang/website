@@ -12,7 +12,7 @@ buttons:
     url: /sponsors
     color: purple
 body: |
-  Inko is a gradually-typed, safe, object-oriented programming language for
+  Inko is a statically-typed, safe, object-oriented programming language for
   writing concurrent programs. By using lightweight isolated processes, data
   race conditions can not occur. The syntax is easy to learn and remember, and
   thanks to its error handling model you will never have to worry about

@@ -11,10 +11,8 @@ title: Type inference
 
 ## Introduction
 
-Inko employs type inference to remove the need for manually adding type
-annotations in a variety of places. Because Inko is a gradually typed language,
-in certain cases a type will be inferred as `Dynamic` instead of it being
-inferred based on a value assigned or returned.
+Inko uses type inference, removing the need for manually adding type annotations
+in a variety of places.
 
 ## Let bindings
 
@@ -32,39 +30,33 @@ If we wanted to we can still specify our own type, as long as the assigned value
 is compatible with it:
 
 ```inko
-let number: Dynamic = 10
+let number: Integer = 10
 ```
 
-## Method arguments and return values
+## Method return types
 
-Method arguments and return values are inferred as `Dynamic` by default to allow
-for gradual typing:
+Leaving out the return types for methods results in them being inferred as
+`Nil`. When this happens, whatever value the method implicitly returns is
+ignored. This means these two methods are the same (apart from their names):
 
 ```inko
-def example(number) {
-  number
+# This will return Nil
+def foo -> Nil {
+  10
+  Nil
 }
-```
 
-Here the `number` argument is of type `Dynamic`, and so is the return value of
-the `example` method. We can specify a custom type as follows:
-
-```inko
-def example(number: Integer) -> Integer {
-  number
+# This will also return Nil
+def bar {
+  10
 }
 ```
 
 ## Closures and lambdas
 
-When defining a closure or lambda, the following rules apply:
-
-1. Arguments are inferred as `Dynamic` by default.
-1. The return type is inferred based on the last expression returned by the
-   closure or lambda.
-1. If a closure or lambda is passed _directly_ as an argument, and the
-   argument's type is compatible, the closure or lambda is inferred according to
-   the argument it is passed to.
+The arguments and return type of closures and lambdas are inferred according to
+their usage. If the return type can't be inferred, it will default to `Nil`. If
+the argument's can't be inferred, explicit type annotations are required.
 
 To showcase these rules, consider the following example:
 
@@ -102,17 +94,8 @@ let closure = do (number) {
 example(closure)
 ```
 
-If we try to run this code, we are presented with the following compiler error:
-
-```
-ERROR: Expected a value of type "do (Integer) -> Integer" instead of "do (Dynamic) -> Dynamic"
- --> /tmp/test.inko on line 7, column 9
-   |
- 7 | example(closure)
-   |         ^
-```
-
-To solve this, manual type annotations are required:
+Running this code will result in a compile-time error. To solve this, explicit
+type annotations are required:
 
 ```inko
 def example(block: do (Integer) -> Integer) {}

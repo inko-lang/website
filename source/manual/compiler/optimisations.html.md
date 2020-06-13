@@ -59,9 +59,6 @@ method call with a "RunBlock" instruction. This is necessary as Inko uses the
 `Block` type heavily, and calling methods every time they are executed would be
 rather expensive.
 
-This optimisation only occurs when sending `call` directory to a `Block`. If a
-type is `Dynamic` then an actual method call will occur.
-
 ## Tail call elimination
 
 The compiler uses tail call elimination to allow for tail recursive method

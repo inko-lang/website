@@ -127,15 +127,13 @@ The following example shows two separate comments:
 ## Constants and types
 
 Constants are sequences of Unicode characters or digits, starting with a
-character in the range `A-Z`. Constants can be looked up relative to other
-constants by using `::`.
+character in the range `A-Z`.
 
 Some examples:
 
 * `Foo`
 * `Foo_Bar`
 * `FooBar123`
-* `Foo::Bar`: this looks up `Bar` in `Foo`
 
 Type names are constants, optionally followed by a list of type arguments. Some
 examples:
@@ -143,7 +141,6 @@ examples:
 * `Foo!(A)`
 * `Foo_Bar!(A, B)`
 * `FooBar123!(A, B)`
-* `Foo::Bar!(A, B)`
 
 ## Variable bindings
 
@@ -214,14 +211,12 @@ matching `}`.
 Examples:
 
 * `def foo { 10 }`
-* `def foo(number) { 10 }`
 * `def foo(number: Integer) { 10 }`
 * `def foo(number: Integer) -> Integer { 10 }`
 
 You can also define a static method using the `static` keyword:
 
 * `static def foo { 10 }`
-* `static def foo(number) { 10 }`
 * `static def foo(number: Integer) { 10 }`
 * `static def foo(number: Integer) -> Integer { 10 }`
 
