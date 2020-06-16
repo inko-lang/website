@@ -36,6 +36,12 @@ information, refer to the [ienv README](https://gitlab.com/inko-lang/ienv/-/blob
 
 Usage of ienv is described in the ["Using ienv"](/manual/ienv) guide.
 
+## Installing using Homebrew
+
+```bash
+brew install inko
+```
+
 ## Installing from Git
 
 First clone the Git repository:
