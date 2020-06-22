@@ -12,10 +12,6 @@ description: How to install Inko on your computer.
 1. TOC
 {:toc}
 
-Inko is currently still in the early stages of development. Unfortunately, this
-means that the installation procedure is a bit more complicated than we would
-like it to be, depending on your platform.
-
 ## Officially supported platforms
 
 Inko supports any Unix-like platform, such as Linux, Mac OS, or BSD.
