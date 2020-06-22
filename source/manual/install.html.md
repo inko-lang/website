@@ -42,9 +42,18 @@ For more information, refer to the ["Using ienv"](/manual/ienv) guide.
 
 ## Installing using Homebrew
 
+Inko is provided as a [default
+formula](https://github.com/Homebrew/homebrew-core/blob/master/Formula/inko.rb)
+in Homebrew, allowing you to install Inko as follows:
+
 ```bash
 brew install inko
 ```
+
+This formula is maintained by Homebrew and its contributors. For issues specific
+to the formula (e.g. it doesn't work on a certain version of macOS), please
+report issues in the [homebrew-core issue
+tracker](https://github.com/Homebrew/homebrew-core/issues).
 
 ## Installing from Git
 
