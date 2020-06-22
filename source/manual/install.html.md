@@ -31,10 +31,14 @@ Inko requires a 64-bits platform, 32-bits is not supported.
 
 [ienv](https://gitlab.com/inko-lang/ienv) is the official version manager of
 Inko. Using ienv you can easily install, remove, and use different versions of
-Inko during development. ienv only supports Unix platforms. For more
-information, refer to the [ienv README](https://gitlab.com/inko-lang/ienv/-/blob/master/README.md)
+Inko during development. ienv only supports Unix platforms. Using ienv, you can
+install the latest version of Inko as follows:
 
-Usage of ienv is described in the ["Using ienv"](/manual/ienv) guide.
+```bash
+ienv install latest
+```
+
+For more information, refer to the ["Using ienv"](/manual/ienv) guide.
 
 ## Installing using Homebrew
 
