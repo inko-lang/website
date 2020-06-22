@@ -39,6 +39,12 @@ Now that ienv is installed, we can install Inko.
 To install a version of Inko, run the `install` command:
 
 ```bash
+ienv install latest
+```
+
+This will install the latest version. You can also install specific versions:
+
+```bash
 ienv install 0.6.0
 ```
 
@@ -53,10 +59,17 @@ ienv will not automatically set a version to use for you, instead you need to do
 so manually. This can be done by running the following
 
 ```bash
+ienv default latest
+```
+
+This will set the latest version installed as the default version. If you want
+to use a specific version instead, run the following:
+
+```bash
 ienv default 0.6.0
 ```
 
-This will set `0.6.0` as the default version.
+This will set 0.6.0 as the default version.
 
 ### remove a version
 
@@ -64,6 +77,12 @@ To remove a version:
 
 ```bash
 ienv remove 0.6.0
+```
+
+You can also remove the latest version easily:
+
+```bash
+ienv remove latest
 ```
 
 ### List all installed versions
