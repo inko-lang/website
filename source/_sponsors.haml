@@ -1,14 +1,14 @@
 %table.sponsors-table
   %thead
     %tr
-      %th.sponsor-logo
+      %th.avatar
       %th Sponsor
       %th Total
       %th Donor since
   %tbody
     - sorted_sponsors(tier) do |member|
       %tr
-        %td.sponsor-logo
+        %td.avatar
           - if member['image']
             %img{src: member['image'], alt: member['name'], height: 30}
         %td

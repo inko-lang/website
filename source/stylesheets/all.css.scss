@@ -509,7 +509,7 @@ select {
 }
 
 .sponsors-table {
-  .sponsor-logo {
+  .avatar {
     min-width: 30px;
     width: 30px;
 
@@ -526,7 +526,7 @@ select {
   margin-bottom: $text-bottom-margin;
   padding: 0;
 
-  .sponsor-logo,
+  .avatar,
   .placeholder {
     align-items: center;
     display: flex;
