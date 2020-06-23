@@ -19,9 +19,9 @@ fi
 
 docker build -t "${image_name}" -f "$dockerfile" .
 
-docker login \
+echo "${CI_JOB_TOKEN}" | docker login \
     --username gitlab-ci-token \
-    --password "${CI_JOB_TOKEN}" \
+    --password-stdin \
     "$CI_REGISTRY"
 
 docker push "${image_name}"

@@ -25,6 +25,20 @@ docker:vale:
       - master
     changes:
       - docker/vale/Dockerfile
+      - docker/build
+
+docker:ruby:
+  <<: *docker
+  variables:
+    IMAGE: ruby
+  except:
+    - schedules
+  only:
+    refs:
+      - master
+    changes:
+      - docker/ruby/Dockerfile
+      - docker/build
 
 lint:vale:
   image: registry.gitlab.com/inko-lang/website:vale
@@ -40,16 +54,13 @@ lint:vale:
       - source/**/*.html.md
 
 deploy:
-  image: ruby:2.6-alpine
+  image: registry.gitlab.com/inko-lang/website:ruby
   stage: deploy
   variables:
     DISTRIBUTION_ID: E2461OP4YFCUOQ
     BUCKET: inko-lang.org
     AWS_DEFAULT_REGION: eu-west-1
   before_script:
-    - apk add --no-cache --update build-base nodejs tzdata python3
-      python3-dev aws-cli git libffi libffi-dev
-    - gem install bundler --no-doc
     - ruby --version
     - gem --version
     - bundle --version
@@ -67,11 +78,9 @@ deploy:
     url: https://inko-lang.org
 
 sponsors:
-  image: ruby:2.6-alpine
+  image: registry.gitlab.com/inko-lang/website:ruby
   stage: automation
   before_script:
-    - apk add --update build-base bash openssh imagemagick git
-    - gem install bundler --no-doc
     - ruby --version
     - gem --version
     - bundle --version
