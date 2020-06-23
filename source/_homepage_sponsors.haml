@@ -2,8 +2,8 @@
   %h1 Sponsors
 
   .sponsors.grid
-    - sorted_sponsors(sponsors_for_tier('Sponsor')) do |member|
-      - if member['image'] && !member['image'].empty?
+    - sorted_sponsors(sponsors_for_tier('sponsor')) do |member|
+      - if member['image']
         .sponsor
           %a{href: member['website'], title: member['name']}
             .sponsor-logo
@@ -11,4 +11,4 @@
     .sponsor
       %a(href="/sponsors" title="Become a sponsor")
         .placeholder
-          Your logo for &euro;100/month
+          Your logo here for &euro;100/month

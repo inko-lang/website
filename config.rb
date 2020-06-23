@@ -78,29 +78,25 @@ helpers do
   end
 
   def sponsors_for_tier(tier)
-    data.sponsors['tiers'][tier] || []
+    data.sponsors[tier] || []
   end
 
   def total_sponsors
-    data.sponsors['tiers'].reduce(0) do |total, (_, members)|
+    data.sponsors.reduce(0) do |total, (_, members)|
       total + members.length
     end
   end
 
   def sponsors?
-    sponsors_for_tier('Sponsor').any?
+    sponsors_for_tier('sponsor').any?
   end
 
   def backers?
-    sponsors_for_tier('Backer').any?
+    sponsors_for_tier('backer').any?
   end
 
-  def annual_budget
-    data.sponsors['budget'].floor
-  end
-
-  def format_date(date)
-    Date.strptime(date, '%Y-%m-%d %H:%M').strftime('%B %e, %Y')
+  def sponsor_date(date)
+    Date.strptime(date, '%Y-%m-%d').strftime('%B %Y')
   end
 
   def last_updated_at(path)

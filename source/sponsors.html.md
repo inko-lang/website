@@ -16,8 +16,8 @@ the following services:
 * [GitHub Sponsors][github]
 
 Users and organisations who donate will be displayed on this page. Those who
-donate at least €100/month will also have their logo and a link displayed on the
-homepage.
+donate at least €100 or $100 per month will also have their logo and a link
+displayed on the homepage.
 
 The data on this page is refreshed periodically, so it may take several days for
 your name to show up after donating for the first time.
@@ -29,8 +29,6 @@ Our recurring costs are as follows:
 | What                         | Amount  | Interval
 |------------------------------|---------|----------
 | Website hosting at AWS       | €15 ±€5 | Monthly
-
-## Budget
 
 [open-collective]: https://opencollective.com/inko-lang
 [github]: https://github.com/sponsors/YorickPeterse

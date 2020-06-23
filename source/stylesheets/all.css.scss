@@ -510,10 +510,11 @@ select {
 
 .sponsors-table {
   .sponsor-logo {
-    min-width: 40px;
-    width: 40px;
+    min-width: 30px;
+    width: 30px;
 
     img {
+      border-radius: 20px;
       vertical-align: middle;
     }
   }

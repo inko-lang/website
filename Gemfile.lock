@@ -31,6 +31,10 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
+    graphql (1.11.1)
+    graphql-client (0.16.0)
+      activesupport (>= 3.0)
+      graphql (~> 1.8)
     haml (5.1.2)
       temple (>= 0.8.0)
       tilt
@@ -98,6 +102,9 @@ GEM
     middleman-syntax (3.2.0)
       middleman-core (>= 3.2)
       rouge (~> 3.2)
+    mime-types (3.3)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2019.1009)
     mini_magick (4.10.1)
     mini_portile2 (2.4.0)
     minitest (5.14.0)
@@ -152,16 +159,18 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  graphql-client (~> 0.16)
   haml (~> 5.1)
   http (~> 4.4)
   middleman (~> 4.3)
   middleman-blog (~> 4.0)
   middleman-livereload (~> 3.4)
   middleman-syntax (~> 3.2)
+  mime-types (~> 3.3)
   mini_magick (~> 4.10)
   nokogiri (~> 1.10)
   rake (~> 13.0)
   rubocop (~> 0.82)
 
 BUNDLED WITH
-   2.0.2
+   2.1.4
