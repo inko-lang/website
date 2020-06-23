@@ -10,7 +10,7 @@
       %tr
         %td.avatar
           - if member['image']
-            %img{src: member['image'], alt: member['name'], height: 30}
+            = image_tag(member['image'], alt: member['name'], height: 30)
         %td
           - if member['website']
             %a{href: member['website'], title: member['name']}
