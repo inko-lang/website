@@ -89,7 +89,7 @@ object AddressFormatter {}
 object Addressformatter {}
 ```
 
-Methods, local variables, instance variables, and arguments all use snake_case
+Methods, local variables, instance attributes, and arguments all use snake_case
 for naming, such as `to_string` and `write_bytes`:
 
 ```inko
