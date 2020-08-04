@@ -28,14 +28,14 @@ conduct](/code-of-conduct).
 
 ## Using Matrix
 
-Using [Matrix](https://matrix.org) and [Riot.im](https://riot.im) can be a
+Using [Matrix](https://matrix.org) and [Element](https://element.io) can be a
 little confusing. To make this easier, you can take the following steps to get
 connected:
 
-1. Open the [Inko channel](https://riot.im/app/#/room/#inko-lang:matrix.org)
-   using Riot.
+1. Open the [Inko channel](https://app.element.io/#/room/#inko-lang:matrix.org)
+   using Element.
 1. Click the link shown to join the discussion. This requires you to sign in to
-   Riot/Matrix first.
+   Element/Matrix first.
 
 If you want to view the discussion, without joining, you can use
 [view.matrix.org](https://view.matrix.org/room/!CENmKDnMngVwJJrTry:matrix.org/).
