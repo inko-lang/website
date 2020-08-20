@@ -31,13 +31,13 @@
               = markdown(example['code'])
 
     .highlights
-      .grid
-        - data.highlights.each do |highlight|
-          %section
-            %h1= highlight['title']
-            %ul
-              - highlight['items'].each do |item|
-                %li= item['text']
+      - data.highlights.each do |row|
+        .row{class: row['color']}
+          .grid
+            - row.items.each do |item|
+              %section
+                %h2= item['title']
+                = markdown(item['text'])
 
     .grid
       = partial('homepage_sponsors')

@@ -3,6 +3,7 @@
 $font: 'Open Sans', sans-serif;
 $code-font: monospace;
 $blue: #1cb6f9;
+$dark-blue: desaturate(darken(adjust-hue($blue, 10%), 10%), 30%);
 $green: #9bdf63;
 $white: #fff;
 $light-grey: #fafafa;
@@ -455,10 +456,29 @@ table {
 
 .highlights {
   .grid {
+    grid-gap: 0;
     grid-template-columns: 1fr;
 
     @media #{$media-wide} {
-      grid-template-columns: 3fr 3fr;
+      grid-gap: 20px;
+      grid-template-columns: 2fr 2fr 2fr;
+      padding: 20px 0;
+    }
+  }
+
+  @media #{$media-wide} {
+    .blue {
+      background: $dark-blue;
+      color: $white;
+
+      a {
+        color: $white;
+        text-decoration: underline;
+      }
+    }
+
+    .grey {
+      background: $light-grey;
     }
   }
 }

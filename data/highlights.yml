@@ -1,23 +1,83 @@
 ---
-- title: Features
+- color: ''
   items:
-    - text: Statically typed.
-    - text: Object-oriented.
-    - text: Lightweight processes that don't share memory.
-    - text: Composition instead of inheritance.
-    - text: Explicit handling of exceptions at the call site.
-    - text: Parallel garbage collection per process.
-    - text: Bytecode that is OS and architecture independent.
-    - text: Requires only 5MB of disk space for the runtime and VM.
-    - text: Free and Open Source, forever.
-    - text: Built-in unit testing framework.
-- title: Supported platforms
+    - title: Static typing
+      text: |
+        Inko is a statically-typed language, and supports generic types. The
+        compiler comes with type inference, removing the need for manual type
+        annotations in many places.
+
+        The use of static typing prevents a wide variety of bugs, and allows for
+        many optimisations a dynamically-typed language may not be able to
+        perform.
+    - title: Object-oriented
+      text: |
+        Inko is an object-oriented language. Unlike other object-oriented
+        languages, Inko does not support inheritance. Instead, it relies on
+        composition using traits.
+
+        The use of composition instead of inheritance prevents tight coupling
+        between objects, without sacrificing flexibility.
+    - title: Exceptions done right
+      text: |
+        Inko uses a form of checked exceptions, inspired by the article [The
+        Error Model](http://joeduffyblog.com/2016/02/07/the-error-model/) by Joe
+        Duffy. Exceptions must be handled where they can occur, and you can't
+        throw exceptions from methods unless they are annotated accordingly.
+
+        Inko's error handling model takes the pain out of exception handling,
+        without sacrificing performance or flexibility.
+
+        Learn more about error handling in the [error handling
+        guide](/manual/getting-started/error-handling/).
+- color: 'blue'
   items:
-    - text: Linux.
-    - text: Windows 10 or newer.
-    - text: Mac OS Sierra or newer.
-    - text: |
-        FreeBSD, OpenBSD, and others should work, but are not officially
-        supported at this time.
-    - text: |
-        Only x86-64 platforms are officially supported.
+    - title: Lightweight processes
+      text: |
+        For concurrency, Inko uses lightweight processes. These processes can't
+        share memory and are garbage collected independently. Communication
+        between processes is done by sending messages.
+
+        The lack of shared memory between processes means you don't have to
+        worry about data races, or a garbage collector stopping your entire
+        program.
+    - title: Parallel garbage collection
+      text: |
+        Inko uses garbage collection to clean up memory, based on
+        [Immix](http://www.cs.utexas.edu/users/speedway/DaCapo/papers/immix-pldi-2008.pdf).
+        Each process is garbage collected independently, without the need for
+        pausing the entire program.
+
+        To reduce garbage collection timings, the garbage collector performs its
+        work using multiple threads.
+    - title: Lightweight VM
+      text: |
+        The Inko VM is lightweight and fits on a single floppy disk (when
+        stripped of any debugging symbols).
+
+        An empty Inko program uses about 5MB of RAM, and takes about 30
+        milliseconds to run.
+- color: 'grey'
+  items:
+    - title: Free Software
+      text: |
+        Inko is free and open source software, licensed under the [Mozilla
+        Public License 2.0](https://en.wikipedia.org/wiki/Mozilla_Public_License).
+
+        The MPL 2.0 is not a viral license, meaning you can comfortably use Inko
+        in proprietary projects.
+    - title: Open and welcoming
+      text: |
+        The development of Inko happens in public, instead of behind closed
+        doors. Donations are used exclusively to fund the development of Inko.
+
+        Everybody is welcome to contribute: whether it's fixing a bug, improving
+        documentation, or simply telling your friends and colleagues about Inko.
+    - title: Supports your platform
+      text: |
+        Inko supports Linux, Windows, and macOS. Inko should also work on BSDs
+        such as FreeBSD and OpenBSD, but these platforms are not officially
+        supported at this time. ARM is not supported at this time.
+
+        Inko requires a 64-bits architecture, and won't run on a 32-bits
+        architecture.
