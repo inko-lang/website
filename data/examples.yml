@@ -4,38 +4,28 @@
     ```inko
     import std::stdio::stdout
 
-    # This will print "Hello, world!" to STDOUT.
     stdout.print('Hello, world!')
     ```
 - title: Process communication
   code: |
     ```inko
-    import std::process::(self, Process)
+    import std::process
     import std::stdio::stdout
 
-    let child = process.spawn {
-      let parent = process.receive as Process
+    let proc = process.spawn {
       let message = process.receive as String
 
-      # This will print "ping" to STDOUT.
+      # This will print "Hello" to STDOUT.
       stdout.print(message)
-
-      parent.send('pong')
     }
 
-    child.send(process.current)
-    child.send('ping')
-
-    let response = process.receive as String
-
-    # This will print "pong" to STDOUT.
-    stdout.print(response)
+    proc.send('Hello')
     ```
 
 - title: Generic types
   code: |
     ```inko
-    object CustomArray!(T) {
+    object List(T) {
       @values: Array!(T)
 
       def init {
@@ -47,32 +37,28 @@
       }
     }
 
-    let array = CustomArray.new
+    let list = List.new
 
     # This is OK:
-    array.push(10)
+    list.push(10)
 
     # This will produce a type error:
-    array.push('oops')
+    list.push('oops')
     ```
 
 - title: Error handling
   code: |
     ```inko
-    import std::error::StandardError
     import std::stdio::stderr
 
-    def withdraw(euros: Integer) !! StandardError {
+    def withdraw(euros: Integer) !! String {
       euros.negative?.if_true {
-        throw StandardError
-          .new('Invalid number of Euros!')
+        throw 'Invalid number of Euros!'
       }
-
-      # ...
     }
 
-    # "withdraw" might throw a "StandardError",
-    # so we *must* use "try" when using "withdraw".
+    # "withdraw" might throw, so we must use the
+    # "try" keyword
     try withdraw(euros: 5)
 
     # We can also handle the error, if needed:
@@ -95,11 +81,8 @@
     # mode. The use of "try!" causes the
     # program to abort (= a panic) if the
     # file could not be opened.
-    let readme =
-      try! file.read_only('README.md')
-
-    let content =
-      try! readme.read_string
+    let handle = try! file.read_only('text.txt')
+    let content = try! handle.read_string
 
     stdout.print(content)
     ```
@@ -194,17 +177,14 @@
     ```inko
     # Inko supports tail call elimination, so this
     # method will not overflow the call stack.
-    def fact(number: Integer, accumulator = 1) -> Integer {
-      number.zero?.if_true {
-        # This will return from the method, also
-        # known as a "block return".
-        return accumulator
+    def fact(num: Integer, acc = 1) -> Integer {
+      num.zero?.if_true {
+        # This will return from the method, not
+        # the surrounding closure.
+        return acc
       }
 
-      fact(
-        number: number - 1,
-        accumulator: accumulator * number
-      )
+      fact(num: num - 1, acc: acc * num)
     }
 
     fact(15) # => 1307674368000
