@@ -1,19 +1,13 @@
 ---
 title: Safe and concurrent object-oriented programming, without the headaches.
-buttons:
-  - text: Install
-    url: /manual/install
-    color: 'green'
-  - text: Get started
-    url: /manual/getting-started/hello-world/
-  - text: Git repository
-    url: https://gitlab.com/inko-lang/inko
-  - text: Donate
-    url: /sponsors
-    color: purple
 body: |
   Inko is a statically-typed, safe, object-oriented programming language for
-  writing concurrent programs. By using lightweight isolated processes, data
-  race conditions can not occur. The syntax is easy to learn and remember, and
-  thanks to its error handling model you will never have to worry about
-  unexpected runtime errors.
+  writing concurrent programs. Thanks to the use of lightweight processes,
+  concurrency is easily achieved and data races are impossible.
+
+  The compiler forces you to handle errors where they may occur, ensuring you
+  never run into unexpected runtime errors again.
+
+  The syntax is easy to learn and consistent, instead of using many different
+  keywords and symbols. If you have ever used a programming language that uses
+  curly braces, you'll feel right at home.

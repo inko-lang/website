@@ -1,14 +1,15 @@
-%section
-  %h1 Sponsors
+.grid
+  %section
+    %h1 Sponsors
 
-  .sponsors.grid
-    - sorted_sponsors(sponsors_for_tier('sponsor')) do |member|
-      - if member['image']
-        .sponsor
-          %a{href: member['website'], title: member['name']}
-            .avatar
-              %img{src: member['image'], width: 100, alt: truncate(member['name'])}
-    .sponsor
-      %a(href="/sponsors" title="Become a sponsor")
-        .placeholder
-          Your logo here for &euro;100/month
+    .sponsors.grid
+      - sorted_sponsors(sponsors_for_tier('sponsor')) do |member|
+        - if member['image']
+          .sponsor
+            %a{href: member['website'], title: member['name']}
+              .avatar
+                %img{src: member['image'], width: 100, alt: truncate(member['name'])}
+      .sponsor
+        %a(href="/sponsors" title="Become a sponsor")
+          .placeholder
+            Your logo here for &euro;100/month

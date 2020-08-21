@@ -15,9 +15,6 @@
 
           = markdown(data.jumbotron.body)
 
-          - data.jumbotron.buttons.each do |button|
-            %a.button{ class: button['color'], href: button[:url] }
-              = button['text']
         .code-examples
           %select{ title: 'Choose a code example to display' }
             - data.examples.each_with_index do |example, index|
@@ -30,6 +27,12 @@
             class: index.zero? ? 'visible' : nil }
               = markdown(example['code'])
 
+    .actions
+      .grid
+        .buttons
+          - data.buttons.each do |button|
+            %a.button{href: button['url']}= button['text']
+
     .highlights
       - data.highlights.each do |row|
         .row{class: row['color']}
@@ -39,7 +42,5 @@
                 %h2= item['title']
                 = markdown(item['text'])
 
-    .grid
-      = partial('homepage_sponsors')
-
+    = partial('homepage_sponsors')
     = partial('footer')

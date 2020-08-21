@@ -1,0 +1,9 @@
+---
+- text: Install
+  url: /manual/install
+- text: Get started
+  url: /manual/getting-started/hello-world/
+- text: Donate
+  url: /sponsors
+- text: View source
+  url: https://gitlab.com/inko-lang/inko

@@ -6,9 +6,9 @@ $blue: #1cb6f9;
 $dark-blue: desaturate(darken(adjust-hue($blue, 10%), 10%), 30%);
 $green: #9bdf63;
 $white: #fff;
-$light-grey: #fafafa;
 $yellow: #fff9b0;
 $grey: #ddd;
+$light-grey: lighten($grey, 10%);
 $dark-grey: darken($grey, 50%);
 $purple: #d692ee;
 $text-color: #000;
@@ -286,7 +286,6 @@ table {
 // Big block displayed on the homepage, including a short introduction to Inko
 // and a list of code samples.
 .jumbotron {
-  background: $light-grey;
   box-shadow: inset 0 1px 2px $top-shadow;
   padding: 20px 0;
 
@@ -454,6 +453,22 @@ table {
   display: block;
 }
 
+.actions {
+  background: $light-grey;
+
+  .grid {
+    grid-template-columns: 1fr;
+  }
+
+  .buttons {
+    padding-top: 20px;
+
+    @media #{$media-wide} {
+      text-align: center;
+    }
+  }
+}
+
 .highlights {
   .grid {
     grid-gap: 0;
@@ -476,10 +491,6 @@ table {
         text-decoration: underline;
       }
     }
-
-    .grey {
-      background: $light-grey;
-    }
   }
 }
 
@@ -488,43 +499,20 @@ select {
 }
 
 .button {
-  background: lighten($blue, 7%);
-  border: 1px solid darken($blue, 10%);
-  border-radius: 3px;
+  background: $white;
+  border: 1px solid darken($grey, 5%);
   box-shadow: 0 2px 2px $button-shadow;
-  color: $white;
+  color: $text-color;
   display: inline-block;
-  font-size: .9rem;
+  font-size: 1rem;
   font-weight: bold;
   margin: 0 $text-bottom-margin / 2 $text-bottom-margin 0;
   padding: .5rem;
   text-decoration: none;
 
   &:hover {
-    background: $blue;
+    color: $link-color;
     text-decoration: none;
-  }
-
-  &.green {
-    background: darken($green, 5%);
-    border: 1px solid darken($green, 18%);
-
-    &:hover {
-      background: darken($green, 15%);
-    }
-  }
-
-  &.purple {
-    background: darken($purple, 5%);
-    border: 1px solid darken($purple, 18%);
-
-    &:hover {
-      background: darken($purple, 15%);
-    }
-  }
-
-  &.no-bottom-margin {
-    margin-bottom: 0;
   }
 }
 
