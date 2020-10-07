@@ -5,11 +5,9 @@
   url: /about
 - title: Sponsors
   url: /sponsors
-- title: Learn
-  url: /manual
+- title: Documentation
+  url: /documentation
 - title: Community
   url: /community
-- title: Contribute
-  url: /contribute
 - title: News
   url: /news

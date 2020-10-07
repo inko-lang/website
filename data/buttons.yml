@@ -1,9 +1,9 @@
 ---
 - text: Install
-  url: /manual/install
+  url: https://docs.inko-lang.org/manual/master/getting-started/installation/
 - text: Get started
-  url: /manual/getting-started/hello-world/
-- text: Donate
+  url: https://docs.inko-lang.org/manual/master/getting-started/our-first-program/
+- text: Sponsor
   url: /sponsors
 - text: View source
   url: https://gitlab.com/inko-lang/inko

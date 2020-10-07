@@ -28,7 +28,7 @@ docker:ruby:
       - docker/build
 
 lint:vale:
-  image: jdkato/vale
+  image: registry.gitlab.com/inko-lang/development-docker-images:vale
   stage: lint
   before_script:
     - vale --version

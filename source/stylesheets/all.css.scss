@@ -462,10 +462,7 @@ table {
 
   .buttons {
     padding-top: 20px;
-
-    @media #{$media-wide} {
-      text-align: center;
-    }
+    text-align: center;
   }
 }
 

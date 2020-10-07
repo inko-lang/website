@@ -11,8 +11,6 @@ page '/*.json', layout: false
 page '/*.txt', layout: false
 page '/*.ico', layout: false
 page '/404.html', layout: :'404', directory_index: false
-page '/manual.html', layout: :manual
-page '/manual/*', layout: :manual
 page '/', layout: :home
 
 ignore '*.dot'
@@ -63,12 +61,6 @@ end
 helpers do
   def markdown(text)
     Tilt['markdown'].new(config.markdown) { text }.render(self)
-  end
-
-  def link_to_manual_page(path)
-    page = sitemap.find_resource_by_path("#{path}.html")
-
-    link_to(page.data.title, page)
   end
 
   def sorted_sponsors(tier, &block)
