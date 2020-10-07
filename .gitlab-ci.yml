@@ -14,19 +14,6 @@ stages:
   script:
     - ./docker/build "${CI_REGISTRY_IMAGE}:${IMAGE}" docker/${IMAGE}/Dockerfile
 
-docker:vale:
-  <<: *docker
-  variables:
-    IMAGE: vale
-  except:
-    - schedules
-  only:
-    refs:
-      - master
-    changes:
-      - docker/vale/Dockerfile
-      - docker/build
-
 docker:ruby:
   <<: *docker
   variables:
@@ -41,7 +28,7 @@ docker:ruby:
       - docker/build
 
 lint:vale:
-  image: registry.gitlab.com/inko-lang/website:vale
+  image: jdkato/vale
   stage: lint
   before_script:
     - vale --version
