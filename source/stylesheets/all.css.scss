@@ -312,11 +312,7 @@ table {
 }
 
 .code-examples {
-  display: none;
-
-  @media #{$media-wide} {
-    display: block;
-  }
+  display: block;
 
   .example {
     display: none;
