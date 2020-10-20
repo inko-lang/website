@@ -29,7 +29,7 @@
         without sacrificing performance or flexibility.
 
         Learn more about error handling in the [error handling
-        guide](/manual/getting-started/error-handling/).
+        guide](https://docs.inko-lang.org/manual/master/getting-started/error-handling/).
 - color: 'blue'
   items:
     - title: Lightweight processes
