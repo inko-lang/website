@@ -12,28 +12,11 @@ function error() {
 function update() {
     if [[ -v CI ]]
     then
-        info 'Configuring SSH'
-
-        mkdir -p ~/.ssh
-
-        cp config/known_hosts ~/.ssh/known_hosts
-        echo "$SSH_PUBLIC_KEY" > ~/.ssh/id_ed25519.pub
-        echo "$SSH_PRIVATE_KEY" > ~/.ssh/id_ed25519
-
-        chmod 700 ~/.ssh
-        chmod 644 ~/.ssh/known_hosts
-        chmod 644 ~/.ssh/id_ed25519.pub
-        chmod 600 ~/.ssh/id_ed25519
-
-        eval "$(ssh-agent -s)"
-
-        ssh-add ~/.ssh/id_ed25519
-
         info 'Configuring Git'
 
         git config --global user.email noreply@inko-lang.org
         git config --global user.name 'Inko bot'
-        git remote add ssh git@gitlab.com:inko-lang/website.git >/dev/null 2>&1 || true
+        git remote add https "https://project_7421203_bot:${SPONSORS_ACCESS_TOKEN}@gitlab.com/inko-lang/website.git" >/dev/null 2>&1 || true
     fi
 
     info 'Updating sponsors data'
@@ -51,7 +34,7 @@ function update() {
         do
             info 'Pushing to master'
 
-            git push ssh master && return
+            git push https master && return
 
             # A push might fail randomly, or because new commits are added. To
             # handle the latter, we'll try to update the local clone before
