@@ -1,6 +1,6 @@
 @import 'normalize';
 
-$font: 'Open Sans', sans-serif;
+$font: sans-serif;
 $code-font: monospace;
 $blue: #1cb6f9;
 $dark-blue: desaturate(darken(adjust-hue($blue, 10%), 10%), 30%);
@@ -20,25 +20,6 @@ $text-bottom-margin: 20px;
 $text-left-margin: 20px;
 $media-wide: 'only screen and (min-width: 750px)';
 $media-narrow: 'only screen and (max-width: 750px)';
-
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 400;
-  src: local('Open Sans'),
-    local('OpenSans-Regular'),
-    url('../fonts/open-sans-v13-latin-ext_latin-regular.woff2') format('woff2'),
-    url('../fonts/open-sans-v13-latin-ext_latin-regular.woff') format('woff');
-}
-
-@font-face {
-  font-family: 'Open Sans';
-  font-style: normal;
-  font-weight: 600;
-  src: local('Open Sans SemiBold'),
-    local('OpenSans-SemiBold'),
-    url('../fonts/open-sans-semi-bold.woff2') format('woff2');
-}
 
 html {
   font-family: $font;
@@ -115,8 +96,8 @@ pre {
 p code,
 li code,
 td code {
+  background: $light-grey;
   font-family: $code-font;
-  font-weight: bold;
 }
 
 a {
@@ -198,17 +179,16 @@ table {
 // Logo displayed at the top left of the website.
 .logo {
   font-size: 3rem;
-  font-weight: bold;
   line-height: 60px;
   margin: 5px 0;
 
   img {
     display: none;
     float: left;
+    margin-right: 5px;
 
     @media #{$media-wide} {
       display: inline;
-      grid-template-columns: 1fr 3fr;
     }
   }
 }
@@ -300,10 +280,6 @@ table {
   h1 {
     font-size: 1.5rem;
     margin-top: 0;
-
-    @media #{$media-wide} {
-      font-size: 1.8rem;
-    }
   }
 
   select {
