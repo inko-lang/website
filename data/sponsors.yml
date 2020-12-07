@@ -14,7 +14,7 @@ backer:
   name: Anonymous
   image: 
   website: 
-  total_donated: 3000
+  total_donated: 3500
   tier: backer
   currency_symbol: "$"
   created_at: '2020-06-03'
