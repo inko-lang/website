@@ -7,22 +7,21 @@ keywords:
   - about
 description: About the Inko Programming language.
 ---
-<!-- vale off -->
 
 Inko is an object-oriented programming language, focusing on making it fun and
 easy to write concurrent programs, without the headaches. It tries to achieve
 this by combining various features, such as its error handling model, a high
-performance garbage collector, the ability to easily perform concurrent tasks,
-and much more.
+performance garbage collector, making concurrency easy, and much more.
 
-Inko draws inspiration from many other languages, such as: Smalltalk, Self,
+Inko draws inspiration from several other languages, such as: Smalltalk, Self,
 Ruby, Erlang, and Rust. Some of Inko's features are borrowed from these
 languages. For example, the concurrency model is heavily inspired by Erlang, and
 the use of message passing for `if` and the likes is taken from Smalltalk.
 
-Inko is free and open source software, licensed under the [Mozilla Public License
-version 2.0](https://www.mozilla.org/en-US/MPL/2.0/). This means you can not
-only install and use Inko, but you are also free to modify and redistribute it.
+Inko is free and open source software, licensed under the [Mozilla Public
+License version 2.0](https://www.mozilla.org/en-US/MPL/2.0/). This means you
+can't only install and use Inko, but you are also free to change and
+redistribute it.
 
 ## Features
 
@@ -37,10 +36,11 @@ import std::process
 import std::stdio::stdout
 
 let proc = process.spawn {
-  let message = process.receive as String
-
   # This will print "Hello world!" to STDOUT.
-  stdout.print(message)
+  match(let message = process.receive) {
+    as String -> { stdout.print(message) }
+    else -> {}
+  }
 }
 
 proc.send('Hello world!')
@@ -57,11 +57,8 @@ let mut remaining = 100
 
 # This will spawn 100 processes, all spinning forever, without blocking OS
 # threads indefinitely.
-{ remaining > 0 }.while_true {
-  process.spawn {
-    {}.loop
-  }
-
+while({ remaining > 0 }) {
+  process.spawn { loop {} }
   remaining -= 1
 }
 ```
@@ -89,10 +86,10 @@ def read_file(path: String) -> String {
 stdout.print(read_file('README.md'))
 ```
 
-Inko also lets you terminate the program immediately upon encountering an error,
-this is known as a "panic". Panics can be useful if there is no proper way of
-responding to an error during runtime, such as a division by zero error. This
-can be done using the `try!` keyword.
+Inko also lets you stop the program upon encountering an error, this is known as
+a "panic". Panics can be useful if there is no proper way of responding to an
+error during runtime, such as a division by zero error. This is done using the
+`try!` keyword.
 
 ```inko
 import std::fs::file
@@ -103,9 +100,8 @@ let handle = try! file.read_only(path)
 stdout.print(try! handle.read_string)
 ```
 
-Class-like objects can be defined, and traits can be used to define reusable
-behaviour and requirements that must be met by objects. Inheritance is not
-supported, preventing objects from being coupled together too tightly.
+Class-like objects can be defined, and traits are used to define reusable
+behaviour that can be composed together. Inheritance is not supported:
 
 ```inko
 trait Greet {
@@ -121,17 +117,16 @@ trait Greet {
 }
 
 object Person {
-  # This is an instance attribute, called an "instance variable" in languages
+  # This is an attribute, called an "instance variable" in languages
   # such as Ruby and Smalltalk. These variables are available to instances of
   # the object that defines them (a Person instance in this case).
   #
-  # Instance attributes can not be accessed outside of an object. Instead, you
-  # have to define a method that returns an instance attribute, should you
-  # want to expose the value.
+  # Instance attributes can't be accessed outside of an object. Instead, you
+  # have to define a method that returns an instance attribute.
   @name: String
 
-  def init(name: String) {
-    @name = name
+  static def new(name: String) -> String {
+    Self { @name = name }
   }
 }
 
@@ -156,16 +151,8 @@ pattern](https://en.wikipedia.org/wiki/Null_object_pattern).
 import std::stdio::stdout
 
 object NullUser {
-  def if_true!(R)(block: do -> R) -> ?R {
-    Nil
-  }
-
-  def if_false!(R)(block: do -> R) -> ?R {
-    block.call
-  }
-
-  def if!(R)(true: do -> R, false: do -> R) -> R {
-    false.call
+  def truthy? -> Boolean {
+    False
   }
 }
 
@@ -189,6 +176,6 @@ def starts_with?(prefix: String) -> Boolean {
 ```
 
 This makes it easier to contribute changes, debug problems, optimise code, and
-test the capabilities of Inko as a language. Overall we believe this leads to a
-better programming language, compared to implementing most of it in a different
+test the capabilities of Inko as a language. We believe this leads to a better
+programming language, compared to implementing most of it in a different
 language (e.g. Rust, the language the virtual machine is written in).

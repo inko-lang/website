@@ -13,10 +13,11 @@
     import std::stdio::stdout
 
     let proc = process.spawn {
-      let message = process.receive as String
-
       # This will print "Hello" to STDOUT.
-      stdout.print(message)
+      match(let message = process.receive) {
+        as String -> { stdout.print(message) }
+        else -> {}
+      }
     }
 
     proc.send('Hello')
@@ -25,11 +26,11 @@
 - title: Generic types
   code: |
     ```inko
-    object List(T) {
+    object List!(T) {
       @values: Array!(T)
 
-      def init {
-        @values = Array.new
+      static def new -> Self {
+        Self { @values = Array.new }
       }
 
       def push(value: T) -> T {
@@ -62,7 +63,9 @@
     try withdraw(euros: 5)
 
     # We can also handle the error, if needed:
-    try withdraw(euros: 5) else (error) {
+    try {
+      withdraw(euros: 5)
+    } else (error) {
       stderr.print(error.message)
     }
 
@@ -77,12 +80,8 @@
     import std::fs::file
     import std::stdio::stdout
 
-    # This will open a file in read-only
-    # mode. The use of "try!" causes the
-    # program to abort (= a panic) if the
-    # file could not be opened.
-    let handle = try! file.read_only('text.txt')
-    let content = try! handle.read_string
+    let txt_file = try! file.read_only('text.txt')
+    let content = try! txt_file.read_string
 
     stdout.print(content)
     ```
@@ -128,8 +127,8 @@
     object Person {
       @name: String
 
-      def init(name: String) {
-        @name = name
+      static def new(name: String) -> Self {
+        Self { @name = name }
       }
     }
 
@@ -145,46 +144,28 @@
     stdout.print(person)
     ```
 
-- title: Handling Nil values
+- title: Handling optional values
   code: |
     ```inko
-    # ?User means we may return a User, or Nil.
-    def find(email: String) -> ?User { }
+    let numbers = Array.new(10, 20, 30)
 
-    def update(user: User) { }
-
-    let user = find('alice@example.com')
-
-    # This will return the username if a User
-    # was returned, or Nil if "user" is Nil:
-    user.username
-
-    # This will produce a type error, because
-    # User doesn't respond to "oops":
-    user.oops
-
-    # This won't work, because "update" takes a User, and not a ?User.
-    update(user)
-
-    user.if_true {
-      # `user!` tells the compiler to treat "user" as a User, not a ?User.
-      update(user!)
-    }
+    # Array.get() returns an Option type.
+    numbers
+      .get(2)
+      .map do (n) { n.to_string } # => Some("30")
     ```
 
 - title: Factorial
   code: |
     ```inko
-    # Inko supports tail call elimination, so this
-    # method will not overflow the call stack.
+    # Inko guarantees tail call elimination for
+    # tail recursive methods, so this method
+    # doesn't overflow the stack.
     def fact(num: Integer, acc = 1) -> Integer {
-      num.zero?.if_true {
-        # This will return from the method, not
-        # the surrounding closure.
-        return acc
-      }
+      # This returns from the surrounding method.
+      num.zero?.if_true { return acc }
 
-      fact(num: num - 1, acc: acc * num)
+      fact(num - 1, acc * num)
     }
 
     fact(15) # => 1307674368000
@@ -197,15 +178,14 @@
 
     let mut number = 0
 
-    { number < 10 }.while_true {
+    while({ number < 10 }) {
       stdout.print('This loop will run 10 times')
-
       number += 1
     }
 
-    {
+    loop {
       stdout.print('This is an infinite loop.')
-    }.loop
+    }
     ```
 
 - title: Iterating over collections
@@ -229,4 +209,74 @@
       .to_array
 
     new_numbers # => Array.new(20, 40, 60)
+    ```
+
+- title: Generators
+  code: |
+    ```inko
+    # This method yields values of type Integer
+    def numbers => Integer {
+      yield 10
+      yield 20
+    }
+
+    let generator = numbers
+
+    generator.resume # => Some(10)
+    generator.resume # => Some(20)
+    generator.resume # => None
+    ```
+- title: Pattern matching expressions
+  code: |
+    ```inko
+    def example(number: Integer) -> String {
+      match(number) {
+        1..10 -> { 'Yes!' }
+        20 -> { 'Oh no!' }
+        else -> { 'The number is not supported' }
+      }
+    }
+
+    example(10) # => 'Yes!'
+    example(20) # => 'Oh no!'
+    example(50) # => 'The number is not supported'
+    ```
+- title: Pattern matching types
+  code: |
+    ```inko
+    def example(type: Any) -> String {
+      match(type) {
+        as String -> { 'A String' }
+        as Integer -> { 'An Integer' }
+        else -> { 'Something else' }
+      }
+    }
+
+    example('foo') # => 'A String'
+    example(10)    # => 'An Integer'
+    ```
+- title: TCP sockets
+  code: |
+    ```inko
+    import std::net::socket::TcpListener
+    import std::net::socket::TcpStream
+    import std::stdio::stdout
+
+    let listener = try! TcpListener
+      .new(ip: '127.0.0.1', port: 40_000)
+
+    let stream = try! TcpStream
+      .new(ip: '127.0.0.1', port: 40_000)
+
+    try! stream.write_string('hello')
+
+    stream.close
+
+    let connection = try! listener.accept
+    let output = try! connection.read_string
+
+    connection.close
+    listener.close
+
+    stdout.print(output) # => 'hello'
     ```

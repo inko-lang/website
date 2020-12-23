@@ -11,7 +11,7 @@ module Rouge
 
       KEYWORDS = %w[
         as def do else for impl import lambda let mut object return self static
-        throw trait try try! when yield
+        throw trait try when yield
       ].freeze
 
       state :root do
@@ -20,6 +20,7 @@ module Rouge
         rule(/"[^"]*"/, Str::Double)
         rule(/'[^']*'/, Str::Single)
         rule(/\b(Self|Any)\b/, Keyword)
+        rule(/\btry!/, Keyword)
 
         rule(/\d+\.\d+(e[+-]?\d+)?/i, Num::Float)
         rule(/\d+(e[+-]?\d+)?/i, Num::Integer)
