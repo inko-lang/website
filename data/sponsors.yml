@@ -14,16 +14,7 @@ backer:
   name: Sell Your Phoenix House Fast
   image: images/sponsors/gh-76853726.png
   website: https://www.sellyourphoenixhousefast.com
-  total_donated: 500
+  total_donated: 1000
   tier: backer
   currency_symbol: "$"
   created_at: '2021-01-03'
-- type: private
-  id: 
-  name: Anonymous
-  image: 
-  website: 
-  total_donated: 4000
-  tier: backer
-  currency_symbol: "$"
-  created_at: '2020-06-03'
