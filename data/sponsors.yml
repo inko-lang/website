@@ -9,12 +9,3 @@ backer:
   tier: backer
   currency_symbol: "$"
   created_at: '2019-10-25'
-- type: public
-  id: gh-76853726
-  name: Sell Your Phoenix House Fast
-  image: images/sponsors/gh-76853726.png
-  website: https://www.sellyourphoenixhousefast.com
-  total_donated: 1500
-  tier: backer
-  currency_symbol: "$"
-  created_at: '2021-01-03'
