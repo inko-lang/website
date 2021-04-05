@@ -3,6 +3,7 @@
 require 'lib/inko_lexer'
 require 'uglifier'
 require 'time'
+require 'kramdown-parser-gfm'
 
 Haml::TempleEngine.disable_option_validator!
 

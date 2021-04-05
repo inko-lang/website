@@ -3,6 +3,7 @@
 source 'https://rubygems.org'
 
 gem 'graphql-client', '~> 0.16'
+gem 'kramdown-parser-gfm', '~> 1.1'
 gem 'haml', '~> 5.1'
 gem 'http', '~> 4.4'
 gem 'middleman', '~> 4.3'
