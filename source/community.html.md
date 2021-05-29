@@ -20,8 +20,7 @@ For more information, see the [code of conduct](/code-of-conduct).
 The following services are provided:
 
 * The official [sub-Reddit](https://www.reddit.com/r/inko/).
-* A [Matrix community](https://matrix.to/#/+inko:matrix.org) for chatting with
-  fellow members of the Inko community.
+* A [Matrix channel](https://matrix.to/#/#inko-lang:matrix.org)
 
 Everybody participating in the community is subject to the [code of
 conduct](/code-of-conduct).
