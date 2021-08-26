@@ -287,7 +287,7 @@ installation.
 
 Along the way we ran into several issues with GitLab Runner as well. For
 example, [when using Powershell to execute an unknown command, GitLab will
-report the job as having succeeded][runner-3415]. There are also [other cases
+report the job as having succeeded][runner-3415]. [Other cases also exist
 where the exit status is not read properly][runner-3194]. We are also still
 looking into an issue where GitLab Runner claims a cache URL is not configured
 when using S3 for caching builds, even though the URL _is_ configured.

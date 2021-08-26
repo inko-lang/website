@@ -84,9 +84,9 @@ same decision](https://blog.jetbrains.com/kotlin/migrating-tuples/).
 ## Progress for a self-hosting Inko compiler
 
 In September we also started making serious progress towards a self-hosting
-compiler. There is a [work-in-progress merge
-request](https://gitlab.com/inko-lang/inko/merge_requests/81), but since it's
-pretty light on details we'll try to cover everything interesting here.
+compiler. A [work-in-progress merge
+request](https://gitlab.com/inko-lang/inko/merge_requests/81) exists, but since
+it's pretty light on details we'll try to cover everything interesting here.
 
 Let's start with what we have so far:
 
@@ -115,8 +115,7 @@ object HoistImports {
 
 This pass just grabs all `import` expressions (which can only occur at the
 top-level in a module), partitions the list of nodes, then merges the two arrays
-so that the imports appear first. There are no tricks or bamboozles here,
-that's all there is to it.
+so that the imports appear first.
 
 With the boring stuff out of the way, let's talk about the more interesting
 aspect of the compiler: the design, how we plan to make it fast, and how this
@@ -141,8 +140,8 @@ take 155 seconds (2.6 minutes) to compile all the source code. That's long!
 
 With this in mind we knew a serial compiler was not going to cut it. Even a
 well optimised serial compiler may need a long time to compile large projects.
-Short compile times are important, so we needed a solution. There are two
-approaches to solving this problem:
+Short compile times are important, so we needed a solution. Two approaches exist
+for solving this problem:
 
 1. Incremental compilation
 1. Parallel compilation

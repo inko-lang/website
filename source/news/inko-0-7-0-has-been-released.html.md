@@ -95,7 +95,7 @@ module was always imported as methods such as `inspect` made use of it.
 
 Starting with Inko 0.7.0, this module is optional and not imported by default.
 This also means that pretty-printing objects requires you to first import this
-module. So instead of this:
+module. Instead of this:
 
 ```inko
 10.inspect

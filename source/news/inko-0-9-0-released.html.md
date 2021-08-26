@@ -317,8 +317,8 @@ object Person {}
 Person.if_true { ... }
 ```
 
-But this is valid, because an instance of `Person` _does_ implement the `Object`
-trait:
+The following is valid, because an instance of `Person` _does_ implement the
+`Object` trait:
 
 ```inko
 Person {}.if_true { ... }
@@ -402,8 +402,8 @@ documentation. Thanks Matheus!
 
 ## Other changes
 
-There are lots of other changes included in this release, so be sure to check
-out [the changelog][changelog] for this release.
+Lots of other changes are included in this release, so be sure to check out [the
+changelog][changelog] for this release.
 
 If you'd like to follow the development of Inko, consider joining our [Matrix
 chat room](https://matrix.to/#/+inko:matrix.org) or our [Reddit

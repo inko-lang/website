@@ -251,7 +251,7 @@ def example(message) {
 }
 ```
 
-But this does not compile when using the `Any` trait:
+This does not compile when using the `Any` trait:
 
 ```inko
 def example(message: Any) {
@@ -455,7 +455,7 @@ users where to find documentation.
 
 ## Plans for the coming months
 
-In the coming months we will continue work on the type checker. Hopefully we can
+In the coming months we will continue work on the type checker. Ideally we can
 also start working on designing the Intermediate Representation(s) of the
 compiler, used when optimising Inko code and generating bytecode. If you would
 like to stay up to date, [please consider joining the growing community on

@@ -70,7 +70,7 @@ Yes. Inko's concurrency model is heavily inspired by Erlang.
 ### Why use curly braces?
 
 Curly braces are by far the most common way of starting and terminating blocks
-of code, such as functions. This hopefully makes it easier to get used to Inko.
+of code, such as functions. This makes it easier to get used to Inko.
 
 Curly braces integrate better into editors, as most have support for
 automatically inserting them, or jumping to a closing curly brace.
@@ -125,7 +125,7 @@ module provides a powerful reflection system, based on the concept of
 ### How can I refer to the current module?
 
 You can use the `ThisModule` constant for this, which contains the module that
-the constant is referenced from. This is used used when an object's method is
+the constant is referenced from. This is used when an object's method is
 the same as a module method, and you want to call the module method from the
 object's method:
 

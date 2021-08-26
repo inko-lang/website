@@ -162,8 +162,8 @@ let user = NullUser.new
 user.if(true: { stdout.print('yay') }, false: { stdout.print('nay') })
 ```
 
-Last but not least, most of Inko is written in Inko itself. For example, this is
-the implementation of `String.starts_with?`:
+Most of Inko is written in Inko itself. For example, this is the implementation
+of `String.starts_with?`:
 
 ```inko
 def starts_with?(prefix: String) -> Boolean {
