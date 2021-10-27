@@ -7,12 +7,10 @@ module Sponsors
       yaml = YAML.safe_load(File.read(path))
       keep = Set.new
 
-      yaml.each do |_, sponsors|
-        sponsors.each do |sponsor|
-          next unless sponsor['image']
+      yaml.each do |sponsor|
+        next unless sponsor['image']
 
-          keep << File.basename(sponsor['image'])
-        end
+        keep << File.basename(sponsor['image'])
       end
 
       Dir[Sponsors::Image::DIRECTORY.join('*.*')].each do |file|

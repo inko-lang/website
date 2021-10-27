@@ -58,34 +58,13 @@ configure :build do
   activate :asset_hash
 end
 
-# rubocop: disable Metrics/BlockLength
 helpers do
   def markdown(text)
     Tilt['markdown'].new(config.markdown) { text }.render(self)
   end
 
-  def sorted_sponsors(tier, &block)
-    tier
-      .sort { |a, b| b['total_donated'] <=> a['total_donated'] }
-      .each(&block)
-  end
-
-  def sponsors_for_tier(tier)
-    data.sponsors[tier] || []
-  end
-
-  def total_sponsors
-    data.sponsors.reduce(0) do |total, (_, members)|
-      total + members.length
-    end
-  end
-
-  def sponsors?
-    sponsors_for_tier('sponsor').any?
-  end
-
-  def backers?
-    sponsors_for_tier('backer').any?
+  def sorted_sponsors
+    data.sponsors.sort { |a, b| b['total_donated'] <=> a['total_donated'] }
   end
 
   def sponsor_date(date)
@@ -96,4 +75,3 @@ helpers do
     Time.at(Integer(`git log -1 --format=%ct #{path} 2>&1`.strip))
   end
 end
-# rubocop: enable Metrics/BlockLength

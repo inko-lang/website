@@ -12,3 +12,4 @@ require 'graphql/client/http'
 
 require_relative 'sponsors/image'
 require_relative 'sponsors/image_pruner'
+require_relative 'sponsors/github'

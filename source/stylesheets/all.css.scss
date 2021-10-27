@@ -496,29 +496,3 @@ select {
     }
   }
 }
-
-.sponsors {
-  grid-gap: 5px;
-  grid-template-columns: repeat(auto-fill, 100px);
-  margin-bottom: $text-bottom-margin;
-  padding: 0;
-
-  .avatar,
-  .placeholder {
-    align-items: center;
-    display: flex;
-    height: 100%;
-    justify-content: center;
-    width: 100%;
-  }
-
-  .placeholder {
-    font-size: 14px;
-    height: 80px;
-    outline: 1px dashed $dark-grey;
-    outline-offset: -1px;
-    padding: 10px;
-    text-align: center;
-    width: 80px;
-  }
-}

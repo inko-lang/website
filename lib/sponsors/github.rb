@@ -56,15 +56,6 @@ module Sponsors
         created_at = Date.parse(member.created_at)
         months = months_since(created_at)
         total = amount * months
-        tier =
-          case amount
-          when 500
-            'backer'
-          when 10_000
-            'sponsor'
-          else
-            raise "No tier found for the amount $#{amount / 1_000}"
-          end
 
         row = {
           'type' => 'private',
@@ -73,7 +64,6 @@ module Sponsors
           'image' => nil,
           'website' => nil,
           'total_donated' => total,
-          'tier' => tier,
           'currency_symbol' => '$',
           'created_at' => created_at.iso8601
         }

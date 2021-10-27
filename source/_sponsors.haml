@@ -6,7 +6,7 @@
       %th Total
       %th Donor since
   %tbody
-    - sorted_sponsors(tier) do |member|
+    - sorted_sponsors.each do |member|
       %tr
         %td.avatar
           - if member['image']

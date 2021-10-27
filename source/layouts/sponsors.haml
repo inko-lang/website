@@ -14,18 +14,9 @@
               = current_page.data.title
           = yield
 
-          - if sponsors?
+          - if data.sponsors.any?
             %h2 Sponsors
-            %p
-              Sponsors are those who have pledged &euro;100/$100 or more per
-              month.
-            = partial('sponsors', locals: { tier: sponsors_for_tier('sponsor') })
-
-          - if backers?
-            %h2 Backers
-            %p
-              Backers are those who have pledged &euro;5/$5 or more per month.
-            = partial('sponsors', locals: { tier: sponsors_for_tier('backer') })
+            = partial('sponsors')
 
         = partial('sidebar')
 

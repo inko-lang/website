@@ -4,11 +4,8 @@ namespace :sponsors do
   desc 'Updates sponsor data'
   task :update do
     require_relative '../lib/sponsors'
-    require_relative '../lib/sponsors/open_collective'
-    require_relative '../lib/sponsors/github'
 
-    sponsors =
-      Sponsors::OpenCollective.new.download + Sponsors::Github.new.download
+    sponsors = Sponsors::Github.new.download
 
     sponsors.each do |sponsor|
       next if sponsor['image'].to_s.empty?
@@ -19,7 +16,7 @@ namespace :sponsors do
     end
 
     File.open('data/sponsors.yml', 'w') do |file|
-      file.write(YAML.dump(sponsors.group_by { |sponsor| sponsor['tier'] }))
+      file.write(YAML.dump(sponsors))
     end
   end
 
