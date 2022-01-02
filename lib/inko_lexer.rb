@@ -10,27 +10,21 @@ module Rouge
       mimetypes 'text/x-inko'
 
       KEYWORDS = %w[
-        as def do else for impl import lambda let mut object return self static
-        throw trait try when yield
+				as do fn if in or and for let not ref try mut nil else impl loop next
+				self when move true once class async break match throw trait while yield
+				false extern import return static sealed
       ].freeze
 
       state :root do
         rule(/\s+/m, Text::Whitespace)
         rule(/#.*$/, Comment::Single)
-        rule(/"[^"]*"/, Str::Double)
-        rule(/'[^']*'/, Str::Single)
-        rule(/\b(Self|Any)\b/, Keyword)
-        rule(/\btry!/, Keyword)
+        rule(/"[^"]+"/, Str::Double)
+        rule(/'[^']+'/, Str::Single)
+        rule(/-?(?:0|[1-9]\d*)\.\d+(?:e[+-]?\d+)?/i, Num::Float)
+        rule(/-?(?:0|[1-9]\d*)(?:e[+-]?\d+)?/i, Num::Integer)
 
-        rule(/\d+\.\d+(e[+-]?\d+)?/i, Num::Float)
-        rule(/\d+(e[+-]?\d+)?/i, Num::Integer)
-
-        rule(/(\.)([a-z]+)/) do
+        rule(/(\.)(\w+)/) do
           groups Punctuation, Name::Function
-        end
-
-        rule(/(match)(\()/) do
-          groups Keyword, Punctuation
         end
 
         rule(/(\w+)(\()/) do
@@ -45,11 +39,11 @@ module Rouge
           groups Str::Symbol, Punctuation
         end
 
-        rule(/(def)(\s+)([^\(|^ ]+)/) do
+        rule(/(fn)(\s+)([^\(|^ ]+)/) do
           groups Keyword, Text, Name::Function
         end
 
-        rule(/(object|trait)(\s+)(\w+)/) do
+        rule(/(class|trait)(\s+)(\w+)/) do
           groups Keyword, Text, Name::Class
         end
 

@@ -1,13 +1,16 @@
 ---
 - title: Home
+  icon: icon-home
   url: /
-- title: About
-  url: /about
 - title: Sponsors
-  url: /sponsors
+  icon: icon-handshake-o
+  url: /sponsors/
 - title: Documentation
-  url: /documentation
+  icon: icon-book
+  url: /documentation/
 - title: Community
-  url: /community
+  icon: icon-users
+  url: /community/
 - title: News
-  url: /news
+  icon: icon-newspaper-o
+  url: /news/

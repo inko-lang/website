@@ -1,0 +1,16 @@
+# Pattern matching
+fn match_with_expressions(number: Int) -> String {
+  match number {
+    when 1..10 -> 'Yes!'
+    when 20 -> 'Oh no!'
+    else -> "The number isn't supported"
+  }
+}
+
+fn match_as_type(value: Any) -> String {
+  match value {
+    as String -> 'an instance of String'
+    as Int -> 'an instance of Int'
+    else -> 'No idea, sorry :<'
+  }
+}

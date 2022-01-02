@@ -1,0 +1,28 @@
+# Single ownership
+fn main {
+  let numbers = Array.new(10, 20, 30)
+
+  # This is OK, as the Array is owned by the `numbers`
+  # variable.
+  numbers[0]
+
+  let nums = numbers
+
+  # This is no longer OK, as `numbers` gave up ownership to
+  # `nums`.
+  numbers[0]
+}
+
+fn references {
+  let numbers = Array.new(10, 20, 30)
+
+  # We can "borrow" a value using references:
+  let values = ref numbers
+
+  # Both are OK and produce the same value: 10.
+  numbers[0]
+  values[0]
+
+  # Once `numbers` goes out of scope (so here), the
+  # `Array` is dropped.
+}

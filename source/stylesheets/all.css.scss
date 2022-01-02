@@ -1,25 +1,21 @@
 @import 'normalize';
+@import 'icons';
 
 $font: sans-serif;
 $code-font: monospace;
-$blue: #1cb6f9;
-$dark-blue: desaturate(darken(adjust-hue($blue, 10%), 10%), 30%);
-$green: #9bdf63;
+$dark-green: #436023;
+$green: #3fac71;
 $white: #fff;
-$yellow: #fff9b0;
 $grey: #ddd;
 $light-grey: lighten($grey, 10%);
 $dark-grey: darken($grey, 50%);
-$purple: #d692ee;
+$purple: #5c21a5;
 $text-color: #000;
-$code-green: #436023;
-$link-color: darken($blue, 10%);
-$button-shadow: rgba(0, 0, 0, .12);
-$top-shadow: rgba(0, 0, 0, .1);
+$blue: #0c52bb;
 $text-bottom-margin: 20px;
 $text-left-margin: 20px;
-$media-wide: 'only screen and (min-width: 750px)';
-$media-narrow: 'only screen and (max-width: 750px)';
+$media-wide: 'only screen and (min-width: 800px)';
+$media-narrow: 'only screen and (max-width: 800px)';
 
 html {
   font-family: $font;
@@ -101,7 +97,7 @@ td code {
 }
 
 a {
-  color: $link-color;
+  color: $blue;
   text-decoration: none;
 
   &:hover {
@@ -130,7 +126,7 @@ table {
   .s,
   .s1,
   .s2 {
-    color: $code-green;
+    color: $dark-green;
   }
 
   .mf,
@@ -138,7 +134,7 @@ table {
   .mi,
   .mo,
   .il {
-    color: $link-color;
+    color: $blue;
   }
 
   .c,
@@ -147,6 +143,10 @@ table {
   .cs,
   .c1 {
     color: lighten($text-color, 40%);
+  }
+
+  .vi {
+    color: $purple;
   }
 }
 
@@ -183,13 +183,9 @@ table {
   margin: 5px 0;
 
   img {
-    display: none;
+    display: inline;
     float: left;
     margin-right: 5px;
-
-    @media #{$media-wide} {
-      display: inline;
-    }
   }
 }
 
@@ -248,11 +244,7 @@ table {
     text-decoration: none;
 
     &:hover {
-      color: $link-color;
-    }
-
-    &.active {
-      font-weight: bold;
+      color: $blue;
     }
   }
 
@@ -266,14 +258,15 @@ table {
 // Big block displayed on the homepage, including a short introduction to Inko
 // and a list of code samples.
 .jumbotron {
-  box-shadow: inset 0 1px 2px $top-shadow;
+  background: $light-grey;
+  border-bottom: 1px solid $grey;
   padding: 20px 0;
 
   .grid {
     grid-template-columns: 1fr;
 
     @media #{$media-wide} {
-      grid-template-columns: 3fr 2fr;
+      grid-template-columns: 2fr 2fr;
     }
   }
 
@@ -283,7 +276,12 @@ table {
   }
 
   select {
+    background: linear-gradient(to top, #f6f6f6, #fff);
+    border: 1px solid darken($grey, 5%);
+    border-radius: 3px;
+    cursor: pointer;
     font-size: .8rem;
+    padding: .3rem;
   }
 }
 
@@ -309,8 +307,6 @@ table {
 }
 
 .page {
-  box-shadow: inset 0 1px 2px $top-shadow;
-
   .grid {
     @media #{$media-wide} {
       grid-template-columns: 3fr 1fr;
@@ -425,63 +421,38 @@ table {
   display: block;
 }
 
-.actions {
-  background: $light-grey;
-
-  .grid {
-    grid-template-columns: 1fr;
-  }
-
-  .buttons {
-    padding-top: 20px;
-    text-align: center;
-  }
-}
-
-.highlights {
-  .grid {
-    grid-gap: 0;
-    grid-template-columns: 1fr;
-
-    @media #{$media-wide} {
-      grid-gap: 20px;
-      grid-template-columns: 2fr 2fr 2fr;
-      padding: 20px 0;
-    }
-  }
-
-  @media #{$media-wide} {
-    .blue {
-      background: $dark-blue;
-      color: $white;
-
-      a {
-        color: $white;
-        text-decoration: underline;
-      }
-    }
-  }
-}
-
 select {
   font-size: 1rem;
 }
 
 .button {
-  background: $white;
+  background: $light-grey;
   border: 1px solid darken($grey, 5%);
-  box-shadow: 0 2px 2px $button-shadow;
+  border-bottom-width: 4px;
+  border-radius: 5px;
   color: $text-color;
   display: inline-block;
   font-size: 1rem;
   font-weight: bold;
-  margin: 0 $text-bottom-margin / 2 $text-bottom-margin 0;
-  padding: .5rem;
+  margin-right: $text-bottom-margin / 2;
+  padding: .5rem .8rem;
   text-decoration: none;
 
   &:hover {
-    color: $link-color;
+    background: lighten($light-grey, 5%);
+    border-color: $grey;
     text-decoration: none;
+  }
+
+  &.green {
+    background: $green;
+    border-color: darken($green, 10%);
+    color: $white;
+
+    &:hover {
+      background: lighten($green, 5%);
+      border-color: darken($green, 2%);
+    }
   }
 }
 

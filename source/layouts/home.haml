@@ -12,34 +12,29 @@
         .introduction
           %h1
             = data.jumbotron.title
-
           = markdown(data.jumbotron.body)
+
+          %a.button.green(href="https://docs.inko-lang.org/manual/master/getting-started/installation/")
+            %i.icon-rocket
+            Get started
+
+          %a.button(href="https://gitlab.com/inko-lang/inko")
+            %i.icon-gitlab
+            Follow on GitLab
 
         .code-examples
           %select{ title: 'Choose a code example to display' }
-            - data.examples.each_with_index do |example, index|
+            - examples.each_with_index do |example, index|
               %option{ 'data-example' => example['title'],
               selected: index.zero? ? 'selected' : nil }
                 = example['title']
 
-          - data.examples.each_with_index do |example, index|
+          - examples.each_with_index do |example, index|
             .example{ 'data-example' => example['title'],
             class: index.zero? ? 'visible' : nil }
-              = markdown(example['code'])
+              = code('inko') do
+                = example['code']
 
-    .actions
-      .grid
-        .buttons
-          - data.buttons.each do |button|
-            %a.button{href: button['url']}= button['text']
-
-    .highlights
-      - data.highlights.each do |row|
-        .row{class: row['color']}
-          .grid
-            - row.items.each do |item|
-              %section
-                %h2= item['title']
-                = markdown(item['text'])
-
-    = partial('footer')
+    .grid
+      .about
+        = yield

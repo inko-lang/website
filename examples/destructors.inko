@@ -1,0 +1,14 @@
+# Destructors
+import std::stdio::stdout
+
+class Thing {
+  fn drop {
+    stdout.print('This is a destructor')
+  }
+}
+
+fn main {
+  let thing = Thing {}
+
+  # Thing goes out of scope here, running its destructor.
+}

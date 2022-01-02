@@ -1,13 +1,10 @@
 ---
-title: Safe and concurrent object-oriented programming, without the headaches.
+title: A general-purpose and easy to use programming language
 body: |
-  Inko is a statically-typed, safe, object-oriented programming language for
-  writing concurrent programs. Thanks to the use of lightweight processes,
-  concurrency is easily achieved and data races are impossible.
+  Inko features deterministic automatic memory management (without a garbage
+  collector), a pleasant way of handling errors, excellent support for
+  concurrency, a simple syntax, and much more.
 
-  The compiler forces you to handle errors where they may occur, ensuring you
-  never run into unexpected runtime errors again.
-
-  The syntax is easy to learn and consistent, instead of using many different
-  keywords and symbols. If you have ever used a programming language that uses
-  curly braces, you'll feel right at home.
+  Inko is easy to learn and get started with, whether you are coming from
+  Python, Go, Rust, or another language. Thanks to its support for a wide range
+  of platforms (including Windows), getting it up and running is a breeze.

@@ -1,0 +1,14 @@
+# Generators
+import std::stdio::stdout
+
+fn numbers => Int {
+  yield 10
+  yield 20
+}
+
+fn main {
+  # This prints the numbers 10 and 20 to STDOUT.
+  for number in numbers {
+    stdout.print(number)
+  }
+}

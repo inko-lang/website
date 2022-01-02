@@ -1,0 +1,25 @@
+# Loops
+import std::stdio::stdout
+
+fn while_loop {
+  let mut num = 0
+
+  while num < 10 {
+    stdout.print('This loop repeats 10 times')
+    num += 1
+  }
+}
+
+fn infinite_loop {
+  loop {
+    stdout.print('This loop runs forever')
+  }
+}
+
+fn for_loop {
+  let numbers = Array.new(10, 20, 30)
+
+  for num in numbers {
+    stdout.print(num)
+  }
+}

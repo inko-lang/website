@@ -1,0 +1,23 @@
+# Concurrent programming
+async class Counter {
+  @value: UInt
+
+  # This is a message that can be sent from another process.
+  async fn increment {
+    @value += 1
+  }
+
+  async fn value -> UInt {
+    @value
+  }
+}
+
+fn main {
+  let counter = Counter { @value = 0 }
+
+  # This increments the counter asynchronously.
+  counter.increment
+  counter.increment
+
+  counter.value # => 2
+}

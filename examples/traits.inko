@@ -1,0 +1,14 @@
+# Implementing traits
+trait ToString {
+  fn to_string -> String
+}
+
+class Person {
+  @name: String
+}
+
+impl ToString for Person {
+  fn to_string -> String {
+    @name
+  }
+}

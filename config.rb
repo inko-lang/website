@@ -74,4 +74,18 @@ helpers do
   def last_updated_at(path)
     Time.at(Integer(`git log -1 --format=%ct #{path} 2>&1`.strip))
   end
+
+  def examples
+    @examples ||=
+      begin
+        Dir['./examples/*.inko'].sort.map do |path|
+          data = File.read(path).strip
+          lines = data.lines
+          title = lines.shift.gsub(/^#\s*/, '').strip
+          body = lines.join
+
+          { 'title' => title, 'code' => body }
+        end
+      end
+  end
 end

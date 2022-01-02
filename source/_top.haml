@@ -11,4 +11,7 @@
       %ul
         - data.menu.each do |link|
           %li
-            = link_to(link['title'], link['url'])
+            = link_to(link['url']) do
+              - if link['icon']
+                %i{class: link['icon']}
+              = link['title']

@@ -1,0 +1,23 @@
+# Generic data types
+class Stack[T] {
+  @values: Array[T]
+
+  static fn new -> Self {
+    Self { @values = Array.new }
+  }
+
+  fn push(value: T) {
+    @values.push(value)
+  }
+}
+
+fn main {
+  let stack = Stack.new
+
+  # This infers `T` to `Int`.
+  stack.push(42)
+
+  # This is an error, as `T` is inferred to `Int`, and
+  # `String` isn't compatible with `Int`.
+  stack.push('Oh no!')
+}
