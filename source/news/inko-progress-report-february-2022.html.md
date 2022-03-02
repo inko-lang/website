@@ -328,6 +328,26 @@ match x {
 }
 ```
 
+Inko also supports `if let` and `while let`:
+
+```inko
+if let Some(v) = some_option {
+  print(v)
+}
+
+while let Some(v) = some_option {
+  print(v)
+}
+```
+
+`let` also supports guards when using sum types as the assigned value:
+
+```inko
+let Some(v) = some_option else return
+```
+
+In this case the `else` block must return from the surrounding scope.
+
 When pattern matching against a sum type, the variant names don't need to be
 fully qualified, as the compiler knows what sum type it's matching against.
 Thus, instead of e.g. `Option.Some(v)` or `Option::Some(v)`, you just write
