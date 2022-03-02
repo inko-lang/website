@@ -13,7 +13,10 @@
         %article.news-article
           %header
             %h1= current_article.title
-            = partial('news_meta', locals: { article: current_article })
+            %p.news-meta
+              Published on:
+              %time{ datetime: current_article.date.to_time.utc.iso8601 }
+                = current_article.date.to_time.utc.strftime('%Y-%m-%d')
           = yield
 
         = partial('sidebar')

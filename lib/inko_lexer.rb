@@ -10,9 +10,9 @@ module Rouge
       mimetypes 'text/x-inko'
 
       KEYWORDS = %w[
-				as do fn if in or and for let not ref try mut nil else impl loop next
-				self when move true once class async break match throw trait while yield
-				false extern import return static sealed
+        as do fn if or and for let not ref try mut else impl loop next self when
+        move true once case class async break match throw trait while false
+        import return static builtin
       ].freeze
 
       state :root do

@@ -13,7 +13,7 @@ task :news, :title do |_, args|
   File.open("source/news/#{filename}.html.md", 'w') do |handle|
     handle.puts <<~TEMPLATE.strip
       ---
-      title: #{title}
+      title: #{title.inspect}
       date: #{Time.now.utc.strftime('%Y-%m-%d %H:%M:%S %Z')}
       ---
 
