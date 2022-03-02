@@ -628,7 +628,7 @@ Fun fact: before we introduced generators we had a similar setup (this was back
 in 2019), though it wasn't as easy to use due to the lack of an Option type and
 sum types (Inko still had optional/nillable types back then).
 
-And that's all for this month! If you'd like to follow along with the progress
+And that's all for February! If you'd like to follow along with the progress
 made, we recommend joining the [Matrix
 channel](https://matrix.to/#/#inko-lang:matrix.org) or the `#inko` channel in
 the [/r/ProgrammingLanguages Discord server](https://discord.gg/yqWzmkV). If
