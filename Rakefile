@@ -89,9 +89,14 @@ desc 'Deploys the website'
 task deploy: %i[download build] do
   bucket = ENV.fetch('BUCKET')
   dist = ENV.fetch('DISTRIBUTION_ID')
+  flags = '--acl=public-read --cache-control max-age=86400'
 
-  sh "aws s3 sync build s3://#{bucket} --acl=public-read --delete " \
-    '--cache-control max-age=86400'
+  if ENV.key?('UPDATE_SPONSORS')
+    sh "aws s3 cp build/sponsors/index.html " \
+      "s3://#{bucket}/sponsors/index.html #{flags}" \
+  else
+    sh "aws s3 sync build s3://#{bucket} --delete #{flags}"
+  end
 
   sh "aws cloudfront create-invalidation --distribution-id #{dist} --paths '/*'"
 end
