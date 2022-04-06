@@ -12,6 +12,7 @@ $dark-grey: darken($grey, 50%);
 $purple: #5c21a5;
 $text-color: #000;
 $blue: #0c52bb;
+$notice-color: #fffcee;
 $text-bottom-margin: 20px;
 $text-left-margin: 20px;
 $media-wide: 'only screen and (min-width: 800px)';
@@ -252,6 +253,16 @@ table {
     clear: both;
     content: '';
     display: block;
+  }
+}
+
+.notice {
+  background: $notice-color;
+  border-bottom: 1px solid $grey;
+
+  p {
+    font-size: 12px;
+    margin: 10px 0px;
   }
 }
 
