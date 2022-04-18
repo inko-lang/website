@@ -22,5 +22,3 @@
                       %time{ datetime: article.date.to_time.utc.iso8601 }
                         = article.date.to_time.utc.strftime('%b %d, %Y')
                     %td= link_to(article.title, article)
-
-        = partial('sidebar')

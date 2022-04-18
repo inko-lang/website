@@ -99,6 +99,7 @@ td code {
 
 a {
   color: $blue;
+  font-weight: 500;
   text-decoration: none;
 
   &:hover {
@@ -241,6 +242,7 @@ table {
   a {
     color: $text-color;
     display: block;
+    font-weight: normal;
     padding: 10px;
     text-decoration: none;
 
@@ -318,15 +320,8 @@ table {
 }
 
 .page {
-  .grid {
-    @media #{$media-wide} {
-      grid-template-columns: 3fr 1fr;
-    }
-  }
-
   article {
     grid-row: 2;
-    max-width: 690px;
 
     h1 {
       @media #{$media-narrow} {
@@ -337,27 +332,6 @@ table {
     @media #{$media-wide} {
       grid-row: 1;
     }
-  }
-}
-
-.sidebar {
-  display: none;
-  font-size: .9rem;
-  grid-row: 1;
-  margin-top: 10px;
-
-  @media #{$media-wide} {
-    display: block;
-    margin-top: 35px;
-  }
-
-  h1 {
-    font-size: 1rem;
-  }
-
-  li {
-    list-style-type: none;
-    margin-left: 0;
   }
 }
 
@@ -414,27 +388,6 @@ table {
 
   img {
     margin-top: 20px;
-  }
-}
-
-.sidebar-manual {
-  ol li {
-    list-style: decimal inside;
-  }
-}
-
-.expand-sidebar {
-  margin-top: 20px;
-  text-align: center;
-
-  @media #{$media-wide} {
-    display: none;
-  }
-
-  a {
-    color: darken($grey, 50%);
-    padding: 20px 20px 20px 0;
-    text-decoration: none;
   }
 }
 

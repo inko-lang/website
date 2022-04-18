@@ -18,5 +18,3 @@
               %time{ datetime: current_article.date.to_time.utc.iso8601 }
                 = current_article.date.to_time.utc.strftime('%Y-%m-%d')
           = yield
-
-        = partial('sidebar')

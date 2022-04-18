@@ -40,7 +40,6 @@
 
     document.addEventListener('DOMContentLoaded', function() {
         bind_expander('.expand-menu a', '.main-menu');
-        bind_expander('.expand-sidebar a', '.sidebar');
 
         let select_example = document.querySelector('.code-examples select');
 
