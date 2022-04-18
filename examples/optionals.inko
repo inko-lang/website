@@ -1,6 +1,6 @@
 # Optional values
 fn main {
-  let numbers = Array.new(10, 20, 30)
+  let numbers = [10, 20, 30]
 
-  numbers.get(2).map do (n) { n.to_string } # => Some("30")
+  numbers.get(2).map do (n) { n.to_string } # => Option.Some('30')
 }

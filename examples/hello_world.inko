@@ -1,6 +1,6 @@
 # Hello, world!
-import std::stdio::stdout
+import std::stdio::STDOUT
 
 fn main {
-  stdout.print('Hello, word!')
+  STDOUT.new.print('Hello, word!')
 }

@@ -4,11 +4,24 @@ trait ToString {
 }
 
 class Person {
-  @name: String
+  let @name: String
 }
 
 impl ToString for Person {
   fn to_string -> String {
     @name
+  }
+}
+
+# Traits can also be implemented conditionally:
+class List[T] {
+  # ...
+}
+
+# Here `ToString` is only available for instances
+# of `List` if `T` also implements `ToString`.
+impl ToString for List if T: ToString {
+  fn to_string -> String {
+    '...'
   }
 }

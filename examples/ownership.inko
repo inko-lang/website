@@ -1,9 +1,8 @@
 # Single ownership
-fn main {
-  let numbers = Array.new(10, 20, 30)
+fn moves {
+  let numbers = [10, 20, 30]
 
-  # This is OK, as the Array is owned by the `numbers`
-  # variable.
+  # This is OK, and returns a `ref 10`.
   numbers[0]
 
   let nums = numbers
@@ -13,16 +12,21 @@ fn main {
   numbers[0]
 }
 
-fn references {
-  let numbers = Array.new(10, 20, 30)
+fn refs {
+  let owned = [10, 20, 30]
 
   # We can "borrow" a value using references:
-  let values = ref numbers
+  let borrowed = ref owned
 
-  # Both are OK and produce the same value: 10.
-  numbers[0]
-  values[0]
+  # Both are OK and produce the same value: `ref 10`.
+  owned[0]
+  borrowed[0]
 
-  # Once `numbers` goes out of scope (so here), the
-  # `Array` is dropped.
+  # This isn't OK, as `ref T` doesn't allow mutation:
+  borrowed.push(42)
+
+  # For that we need a mutable reference:
+  let mutable = mut owned
+
+  mutable.push(42)
 }

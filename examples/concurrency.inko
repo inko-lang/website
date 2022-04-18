@@ -1,23 +1,44 @@
 # Concurrent programming
-async class Counter {
-  @value: UInt
+# A concurrent/async generic stack.
+class async Stack[T] {
+  let @values: Array[uni T]
 
-  # This is a message that can be sent from another process.
-  async fn increment {
-    @value += 1
+  fn static new -> Self {
+    Self { @values = recover [] }
   }
 
-  async fn value -> UInt {
-    @value
+  fn async mut push(value: uni T) {
+    @values.push(value)
+  }
+
+  fn async mut pop -> uni Option[T] {
+    if let Some(v) = @values.pop {
+      recover Option.Some(v)
+    } else {
+      recover Option.None
+    }
   }
 }
 
 fn main {
-  let counter = Counter { @value = 0 }
+  # This is valid, as a few builtin types (e.g. Int
+  # and String) are cheap to copy, so we don't have
+  # to explicitly turn them into unique/sendable
+  # values.
+  Stack.new.push(42)
 
-  # This increments the counter asynchronously.
-  counter.increment
-  counter.increment
+  # For more complex types, we do need to turn them
+  # into unique values explicitly.
+  let stack = Stack.new
 
-  counter.value # => 2
+  stack.push(recover [10, 20, 30])
+
+  # The default approach to sending a message is to
+  # wait for the result immediately. If we instead
+  # want a future to resolve later, we do so using
+  # `async` expressions:
+  let future =
+    async stack.pop # => Future[uni Array[Int]]
+
+  future.await # => uni Array[Int]
 }

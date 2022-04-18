@@ -38,6 +38,78 @@ The allocator is a fast thread-local bump allocator based on the
 allocator. Fragmentation is handled by incrementally scanning the heap (only
 when necessary) and marking free memory as reusable.
 
+## <i class="icon-tachometer" /> Easy and type-safe concurrency
+
+In Inko it's easy to write concurrent code. Inko uses lightweight processes,
+scheduled onto a fixed number of OS threads. These processes are defined similar
+to classes, and the messages they can receive are defined similar to regular
+methods. Objects sent along with messages are moved into the receiving process,
+removing the need for (deep) copying them. It's easy to take a synchronous data
+type and turn it into an asynchronous type. For example:
+
+```inko
+class Stack[T] {
+  let @values: Array[T]
+
+  fn static new -> Self {
+    Self { @values = [] }
+  }
+
+  fn mut push(value: T) {
+    @values.push(value)
+  }
+
+  fn mut pop -> Option[T] {
+    @values.pop
+  }
+}
+```
+
+We can make this type asynchronous by changing it to the following:
+
+```inko
+class async Stack[T] {
+  let @values: Array[uni T]
+
+  fn static new -> Self {
+    Self { @values = recover [] }
+  }
+
+  fn async mut push(value: uni T) {
+    @values.push(value)
+  }
+
+  fn async mut pop -> uni Option[uni T] {
+    if let Some(value) = @values.pop {
+      recover Option.Some(value)
+    } else {
+      recover Option.None
+    }
+  }
+}
+```
+
+When an instance of our `Stack` is created, Inko automatically spawns a process
+for it. The methods `push` and `pop` are messages we can send to this process.
+Messages are processed in FIFO order. Regular methods defined on an async class
+can't be called by other processes. By default, Inko waits for the result of a
+message right away, as this is what you want most of the time:
+
+```inko
+fn main {
+  let stack = Stack.new
+
+  stack.push(42)
+  stack.pop # => 42
+}
+```
+
+If you instead want a future to resolve later, use an `async` expression:
+
+```inko
+async stack.pop # => Future[uni Int]
+```
+
 ## <i class="icon-fire" /> Error handling done right
 
 Inko's error handling mechanism forces you to handle errors at the call site.
@@ -76,97 +148,6 @@ fn example(file: ReadOnlyFile) !! String, OutOfMemoryError, IOError, PleaseMakeI
 The result of this setup makes it impossible to produce unchecked errors,
 without the complexity of error handling as found in other languages.
 
-## <i class="icon-tachometer" /> Concurrency is easy and type-safe
-
-In Inko it's easy to write concurrent code. Inko uses lightweight processes,
-scheduled onto a fixed number of OS threads. These processes are defined similar
-to classes, and the messages they can receive are defined similar to regular
-methods. Objects sent along with messages are moved into the receiving process,
-removing the need for (deep) copying them. It's also trivial to take a
-synchronous data type and turn it into an asynchronous type. For example, take
-this simple stack type:
-
-```inko
-class Stack[T] {
-  @values: Array[T]
-
-  static fn new -> Self {
-    Self { @values = Array.new }
-  }
-
-  fn push(value: T) {
-    @values.push(value)
-  }
-
-  fn pop -> Option[T] {
-    @values.pop
-  }
-}
-```
-
-To turn this synchronous type into an asynchronous type, all we need to do is
-use `async class` instead of `class`, and `async fn` instead of `fn`:
-
-```inko
-async class Stack[T] {
-  @values: Array[T]
-
-  static fn new -> Self {
-    Self { @values = Array.new }
-  }
-
-  async fn push(value: T) {
-    @values.push(value)
-  }
-
-  async fn pop -> Option[T] {
-    @values.pop
-  }
-}
-```
-
-When an instance of our `Stack` is created, Inko automatically spawns a process
-for it. The methods `push` and `pop` are messages we can send to this process.
-Messages are processed on a first in first out basis. Regular methods in an
-`async class` are private to the process spawned for the class. By default, Inko
-awaits the result of a message right away, as this is what you want most of the
-time:
-
-```inko
-async class Stack[T] {
-  @values: Array[T]
-
-  static fn new -> Self {
-    Self { @values = Array.new }
-  }
-
-  async fn push(value: T) {
-    @values.push(value)
-  }
-
-  async fn pop -> Option[T] {
-    @values.pop
-  }
-}
-
-fn main {
-  let stack = Stack.new
-
-  stack.push(42)
-  stack.pop # => 42
-}
-```
-
-If you don't want to wait for the result, just stick `async` in front of the
-message like so:
-
-```inko
-async stack.pop
-```
-
-In this case you'll get a `Future` back, which you can resolve into a value at a
-later time.
-
 ## <i class="icon-file-code-o" /> Composition over inheritance
 
 Inko has classes, but doesn't support inheritance. Instead, behaviour is
@@ -176,13 +157,17 @@ inheritance. For example, here's how you'd allow converting of a custom type to
 a string:
 
 ```inko
+trait ToString {
+  fn to_string -> String
+}
+
 class Person {
-  @name: String
+  let @name: String
 }
 
 impl ToString for Person {
   fn to_string -> String {
-    @name
+    @name.clone
   }
 }
 

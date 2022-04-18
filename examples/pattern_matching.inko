@@ -1,16 +1,30 @@
 # Pattern matching
-fn match_with_expressions(number: Int) -> String {
-  match number {
-    when 1..10 -> 'Yes!'
-    when 20 -> 'Oh no!'
-    else -> "The number isn't supported"
+fn main {
+  match Option.Some(42) {
+    case Some(number) -> number
+    case None -> 0
   }
-}
 
-fn match_as_type(value: Any) -> String {
-  match value {
-    as String -> 'an instance of String'
-    as Int -> 'an instance of Int'
-    else -> 'No idea, sorry :<'
+  # Guards are also supported:
+  match Option.Some(42) {
+    case Some(number) if number < 50 -> number
+    case None -> 0
+  }
+
+  # `if` also supports pattern matching:
+  if let Some(number) = Option.Some(42) {
+    number
+  } else {
+    0
+  }
+
+  # And so does `let`:
+  let Some(number) = Option.Some(42) else return
+
+  # And `while` also supports it:
+  let numbers = [10, 20]
+
+  while let Some(number) = numbers.pop {
+    # ...
   }
 }

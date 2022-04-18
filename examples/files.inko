@@ -1,6 +1,5 @@
 # Reading from a file
 import std::fs::file::ReadOnlyFile
-import std::stdio::stdout
 
 fn main {
   let file = try! ReadOnlyFile.new('README.md')
@@ -8,5 +7,5 @@ fn main {
 
   try! file.read_all(bytes)
 
-  stdout.print(bytes.to_string)
+  bytes.to_string # => "# README ..."
 }

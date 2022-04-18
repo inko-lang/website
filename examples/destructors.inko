@@ -1,9 +1,12 @@
 # Destructors
-import std::stdio::stdout
+import std::drop::Drop
+import std::stdio::STDOUT
 
-class Thing {
-  fn drop {
-    stdout.print('This is a destructor')
+class Thing {}
+
+impl Drop for Thing {
+  fn mut drop {
+    STDOUT.new.print('Thing is dropped')
   }
 }
 

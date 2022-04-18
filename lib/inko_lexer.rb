@@ -10,9 +10,9 @@ module Rouge
       mimetypes 'text/x-inko'
 
       KEYWORDS = %w[
-        as do fn if or and for let not ref try mut else impl loop next self when
-        move true once case class async break match throw trait while false
-        import return static builtin
+        let else class import trait mut return self throw impl for as static
+        match do try! try builtin if async move ref while loop next break and or
+        pub true false case enum uni recover fn
       ].freeze
 
       state :root do
@@ -39,17 +39,9 @@ module Rouge
           groups Str::Symbol, Punctuation
         end
 
-        rule(/(fn)(\s+)([^\(|^ ]+)/) do
-          groups Keyword, Text, Name::Function
-        end
-
-        rule(/(class|trait)(\s+)(\w+)/) do
-          groups Keyword, Text, Name::Class
-        end
-
         rule(/@[a-z_]\w*/i, Name::Variable::Instance)
         rule(/[A-Z][a-zA-Z0-9_]*/, Name::Constant)
-        rule(/->|!!|=>/, Keyword)
+        rule(/->|!!/, Keyword)
         rule(/(#{KEYWORDS.join('|')})\b/, Keyword)
 
         rule(/((<|>|\+|-|\/|\*)=?|==)/, Name::Function)
