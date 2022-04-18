@@ -360,10 +360,10 @@ table {
   }
 
   .news-meta {
-    display: none;
+    width: 90px;
 
-    @media #{$media-wide} {
-      display: inline;
+    @media #{$media-narrow} {
+      display: none;
     }
   }
 }
