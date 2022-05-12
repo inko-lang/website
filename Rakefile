@@ -27,7 +27,7 @@ namespace :sponsors do
 
   desc 'Prunes unused sponsor images'
   task :prune_logos do
-    require_relative '../lib/sponsors'
+    require_relative 'lib/sponsors'
 
     Sponsors::ImagePruner.new.prune
   end
