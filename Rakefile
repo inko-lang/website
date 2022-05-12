@@ -8,7 +8,7 @@ CLEAN.include('build')
 namespace :sponsors do
   desc 'Updates sponsor data'
   task :update do
-    require_relative '../lib/sponsors'
+    require_relative 'lib/sponsors'
 
     sponsors = Sponsors::Github.new.download
 

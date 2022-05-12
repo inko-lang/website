@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+set -e
 
 function info() {
     echo -e "\\033[1m\\033[32m>>>\\033[0m\\033[0m ${1}"
