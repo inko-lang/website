@@ -4,7 +4,7 @@
   name: Sytse Sijbrandij
   image: images/sponsors/gh-22061.jpeg
   website: https://github.com/dosire
-  total_donated: 15000
+  total_donated: 15500
   currency_symbol: "$"
   created_at: '2019-10-25'
 - type: public
@@ -12,14 +12,6 @@
   name: Evan Ovadia
   image: images/sponsors/gh-192751.png
   website: https://github.com/Verdagon
-  total_donated: 3000
+  total_donated: 4000
   currency_symbol: "$"
   created_at: '2022-01-31'
-- type: public
-  id: gh-692384
-  name: Martin Angers
-  image: images/sponsors/gh-692384.jpeg
-  website: https://mna.dev
-  total_donated: 1000
-  currency_symbol: "$"
-  created_at: '2022-03-03'
