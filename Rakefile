@@ -46,15 +46,12 @@ task :news, :title do |_, args|
   File.open("source/news/#{filename}.html.md", 'w') do |handle|
     handle.puts <<~TEMPLATE.strip
       ---
+      author: Your name here
       title: #{title.inspect}
       date: #{Time.now.utc.strftime('%Y-%m-%d %H:%M:%S %Z')}
       ---
 
-      A brief summary of the article.
 
-      <!-- READ MORE -->
-
-      The rest of the article.
     TEMPLATE
   end
 end

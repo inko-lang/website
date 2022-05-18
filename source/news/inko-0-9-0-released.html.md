@@ -1,4 +1,5 @@
 ---
+author: Yorick Peterse
 title: Inko 0.9.0 released
 date: 2020-12-23 17:00:00 UTC
 ---

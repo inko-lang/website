@@ -1,4 +1,5 @@
 ---
+author: Yorick Peterse
 title: "Inko 0.6.0 has been released"
 date: 2019-11-17 14:15:44 UTC
 ---

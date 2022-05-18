@@ -1,4 +1,5 @@
 ---
+author: Yorick Peterse
 title: Inko 0.2.3 released
 date: 2018-08-19 12:30:00 UTC
 description: Inko 0.2.3 released

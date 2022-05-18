@@ -1,4 +1,5 @@
 ---
+author: Yorick Peterse
 title: Inko now supports stable Rust
 date: 2018-08-02 18:00 UTC
 keywords:

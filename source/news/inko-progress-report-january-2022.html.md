@@ -1,4 +1,5 @@
 ---
+author: Yorick Peterse
 title: "Inko Progress Report: January 2022"
 date: 2022-01-31 13:28:19 UTC
 ---

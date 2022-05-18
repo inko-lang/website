@@ -1,4 +1,5 @@
 ---
+author: Yorick Peterse
 title: Inko 0.4.1 released
 date: 2019-05-15 00:24:34 UTC
 description: Inko 0.4.1 has been released

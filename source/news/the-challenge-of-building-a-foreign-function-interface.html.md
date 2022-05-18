@@ -1,4 +1,5 @@
 ---
+author: Yorick Peterse
 title: The challenge of building a Foreign Function Interface
 date: 2018-12-21 12:00:00 UTC
 keywords:

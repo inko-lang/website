@@ -1,4 +1,5 @@
 ---
+author: Yorick Peterse
 title: >
   Static typing, pattern matching, and Inko's self-hosting compiler
 date: 2020-06-11 23:00:00 UTC

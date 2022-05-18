@@ -1,4 +1,5 @@
 ---
+author: Yorick Peterse
 title: Inko 0.8.1 released
 date: 2020-10-04 18:00:00 UTC
 ---

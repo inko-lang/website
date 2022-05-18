@@ -1,4 +1,5 @@
 ---
+author: Yorick Peterse
 title: Inko 0.2.5 released
 date: 2018-09-10 22:00:00 UTC
 description: Inko 0.2.5 has been released

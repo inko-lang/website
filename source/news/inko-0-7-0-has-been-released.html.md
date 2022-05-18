@@ -1,4 +1,5 @@
 ---
+author: Yorick Peterse
 title: Inko 0.7.0 has been released
 date: 2020-08-04 21:37:55 UTC
 ---

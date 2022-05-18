@@ -1,4 +1,5 @@
 ---
+author: Yorick Peterse
 title: Introducing the Inko version manager
 date: 2018-07-30 19:00:00
 keywords:

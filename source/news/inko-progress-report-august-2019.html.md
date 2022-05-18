@@ -1,4 +1,5 @@
 ---
+author: Yorick Peterse
 title: "Inko Progress Report: August 2019"
 date: 2019-09-03 14:47:16 UTC
 ---
