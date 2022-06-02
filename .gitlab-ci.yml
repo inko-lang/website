@@ -22,7 +22,7 @@ docker:ruby:
     - schedules
   only:
     refs:
-      - master
+      - main
     changes:
       - docker/ruby/Dockerfile
       - docker/build
@@ -59,7 +59,7 @@ deploy:
     paths:
       - vendor
   only:
-    - master@inko-lang/website
+    - main@inko-lang/website
   environment:
     name: production
     url: https://inko-lang.org
