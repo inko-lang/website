@@ -26,21 +26,21 @@ function update() {
 
     info 'Committing changes (if any)'
 
-    git checkout --quiet master
+    git checkout --quiet main
     git add --all source/images/sponsors data/sponsors.yml
 
     if git commit -m 'Update sponsors data'
     then
         for i in {1..3}
         do
-            info 'Pushing to master'
+            info 'Pushing to main'
 
-            git push https master && return
+            git push https main && return
 
             # A push might fail randomly, or because new commits are added. To
             # handle the latter, we'll try to update the local clone before
             # retrying.
-            git pull --rebase origin master >/dev/null 2>&1
+            git pull --rebase origin main >/dev/null 2>&1
 
             info "Push attempt $i failed, retrying..."
         done
