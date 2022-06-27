@@ -1,10 +1,18 @@
 ---
 - type: public
+  id: gh-9919
+  name: GitHub
+  image: images/sponsors/gh-9919.png
+  website: https://github.com/about
+  total_donated: 55000
+  currency_symbol: "$"
+  created_at: '2022-06-24'
+- type: public
   id: gh-22061
   name: Sytse Sijbrandij
   image: images/sponsors/gh-22061.jpeg
   website: https://github.com/dosire
-  total_donated: 16000
+  total_donated: 16500
   currency_symbol: "$"
   created_at: '2019-10-25'
 - type: public
