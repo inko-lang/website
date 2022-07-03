@@ -20,11 +20,10 @@ other languages are impossible in Inko.
 Inko offers automatic and deterministic memory management, without the use of a
 garbage collector. Instead, it uses single ownership and a form of reference
 counting based on the paper ["Ownership You Can Count
-On"](https://researcher.watson.ibm.com/researcher/files/us-bacon/Dingle07Ownership.pdf).
-Unlike traditional reference counting, reference counts are only used when
-creating references; not when creating or moving owned values. Many reference
-count changes can also be optimised away, reducing the overhead of creating and
-dropping references.
+On"](/papers/ownership.pdf). Unlike traditional reference counting, reference
+counts are only used when creating references; not when creating or moving owned
+values. Many reference count changes can also be optimised away, reducing the
+overhead of creating and dropping references.
 
 Unlike Rust, Inko allows you to create references to owned values and then move
 those owned values, as long as they aren't dropped. If you drop a value while
