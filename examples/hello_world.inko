@@ -1,6 +1,8 @@
 # Hello, world!
 import std::stdio::STDOUT
 
-fn main {
-  STDOUT.new.print('Hello, word!')
+class async Main {
+  fn async main {
+    STDOUT.new.print('Hello, world!')
+  }
 }

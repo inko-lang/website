@@ -6,18 +6,16 @@ fn checked_div(left: Int, right: Int) !! String -> Int {
   left / right
 }
 
-fn main {
-  # This is incorrect: a method that declares an error type
-  # _must_ have the error handled at the call site.
-  checked_div(10, 0)
+# This is incorrect: a method that declares an error type
+# _must_ have the error handled at the call site.
+checked_div(10, 0)
 
-  # If an error is thrown, we just bail out.
-  try checked_div(10, 0) else return
+# If an error is thrown, we just bail out.
+try checked_div(10, 0) else return
 
-  # Or if we're feeling lucky: just give us 0:
-  try checked_div(10, 0) else 0
+# Or if we're feeling lucky: just give us 0:
+try checked_div(10, 0) else 0
 
-  # If there's no better way of handling the error, we can
-  # have it terminate the program, known as a "panic":
-  try! checked_div(10, 0)
-}
+# If there's no better way of handling the error, we can
+# have it terminate the program, known as a "panic":
+try! checked_div(10, 0)

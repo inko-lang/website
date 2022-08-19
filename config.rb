@@ -78,14 +78,16 @@ helpers do
   def examples
     @examples ||=
       begin
-        Dir['./examples/*.inko'].sort.map do |path|
-          data = File.read(path).strip
-          lines = data.lines
-          title = lines.shift.gsub(/^#\s*/, '').strip
-          body = lines.join
+        Dir['./examples/*.inko']
+          .map do |path|
+            data = File.read(path).strip
+            lines = data.lines
+            title = lines.shift.gsub(/^#\s*/, '').strip
+            body = lines.join
 
-          { 'title' => title, 'code' => body }
-        end
+            { 'title' => title, 'code' => body }
+          end
+          .sort_by { |hash| hash['title'] }
       end
   end
 end

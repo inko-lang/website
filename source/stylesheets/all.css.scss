@@ -14,6 +14,7 @@ $text-color: #000;
 $blue: #0c52bb;
 $notice-color: #fffcee;
 $text-bottom-margin: 20px;
+$header-top-margin: 40px;
 $text-left-margin: 20px;
 $media-wide: 'only screen and (min-width: 800px)';
 $media-narrow: 'only screen and (max-width: 800px)';
@@ -46,6 +47,10 @@ h5 {
 
 h6 {
   font-size: .7rem;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  margin: $header-top-margin 0 0 0;
 }
 
 p {
@@ -94,7 +99,9 @@ p code,
 li code,
 td code {
   background: $light-grey;
+  border: 1px solid $grey;
   font-family: $code-font;
+  padding: 0px 5px;
 }
 
 a {
@@ -320,14 +327,14 @@ table {
 }
 
 .page {
+  header {
+    h1 {
+      margin-top: $header-top-margin / 2;
+    }
+  }
+
   article {
     grid-row: 2;
-
-    h1 {
-      @media #{$media-narrow} {
-        margin-top: 0;
-      }
-    }
 
     @media #{$media-wide} {
       grid-row: 1;
@@ -347,10 +354,6 @@ table {
   p {
     margin: $text-bottom-margin / 2 0;
   }
-}
-
-.faq h3 {
-  font-size: 1rem;
 }
 
 .news-index {

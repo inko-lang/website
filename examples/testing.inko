@@ -1,8 +1,11 @@
 # Unit testing
-# Tests are run using the `inko test` command.
 import std::test::*
 
-fn test_add_two_integers !! Failure {
-  try assert_equal(10 + 5, 15)
-  try assert_equal(1 + -1, 0)
+let tests = Tests.new
+
+tests.test('Adding two integers') fn (t) {
+  t.equal(10 + 5, 15)
+  t.equal(1 + -1, 0)
 }
+
+tests.run
