@@ -1,11 +1,15 @@
 # Pattern matching
-match Option.Some(42) {
-  case Some(number) -> number
-  case None -> 0
-}
+class async Main {
+  fn async main {
+    match Option.Some(42) {
+      case Some(number) -> number
+      case None -> 0
+    }
 
-# Guards are also supported:
-match Option.Some(42) {
-  case Some(number) if number < 50 -> number
-  case None -> 0
+    # Guards are also supported:
+    match Option.Some(42) {
+      case Some(number) if number < 50 -> number
+      case None -> 0
+    }
+  }
 }

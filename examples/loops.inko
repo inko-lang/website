@@ -1,13 +1,15 @@
 # Loops
-fn loops {
-  let mut num = 0
+class async Main {
+  fn async main {
+    let mut num = 0
 
-  while num < 10 {
-    num += 1
-  }
+    while num < 10 {
+      num += 1
+    }
 
-  loop {
-    # This loops run forever. You can skip/break
-    # iteration using `next` and `break`.
+    loop {
+      # This loops run forever. You can skip/break
+      # iteration using `next` and `break`.
+    }
   }
 }

@@ -1,4 +1,8 @@
 # Optional values
-let numbers = [10, 20, 30]
+class async Main {
+  fn async main {
+    let numbers = [10, 20, 30]
 
-numbers.get(2).map fn (n) { n.to_string } # => Option.Some('30')
+    numbers.get(2).map fn (n) { n.to_string } # => Option.Some('30')
+  }
+}

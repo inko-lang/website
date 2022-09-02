@@ -1,11 +1,15 @@
 # Unit testing
 import std::test::*
 
-let tests = Tests.new
+class async Main {
+  fn async main {
+    let tests = Tests.new
 
-tests.test('Adding two integers') fn (t) {
-  t.equal(10 + 5, 15)
-  t.equal(1 + -1, 0)
+    tests.test('Adding two integers') fn (t) {
+      t.equal(10 + 5, 15)
+      t.equal(1 + -1, 0)
+    }
+
+    tests.run
+  }
 }
-
-tests.run

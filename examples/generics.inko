@@ -15,18 +15,22 @@ class Stack[T] {
   }
 }
 
-let stack = Stack.new
+class async Main {
+  fn async main {
+    let stack = Stack.new
 
-# This infers `T` to `Int`.
-stack.push(42)
+    # This infers `T` to `Int`.
+    stack.push(42)
 
-# This is an error, as `T` is inferred to `Int`, and
-# `String` isn't compatible with `Int`.
-stack.push('Oh no!')
+    # This is an error, as `T` is inferred to `Int`, and
+    # `String` isn't compatible with `Int`.
+    stack.push('Oh no!')
 
-# The compiler can also infer earlier types based
-# on how they are used later on:
-let stack = Stack.new
-let value = stack.pop # The exact type isn't known yet
+    # The compiler can also infer earlier types based
+    # on how they are used later on:
+    let stack = Stack.new
+    let value = stack.pop # The exact type isn't known yet
 
-10 + value.unwrap # `value` inferred as `Option[Int]`
+    10 + value.unwrap # `value` inferred as `Option[Int]`
+  }
+}
