@@ -1,10 +1,12 @@
 ---
-title: A general-purpose and easy to use programming language
+title: A language for building concurrent software with confidence
 body: |
-  Inko features deterministic automatic memory management (without a garbage
-  collector), a pleasant way of handling errors, excellent support for
-  concurrency, a simple syntax, and much more.
+  Inko makes it easy to build concurrent software, without having to worry about
+  unpredictable performance, unexpected runtime errors, race conditions, and
+  type errors.
 
-  Inko is easy to learn and get started with, whether you are coming from
-  Python, Go, Rust, or another language. Thanks to its support for a wide range
-  of platforms, getting it up and running is a breeze.
+  Inko features deterministic automatic memory management, move semantics,
+  static typing, type-safe concurrency, efficient error handling, and more.
+
+  Inko supports 64-bits Linux, macOS and Windows, and installing Inko is quick
+  and easy.

@@ -22,25 +22,17 @@ class async Stack[T] {
 
 class async Main {
   fn async main {
-    # This is valid, as a few builtin types (e.g. Int
-    # and String) are cheap to copy, so we don't have
-    # to explicitly turn them into unique/sendable
-    # values.
-    Stack.new.push(42)
-
-    # For more complex types, we do need to turn them
-    # into unique values explicitly.
     let stack = Stack.new
 
-    stack.push(recover [10, 20, 30])
+    # These are async calls/messages, and the sender waits
+    # for the result of each call.
+    stack.push(10)
+    stack.push(20)
+    stack.pop # => 20
 
-    # The default approach to sending a message is to
-    # wait for the result immediately. If we instead
-    # want a future to resolve later, we do so using
-    # `async` expressions:
-    let future =
-      async stack.pop # => Future[uni Array[Int]]
+    # And if we don't want to wait:
+    let future = async stack.pop # => Future[Int, Never]
 
-    future.await # => uni Array[Int]
+    future.await # => 10
   }
 }

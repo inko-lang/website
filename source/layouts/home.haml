@@ -7,9 +7,10 @@
   %body
     = partial('top')
 
-    .notice
-      .grid{'data-nosnippet': 'true'}
-        = markdown(data.notice.message)
+    - unless data.notice.message.empty?
+      .notice
+        .grid{'data-nosnippet': 'true'}
+          = markdown(data.notice.message)
 
     .jumbotron
       .grid
@@ -22,9 +23,13 @@
             %i.icon-rocket
             Get started
 
+          %a.button.blue(href="https://github.com/sponsors/YorickPeterse")
+            %i.icon-handshake-o
+            Sponsor
+
           %a.button(href="https://gitlab.com/inko-lang/inko")
             %i.icon-gitlab
-            Follow on GitLab
+            Follow
 
         .code-examples
           %select{ title: 'Choose a code example to display' }

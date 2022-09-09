@@ -12,6 +12,7 @@ $dark-grey: darken($grey, 50%);
 $purple: #5c21a5;
 $text-color: #000;
 $blue: #0c52bb;
+$light-blue: desaturate(lighten($blue, 25%), 20%);
 $notice-color: #fffcee;
 $text-bottom-margin: 20px;
 $header-top-margin: 40px;
@@ -54,7 +55,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 p {
-  margin-bottom: $text-bottom-margin;
+  margin: $text-bottom-margin 0;
 }
 
 ul,
@@ -342,20 +343,6 @@ table {
   }
 }
 
-.footer {
-  border-top: 1px solid $grey;
-  font-size: .7rem;
-  margin-top: 10px;
-
-  footer {
-    text-align: center;
-  }
-
-  p {
-    margin: $text-bottom-margin / 2 0;
-  }
-}
-
 .news-index {
   td,
   th {
@@ -424,6 +411,17 @@ select {
     &:hover {
       background: lighten($green, 5%);
       border-color: darken($green, 2%);
+    }
+  }
+
+  &.blue {
+    background: $light-blue;
+    border-color: darken($light-blue, 10%);
+    color: $white;
+
+    &:hover {
+      background: lighten($light-blue, 5%);
+      border-color: darken($light-blue, 2%);
     }
   }
 }
