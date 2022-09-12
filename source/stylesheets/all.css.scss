@@ -14,8 +14,8 @@ $text-color: #000;
 $blue: #0c52bb;
 $light-blue: desaturate(lighten($blue, 25%), 20%);
 $notice-color: #fffcee;
+$list-bottom-margin: 5px;
 $text-bottom-margin: 20px;
-$header-top-margin: 40px;
 $text-left-margin: 20px;
 $media-wide: 'only screen and (min-width: 800px)';
 $media-narrow: 'only screen and (max-width: 800px)';
@@ -51,11 +51,11 @@ h6 {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin: $header-top-margin 0 0 0;
+  margin: 0 0 $text-bottom-margin 0;
 }
 
 p {
-  margin: $text-bottom-margin 0;
+  margin: 0 0 $text-bottom-margin 0;
 }
 
 ul,
@@ -65,20 +65,19 @@ ol {
 
   ul,
   ol {
-    margin-bottom: 0;
-    margin-left: $text-left-margin;
+    margin: $list-bottom-margin 0 0 $text-left-margin;
   }
 }
 
 ul li {
   list-style: disc outside;
-  margin-bottom: 5px;
+  margin-bottom: $list-bottom-margin;
   margin-left: 1rem;
 }
 
 ol li {
   list-style: decimal outside;
-  margin-bottom: 5px;
+  margin-bottom: $list-bottom-margin;
   margin-left: 1rem;
 }
 
@@ -91,7 +90,7 @@ pre {
   font-family: $code-font;
   font-size: .8rem;
   line-height: 1.3;
-  margin-left: $text-left-margin;
+  margin: 0 0 $text-bottom-margin $text-left-margin;
   overflow-x: auto;
   white-space: pre-wrap;
 }
@@ -102,7 +101,8 @@ td code {
   background: $light-grey;
   border: 1px solid $grey;
   font-family: $code-font;
-  padding: 0px 5px;
+  font-size: .8rem;
+  padding: 0 5px;
 }
 
 a {
@@ -281,6 +281,7 @@ table {
 .jumbotron {
   background: $light-grey;
   border-bottom: 1px solid $grey;
+  margin-bottom: $text-bottom-margin;
   padding: 20px 0;
 
   .grid {
@@ -330,7 +331,7 @@ table {
 .page {
   header {
     h1 {
-      margin-top: $header-top-margin / 2;
+      margin-top: $text-bottom-margin;
     }
   }
 
@@ -361,7 +362,7 @@ table {
 .news-meta {
   color: $dark-grey;
   font-size: .8rem;
-  margin: 0;
+  margin: 0 0 $text-bottom-margin 0;
 }
 
 .news-article h1 {
