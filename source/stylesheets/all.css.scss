@@ -117,6 +117,7 @@ a {
 
 table {
   border-spacing: 0;
+  margin-bottom: $text-bottom-margin;
   text-align: left;
   width: 100%;
 
@@ -424,6 +425,30 @@ select {
       background: lighten($light-blue, 5%);
       border-color: darken($light-blue, 2%);
     }
+  }
+}
+
+.corporate-sponsors-table {
+  .logo {
+    min-width: 170px;
+    width: 170px;
+  }
+
+  img {
+    vertical-align: middle;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  td,
+  th {
+    border-bottom: none;
+  }
+
+  td {
+    padding-bottom: $text-bottom-margin;
   }
 }
 

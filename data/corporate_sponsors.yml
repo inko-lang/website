@@ -1,0 +1,7 @@
+---
+- name: MacStadium
+  logo: /images/macstadium.svg
+  description: |
+    [MacStadium](https://macstadium.com/) is a macOS cloud hosting service.
+    MacStadium sponsors the use of an M1 Mac Mini for our continuous integration
+    pipeline.

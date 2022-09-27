@@ -14,6 +14,16 @@
               = current_page.data.title
           = yield
 
+          %h2 Corporate Sponsors
+          %table.corporate-sponsors-table
+            %tbody
+              - data.corporate_sponsors.each do |row|
+                %tr
+                  %td.logo
+                    %img{src: row['logo'], alt: row['name'], width: '150', height: '60'}
+                  %td
+                    = markdown(row['description'])
+
           - if data.sponsors.any?
-            %h2 Current sponsors
+            %h2 GitHub sponsors
             = partial('sponsors')
