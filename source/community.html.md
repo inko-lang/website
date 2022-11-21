@@ -19,6 +19,7 @@ For more information, see the [code of conduct](/code-of-conduct).
 ## Communities
 
 * [/r/inko](https://www.reddit.com/r/inko/) on Reddit
+* [Discord](https://discord.gg/seeURxHxCb)
 * A [Matrix channel](https://matrix.to/#/#inko-lang:matrix.org)
 * A [read-only
   overview](https://view.matrix.org/room/!CENmKDnMngVwJJrTry:matrix.org/) of
