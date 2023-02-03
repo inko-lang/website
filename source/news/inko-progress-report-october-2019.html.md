@@ -34,7 +34,7 @@ If you would like to engage with others interested in the development of Inko,
 please join the [Matrix chat
 channel](https://riot.im/app/#/room/#inko-lang:matrix.org). You can also follow
 the development on [Reddit](https://www.reddit.com/r/inko/), or follow the
-author of Inko on [Twitter](https://twitter.com/yorickpeterse). For more
+author of Inko on [Twitter](https://archive.is/6LWOm). For more
 information check out the [Community](/community) page.
 
 ## Donate using GitHub Sponsors

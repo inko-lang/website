@@ -35,7 +35,7 @@ Sponsors](https://github.com/sponsors/YorickPeterse/).
 
 If you would like to engage with others interested in the development of Inko,
 please join our community on [Matrix][matrix], [Reddit][reddit], or follow the
-author of Inko on [Twitter](https://twitter.com/yorickpeterse). For more
+author of Inko on [Twitter](https://archive.is/6LWOm). For more
 information check out the [Community](/community) page.
 
 ## Windows CI now runs in VirtualBox
