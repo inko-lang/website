@@ -31,7 +31,7 @@ let d = a     # moves "a" into "d"
 ```
 
 This gives you the benefits of single ownership, but at a fraction of the cost
-compared so languages such as Rust. The use of single ownership also means more
+compared to languages such as Rust. The use of single ownership also means more
 predictable behaviour and performance, and not having to spend a long time
 adjusting different garbage collection settings.
 
