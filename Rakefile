@@ -79,7 +79,7 @@ end
 
 desc 'Updates the local build directory from S3'
 task :download do
-  sh "aws s3 sync s3://#{ENV.fetch('BUCKET')} build"
+  sh "aws s3 sync --no-progress s3://#{ENV.fetch('BUCKET')} build"
 end
 
 desc 'Deploys the website'
@@ -92,7 +92,7 @@ task deploy: %i[download build] do
     sh "aws s3 cp build/sponsors/index.html " \
       "s3://#{bucket}/sponsors/index.html #{flags}" \
   else
-    sh "aws s3 sync build s3://#{bucket} --delete #{flags}"
+    sh "aws s3 sync build s3://#{bucket} --delete #{flags} --no-progress"
   end
 
   sh "aws cloudfront create-invalidation --distribution-id #{dist} --paths '/*'"
