@@ -17,7 +17,6 @@ function update() {
 
         git config --global user.email noreply@inko-lang.org
         git config --global user.name 'Inko bot'
-        git remote add https "https://project_7421203_bot:${SPONSORS_ACCESS_TOKEN}@gitlab.com/inko-lang/website.git" >/dev/null 2>&1 || true
     fi
 
     info 'Updating sponsors data'
@@ -35,7 +34,7 @@ function update() {
         do
             info 'Pushing to main'
 
-            git push https main && return
+            git push origin main && return
 
             # A push might fail randomly, or because new commits are added. To
             # handle the latter, we'll try to update the local clone before

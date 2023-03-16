@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: Inko 0.4.0 released
-date: 2019-05-10 22:10:13 UTC
+date: "2019-05-10 22:10:13 UTC"
 description: Inko 0.4.0 has been released
 ---
 <!-- vale off -->
@@ -177,8 +177,8 @@ The `MonotonicTime` type has been renamed to `Instant`.
 
 More information about these changes can be found in commit [7f0cb4][std-time].
 
-[changelog]: https://gitlab.com/inko-lang/inko/blob/v0.4.0/CHANGELOG.md#040-may-11-2019
-[new-scheduler]: https://gitlab.com/inko-lang/inko/commit/3e5882be8ce36b594c9012f236d14207fc8983cf
-[bytecode]: https://gitlab.com/inko-lang/inko/commit/d80c4c30f61e6c2d89cfde5079deb41f9035c681
-[std-time]: https://gitlab.com/inko-lang/inko/commit/7f0cb46bcd3769045934d55c28ea66d326a05c50
-[issue-163]: https://gitlab.com/inko-lang/inko/issues/163
+[changelog]: https://github.com/inko-lang/inko/blob/v0.4.0/CHANGELOG.md#040---may-11-2019
+[new-scheduler]: https://github.com/inko-lang/inko/commit/3e5882be8ce36b594c9012f236d14207fc8983cf
+[bytecode]: https://github.com/inko-lang/inko/commit/d80c4c30f61e6c2d89cfde5079deb41f9035c681
+[std-time]: https://github.com/inko-lang/inko/commit/7f0cb46bcd3769045934d55c28ea66d326a05c50
+[issue-163]: https://github.com/inko-lang/inko/issues/233

@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: Introducing the Inko website and manual
-date: 2018-07-17 12:00 UTC
+date: "2018-07-17 12:00 UTC"
 keywords:
   - introducing
   - inko

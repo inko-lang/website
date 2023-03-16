@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: Inko 0.8.1 released
-date: 2020-10-04 18:00:00 UTC
+date: "2020-10-04 18:00:00 UTC"
 ---
 
 Inko 0.8.1 has been released, featuring a new approach for running Inko
@@ -16,7 +16,7 @@ bytecode, fewer dependencies, and a simplified build and installation process.
 {:toc}
 
 For the full list of changes, take a look at
-[the changelog](https://gitlab.com/inko-lang/inko/-/blob/5440b4e4c552b4f41b9e03cd1bbd3c1b44ace926/CHANGELOG.md#080-october-03-2020).
+[the changelog](https://github.com/inko-lang/inko/blob/5440b4e4c552b4f41b9e03cd1bbd3c1b44ace926/CHANGELOG.md#080---october-03-2020).
 
 If you would like to support the development of Inko, please [donate to Inko on
 Open Collective](https://opencollective.com/inko-lang) or via [GitHub
@@ -143,7 +143,7 @@ Starting with 0.8.1, we no longer provide pre-compiled packages for Linux, macOS
 and Windows. We found this to complicate the release process too much, while
 not bringing enough benefits to make this worth the effort. Instead, we will
 focus our attention of getting Inko in package manager repositories. For more
-details, refer to [this issue](https://gitlab.com/inko-lang/inko/-/issues/218).
+details, refer to [this issue](https://github.com/inko-lang/inko/issues/287).
 
 ## Revamped CLI
 

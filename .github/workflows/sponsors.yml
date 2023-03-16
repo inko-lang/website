@@ -1,0 +1,21 @@
+---
+name: Sponsors data
+on:
+  schedule:
+    - cron: '15 1 * * 1'
+  workflow_dispatch:
+
+jobs:
+  sponsors:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+          bundler-cache: true
+      - run: bash ./scripts/sponsors.sh
+        env:
+          SPONSORS_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}

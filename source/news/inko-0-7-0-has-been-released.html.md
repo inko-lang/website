@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: Inko 0.7.0 has been released
-date: 2020-08-04 21:37:55 UTC
+date: "2020-08-04 21:37:55 UTC"
 ---
 
 Inko 0.7.0 has been released, featuring improved garbage collection performance,
@@ -17,7 +17,7 @@ instead of gradual typing.
 {:toc}
 
 For the full list of changes, take a look at
-[the changelog](https://gitlab.com/inko-lang/inko/-/blob/7c955324671da3897041f156ac08019086ed250d/CHANGELOG.md#070-august-04-2020).
+[the changelog](https://github.com/inko-lang/inko/blob/7c955324671da3897041f156ac08019086ed250d/CHANGELOG.md#070---august-04-2020).
 
 If you would like to support the development of Inko, please [donate to Inko on
 Open Collective](https://opencollective.com/inko-lang) or via [GitHub

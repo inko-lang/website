@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: "Inko Progress Report: May 2022"
-date: 2022-06-02 16:29:45 UTC
+date: "2022-06-02 16:29:45 UTC"
 ---
 
 In May most of the work on Inko's mid-level IR ("MIR") was completed, including
@@ -13,7 +13,7 @@ Pattern matching proved to be more challenging than anticipated. Originally I
 had hoped to complete the work in May, but just investigating and understanding
 the various pattern matching and exhaustiveness checking algorithms took
 almost three weeks. As part of this effort I implemented two algorithms in [this
-project](https://gitlab.com/yorickpeterse/pattern-matching-in-rust). The
+project](https://github.com/yorickpeterse/pattern-matching-in-rust). The
 algorithms I looked into (and implemented) are:
 
 1. [ML pattern compilation and partial evaluation](https://citeseerx.ist.psu.edu/viewdoc/summary?doi=10.1.1.48.1363)
@@ -25,7 +25,7 @@ simplicity, and started to include it in Inko's compiler.
 ## Potentially compiling Inko to C
 
 Aside from this I started [toying with the idea of one day compiling Inko to
-C](https://gitlab.com/inko-lang/inko/-/issues/248), with its runtime written in
+C](https://github.com/inko-lang/inko/issues/317), with its runtime written in
 Rust.
 
 The reason for looking into this is as follows: interpreters without JITs won't

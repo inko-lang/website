@@ -111,10 +111,8 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2022.0105)
     mini_magick (4.11.0)
-    mini_portile2 (2.8.0)
     minitest (5.16.3)
-    nokogiri (1.13.9)
-      mini_portile2 (~> 2.8.0)
+    nokogiri (1.14.2-x86_64-linux)
       racc (~> 1.4)
     openssl (3.0.1)
     padrino-helpers (0.15.1)
@@ -171,7 +169,7 @@ GEM
     zeitwerk (2.6.4)
 
 PLATFORMS
-  ruby
+  x86_64-linux
 
 DEPENDENCIES
   graphql-client (~> 0.16)

@@ -5,7 +5,7 @@ module Sponsors
   class Github
     HTTP = GraphQL::Client::HTTP.new('https://api.github.com/graphql') do
       def headers(*)
-        { 'Authorization' => "bearer #{ENV.fetch('GITHUB_ACCESS_TOKEN')}" }
+        { 'Authorization' => "bearer #{ENV.fetch('SPONSORS_ACCESS_TOKEN')}" }
       end
     end
 

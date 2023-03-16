@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: Funding Inko's development
-date: 2019-07-04 16:50:39 UTC
+date: "2019-07-04 16:50:39 UTC"
 ---
 <!-- vale off -->
 

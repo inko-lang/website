@@ -1,0 +1,42 @@
+---
+name: Build and deploy
+on: push
+
+env:
+  DISTRIBUTION_ID: E2461OP4YFCUOQ
+  BUCKET: inko-lang.org
+  AWS_DEFAULT_REGION: eu-west-1
+
+jobs:
+  vale:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: errata-ai/vale-action@reviewdog
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        with:
+          reporter: github-check
+          vale_flags: '--no-wrap --sort'
+
+  deploy:
+    runs-on: ubuntu-latest
+    needs:
+      - vale
+    if: |
+      github.repository == 'inko-lang/website' && github.ref_name == 'main'
+    steps:
+      - uses: actions/checkout@v3
+      - uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0'
+          bundler-cache: true
+      - uses: actions/cache@v3
+        id: cache-build
+        with:
+          path: build
+          key: ${{ runner.os }}-deploy
+      - run: rake deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

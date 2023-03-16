@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: "Inko progress report: July 2019"
-date: 2019-08-04 13:51:20 UTC
+date: "2019-08-04 13:51:20 UTC"
 ---
 
 Starting this month we will be sharing monthly updates on the progress made on
@@ -336,7 +336,7 @@ the work on porting the parser to Inko, release Inko 0.5.0, and start working on
 porting over the compiler to Inko.
 
 [ll-1]: https://en.wikipedia.org/wiki/LL_parser
-[static-methods]: https://gitlab.com/inko-lang/inko/commit/f86eb0b091e3c0ffdbda2d7387f36b9ae091501e
+[static-methods]: https://github.com/inko-lang/inko/commit/f86eb0b091e3c0ffdbda2d7387f36b9ae091501e
 [appveyor]: https://www.appveyor.com/
 [hetzner]: https://www.hetzner.com/
 [gitlab-runner-2016]: https://gitlab.com/gitlab-org/gitlab-runner/merge_requests/1508
@@ -347,7 +347,7 @@ porting over the compiler to Inko.
 [runner-3194]: https://gitlab.com/gitlab-org/gitlab-runner/issues/3194
 [reddit-rsc]: https://www.reddit.com/r/sysadmin/comments/c9a005/server_2019_vm_slow_network_performance_due_to_rsc/
 [ienv]: https://gitlab.com/inko-lang/ienv
-[dep-scanning]: https://gitlab.com/inko-lang/inko/commit/59a1aeda2c5758451b3cc9e3cd4ba9b72ec8a479
+[dep-scanning]: https://github.com/inko-lang/inko/commit/59a1aeda2c5758451b3cc9e3cd4ba9b72ec8a479
 [cargo-audit]: https://crates.io/crates/cargo-audit
-[audit.rb]: https://gitlab.com/inko-lang/inko/blob/94e22f5cf9525c1fed071b821f9c4ba3573f1831/scripts/audit.rb
+[audit.rb]: https://github.com/inko-lang/inko/blob/94e22f5cf9525c1fed071b821f9c4ba3573f1831/scripts/audit.rb
 [open collective]: https://opencollective.com/inko-lang

@@ -1,9 +1,0 @@
----
-- source: /source\/news\/([^\.]+)\.html\.md/
-  public: news/\1
-
-- source: /source\/([^\.]+)\.html\.md/
-  public: \1
-
-- source: 'source/feed.xml.builder'
-  public: feed.xml

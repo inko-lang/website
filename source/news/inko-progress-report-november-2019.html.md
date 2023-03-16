@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: "Inko Progress Report: November 2019"
-date: 2019-12-06 15:00:00 UTC
+date: "2019-12-06 15:00:00 UTC"
 ---
 
 The progress report for November 2019 is here! In November we released [Inko

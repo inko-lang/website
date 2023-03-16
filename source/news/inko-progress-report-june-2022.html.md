@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: "Inko progress report: June 2022"
-date: 2022-07-02 11:14:05 UTC
+date: "2022-07-02 11:14:05 UTC"
 ---
 
 After a three week vacation, followed by a productive week of working on the

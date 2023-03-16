@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: "Inko in 2023"
-date: 2023-01-02 16:00:00 UTC
+date: "2023-01-02 16:00:00 UTC"
 ---
 
 It's been a while since our last update, so let's take a look at what's planned

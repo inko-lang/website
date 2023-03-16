@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: "Inko Progress Report: August 2022"
-date: 2022-09-02 14:10:17 UTC
+date: "2022-09-02 14:10:17 UTC"
 ---
 
 With August behind us I'm pleased to announce that we're getting close to a new

@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: "Inko 0.6.0 has been released"
-date: 2019-11-17 14:15:44 UTC
+date: "2019-11-17 14:15:44 UTC"
 ---
 
 Inko 0.6.0 has been released, featuring improvements to the garbage collector,
@@ -247,7 +247,7 @@ postpone such improvements so we can instead focus on working towards a
 self-hosting Inko compiler.
 
 For more information about all the garbage collector changes, consider taking a
-look at commit [347ade](https://gitlab.com/inko-lang/inko/commit/347ade205d68084d1ab742cdfbe6e67c3a1a9de3).
+look at commit [347ade](https://github.com/inko-lang/inko/commit/347ade205d68084d1ab742cdfbe6e67c3a1a9de3).
 
 ## Reworked sending of process messages
 

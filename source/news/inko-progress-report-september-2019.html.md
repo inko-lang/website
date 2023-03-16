@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: "Inko progress report: September 2019"
-date: 2019-10-05 22:15:00 UTC
+date: "2019-10-05 22:15:00 UTC"
 ---
 
 The progress report for September 2019 is here! In September we released version

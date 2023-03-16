@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: "Inko Progress Report: July 2022"
-date: 2022-08-02 13:10:05 UTC
+date: "2022-08-02 13:10:05 UTC"
 ---
 
 In [last month's progress report](/news/inko-progress-report-june-2022/) I

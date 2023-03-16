@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: Inko 0.9.0 released
-date: 2020-12-23 17:00:00 UTC
+date: "2020-12-23 17:00:00 UTC"
 ---
 
 Merry Christmas! Inko 0.9.0 has been released, with a new manual, fewer
@@ -56,7 +56,7 @@ guide in the manual.
 ## Reduced memory usage of the Ruby compiler
 
 In commit
-[fb80d4](https://gitlab.com/inko-lang/inko/-/commit/fb80d41913dd02264189901af57501bd4c4fbedb)
+[fb80d4](https://github.com/inko-lang/inko/commit/fb80d41913dd02264189901af57501bd4c4fbedb)
 we reduced the memory usage of the Ruby compiler by about 20%, making it
 easier to run Inko in memory constrained environments such as Docker containers.
 
@@ -410,4 +410,4 @@ If you'd like to follow the development of Inko, consider joining our [Matrix
 chat room](https://matrix.to/#/+inko:matrix.org) or our [Reddit
 community](https://www.reddit.com/r/inko/).
 
-[changelog]: https://gitlab.com/inko-lang/inko/-/blob/5dd2dabb08f6efc9e852a9f26591582ae85cba5d/CHANGELOG.md#090-december-23-2020
+[changelog]: https://github.com/inko-lang/inko/blob/5dd2dabb08f6efc9e852a9f26591582ae85cba5d/CHANGELOG.md#090---december-23-2020

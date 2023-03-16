@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: Inko 0.2.3 released
-date: 2018-08-19 12:30:00 UTC
+date: "2018-08-19 12:30:00 UTC"
 description: Inko 0.2.3 released
 ---
 <!-- vale off -->
@@ -35,4 +35,4 @@ atomic operations for allocating objects, and remove bucket wide locking"][mr-10
 The full list of changes can be found in the [CHANGELOG][changelog].
 
 [mr-10]: https://gitlab.com/inko-lang/inko/merge_requests/10
-[changelog]: https://gitlab.com/inko-lang/inko/blob/6bf7cfb086183aa7a0fdad2edb210cd6c1a4ec1e/CHANGELOG.md#023-august-19-2018
+[changelog]: https://github.com/inko-lang/inko/blob/6bf7cfb086183aa7a0fdad2edb210cd6c1a4ec1e/CHANGELOG.md#023---august-19-2018

@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: "Inko Progress Report: March 2022"
-date: 2022-04-02 14:59:39 UTC
+date: "2022-04-02 14:59:39 UTC"
 ---
 
 ## Type checking progress

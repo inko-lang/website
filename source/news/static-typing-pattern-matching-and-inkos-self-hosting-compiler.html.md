@@ -2,7 +2,7 @@
 author: Yorick Peterse
 title: >
   Static typing, pattern matching, and Inko's self-hosting compiler
-date: 2020-06-11 23:00:00 UTC
+date: "2020-06-11 23:00:00 UTC"
 ---
 
 It's been a while since our last Inko progress update. But worry not, we've been
@@ -192,7 +192,7 @@ knowledge of keyword arguments, allowing you to use them when the type a message
 is sent to is not known. This complicates the VM, adds overhead even when
 sending messages without keyword arguments, and is not used in Inko's standard
 library. To solve this, [we will change how keyword arguments are
-implemented](https://gitlab.com/inko-lang/inko/-/issues/174). This
+implemented](https://github.com/inko-lang/inko/issues/244). This
 implementation requires that the compiler knows about all arguments available
 for a message. As such, it will not work when sending messages to dynamically
 typed values. As Inko's standard library makes little use of dynamic types, we

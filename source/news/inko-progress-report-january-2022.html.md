@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: "Inko Progress Report: January 2022"
-date: 2022-01-31 13:28:19 UTC
+date: "2022-01-31 13:28:19 UTC"
 ---
 
 It's been a while since our last update, with the last release being in December

@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: Inko 0.2.4 released
-date: 2018-09-09 19:00:00 UTC
+date: "2018-09-09 19:00:00 UTC"
 description: Inko 0.2.4 released
 ---
 <!-- vale off -->
@@ -296,12 +296,12 @@ These changes simplify the compiler, allow the VM to schedule blocks more
 easily, and ensure that `self` doesn't show up in the list of arguments of a
 block when using `std::mirror::BlockMirror.argument_names`.
 
-[changelog]: https://gitlab.com/inko-lang/inko/blob/ae209a0dd19d4ad2995d5dc4e5cdbb1cc59e964d/CHANGELOG.md#024-september-08-2018
+[changelog]: https://github.com/inko-lang/inko/blob/ae209a0dd19d4ad2995d5dc4e5cdbb1cc59e964d/CHANGELOG.md#024---september-08-2018
 [finalizers]: https://en.wikipedia.org/wiki/Finalizer
 [golang]: https://golang.org/
 [pep343]: https://www.python.org/dev/peps/pep-0343/
 [prefetching]: https://inko-lang.org/manual/virtual-machine/memory-management/#header-prefetching
-[networking]: https://gitlab.com/inko-lang/inko/issues/112
+[networking]: https://github.com/inko-lang/inko/issues/189
 [ffi]: https://gitlab.com/inko-lang/inko/issues/113
-[parse-format-time]: https://gitlab.com/inko-lang/inko/issues/96
+[parse-format-time]: https://github.com/inko-lang/inko/issues/173
 [0.3.0]: https://gitlab.com/inko-lang/inko/issues?scope=all&utf8=%E2%9C%93&state=opened&milestone_title=0.3.0

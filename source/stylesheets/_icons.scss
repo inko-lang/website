@@ -1,9 +1,9 @@
 @font-face {
   font-family: 'icons';
   src:
-    url('/fonts/icons.ttf?bq1pda') format('truetype'),
-    url('/fonts/icons.woff?bq1pda') format('woff'),
-    url('/fonts/icons.svg?bq1pda#icons') format('svg');
+    url('/fonts/icons.ttf?bdcnz0') format('truetype'),
+    url('/fonts/icons.woff?bdcnz0') format('woff'),
+    url('/fonts/icons.svg?bdcnz0#icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -31,8 +31,8 @@ i {
 .icon-book:before {
   content: "\f02d";
 }
-.icon-fire:before {
-  content: "\f06d";
+.icon-github:before {
+  content: "\f09b";
 }
 .icon-group:before {
   content: "\f0c0";
@@ -40,30 +40,12 @@ i {
 .icon-users:before {
   content: "\f0c0";
 }
-.icon-dashboard:before {
-  content: "\f0e4";
-}
-.icon-tachometer:before {
-  content: "\f0e4";
-}
-.icon-umbrella:before {
-  content: "\f0e9";
-}
 .icon-rocket:before {
   content: "\f135";
-}
-.icon-recycle:before {
-  content: "\f1b8";
 }
 .icon-newspaper-o:before {
   content: "\f1ea";
 }
-.icon-gitlab:before {
-  content: "\f296";
-}
 .icon-handshake-o:before {
   content: "\f2b5";
-}
-.icon-file-code-o:before {
-  content: "\f1c9";
 }

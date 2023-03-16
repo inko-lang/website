@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: The challenge of building a Foreign Function Interface
-date: 2018-12-21 12:00:00 UTC
+date: "2018-12-21 12:00:00 UTC"
 keywords:
   - ffi
   - foreign function interface
@@ -388,4 +388,4 @@ of Rust.
 [macos thread limit]: https://www.jstorimer.com/blogs/workingwithcode/7970125-how-many-threads-is-too-many
 [libuv]: https://libuv.org/
 [musl]: https://www.musl-libc.org/
-[inko ffi]: https://gitlab.com/inko-lang/inko/blob/57247e719ebd937f5fff7dbb9fcfc90fed5be858/vm/src/ffi.rs
+[inko ffi]: https://github.com/inko-lang/inko/blob/57247e719ebd937f5fff7dbb9fcfc90fed5be858/vm/src/ffi.rs

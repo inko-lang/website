@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: Inko 0.4.1 released
-date: 2019-05-15 00:24:34 UTC
+date: "2019-05-15 00:24:34 UTC"
 description: Inko 0.4.1 has been released
 ---
 <!-- vale off -->
@@ -18,4 +18,4 @@ such as Inko trying to connect over and over again.
 More information about the problem and fixes can be found in commit
 [53675b][fix].
 
-[fix]: https://gitlab.com/inko-lang/inko/commit/53675b7ae824d7bae5e701628044cc5580ee82ab
+[fix]: https://github.com/inko-lang/inko/commit/53675b7ae824d7bae5e701628044cc5580ee82ab

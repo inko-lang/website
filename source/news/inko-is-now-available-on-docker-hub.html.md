@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: Inko is now available on Docker Hub
-date: 2020-10-25 00:46:53 UTC
+date: "2020-10-25 00:46:53 UTC"
 ---
 
 You can now install Inko using [Docker](https://www.docker.com/) or

@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: Inko now supports stable Rust
-date: 2018-08-02 18:00 UTC
+date: "2018-08-02 18:00 UTC"
 keywords:
   - inko
   - rust
@@ -46,10 +46,10 @@ nightly-only features enabled.
 
 Support for stable Rust was added in the following commits:
 
-* [ienv: Support building using stable Rust](https://gitlab.com/inko-lang/ienv/commit/b91e896cc9761beba6eb591a509fcc265fa27912)
-* [inko: Support building on stable Rust ](https://gitlab.com/inko-lang/inko/commit/8cf6067428a4865b98c7dfb64eb46117c2f74263)
-* [inko: Use std::alloc everywhere](https://gitlab.com/inko-lang/inko/commit/47e9f0fe3e8ad8f9ea8fe57e3a83f7c59b899500)
-* [inko: Use std::alloc for immix::block](https://gitlab.com/inko-lang/inko/commit/443dfba376a6f50e54149a7b94b77b6871c4bb52)
+* [ienv: Support building using stable Rust](https://github.com/inko-lang/ienv/commit/b91e896cc9761beba6eb591a509fcc265fa27912)
+* [inko: Support building on stable Rust ](https://github.com/inko-lang/inko/commit/8cf6067428a4865b98c7dfb64eb46117c2f74263)
+* [inko: Use std::alloc everywhere](https://github.com/inko-lang/inko/commit/47e9f0fe3e8ad8f9ea8fe57e3a83f7c59b899500)
+* [inko: Use std::alloc for immix::block](https://github.com/inko-lang/inko/commit/443dfba376a6f50e54149a7b94b77b6871c4bb52)
 
 [rust-1.28]: https://blog.rust-lang.org/2018/08/02/Rust-1.28.html
 [prefetch]: http://users.cecs.anu.edu.au/~steveb/downloads/pdf/pf-ismm-2007.pdf

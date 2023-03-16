@@ -71,9 +71,12 @@ behaviour:
 
 ## Reporting abuse
 
-Instances of abusive, harassing, or otherwise unacceptable behavior may be
-reported by creating a **confidential** issue in the [abuse
-project](https://gitlab.com/inko-lang/abuse). All complaints will be reviewed
-and investigated and will result in a response that is deemed necessary and
-appropriate to the circumstances. Maintainers are obligated to maintain
-confidentiality with regard to the reporter of an incident.
+If you encounter abusive content such as issues and comments on GitHub, you can
+report these using the "Report content" feature, found under the `...` menu
+(usually somewhere in the top right corner of a comment or issue).
+
+If you wish to report content on our Discord server, please send a private
+message to one of the moderators.
+
+For anything else you can either create an issue on GitHub, or contact one of
+the maintainers directly through Email.

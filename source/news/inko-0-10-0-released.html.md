@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: "Inko 0.10.0 released"
-date: 2022-09-12 14:00:00 UTC
+date: "2022-09-12 14:00:00 UTC"
 ---
 
 It's been almost two years since the last Inko release, and 1.5 years since we
@@ -39,8 +39,8 @@ API similar to Erlang. Both of these have their issues: garbage collectors are
 notoriously unpredictable, and may require a lot of tuning. Erlang's concurrency
 API in turn is difficult to make type-safe. We first started looking into
 solving these issues [over two years
-ago](https://gitlab.com/inko-lang/inko/-/issues/207), but at the time we
-couldn't come up with a viable solution.
+ago](https://github.com/inko-lang/inko/issues/277), but at the time we couldn't
+come up with a viable solution.
 
 Along the way we came across the paper ["Ownership You Can Count On: A Hybrid
 Approach to Safe Explicit Memory
@@ -122,7 +122,7 @@ take a while to be updated to version 0.10.0.
 You can also build from source:
 
 ```bash
-git clone https://gitlab.com/inko-lang/inko.git --branch=v0.10.0
+git clone https://github.com/inko-lang/inko.git --branch=v0.10.0
 cd inko
 
 # This installs Inko into /usr
@@ -134,7 +134,7 @@ If you want to contribute to Inko you'll need to build the `master` branch like
 so:
 
 ```bash
-git clone https://gitlab.com/inko-lang/inko.git
+git clone https://github.com/inko-lang/inko.git
 cd inko
 cargo build --release
 ```
@@ -148,7 +148,7 @@ right expectations. Inko is only at version 0.10, and we still have a long road
 ahead of us before reaching version 1.0. This means you may encounter bugs,
 compiler crashes, performance issues, or missing/lacking documentation. If you
 encounter any problems, please [report them
-on our issue tracker](https://gitlab.com/inko-lang/inko/-/issues/new).
+on our issue tracker](https://github.com/inko-lang/inko/issues).
 
 With that said, let's dive into the changes included in this release.
 
@@ -620,11 +620,11 @@ in 0.10.0, such as by improving the standard library and the compiler's test
 suite.
 
 To make sharing Inko code easier we'll start looking into building a [package
-manager for Inko](https://gitlab.com/inko-lang/inko/-/issues/225), though this
+manager for Inko](https://github.com/inko-lang/inko/issues/295), though this
 is unlikely to make it into the next release due to the scope of the work.
 
 We'll also continue looking into [compiling Inko to machine
-code](https://gitlab.com/inko-lang/inko/-/issues/248). This isn't something
+code](https://github.com/inko-lang/inko/issues/317). This isn't something
 planned for the next release specifically, but rather something we're looking
 into on the side.
 

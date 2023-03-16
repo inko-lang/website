@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: "Inko Progress Report: August 2019"
-date: 2019-09-03 14:47:16 UTC
+date: "2019-09-03 14:47:16 UTC"
 ---
 
 The progress report for August 2019 is here! This month was all about porting
@@ -75,8 +75,8 @@ pairs.
 
 For more information about these changes you can refer to the following commits:
 
-* <https://gitlab.com/inko-lang/inko/commit/94ac7d14de445b3df4f97ad4967868f99e4a2e14>
-* <https://gitlab.com/inko-lang/inko/commit/c94fb713b12e8ecf7ecfab34e936d824cea60fae>
+* <https://github.com/inko-lang/inko/commit/94ac7d14de445b3df4f97ad4967868f99e4a2e14>
+* <https://github.com/inko-lang/inko/commit/c94fb713b12e8ecf7ecfab34e936d824cea60fae>
 
 ## Porting the parser to Inko
 

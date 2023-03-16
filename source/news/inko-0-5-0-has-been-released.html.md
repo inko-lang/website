@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: Inko 0.5.0 has been released
-date: 2019-09-16 18:17:15 UTC
+date: "2019-09-16 18:17:15 UTC"
 description: Inko 0.5.0 has been released
 ---
 
@@ -393,7 +393,7 @@ virtual machine from source.
 While you can use these packages outside of MSYS2 (they do not depend on MSYS2),
 ienv does not work without a Unix-like environment (such as MSYS2).
 
-[changelog]: https://gitlab.com/inko-lang/inko/blob/v0.5.0/CHANGELOG.md#050-september-16-2019
+[changelog]: https://github.com/inko-lang/inko/blob/v0.5.0/CHANGELOG.md#050---september-16-2019
 [july-2019]: /news/inko-progress-report-july-2019/
 [aug-2019]: /news/inko-progress-report-august-2019/
 [open-collective]: https://opencollective.com/inko-lang/contribute/backer-9989/checkout

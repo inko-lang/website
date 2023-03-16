@@ -1,6 +1,6 @@
 ---
 title: Inko Programming Language
-created_at: 2018-07-09
+created_at: "2018-07-09"
 description: A language for building concurrent software with confidence
 ---
 

@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: Inko 0.3.0 released
-date: 2018-11-24 20:00:00 UTC
+date: "2018-11-24 20:00:00 UTC"
 description: Inko 0.3.0 has been released
 ---
 <!-- vale off -->
@@ -224,6 +224,6 @@ from 0.3.0 on, all executables will dynamically link to the system's C standard
 library, and ienv will no longer prefer to install musl executables over regular
 ones.
 
-[changelog]: https://gitlab.com/inko-lang/inko/blob/v0.3.0/CHANGELOG.md#030-november-24-2018
-[std-ffi]: https://gitlab.com/inko-lang/inko/blob/7dc4d1c3b1f91640eb9861dc507314e3ed1e86fd/runtime/src/std/ffi.inko
+[changelog]: https://github.com/inko-lang/inko/blob/v0.3.0/CHANGELOG.md#030---november-25-2018
+[std-ffi]: https://github.com/inko-lang/inko/blob/7dc4d1c3b1f91640eb9861dc507314e3ed1e86fd/runtime/src/std/ffi.inko
 [0.2.4 release]: /news/inko-0-2-4-released/

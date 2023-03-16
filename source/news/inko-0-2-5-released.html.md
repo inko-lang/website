@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: Inko 0.2.5 released
-date: 2018-09-10 22:00:00 UTC
+date: "2018-09-10 22:00:00 UTC"
 description: Inko 0.2.5 has been released
 ---
 <!-- vale off -->
@@ -51,4 +51,4 @@ import std::test::assert
 assert.true(10 == 10)
 ```
 
-[changelog]: https://gitlab.com/inko-lang/inko/blob/v0.2.5/CHANGELOG.md#025-september-11-2018
+[changelog]: https://github.com/inko-lang/inko/blob/v0.2.5/CHANGELOG.md#025---september-11-2018
