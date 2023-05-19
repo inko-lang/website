@@ -3,10 +3,18 @@ import std::fs::file::ReadOnlyFile
 
 class async Main {
   fn async main {
-    let file = try! ReadOnlyFile.new('README.md')
+    # expect() unwraps the Result, panicking with
+    # the given error message when encountering an
+    # `Error`.
+    let file = ReadOnlyFile
+      .new('README.md')
+      .expect("the file doesn't exist")
+
     let bytes = ByteArray.new
 
-    try! file.read_all(bytes)
+    file
+      .read_all(bytes)
+      .expect('failed to read the file')
 
     bytes.to_string # => "# README ..."
   }

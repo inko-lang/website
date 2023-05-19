@@ -11,7 +11,7 @@ module Rouge
 
       KEYWORDS = %w[
         let else class import trait mut return self throw impl for as static
-        match do try! try builtin if async move ref while loop next break and or
+        match try if async move ref while loop next break and or
         pub true false case enum uni recover fn
       ].freeze
 

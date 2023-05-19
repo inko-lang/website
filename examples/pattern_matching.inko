@@ -6,10 +6,16 @@ class async Main {
       case None -> 0
     }
 
+    # Of course we also support nested patterns:
+    match Option.Some((10, 'foo')) {
+      case Some((10, message)) -> message
+      case _ -> 'oh no!'
+    }
+
     # Guards are also supported:
     match Option.Some(42) {
       case Some(number) if number < 50 -> number
-      case None -> 0
+      case _ -> 0
     }
   }
 }

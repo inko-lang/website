@@ -7,6 +7,3 @@ body: |
 
   Inko features deterministic automatic memory management, move semantics,
   static typing, type-safe concurrency, efficient error handling, and more.
-
-  Inko supports 64-bits Linux, macOS and Windows, and installing Inko is quick
-  and easy.

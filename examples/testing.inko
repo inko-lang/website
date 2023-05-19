@@ -1,5 +1,5 @@
 # Unit testing
-import std::test::*
+import std::test::Tests
 
 class async Main {
   fn async main {

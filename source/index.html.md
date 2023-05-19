@@ -50,89 +50,70 @@ Inko uses lightweight processes for concurrency, and its concurrency model is
 inspired by [Erlang](https://www.erlang.org/) and
 [Pony](https://www.ponylang.io/). Processes are isolated from each other and
 communicate by sending messages. Processes and messages are defined as classes
-and methods, and the compiler type-checks these to ensure correctness. Here's
-how you'd implement a simple concurrent counter:
+and methods, and the compiler type-checks these to ensure correctness.
+
+The compiler ensures that data sent between processes is unique, meaning there
+are no outside references to the data. This removes the need for (deep) copying
+data, and makes data races impossible. Inko also supports multi-producer
+multi-consumer channels, allowing processes to communicate with each other
+without needing explicit references to each other.
+
+ Here's how you'd implement a simple concurrent counter:
 
 ```inko
 class async Counter {
   let @value: Int
 
-  fn async mut add(value: Int) {
-    @value += value
+  fn async mut increment {
+    @value += 1
   }
 
-  fn async value -> Int {
-    @value
+  fn async send_to(channel: Channel[Int]) {
+    channel.send(@value)
   }
 }
 
-let counter = Counter { @value = 0 }
+class async Main {
+  fn async main {
+    let counter = Counter { @value = 0 }
+    let output = Channel.new(size: 1)
 
-counter.add(1)
-counter.add(1)
-counter.value # => 2
+    counter.increment
+    counter.increment
+    counter.send_to(output)
+    output.receive # => 2
+  }
+}
 ```
-
-By default, the sending process awaits the result of a message. This can be
-changed using the `async` keyword, resulting in a `Future` being returned that
-can be resolved later:
-
-```inko
-counter.add(1) # => nil
-counter.add(1) # => nil
-
-let future = async counter.value # => Future[Int, Never]
-let value = future.await         # => Int
-```
-
-The compiler ensures that data sent between processes is unique, meaning there
-are no outside references to the data. This removes the need for (deep) copying
-data, and makes data races impossible.
 
 # Error handling done right
 
-Inko uses a form of exception handling inspired by Joe Duffy's excellent article
-["The Error Model"](http://joeduffyblog.com/2016/02/07/the-error-model/). The
-compiler enforces error handling whenever a method may throw, and methods can't
-throw unless annotated accordingly:
+Inko uses a form of error handling inspired by Joe Duffy's excellent article
+["The Error Model"](http://joeduffyblog.com/2016/02/07/the-error-model/). Errors
+are represented using the algebraic type "Result", and Inko provides syntax
+sugar in the form of `try` and `throw` to make error handling easy. Critical
+errors that can't/shouldn't be handled are supported in the form of "panics",
+which abort the program when they occur.
+
+For example, here's how you'd handle errors when opening a file and calculating
+its size:
 
 ```inko
-# This is invalid because the method isn't annotated with a throw type.
-fn invalid {
-  throw 42
-}
+import std::fs::file::ReadOnlyFile
+import std::stdio::STDOUT
 
-# This is also invalid, because while the method specifies a throw type, it
-# never actually throws a value.
-fn invalid !! Int -> Int {
-  42
-}
+class async Main {
+  fn async main {
+    let size =
+      ReadOnlyFile
+        .new('README.md')             # => Result[ReadOnlyFile, Error]
+        .then fn (file) { file.size } # => Result[Int, Error]
+        .unwrap_or(0)                 # => Int
 
-fn valid !! Int {
-  throw 42
-}
-```
-
-Methods may only throw a single error type, drastically simplifying error
-handling:
-
-```inko
-# This is invalid because a method can't specify more than one throw type.
-fn invalid !! String, Int {
-  throw 42
+    STDOUT.new.print(size.to_string) # => 1099
+  }
 }
 ```
-
-Error handling at the call site is done using the `try` or `try!` keyword:
-
-```inko
-try example                    # If `example` throws, the value is thrown again.
-try example else (err) { ... } # Handle the thrown value explicitly if it occurs.
-try! example                   # Simply panic (= terminate) the program if a value is thrown
-```
-
-The overhead is minimal, as Inko doesn't use implicit stack unwinding, and
-errors don't include extra data (e.g. stack traces) unless explicitly added.
 
 # Efficient
 
@@ -140,9 +121,11 @@ Inko aims to be an efficient language, though it doesn't aim to compete with
 low-level languages such as C and Rust. Instead, we aim to provide a compelling
 alternative to the likes of Ruby, Erlang, and Go.
 
-Inko uses a bytecode interpreter written in Rust, but the long term plan is to
-switch to compiling to machine code. The interpreter has a small memory
-footprint, and starts up in less than two milliseconds.
+Inko uses a native code compiler, using [LLVM](https://llvm.org/) as its
+backend, and aims to provide a balance between fast compile times and good
+runtime performance. The native code is statically linked against a small
+runtime library written in Rust, which takes care of scheduling processes,
+non-blocking IO, and provides various low-level functions.
 
 # Pattern matching
 

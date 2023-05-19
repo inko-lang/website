@@ -2,8 +2,8 @@
 class Stack[T] {
   let @values: Array[T]
 
-  fn static new -> Self {
-    Self { @values = [] }
+  fn static new -> Stack[T] {
+    Stack { @values = [] }
   }
 
   fn mut push(value: T) {

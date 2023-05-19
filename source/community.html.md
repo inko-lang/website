@@ -18,13 +18,18 @@ For more information, see the [code of conduct](/code-of-conduct).
 
 ## Communities
 
-* [/r/inko](https://www.reddit.com/r/inko/) on Reddit
-* [Discord](https://discord.gg/seeURxHxCb)
-* A [Matrix channel](https://matrix.to/#/#inko-lang:matrix.org) (bridged to the
+- [/r/inko](https://www.reddit.com/r/inko/) on Reddit
+- [Discord](https://discord.gg/seeURxHxCb)
+- A [Matrix channel](https://matrix.to/#/#inko-lang:matrix.org) (bridged to the
   Discord server)
-* [#inko](https://discord.gg/VkWAmjAg5R) on the
+- [#inko](https://discord.gg/VkWAmjAg5R) on the
   [/r/ProgrammingLanguages](https://www.reddit.com/r/ProgrammingLanguages/)
   Discord
 
 Everybody participating in the community is subject to the [code of
 conduct](/code-of-conduct).
+
+## Projects using Inko
+
+- [OpenFlow](https://github.com/yorickpeterse/openflow): controls your [Itho
+  Daalderop](https://www.ithodaalderop.nl/) ventilation unit.
