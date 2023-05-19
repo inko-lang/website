@@ -1,25 +1,35 @@
 # Error handling
-# This methods throws values of type `String`.
-fn checked_div(left: Int, right: Int) !! String -> Int {
+fn div(left: Int, right: Int) -> Result[Int, String] {
+  # `throw x` is short for `return Result.Error(x)`,
+  # saving us a bit of typing.
   if right == 0 { throw 'Attempt to divide by zero' }
 
-  left / right
+  Result.Ok(left / right)
+}
+
+fn div2(left: Int, right: Int) -> Result[Int, String] {
+  # `try` is short for matching against a value,
+  # and throwing it again if it's an `Error`. It
+  # also works for `Option` values, in which case
+  # it throws a `None` if the value is also a
+  # `None`.
+  let res = try div(left, right)
+
+  if res == 5 { Result.Ok(50) } else { Result.Ok(res) }
 }
 
 class async Main {
   fn async main {
-    # This is incorrect: a method that declares an error
-    # type _must_ have the error handled at the call site.
-    checked_div(10, 0)
+    # `Result` is just an algebraic data type, so we can
+    # pattern match against it to get the underlying
+    # value.
+    match div(10, 2) {
+      case Ok(val) -> val
+      case Error(err) -> panic(err)
+    }
 
-    # If an error is thrown, we just bail out.
-    try checked_div(10, 0) else return
-
-    # Or if we're feeling lucky: just give us 0:
-    try checked_div(10, 0) else 0
-
-    # If there's no better way of handling the error, we can
-    # have it terminate the program, known as a "panic":
-    try! checked_div(10, 0)
+    # We can also just unwrap the Ok value if we're
+    # certain we'll never get an `Error` case:
+    div(10, 2).unwrap # => 10
   }
 }

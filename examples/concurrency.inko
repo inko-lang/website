@@ -1,38 +1,24 @@
 # Concurrent programming
-# A concurrent/async generic stack.
-class async Stack[T] {
-  let @values: Array[uni T]
+class async Calculator {
+  fn async fact(size: Int, output: Channel[Int]) {
+    let result = 1
+      .to(size)
+      .iter
+      .reduce(1) fn (product, val) { product * val }
 
-  fn static new -> Self {
-    Self { @values = recover [] }
-  }
-
-  fn async mut push(value: uni T) {
-    @values.push(value)
-  }
-
-  fn async mut pop -> uni Option[T] {
-    if let Some(v) = @values.pop {
-      recover Option.Some(v)
-    } else {
-      recover Option.None
-    }
+    output.send(result)
   }
 }
 
 class async Main {
   fn async main {
-    let stack = Stack.new
+    let calc = Calculator {}
+    let out = Channel.new(size: 1)
 
-    # These are async calls/messages, and the sender waits
-    # for the result of each call.
-    stack.push(10)
-    stack.push(20)
-    stack.pop # => 20
-
-    # And if we don't want to wait:
-    let future = async stack.pop # => Future[Int, Never]
-
-    future.await # => 10
+    # This calculates the factorial of 15 in the
+    # background, then we wait for the result to
+    # be sent back to us via a channel.
+    calc.fact(15, out)
+    out.receive # => 1307674368000
   }
 }
