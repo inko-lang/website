@@ -48,7 +48,7 @@ task :news, :title do |_, args|
       ---
       author: Your name here
       title: #{title.inspect}
-      date: #{Time.now.utc.strftime('%Y-%m-%d %H:%M:%S %Z')}
+      date: #{Time.now.utc.strftime('%Y-%m-%d %H:%M:%S %Z').inspect}
       ---
 
 

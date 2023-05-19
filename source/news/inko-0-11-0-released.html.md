@@ -1,7 +1,7 @@
 ---
 author: Yorick Peterse
 title: "Inko 0.11.0 released"
-date: 2023-05-19 00:03:04 UTC
+date: "2023-05-19 15:00:00 UTC"
 ---
 
 After nine months of hard work we're pleased to announce the release of Inko
