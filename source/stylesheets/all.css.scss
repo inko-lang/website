@@ -92,7 +92,7 @@ pre {
   line-height: 1.3;
   margin: 0 0 $text-bottom-margin $text-left-margin;
   overflow-x: auto;
-  white-space: pre-wrap;
+  white-space: pre;
 }
 
 p code,
@@ -167,6 +167,10 @@ table {
   margin: 0 auto;
   max-width: 940px;
   padding: 0 10px;
+}
+
+.grid > * {
+  min-width: 0;
 }
 
 // Bar at the top, containing the logo and navigation menu.
