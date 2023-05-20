@@ -19,6 +19,9 @@ $text-bottom-margin: 20px;
 $text-left-margin: 20px;
 $media-wide: 'only screen and (min-width: 800px)';
 $media-narrow: 'only screen and (max-width: 800px)';
+$media-tiny: 'only screen and (max-width: 400px)';
+$button-margin: $text-bottom-margin / 2;
+$button-padding: .5rem;
 
 html {
   font-family: $font;
@@ -323,7 +326,7 @@ table {
       border: 1px solid $grey;
       font-size: 12px;
       margin: $text-bottom-margin / 2 0 0;
-      overflow-y: auto;
+      overflow: auto;
       padding: 10px;
     }
 
@@ -399,9 +402,10 @@ select {
   display: inline-block;
   font-size: 1rem;
   font-weight: bold;
-  margin-right: $text-bottom-margin / 2;
-  padding: .5rem .8rem;
+  margin: 0 $button-margin $button-margin 0;
+  padding: $button-padding;
   text-decoration: none;
+  text-align: center;
 
   &:hover {
     background: lighten($light-grey, 5%);
@@ -429,6 +433,12 @@ select {
       background: lighten($light-blue, 5%);
       border-color: darken($light-blue, 2%);
     }
+  }
+}
+
+@media #{$media-tiny} {
+  .button {
+    width: calc(100% - #{$button-margin} - #{$button-padding});
   }
 }
 
