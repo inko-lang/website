@@ -11,6 +11,7 @@ on:
         description: The Git ref to deploy
         required: false
         default: ''
+        type: 'string'
 
 env:
   DISTRIBUTION_ID: E2461OP4YFCUOQ
