@@ -1,5 +1,7 @@
 ---
-# - name: Company name
-#   logo: /images/logo.svg
-#   description: |
-#     Description of the company here.
+- name: NLnet Foundation
+  logo: /images/orgs/nlnet.svg
+  description: |
+    The NLnet Foundation supports organizations and people that contribute to an
+    open information society. NLnet is funding Inko through its NGI0 Entrust
+    fund. More information [is found here](https://nlnet.nl/project/Inko/).
