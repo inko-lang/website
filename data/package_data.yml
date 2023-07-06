@@ -5,7 +5,6 @@
   description: Argument parsing library for the Inko programming language
   stars: 0
   license: MIT License
-  last_release: 
   versions:
   - name: 0.1.0
     date: 2023-06-21 11:36
@@ -21,7 +20,6 @@
   description: Simple debugging tools for the Inko programming language
   stars: 0
   license: MIT License
-  last_release: 
   versions:
   - name: 0.0.2
     date: 2023-07-01 19:30
@@ -33,7 +31,6 @@
   description: Rudimentary HTTP Server exploring the Inko programming language
   stars: 2
   license: MIT License
-  last_release: 
   versions:
   - name: 0.0.3
     date: 2023-06-21 11:40
@@ -44,10 +41,9 @@
 - owner: dusty-phillips
   name: inko-regex
   url: https://github.com/dusty-phillips/inko-regex
-  description: 
+  description:
   stars: 1
   license: MIT License
-  last_release: 
   versions:
   - name: 0.0.2
     date: 2023-07-05 14:17

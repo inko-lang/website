@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: '15 6 * * 1'
   workflow_dispatch:
+  push:
+    paths:
+      - 'data/packages.yml'
 
 jobs:
   packages:
