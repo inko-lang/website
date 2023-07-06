@@ -2,6 +2,7 @@
 @import 'icons';
 
 $font: sans-serif;
+$font-size: 16px;
 $code-font: monospace;
 $dark-green: #436023;
 $green: #3fac71;
@@ -17,15 +18,15 @@ $notice-color: #fffcee;
 $list-bottom-margin: 5px;
 $text-bottom-margin: 20px;
 $text-left-margin: 20px;
-$media-wide: 'only screen and (min-width: 800px)';
-$media-narrow: 'only screen and (max-width: 800px)';
-$media-tiny: 'only screen and (max-width: 400px)';
+$media-wide: 'only screen and (min-width: 830px)';
+$media-narrow: 'only screen and (max-width: 830px)';
+$media-tiny: 'only screen and (max-width: 500px)';
 $button-margin: $text-bottom-margin / 2;
 $button-padding: .5rem;
 
 html {
   font-family: $font;
-  font-size: 16px;
+  font-size: $font-size;
   line-height: 1.5;
 }
 
@@ -177,7 +178,7 @@ table {
 }
 
 // Bar at the top, containing the logo and navigation menu.
-.top {
+.top-bar {
   border-bottom: 1px solid $grey;
 
   header {
@@ -475,5 +476,83 @@ select {
       border-radius: 20px;
       vertical-align: middle;
     }
+  }
+}
+
+.package {
+  background: $light-grey;
+  font-size: 0.9rem;
+  margin-bottom: $text-bottom-margin;
+  padding: 10px;
+
+  .top {
+    display: grid;
+    grid-template-columns: 80% 20%;
+
+    @media #{$media-narrow} {
+      grid-template-columns: 100%;
+    }
+  }
+
+  h3 {
+    font-size: 1.1rem;
+    margin-bottom: $text-bottom-margin / 2;
+  }
+
+  p {
+    margin-bottom: $text-bottom-margin / 2;
+  }
+
+  .no-desc {
+    color: $dark-grey;
+    font-style: italic;
+  }
+
+  .version {
+    color: $dark-grey;
+    font-weight: normal;
+    font-size: 0.9rem;
+  }
+
+  .meta {
+    color: $dark-grey;
+    font-size: 0.8rem;
+
+    strong:hover {
+      cursor: help;
+    }
+
+    @media #{$media-narrow} {
+      display: none;
+    }
+  }
+
+  pre {
+    background: $white;
+    border: 1px solid $grey;
+    margin: 0 0 $text-bottom-margin / 2 0;
+    padding: 10px;
+  }
+
+  table {
+    margin: 0 0 $text-bottom-margin / 2 0;
+  }
+
+  table code {
+    display: inline-block;
+    background: $white;
+    padding: 2px 5px;
+
+    @media #{$media-tiny} {
+      display: none;
+    }
+  }
+
+  summary {
+    cursor: pointer;
+  }
+
+  details[open] summary {
+    margin-bottom: $text-bottom-margin / 2;
   }
 }

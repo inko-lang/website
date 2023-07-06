@@ -5,6 +5,23 @@ require 'time'
 
 CLEAN.include('build')
 
+namespace :packages do
+  desc 'Updates package data'
+  task :update do
+    require_relative 'lib/packages'
+
+    pkgs = YAML.load_file('data/packages.yml').map do |meta|
+      Package.new(meta['owner'], meta['name']).download
+    end
+
+    pkgs.sort_by! { |pkg| pkg['name'] }
+
+    File.open('data/package_data.yml', 'w') do |file|
+      file.write(YAML.dump(pkgs))
+    end
+  end
+end
+
 namespace :sponsors do
   desc 'Updates sponsor data'
   task :update do

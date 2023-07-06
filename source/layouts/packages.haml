@@ -1,0 +1,75 @@
+!!!
+%html{ lang: 'en' }
+  %head
+    = partial('head',
+      locals: { keywords: current_page.data.keywords,
+                description: current_page.data.description,
+                canonical: current_page.url })
+  %body
+    = partial('top')
+
+    .page
+      .grid
+        %article{ class: current_page.data.html_class }
+          %header
+            %h1= current_page.data.title
+
+          - if data.package_data.empty?
+            %p No packages have been created yet :(
+          - else
+            - data.package_data.each do |pkg|
+              - next if pkg['versions'].empty?
+
+              .packages
+                %section.package
+                  .top
+                    .left
+                      %header
+                        %h3
+                          %a.name{rel: 'nofollow', title: pkg['description'], href: pkg['url']}
+                            #{pkg['owner']}/#{pkg['name']}
+                          %span.version
+                            v#{pkg['versions'][0]['name']}
+                      - if pkg['description']
+                        %p= escape_html(pkg['description'])
+                      - else
+                        %p.no-desc
+                          No description is provided by the package author.
+                    .right
+                      .meta
+                        .stars
+                          %strong{title: 'Stars'}
+                            %i.icon-star
+                          #{pkg['stars']}
+                        .license
+                          %strong{title: 'License'}
+                            ⚖
+                          #{pkg['license'] || 'Unknown'}
+                        .updated
+                          %strong{title: 'Released at'}
+                            %i.icon-clock-o
+                          #{pkg['versions'][0]['date']}
+                  .bottom
+                    %details
+                      %summary Install
+                      %pre
+                        %code
+                          inko pkg add github.com/#{pkg['owner']}/#{pkg['name']} #{pkg['versions'][0]['name']}<br>
+                          inko pkg sync
+                    %details
+                      %summary All releases
+                      %table
+                        %thead
+                          %tr
+                            %th Version
+                            %th Released at
+                            %th
+                        %tbody
+                          - pkg['versions'].each do |ver|
+                            %tr
+                              %td= ver['name']
+                              %td= ver['date']
+                              %td
+                                %code inko pkg add github.com/#{pkg['owner']}/#{pkg['name']} #{ver['name']}
+
+          = yield

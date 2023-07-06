@@ -2,12 +2,15 @@
 - title: Home
   icon: icon-home
   url: /
-- title: Sponsors
+- title: Sponsor
   icon: icon-handshake-o
   url: /sponsors/
-- title: Documentation
+- title: Learn
   icon: icon-book
   url: /documentation/
+- title: Packages
+  icon: icon-archive
+  url: /packages/
 - title: Community
   icon: icon-users
   url: /community/
