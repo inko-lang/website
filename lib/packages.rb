@@ -66,7 +66,6 @@ class Package
       'description' => repo.description,
       'stars' => repo.stargazer_count,
       'license' => repo.license_info.name,
-      'last_release' => nil,
       'versions' => [],
     }
 
