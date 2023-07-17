@@ -41,10 +41,12 @@
 - owner: dusty-phillips
   name: inko-regex
   url: https://github.com/dusty-phillips/inko-regex
-  description:
-  stars: 1
+  description: Basic regular expression parser in pure inko
+  stars: 2
   license: MIT License
   versions:
+  - name: 0.0.3
+    date: 2023-07-10 22:54
   - name: 0.0.2
     date: 2023-07-05 14:17
   - name: 0.0.1
