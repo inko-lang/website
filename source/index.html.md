@@ -38,7 +38,7 @@ adjusting different garbage collection settings.
 # Inko is safe
 
 With Inko you never again have to worry about NULL pointers, use-after-free
-errors, unexpected runtime errors, race conditions, and other types of errors
+errors, unexpected runtime errors, data races, and other types of errors
 commonly found in other languages. For optional data Inko provides an `Option`
 type, which is an algebraic data type that you can pattern match against. Inko
 supports both mutable and immutable references, allowing you to restrict
