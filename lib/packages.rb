@@ -39,6 +39,13 @@ class Package
               ... on Commit {
                 committedDate
               }
+              ... on Tag {
+                target {
+                  ... on Commit {
+                    committedDate
+                  }
+                }
+              }
             }
           }
         }
@@ -79,7 +86,8 @@ class Package
 
         next unless name.match?(/^\d+\.\d+\.\d+$/)
 
-        date = Time.parse(tag.target.committed_date).strftime('%Y-%m-%d %H:%M')
+        date = tag.target.committed_date rescue tag.target.target.committed_date
+        date = Time.parse(date).strftime('%Y-%m-%d %H:%M')
         project['versions'] << { 'name' => name, 'date' => date }
       end
 
