@@ -21,7 +21,7 @@ class Package
         description
         url
         licenseInfo {
-          name
+          spdxId
         }
         refs(
           refPrefix: "refs/tags/"
@@ -72,7 +72,7 @@ class Package
       'url' => repo.url,
       'description' => repo.description,
       'stars' => repo.stargazer_count,
-      'license' => repo.license_info.name,
+      'license' => repo.license_info&.spdx_id,
       'versions' => [],
     }
 

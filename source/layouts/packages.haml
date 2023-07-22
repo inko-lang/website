@@ -44,7 +44,11 @@
                         .license
                           %strong{title: 'License'}
                             ⚖
-                          #{pkg['license'] || 'Unknown'}
+                          - if pkg['license']
+                            %a{href: "https://choosealicense.com/licenses/#{pkg['license'].downcase}/", title: pkg['license']}
+                              = pkg['license']
+                          - else
+                            Unknown license
                         .updated
                           %strong{title: 'Released at'}
                             %i.icon-clock-o

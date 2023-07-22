@@ -518,6 +518,11 @@ select {
     color: $dark-grey;
     font-size: 0.8rem;
 
+    a {
+      color: $dark-grey;
+      font-weight: normal;
+    }
+
     strong:hover {
       cursor: help;
     }
