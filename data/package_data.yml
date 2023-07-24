@@ -18,7 +18,7 @@
   name: inko-builder
   url: https://github.com/yorickpeterse/inko-builder
   description: An Inko library for generating XML and HTML
-  stars: 0
+  stars: 2
   license: MPL-2.0
   versions:
   - name: 0.1.0
