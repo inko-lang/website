@@ -3,7 +3,7 @@
   name: inko-argparse
   url: https://github.com/dusty-phillips/inko-argparse
   description: Argument parsing library for the Inko programming language
-  stars: 0
+  stars: 1
   license: MIT
   versions:
   - name: 0.1.0
