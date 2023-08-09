@@ -11,3 +11,5 @@
   name: inko-builder
 - owner: roetlich
   name: inko-html
+- owner: uasi
+  name: inko-hmac
