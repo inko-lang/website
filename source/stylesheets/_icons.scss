@@ -2,9 +2,9 @@
 @font-face {
   font-family: 'icons';
   src:
-    url('/fonts/icons.ttf?51bymd') format('truetype'),
-    url('/fonts/icons.woff?51bymd') format('woff'),
-    url('/fonts/icons.svg?51bymd#icons') format('svg');
+    url('/fonts/icons.ttf?yi1m67') format('truetype'),
+    url('/fonts/icons.woff?yi1m67') format('woff'),
+    url('/fonts/icons.svg?yi1m67#icons') format('svg');
   font-weight: normal;
   font-style: normal;
   font-display: block;
@@ -25,6 +25,10 @@ i {
   -moz-osx-font-smoothing: grayscale;
 }
 
+.icon-discord:before {
+  content: "\e900";
+  color: #7289da;
+}
 .icon-star:before {
   content: "\f005";
 }

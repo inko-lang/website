@@ -14,6 +14,7 @@ $purple: #5c21a5;
 $text-color: #000;
 $blue: #0c52bb;
 $light-blue: desaturate(lighten($blue, 25%), 20%);
+$discord-purple: #7289da;
 $notice-color: #fffcee;
 $list-bottom-margin: 5px;
 $text-bottom-margin: 20px;
@@ -430,11 +431,31 @@ select {
     border-color: darken($light-blue, 10%);
     color: $white;
 
+    i:before {
+      color: $white;
+    }
+
     &:hover {
       background: lighten($light-blue, 5%);
       border-color: darken($light-blue, 2%);
     }
   }
+
+  &.discord {
+    background: $discord-purple;
+    border-color: darken($discord-purple, 10%);
+    color: $white;
+
+    i:before {
+      color: $white;
+    }
+
+    &:hover {
+      background: lighten($discord-purple, 5%);
+      border-color: darken($discord-purple, 2%);
+    }
+  }
+
 }
 
 @media #{$media-tiny} {
