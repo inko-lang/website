@@ -34,6 +34,15 @@
     date: 2023-07-01 19:30
   - name: 0.0.1
     date: 2023-07-01 18:04
+- owner: uasi
+  name: inko-hmac
+  url: https://github.com/uasi/inko-hmac
+  description: An HMAC implementation for Inko.
+  stars: 0
+  license: MPL-2.0
+  versions:
+  - name: 0.1.0
+    date: 2023-08-09 11:02
 - owner: roetlich
   name: inko-html
   url: https://github.com/roetlich/inko-html
