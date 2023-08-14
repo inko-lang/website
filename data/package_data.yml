@@ -21,6 +21,10 @@
   stars: 2
   license: MPL-2.0
   versions:
+  - name: 0.3.0
+    date: 2023-08-11 22:48
+  - name: 0.2.0
+    date: 2023-08-11 21:51
   - name: 0.1.0
     date: 2023-07-21 23:25
 - owner: dusty-phillips
@@ -38,7 +42,7 @@
   name: inko-hmac
   url: https://github.com/uasi/inko-hmac
   description: An HMAC implementation for Inko.
-  stars: 0
+  stars: 1
   license: MPL-2.0
   versions:
   - name: 0.1.0
@@ -69,7 +73,7 @@
   name: inko-regex
   url: https://github.com/dusty-phillips/inko-regex
   description: Basic regular expression parser in pure inko
-  stars: 2
+  stars: 3
   license: MIT
   versions:
   - name: 0.0.3
