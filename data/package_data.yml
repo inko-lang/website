@@ -21,6 +21,8 @@
   stars: 2
   license: MPL-2.0
   versions:
+  - name: 0.6.0
+    date: 2023-09-01 01:16
   - name: 0.5.0
     date: 2023-08-20 00:48
   - name: 0.4.0
@@ -73,6 +75,15 @@
     date: 2023-05-30 20:14
   - name: 0.0.1
     date: 2023-05-30 20:00
+- owner: yorickpeterse
+  name: inko-markdown
+  url: https://github.com/yorickpeterse/inko-markdown
+  description: An Inko library for parsing an opinionated dialect of Markdown
+  stars: 1
+  license: MPL-2.0
+  versions:
+  - name: 0.1.0
+    date: 2023-09-01 01:56
 - owner: dusty-phillips
   name: inko-regex
   url: https://github.com/dusty-phillips/inko-regex
