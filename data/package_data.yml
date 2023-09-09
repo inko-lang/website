@@ -81,11 +81,22 @@
   name: inko-markdown
   url: https://github.com/yorickpeterse/inko-markdown
   description: An Inko library for parsing an opinionated dialect of Markdown
-  stars: 1
+  stars: 2
+  license: MPL-2.0
+  versions:
+  - name: 0.2.0
+    date: 2023-09-07 00:43
+  - name: 0.1.0
+    date: 2023-09-01 01:56
+- owner: yorickpeterse
+  name: inko-optparse
+  url: https://github.com/yorickpeterse/inko-optparse
+  description: An Inko library for parsing command-line arguments and options.
+  stars: 0
   license: MPL-2.0
   versions:
   - name: 0.1.0
-    date: 2023-09-01 01:56
+    date: 2023-09-09 03:02
 - owner: dusty-phillips
   name: inko-regex
   url: https://github.com/dusty-phillips/inko-regex
