@@ -91,7 +91,7 @@
 - owner: yorickpeterse
   name: inko-optparse
   url: https://github.com/yorickpeterse/inko-optparse
-  description: An Inko library for parsing command-line arguments and options.
+  description: An Inko library for parsing command-line arguments and options
   stars: 1
   license: MPL-2.0
   versions:
