@@ -4,9 +4,11 @@ title: Documentation
 
 ## Manual
 
-The [Inko manual covers](https://docs.inko-lang.org/manual/main) various
-aspects of Inko, such as: the syntax, how to use the compiler, error handling,
-and much more. The manual is suitable for both beginners and seasoned veterans.
+The manual covers a wide range of topics, such as how to install Inko, its
+syntax, reference guides, and more.
+
+- [Latest stable release](https://docs.inko-lang.org/manual/latest)
+- [Unstable (main)](https://docs.inko-lang.org/manual/main)
 
 ## Standard library
 
