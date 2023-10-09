@@ -110,3 +110,12 @@
     date: 2023-07-05 14:17
   - name: 0.0.1
     date: 2023-07-04 19:05
+- owner: dusty-phillips
+  name: inko-tui
+  url: https://github.com/dusty-phillips/inko-tui
+  description: Basic Terminal Ui for Inko
+  stars: 0
+  license: MIT
+  versions:
+  - name: 0.0.1
+    date: 2023-10-09 20:17
