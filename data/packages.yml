@@ -7,6 +7,8 @@
   name: inko-debug
 - owner: dusty-phillips
   name: inko-regex
+- owner: dusty-phillips
+  name: inko-tui
 - owner: yorickpeterse
   name: inko-builder
 - owner: roetlich
