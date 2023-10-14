@@ -1,6 +1,6 @@
 # Destructors
-import std::drop::Drop
-import std::stdio::STDOUT
+import std.drop.Drop
+import std.stdio.STDOUT
 
 class Thing {}
 

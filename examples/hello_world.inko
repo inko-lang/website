@@ -1,5 +1,5 @@
 # Hello, world!
-import std::stdio::STDOUT
+import std.stdio.STDOUT
 
 class async Main {
   fn async main {

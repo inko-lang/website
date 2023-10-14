@@ -26,7 +26,7 @@
 <title>Compiler process&#45;&gt;Partition 1</title>
 <path fill="none" stroke="black" d="M289.78,-226.17C285.3,-262.02 269.73,-341.24 218,-375 178.21,-400.96 122.64,-389.63 83.8,-376"/>
 <polygon fill="black" stroke="black" points="84.9,-372.67 74.31,-372.51 82.49,-379.24 84.9,-372.67"/>
-<text text-anchor="middle" x="155" y="-393.8" font-family="Times,serif" font-size="14.00">1: module(std::integer)</text>
+<text text-anchor="middle" x="155" y="-393.8" font-family="Times,serif" font-size="14.00">1: module(std.integer)</text>
 </g>
 <!-- Partition 2 -->
 <g id="node3" class="node">
@@ -39,7 +39,7 @@
 <title>Compiler process&#45;&gt;Partition 2</title>
 <path fill="none" stroke="black" d="M275.39,-226.08C261.69,-240.07 240.66,-258.46 218,-267 174.79,-283.28 121.56,-283.45 84.23,-280.67"/>
 <polygon fill="black" stroke="black" points="84.41,-277.17 74.15,-279.81 83.82,-284.14 84.41,-277.17"/>
-<text text-anchor="middle" x="155" y="-285.8" font-family="Times,serif" font-size="14.00">3: module(std::integer)</text>
+<text text-anchor="middle" x="155" y="-285.8" font-family="Times,serif" font-size="14.00">3: module(std.integer)</text>
 </g>
 <!-- Partition 3 -->
 <g id="node4" class="node">
@@ -52,7 +52,7 @@
 <title>Compiler process&#45;&gt;Partition 3</title>
 <path fill="none" stroke="black" d="M244.45,-189.9C235.74,-186.97 226.66,-184.18 218,-182 173.34,-170.73 121.25,-163.22 84.63,-158.84"/>
 <polygon fill="black" stroke="black" points="84.59,-155.31 74.25,-157.63 83.78,-162.27 84.59,-155.31"/>
-<text text-anchor="middle" x="155" y="-185.8" font-family="Times,serif" font-size="14.00">5: module(std::integer)</text>
+<text text-anchor="middle" x="155" y="-185.8" font-family="Times,serif" font-size="14.00">5: module(std.integer)</text>
 </g>
 <!-- Partition 4 -->
 <g id="node5" class="node">
@@ -65,7 +65,7 @@
 <title>Compiler process&#45;&gt;Partition 4</title>
 <path fill="none" stroke="black" d="M286.83,-189.62C278.38,-160.44 257.66,-103.95 218,-76 207.21,-68.39 134.19,-57.98 84.54,-51.63"/>
 <polygon fill="black" stroke="black" points="84.68,-48.12 74.32,-50.34 83.81,-55.07 84.68,-48.12"/>
-<text text-anchor="middle" x="155" y="-79.8" font-family="Times,serif" font-size="14.00">7: module(std::integer)</text>
+<text text-anchor="middle" x="155" y="-79.8" font-family="Times,serif" font-size="14.00">7: module(std.integer)</text>
 </g>
 <!-- Partition 1&#45;&gt;Compiler process -->
 <g id="edge2" class="edge">

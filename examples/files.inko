@@ -1,5 +1,5 @@
 # Reading from a file
-import std::fs::file::ReadOnlyFile
+import std.fs.file.ReadOnlyFile
 
 class async Main {
   fn async main {

@@ -99,8 +99,8 @@ For example, here's how you'd handle errors when opening a file and calculating
 its size:
 
 ```inko
-import std::fs::file::ReadOnlyFile
-import std::stdio::STDOUT
+import std.fs.file.ReadOnlyFile
+import std.stdio.STDOUT
 
 class async Main {
   fn async main {

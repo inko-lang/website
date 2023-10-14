@@ -199,7 +199,7 @@
 <polygon fill="none" stroke="black" points="160.5,-369.5 160.5,-382.5 182.5,-382.5 182.5,-369.5 160.5,-369.5"/>
 <text text-anchor="start" x="163.5" y="-374.7" font-family="monospace" font-size="6.00">Line</text>
 <polygon fill="none" stroke="black" points="75.5,-356.5 75.5,-369.5 160.5,-369.5 160.5,-356.5 75.5,-356.5"/>
-<text text-anchor="start" x="78.5" y="-361.7" font-family="monospace" font-size="6.00">r8 = module std::drop</text>
+<text text-anchor="start" x="78.5" y="-361.7" font-family="monospace" font-size="6.00">r8 = module std.drop</text>
 <polygon fill="none" stroke="black" points="160.5,-356.5 160.5,-369.5 182.5,-369.5 182.5,-356.5 160.5,-356.5"/>
 <text text-anchor="start" x="169.5" y="-361.7" font-family="monospace" font-size="6.00">8</text>
 <polygon fill="none" stroke="black" points="75.5,-343.5 75.5,-356.5 160.5,-356.5 160.5,-343.5 75.5,-343.5"/>
