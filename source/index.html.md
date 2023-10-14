@@ -99,8 +99,8 @@ For example, here's how you'd handle errors when opening a file and calculating
 its size:
 
 ```inko
-import std::fs::file::ReadOnlyFile
-import std::stdio::STDOUT
+import std.fs.file.ReadOnlyFile
+import std.stdio.STDOUT
 
 class async Main {
   fn async main {
@@ -133,7 +133,7 @@ Inko supports pattern matching on a variety of types, such as tuples and
 algebraic data types:
 
 ```inko
-match [10, 20].get(1) {
+match [10, 20].opt(1) {
   case Some(number) -> number # => 20
   case None -> 0
 }

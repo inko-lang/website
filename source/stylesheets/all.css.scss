@@ -15,7 +15,8 @@ $text-color: #000;
 $blue: #0c52bb;
 $light-blue: desaturate(lighten($blue, 25%), 20%);
 $discord-purple: #7289da;
-$notice-color: #fffcee;
+$yellow: #ffea88;
+$light-yellow: lighten($yellow, 20%);
 $list-bottom-margin: 5px;
 $text-bottom-margin: 20px;
 $text-left-margin: 20px;
@@ -75,15 +76,13 @@ ol {
 }
 
 ul li {
-  list-style: disc outside;
+  list-style: disc inside;
   margin-bottom: $list-bottom-margin;
-  margin-left: 1rem;
 }
 
 ol li {
-  list-style: decimal outside;
+  list-style: decimal inside;
   margin-bottom: $list-bottom-margin;
-  margin-left: 1rem;
 }
 
 blockquote {
@@ -105,8 +104,22 @@ li code,
 td code {
   background: $light-grey;
   border: 1px solid $grey;
+  border-radius: 3px;
   font-family: $code-font;
   font-size: .8rem;
+  padding: 0 5px;
+}
+
+h1 code,
+h2 code,
+h3 code,
+h4 code,
+h5 code,
+h6 code {
+  background: $light-grey;
+  border: 1px solid $grey;
+  border-radius: 3px;
+  font-family: $code-font;
   padding: 0 5px;
 }
 
@@ -277,7 +290,7 @@ table {
 }
 
 .notice {
-  background: $notice-color;
+  background: $light-yellow;
   border-bottom: 1px solid $grey;
 
   p {
@@ -375,8 +388,33 @@ table {
   margin: 0 0 $text-bottom-margin 0;
 }
 
-.news-article h1 {
-  margin-bottom: 0;
+.news-article {
+  h1 {
+    margin-bottom: 0;
+  }
+
+  .note {
+    background: $light-yellow;
+    border: 1px solid $yellow;
+    border-radius: 5px;
+    display: grid;
+    font-size: 0.9rem;
+    grid-template-columns: 2.0rem auto;
+    margin-bottom: $text-bottom-margin;
+    padding: 10px;
+
+    .icon {
+      font-size: 1.2rem;
+    }
+
+    .text {
+      align-self: center;
+    }
+
+    p:last-child {
+      margin-bottom: 0;
+    }
+  }
 }
 
 .missing-page {
