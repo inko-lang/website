@@ -251,7 +251,7 @@ Per this specification, values are ordered in the following order:
 1. positive signaling NaN
 1. positive quiet NaN
 
-See commit [95434442](https://github.com/inko-lang/inko/commit/95434442) for
+See commit [cf87e5a7](https://github.com/inko-lang/inko/commit/cf87e5a7) for
 more details.
 
 ## The syntax for imports is changed
