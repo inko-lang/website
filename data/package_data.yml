@@ -53,6 +53,8 @@
   stars: 1
   license: MPL-2.0
   versions:
+  - name: 0.2.0
+    date: 2023-10-15 08:25
   - name: 0.1.0
     date: 2023-08-09 11:02
 - owner: roetlich
@@ -110,6 +112,15 @@
     date: 2023-07-05 14:17
   - name: 0.0.1
     date: 2023-07-04 19:05
+- owner: uasi
+  name: inko-totp
+  url: https://github.com/uasi/inko-totp
+  description: A TOTP token generator and validator for Inko.
+  stars: 2
+  license: MPL-2.0
+  versions:
+  - name: 0.1.0
+    date: 2023-10-15 08:45
 - owner: dusty-phillips
   name: inko-tui
   url: https://github.com/dusty-phillips/inko-tui
