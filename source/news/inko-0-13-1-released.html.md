@@ -25,7 +25,7 @@ version jump from 0.12.0 to 0.13.1.
 {:toc}
 
 This release includes many changes not listed in this announcement. For the full
-list of changes, refer to the [changelog](https://github.com/inko-lang/inko/blob/main/CHANGELOG.md#0130-2023-10-16)
+list of changes, refer to the [changelog](https://github.com/inko-lang/inko/blob/main/CHANGELOG.md#0130-2023-10-14)
 for this release.
 
 ## A new C FFI and conditional compilation
