@@ -130,3 +130,12 @@
   versions:
   - name: 0.0.1
     date: 2023-10-09 20:17
+- owner: uasi
+  name: inko-url_search_params
+  url: https://github.com/uasi/inko-url_search_params
+  description: A URLSearchParams implementation.
+  stars: 0
+  license: MPL-2.0
+  versions:
+  - name: 0.1.0
+    date: 2023-10-16 08:00
