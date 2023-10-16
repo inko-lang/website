@@ -17,6 +17,8 @@
   name: inko-hmac
 - owner: uasi
   name: inko-totp
+- owner: uasi
+  name: inko-url_search_params
 - owner: yorickpeterse
   name: inko-markdown
 - owner: yorickpeterse
