@@ -6,6 +6,8 @@
   stars: 1
   license: MIT
   versions:
+  - name: 0.2.0
+    date: 2023-10-22 16:35
   - name: 0.1.0
     date: 2023-06-21 11:36
   - name: 0.0.3
@@ -35,17 +37,6 @@
     date: 2023-08-11 21:51
   - name: 0.1.0
     date: 2023-07-21 23:25
-- owner: dusty-phillips
-  name: inko-debug
-  url: https://github.com/dusty-phillips/inko-debug
-  description: Simple debugging tools for the Inko programming language
-  stars: 0
-  license: MIT
-  versions:
-  - name: 0.0.2
-    date: 2023-07-01 19:30
-  - name: 0.0.1
-    date: 2023-07-01 18:04
 - owner: uasi
   name: inko-hmac
   url: https://github.com/uasi/inko-hmac
@@ -106,6 +97,8 @@
   stars: 3
   license: MIT
   versions:
+  - name: 0.0.4
+    date: 2023-10-22 17:19
   - name: 0.0.3
     date: 2023-07-10 22:54
   - name: 0.0.2
