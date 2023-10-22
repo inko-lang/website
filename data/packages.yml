@@ -4,8 +4,6 @@
 - owner: dusty-phillips
   name: inko-argparse
 - owner: dusty-phillips
-  name: inko-debug
-- owner: dusty-phillips
   name: inko-regex
 - owner: dusty-phillips
   name: inko-tui
