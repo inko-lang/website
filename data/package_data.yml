@@ -77,6 +77,8 @@
   stars: 2
   license: MPL-2.0
   versions:
+  - name: 0.3.0
+    date: 2023-10-22 19:33
   - name: 0.2.0
     date: 2023-09-07 00:43
   - name: 0.1.0
