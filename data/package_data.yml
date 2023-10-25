@@ -107,6 +107,15 @@
     date: 2023-07-05 14:17
   - name: 0.0.1
     date: 2023-07-04 19:05
+- owner: yorickpeterse
+  name: inko-syntax
+  url: https://github.com/yorickpeterse/inko-syntax
+  description: A syntax highlighting library for Inko
+  stars: 0
+  license: MPL-2.0
+  versions:
+  - name: 0.1.0
+    date: 2023-10-25 00:25
 - owner: uasi
   name: inko-totp
   url: https://github.com/uasi/inko-totp
