@@ -17,6 +17,8 @@
   name: inko-totp
 - owner: uasi
   name: inko-url_search_params
+- owner: uasi
+  name: inko-uuid
 - owner: yorickpeterse
   name: inko-markdown
 - owner: yorickpeterse
