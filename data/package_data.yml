@@ -64,6 +64,8 @@
   stars: 2
   license: MIT
   versions:
+  - name: 0.0.4
+    date: 2023-10-29 15:51
   - name: 0.0.3
     date: 2023-06-21 11:40
   - name: 0.0.2
@@ -90,6 +92,8 @@
   stars: 1
   license: MPL-2.0
   versions:
+  - name: 0.2.0
+    date: 2023-10-27 23:52
   - name: 0.1.0
     date: 2023-09-09 03:02
 - owner: dusty-phillips
@@ -111,7 +115,7 @@
   name: inko-syntax
   url: https://github.com/yorickpeterse/inko-syntax
   description: A syntax highlighting library for Inko
-  stars: 0
+  stars: 2
   license: MPL-2.0
   versions:
   - name: 0.1.0
@@ -143,3 +147,12 @@
   versions:
   - name: 0.1.0
     date: 2023-10-16 08:00
+- owner: uasi
+  name: inko-uuid
+  url: https://github.com/uasi/inko-uuid
+  description: A UUID generator for Inko.
+  stars: 0
+  license: MPL-2.0
+  versions:
+  - name: 0.1.0
+    date: 2023-10-29 02:49
