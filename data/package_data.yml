@@ -16,6 +16,15 @@
     date: 2023-04-01 16:03
   - name: 0.0.1
     date: 2023-03-28 22:30
+- owner: uasi
+  name: inko-blake3
+  url: https://github.com/uasi/inko-blake3
+  description: A BLAKE3 hasher for Inko.
+  stars: 0
+  license: MPL-2.0
+  versions:
+  - name: 0.1.0
+    date: 2023-10-29 17:04
 - owner: yorickpeterse
   name: inko-builder
   url: https://github.com/yorickpeterse/inko-builder
