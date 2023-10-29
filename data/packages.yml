@@ -12,6 +12,8 @@
 - owner: roetlich
   name: inko-html
 - owner: uasi
+  name: inko-blake3
+- owner: uasi
   name: inko-hmac
 - owner: uasi
   name: inko-totp
