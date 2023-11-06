@@ -4,7 +4,7 @@
   name: Dusty Phillips
   image: images/sponsors/gh-86920.jpeg
   website: https://dusty.phillips.codes
-  total_donated: 7000
+  total_donated: 8000
   currency_symbol: "$"
   created_at: '2023-04-01'
 - type: public
@@ -20,7 +20,7 @@
   name: Amidamaru
   image: images/sponsors/gh-5485589.jpeg
   website: https://github.com/thaodt
-  total_donated: 4000
+  total_donated: 5000
   currency_symbol: "$"
   created_at: '2023-07-05'
 - type: public
