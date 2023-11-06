@@ -20,7 +20,7 @@
   name: inko-blake3
   url: https://github.com/uasi/inko-blake3
   description: A BLAKE3 hasher for Inko.
-  stars: 0
+  stars: 1
   license: MPL-2.0
   versions:
   - name: 0.1.0
@@ -160,7 +160,7 @@
   name: inko-uuid
   url: https://github.com/uasi/inko-uuid
   description: A UUID generator for Inko.
-  stars: 0
+  stars: 1
   license: MPL-2.0
   versions:
   - name: 0.1.0
