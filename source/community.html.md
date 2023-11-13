@@ -33,3 +33,5 @@ conduct](/code-of-conduct).
 
 - [OpenFlow](https://github.com/yorickpeterse/openflow): controls your [Itho
   Daalderop](https://www.ithodaalderop.nl/) ventilation unit.
+- [clogs](https://github.com/yorickpeterse/clogs): a changelog generator using
+  Git trailers.
