@@ -30,6 +30,6 @@ class async Main {
 
     # We can also just unwrap the Ok value if we're
     # certain we'll never get an `Error` case:
-    div(10, 2).unwrap # => 10
+    div(10, 2).unwrap # => 5
   }
 }
