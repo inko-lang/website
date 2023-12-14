@@ -48,6 +48,18 @@ namespace :sponsors do
 
     Sponsors::ImagePruner.new.prune
   end
+
+  desc 'List the sponsors in Markdown'
+  task :list do
+    require 'yaml'
+
+    entries = YAML
+      .load_file('data/sponsors.yml')
+      .sort_by { |r| r['name'].downcase }
+      .map { |row| "- [#{row['name']}](#{row['website']})" }
+
+    puts(entries)
+  end
 end
 
 desc 'Generate a new news article'
