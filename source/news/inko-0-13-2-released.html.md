@@ -82,6 +82,10 @@ backup threads. This combination means the new setup is good enough to prevent
 Inko processes from claiming an OS thread for too long, at a fraction of the
 cost compared to the previous approach.
 
+Refer to commit
+[cc8c6fe](https://github.com/inko-lang/inko/commit/cc8c6feb09adce56f71e34931936eb087f121d9a)
+for more details.
+
 ## Applying LLVM optimizations
 
 Inko by default doesn't apply LLVM optimizations as we're still trying to figure
