@@ -53,6 +53,8 @@
   stars: 1
   license: MPL-2.0
   versions:
+  - name: 0.2.1
+    date: 2023-12-16 15:33
   - name: 0.2.0
     date: 2023-10-15 08:25
   - name: 0.1.0
@@ -70,7 +72,7 @@
   name: inko-http
   url: https://github.com/dusty-phillips/inko-http
   description: Rudimentary HTTP Server exploring the Inko programming language
-  stars: 2
+  stars: 3
   license: MIT
   versions:
   - name: 0.0.4
@@ -88,6 +90,8 @@
   stars: 3
   license: MPL-2.0
   versions:
+  - name: 0.6.0
+    date: 2023-12-14 18:50
   - name: 0.5.0
     date: 2023-11-11 00:57
   - name: 0.4.0
@@ -105,6 +109,8 @@
   stars: 1
   license: MPL-2.0
   versions:
+  - name: 0.3.0
+    date: 2023-12-14 18:51
   - name: 0.2.0
     date: 2023-10-27 23:52
   - name: 0.1.0
@@ -131,6 +137,8 @@
   stars: 2
   license: MPL-2.0
   versions:
+  - name: 0.2.0
+    date: 2023-12-14 22:40
   - name: 0.1.0
     date: 2023-10-25 00:25
 - owner: uasi
