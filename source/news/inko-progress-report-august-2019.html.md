@@ -186,7 +186,7 @@ as it has been a while since the last release of Inko.
 
 If you would like to support the development of Inko, please [donate to Inko on
 Open Collective][open-collective]. If you would like to donate via other means,
-please send an Email to <mailto:yorick@yorickpeterse.com>.
+please contact us through Email or GitHub.
 
 [july-report]: /news/inko-progress-report-july-2019/
 [mr75]: https://gitlab.com/inko-lang/inko/merge_requests/75

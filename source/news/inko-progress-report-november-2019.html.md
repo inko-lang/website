@@ -19,8 +19,7 @@ collector, and continued work on the self-hosting compiler.
 If you would like to support the development of Inko, please [donate to Inko on
 Open Collective](https://opencollective.com/inko-lang) or via [GitHub
 Sponsors](https://github.com/sponsors/YorickPeterse/). If you would like to
-donate via other means, please send an Email to
-<mailto:yorick@yorickpeterse.com>.
+donate via other means, please contact us through Email or GitHub.
 
 If you would like to engage with others interested in the development of Inko,
 please join the [Matrix chat
