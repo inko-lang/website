@@ -4,7 +4,7 @@
   name: Dusty Phillips
   image: images/sponsors/gh-86920.jpeg
   website: https://dusty.phillips.codes
-  total_donated: 9000
+  total_donated: 10000
   currency_symbol: "$"
   created_at: '2023-04-01'
 - type: public
@@ -12,7 +12,7 @@
   name: Evan Ovadia
   image: images/sponsors/gh-192751.png
   website: https://github.com/Verdagon
-  total_donated: 23000
+  total_donated: 24000
   currency_symbol: "$"
   created_at: '2022-01-31'
 - type: public
@@ -31,11 +31,3 @@
   total_donated: 4000
   currency_symbol: "$"
   created_at: '2023-05-20'
-- type: public
-  id: gh-80464733
-  name: Kiril Mihaylov
-  image: images/sponsors/gh-80464733.jpeg
-  website: https://github.com/KirilMihaylov
-  total_donated: 3500
-  currency_symbol: "$"
-  created_at: '2023-05-26'
