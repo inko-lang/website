@@ -32,6 +32,8 @@
   stars: 2
   license: MPL-2.0
   versions:
+  - name: 0.10.0
+    date: 2024-01-19 00:57
   - name: 0.9.0
     date: 2024-01-01 02:40
   - name: 0.8.1
@@ -96,6 +98,12 @@
   stars: 3
   license: MPL-2.0
   versions:
+  - name: 0.11.0
+    date: 2024-01-21 03:49
+  - name: 0.10.0
+    date: 2024-01-18 22:52
+  - name: 0.9.0
+    date: 2024-01-17 22:35
   - name: 0.8.0
     date: 2024-01-01 02:10
   - name: 0.7.0
@@ -147,6 +155,14 @@
   stars: 2
   license: MPL-2.0
   versions:
+  - name: 0.6.0
+    date: 2024-01-17 23:40
+  - name: 0.5.0
+    date: 2024-01-17 23:38
+  - name: 0.4.0
+    date: 2024-01-17 23:30
+  - name: 0.3.0
+    date: 2024-01-17 22:56
   - name: 0.2.0
     date: 2023-12-14 22:40
   - name: 0.1.0
