@@ -95,8 +95,8 @@ isn't supported. This keeps the complexity required to make this work
 manageable, and forces you to push platform/configuration specific code into
 dedicated modules.
 
-For more details, refer to [the FFI documentation](https://docs.inko-lang.org/manual/main/guides/ffi/),
-the [conditional compilation documentation](https://docs.inko-lang.org/manual/main/guides/conditional_compilation/),
+For more details, refer to [the FFI documentation](https://docs.inko-lang.org/manual/v0.13.1/guides/ffi/),
+the [conditional compilation documentation](https://docs.inko-lang.org/manual/v0.13.1/guides/conditional_compilation/),
 and/or commit [df66fef7](https://github.com/inko-lang/inko/commit/df66fef7).
 
 ## Specialization of types and methods
@@ -139,7 +139,7 @@ executables (though this depends on the program in question), but with better
 runtime performance.
 
 See [this section in the
-documentation](https://docs.inko-lang.org/manual/main/internals/compiler/#generics)
+documentation](https://docs.inko-lang.org/manual/v0.13.1/internals/compiler/#generics)
 and commit [3057ba7e](https://github.com/inko-lang/inko/commit/3057ba7e) for
 more details.
 

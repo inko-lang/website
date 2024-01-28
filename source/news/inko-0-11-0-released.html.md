@@ -182,7 +182,7 @@ platforms. This removes the need for a central package hosting service, which
 would be too costly and time consuming to operate.
 
 For more information, refer to the documentation of [modules and
-packages](https://docs.inko-lang.org/manual/main/getting-started/modules/).
+packages](https://docs.inko-lang.org/manual/v0.11.0/getting-started/modules/).
 
 ## A new type checker
 
