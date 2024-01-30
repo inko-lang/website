@@ -533,6 +533,7 @@ table tr:last-child td {
   font-size: 0.8rem;
   font-weight: normal;
   margin: 0;
+  min-width: max-content;
   padding: 5px;
 }
 
@@ -596,11 +597,15 @@ table tr:last-child td {
 }
 
 @media only screen and (max-width: 700px) {
-  .content table {
+  .page table:not(.packages-table, .news-index) {
     display: block;
     max-width: fit-content;
     overflow-x: scroll;
     white-space: nowrap;
+  }
+
+  .packages-table .hide-if-narrow {
+    display: none;
   }
 }
 
@@ -618,6 +623,10 @@ table tr:last-child td {
   .jumbotron .button {
     display: block;
     margin-bottom: calc(var(--margin) / 1.5);
+  }
+
+  .news-index .news-meta {
+    display: none;
   }
 }
 

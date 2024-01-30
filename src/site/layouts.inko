@@ -257,9 +257,9 @@ fn package_list(root: mut html.Element, packages: ref Array[Package]) {
     table.thead.with fn (thead) {
       thead.tr.with fn (tr) {
         tr.th.text('Package')
-        tr.th.text('License')
-        tr.th.text('Stars')
-        tr.th.text('Version')
+        tr.th.attr('class', 'hide-if-narrow').text('License')
+        tr.th.attr('class', 'hide-if-narrow').text('Stars')
+        tr.th.attr('class', 'hide-if-narrow').text('Version')
         tr.th
       }
     }
@@ -280,7 +280,7 @@ fn package_list(root: mut html.Element, packages: ref Array[Package]) {
             td.text(pkg.description)
           }
 
-          tr.td.with fn (td) {
+          tr.td.attr('class', 'hide-if-narrow').with fn (td) {
             if packages.size > 0 {
               td
                 .a
@@ -293,8 +293,8 @@ fn package_list(root: mut html.Element, packages: ref Array[Package]) {
             }
           }
 
-          tr.td.text(pkg.stars.to_string)
-          tr.td.text(pkg.version)
+          tr.td.attr('class', 'hide-if-narrow').text(pkg.stars.to_string)
+          tr.td.attr('class', 'hide-if-narrow').text(pkg.version)
           tr.td.a.attr('href', '#').with fn (a) {
             a.i.attr('class', 'icon-clipboard')
             a
