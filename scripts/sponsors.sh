@@ -20,13 +20,11 @@ function update() {
     fi
 
     info 'Updating sponsors data'
-
-    bundle exec rake sponsors:update sponsors:prune_logos
-
+    make sponsors
     info 'Committing changes (if any)'
 
     git checkout --quiet main
-    git add --all source/images/sponsors data/sponsors.yml
+    git add --all source/data/sponsors.json
 
     if git commit -m 'Update sponsors data'
     then

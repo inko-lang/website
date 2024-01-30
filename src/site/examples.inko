@@ -1,0 +1,40 @@
+import builder.html
+import std.fs.file.ReadOnlyFile
+import std.io.BufferedReader
+import syntax.format.Html
+import syntax.lexer.inko.Lexer
+import wobsite.Files
+
+class Example {
+  let @title: String
+  let @body: ByteArray
+
+  fn static parse_all(files: ref Files) -> Result[Array[Example], String] {
+    files.matching('/examples/*.inko').try_reduce([]) fn (ary, path) {
+      let title = ByteArray.new
+      let body = ByteArray.new
+
+      try ReadOnlyFile
+        .new(path)
+        .then fn (file) {
+          # Skip the `# ` of the first line.
+          try file.seek(2)
+          Result.Ok(file)
+        }
+        .then fn (file) {
+          let reader = BufferedReader.new(file)
+
+          reader.read_line(title).then fn (_) { reader.read_all(body) }
+        }
+        .map_error fn (e) { "failed to read example {path}: {e}" }
+
+      title.pop # Remove the trailing newline
+      ary.push((Example { @title = title.into_string, @body = body }))
+      Result.Ok(ary)
+    }
+  }
+
+  fn to_html -> html.Document {
+    Html.new.format(Lexer.new(@body))
+  }
+}

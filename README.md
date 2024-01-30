@@ -1,27 +1,38 @@
 # README
 
-This repository contains the source code of the [Inko
+This repository contains the source code for the [Inko
 website](https://inko-lang.org/).
 
-# Requirements
+## Requirements
 
-* Ruby 2.5 or newer
-* Bundler
+- Inko main (for now)
 
-# Development
+## Development
 
-First make sure Bundler is installed:
+Install the necessary packages:
 
-    gem install bundler
+```bash
+inko pkg sync
+```
 
-Then, install all necessary dependencies:
+Build the website:
 
-    bundle install
+```bash
+inko run
+```
 
-You can then start a development server by just running `rake`.
+If you want to start a server and automatically build the website upon any
+changes, run the following:
 
-# License
+```bash
+make watch
+```
 
-This Source Code Form is subject to the terms of the Mozilla Public License, v.
-2.0. If a copy of the MPL was not distributed with this file, You can get one
-at http://mozilla.org/MPL/2.0/.
+This requires [inotify-tools](https://github.com/inotify-tools/inotify-tools)
+and [Python 3](https://www.python.org/) to be installed.
+
+## License
+
+All source code in this repository is licensed under the Mozilla Public License
+version 2.0, unless stated otherwise. A copy of this license is found in the
+file "LICENSE".

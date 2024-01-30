@@ -20,13 +20,11 @@ function update() {
     fi
 
     info 'Updating package data'
-
-    bundle exec rake packages:update
-
+    make packages
     info 'Committing changes (if any)'
 
     git checkout --quiet main
-    git add --all data/package_data.yml
+    git add --all source/data/package_data.json
 
     if git commit -m 'Update package information'
     then

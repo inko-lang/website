@@ -5,28 +5,35 @@ on:
     - cron: '15 1 * * 1'
   workflow_dispatch:
 
+env:
+  AWS_DEFAULT_REGION: eu-west-1
+
 jobs:
   sponsors:
     runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/inko-lang/inko:main
     permissions:
       contents: write
     if: |
       github.repository == 'inko-lang/website' && github.ref_name == 'main'
     steps:
-      - uses: actions/checkout@v3
-      - uses: ruby/setup-ruby@v1
+      - name: Installing dependencies
+        run: microdnf install --quiet --assumeyes rclone make awscli2 git tar
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
         with:
-          ruby-version: '3.0'
-          bundler-cache: true
-      - run: bash ./scripts/sponsors.sh
+          path: |
+            build
+            dep
+            ~/.local/share/inko/packages
+          key: ${{ runner.os }}
+      - name: Update sponsors data
+        run: bash ./scripts/sponsors.sh
         env:
-          SPONSORS_ACCESS_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
-  deploy:
-    needs:
-      - sponsors
-    uses: ./.github/workflows/deploy.yml
-    with:
-      ref: 'main'
-    secrets:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
+      - name: Deploy website
+        run: make deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

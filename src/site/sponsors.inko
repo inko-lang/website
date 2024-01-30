@@ -1,0 +1,145 @@
+import std.fs.file.ReadOnlyFile
+import markdown
+import std.fs.path.Path
+import std.io.Error
+import std.json.Json
+import std.string.ToString
+import std.time.DateTime
+import wobsite.time.(parse_date)
+
+fn string(value: ref Json, key: String) -> Result[String, ParseError] {
+  match value.query.key(key).as_string {
+    case Some(v) -> Result.Ok(v)
+    case _ -> Result.Error(ParseError.InvalidKey(key))
+  }
+}
+
+fn int(value: ref Json, key: String) -> Result[Int, ParseError] {
+  match value.query.key(key).as_int {
+    case Some(v) -> Result.Ok(v)
+    case _ -> Result.Error(ParseError.InvalidKey(key))
+  }
+}
+
+class enum ParseError {
+  case Io(Error)
+  case InvalidJson(String)
+  case InvalidKey(String)
+}
+
+impl ToString for ParseError {
+  fn pub to_string -> String {
+    match self {
+      case Io(e) -> "failed to read the sponsors data: {e}"
+      case InvalidJson(e) -> "failed to parse the sponsors JSON: {e}"
+      case InvalidKey(k) -> "the JSON key '{k}' is invalid or missing"
+    }
+  }
+}
+
+class Sponsor {
+  let @name: String
+  let @image: String
+  let @website: String
+  let @amount: Int
+  let @created_at: DateTime
+
+  fn static parse_all(
+    path: ref Path,
+  ) -> Result[Array[Sponsor], ParseError] {
+    let data = ByteArray.new
+
+    try ReadOnlyFile
+      .new(path)
+      .then fn (f) { f.read_all(data) }
+      .map_error fn (e) { ParseError.Io(e) }
+
+    let root = try Json
+      .parse(data)
+      .map_error fn (e) { ParseError.InvalidJson(e.to_string) }
+
+    let root = match Json.parse(data) {
+      case Ok(Array(v)) -> v
+      case Ok(_) -> {
+        throw ParseError.InvalidJson('the top-level value must be an array')
+      }
+      case Error(e) -> throw ParseError.InvalidJson(e.to_string)
+    }
+
+    let rows = try root.into_iter.try_reduce([]) fn (sponsors, val) {
+      let name = try string(val, 'name')
+      let img = try string(val, 'image')
+      let site = try string(val, 'website')
+      let amount = try int(val, 'amount')
+      let date = match val
+        .query
+        .key('created_at')
+        .as_string
+        .then(fn (v) { parse_date(v) })
+      {
+        case Some(v) -> v
+        case _ -> throw ParseError.InvalidKey('created_at')
+      }
+
+      sponsors.push(Sponsor {
+        @name = name,
+        @image = img,
+        @website = site,
+        @amount = amount,
+        @created_at = date,
+      })
+      Result.Ok(sponsors)
+    }
+
+    rows.sort_by fn (a, b) { a.created_at.cmp(b.created_at) }
+    Result.Ok(rows)
+  }
+}
+
+class CorporateSponsor {
+  let @name: String
+  let @image: String
+  let @description: markdown.Document
+
+  fn static parse_all(
+    path: ref Path,
+  ) -> Result[Array[CorporateSponsor], ParseError] {
+    let data = ByteArray.new
+
+    try ReadOnlyFile
+      .new(path)
+      .then fn (f) { f.read_all(data) }
+      .map_error fn (e) { ParseError.Io(e) }
+
+    let root = try Json
+      .parse(data)
+      .map_error fn (e) { ParseError.InvalidJson(e.to_string) }
+
+    let root = match Json.parse(data) {
+      case Ok(Array(v)) -> v
+      case Ok(_) -> {
+        throw ParseError.InvalidJson('the top-level value must be an array')
+      }
+      case Error(e) -> throw ParseError.InvalidJson(e.to_string)
+    }
+
+    root.into_iter.try_reduce([]) fn (sponsors, val) {
+      let name = try string(val, 'name')
+      let img = try string(val, 'image')
+      let desc = match val.query.key('description').as_string {
+        case Some(v) -> match markdown.Document.parse(v) {
+          case Ok(v) -> v
+          case Error(e) -> throw ParseError.InvalidKey('description')
+        }
+        case _ -> throw ParseError.InvalidKey('description')
+      }
+
+      sponsors.push(CorporateSponsor {
+        @name = name,
+        @image = img,
+        @description = desc,
+      })
+      Result.Ok(sponsors)
+    }
+  }
+}

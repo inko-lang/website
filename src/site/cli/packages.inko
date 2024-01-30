@@ -1,0 +1,189 @@
+import site.github
+import std.env
+import std.fs.file.(ReadOnlyFile, WriteOnlyFile)
+import std.fs.path.Path
+import std.int.Format
+import std.io.Error
+import std.json.Json
+
+import std.stdio.STDOUT
+import std.fmt.(fmt)
+
+let ENV = 'GITHUB_TOKEN'
+let QUERY = '
+query ($owner: String!, $name: String!) {
+  tags: repository(followRenames: true, owner: $owner, name: $name) {
+    stargazerCount
+    description
+    url
+    licenseInfo {
+      spdxId
+    }
+    refs(
+      refPrefix: "refs/tags/"
+      first: 1
+      orderBy: { field: ALPHABETICAL, direction: DESC }
+    ) {
+      nodes {
+        name
+        target {
+          ... on Commit {
+            committedDate
+          }
+          ... on Tag {
+            target {
+              ... on Commit {
+                committedDate
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+'
+
+fn version_tag?(name: String) -> Bool {
+  let vals =
+    name.split('.').map fn (v) { Int.parse(v, Format.Decimal).some? }.to_array
+
+  vals == [true, true, true]
+}
+
+fn registered(path: ref Path) -> Result[Array[(String, String)], String] {
+  let path = Path.new('source').join('data').join('packages.json')
+  let data = ByteArray.new
+
+  try ReadOnlyFile
+    .new(path)
+    .then fn (f) { f.read_all(data) }
+    .map_error fn (e) { e.to_string }
+
+  let vals = match Json.parse(data) {
+    case Ok(Array(v)) -> v
+    case Ok(_) -> throw 'the top-level value must be an array'
+    case Error(e) -> throw e.to_string
+  }
+
+  vals.into_iter.try_reduce([]) fn (ary, val) {
+    let owner = match val.query.key('owner').as_string {
+      case Some(v) -> v
+      case _ -> throw "the 'owner' key is invalid or missing"
+    }
+
+    let name = match val.query.key('name').as_string {
+      case Some(v) -> v
+      case _ -> throw "the 'name' key is invalid or missing"
+    }
+
+    ary.push((owner, name))
+    Result.Ok(ary)
+  }
+}
+
+fn packages(
+  token: String,
+  packages: Array[(String, String)],
+) -> Result[Json, String] {
+  let rows = try packages.into_iter.try_reduce([]) fn (ary, owner_name) {
+    let vars = Map.new
+
+    vars.set('owner', owner_name.0)
+    vars.set('name', owner_name.1)
+
+    let resp =
+      try github.get(QUERY, token, vars).map_error fn (e) { e.to_string }
+    let repo = match resp.query.key('data').key('tags').as_object {
+      case Some(v) -> v
+      case _ -> return Result.Ok(ary)
+    }
+
+    let url = match repo.opt('url') {
+      case Some(String(v)) -> v
+      case _ -> ''
+    }
+
+    let desc = match repo.opt('description') {
+      case Some(String(v)) -> v
+      case _ -> ''
+    }
+
+    let stars = match repo.opt('stargazerCount') {
+      case Some(Int(v)) -> v
+      case _ -> 0
+    }
+
+    let license = match repo.opt('licenseInfo') {
+      case Some(Object(m)) -> match m.opt('spdxId') {
+        case Some(String(v)) -> v
+        case _ -> ''
+      }
+      case _ -> ''
+    }
+
+    let tag = match repo.opt('refs') {
+      case Some(Object(m)) -> match m.opt('nodes') {
+        case Some(Array(v)) -> match v.opt(0) {
+          case Some(Object(v)) -> v
+          case _ -> return Result.Ok(ary)
+        }
+        case _ -> return Result.Ok(ary)
+      }
+      case _ -> return Result.Ok(ary)
+    }
+
+    let version = match tag.opt('name') {
+      case Some(String(v)) -> {
+        let name = if v.starts_with?('v') {
+          v.slice(start: 1, size: v.size - 1).into_string
+        } else {
+          v
+        }
+
+        if version_tag?(name).false? { return Result.Ok(ary) }
+        name
+      }
+      case _ -> return Result.Ok(ary)
+    }
+
+    let row = Map.new
+
+    row.set('owner', Json.String(owner_name.0))
+    row.set('name', Json.String(owner_name.1))
+    row.set('url', Json.String(url))
+    row.set('description', Json.String(desc))
+    row.set('stars', Json.Int(stars))
+    row.set('license', Json.String(license))
+    row.set('version', Json.String(version))
+
+    ary.push(Json.Object(row))
+    Result.Ok(ary)
+  }
+
+  Result.Ok(Json.Array(rows))
+}
+
+fn pub run {
+  let in_path = Path.new('source').join('data').join('packages.json')
+  let out_path = Path.new('source').join('data').join('package_data.json')
+  let token = match env.opt(ENV) {
+    case Some(v) if v.size > 0 -> v
+    case _ -> panic("the {ENV} environment variable must be non-empty")
+  }
+
+  let input = match registered(in_path) {
+    case Ok(v) -> v
+    case Error(e) -> panic("failed to parse {in_path}: {e}")
+  }
+
+  let output = match packages(token, input) {
+    case Ok(v) -> v
+    case Error(e) -> panic("failed to get the packages: {e}")
+  }
+
+  WriteOnlyFile
+    .new(out_path)
+    .then fn (f) { f.write_string(output.to_pretty_string) }
+    .expect('failed to write the packages')
+}

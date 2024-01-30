@@ -1,0 +1,78 @@
+@font-face {
+  font-family: 'icons';
+  src: url('/fonts/icons.woff2?d87gwj') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
+}
+
+i {
+  font-family: 'icons' !important;
+  speak: never;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-discord:before {
+  content: "\e900";
+}
+.icon-star:before {
+  content: "\f005";
+}
+.icon-home:before {
+  content: "\f015";
+}
+.icon-clock-o:before {
+  content: "\f017";
+}
+.icon-book:before {
+  content: "\f02d";
+}
+.icon-pencil:before {
+  content: "\f040";
+}
+.icon-info-circle:before {
+  content: "\f05a";
+}
+.icon-exclamation-circle:before {
+  content: "\f06a";
+}
+.icon-comments:before {
+  content: "\f086";
+}
+.icon-github:before {
+  content: "\f09b";
+}
+.icon-group:before {
+  content: "\f0c0";
+}
+.icon-users:before {
+  content: "\f0c0";
+}
+.icon-clipboard:before {
+  content: "\f0ea";
+}
+.icon-lightbulb-o:before {
+  content: "\f0eb";
+}
+.icon-rocket:before {
+  content: "\f135";
+}
+.icon-archive:before {
+  content: "\f187";
+}
+.icon-newspaper-o:before {
+  content: "\f1ea";
+}
+.icon-balance-scale:before {
+  content: "\f24e";
+}
+.icon-handshake-o:before {
+  content: "\f2b5";
+}

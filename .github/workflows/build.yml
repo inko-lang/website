@@ -3,12 +3,16 @@ name: Build and deploy
 on:
   push:
   pull_request:
+  workflow_dispatch:
+
+env:
+  AWS_DEFAULT_REGION: eu-west-1
 
 jobs:
   vale:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - uses: errata-ai/vale-action@reviewdog
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
@@ -16,9 +20,24 @@ jobs:
           reporter: github-check
           vale_flags: '--no-wrap --sort'
   deploy:
+    runs-on: ubuntu-latest
+    container:
+      image: ghcr.io/inko-lang/inko:main
     needs:
       - vale
-    uses: ./.github/workflows/deploy.yml
-    secrets:
-      AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-      AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+    if: |
+      github.repository == 'inko-lang/website' && github.ref_name == 'main'
+    steps:
+      - name: Installing dependencies
+        run: microdnf install --quiet --assumeyes rclone make awscli2 git tar
+      - uses: actions/checkout@v4
+      - uses: actions/cache@v4
+        with:
+          path: |
+            build
+            ~/.local/share/inko/packages
+          key: ${{ runner.os }}
+      - run: make deploy
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}

@@ -1,0 +1,52 @@
+import site.layouts
+import wobsite.Site
+
+fn pub run {
+  Site.build fn (site) {
+    site.copy('*.ico')
+    site.copy('*.txt')
+    site.copy('*.pdf')
+    site.copy('*.woff2')
+    site.copy('*.jpg')
+    site.copy('*.jpeg')
+    site.copy('*.png')
+    site.copy('*.gif')
+    site.copy('*.svg')
+    site.copy('*.css')
+    site.copy('*.js')
+
+    site.page('/index.md') fn {
+      recover fn (files, page) {
+        layouts.home(files, page)
+      }
+    }
+
+    site.page('/404.md') fn {
+      recover fn (_, p) { Result.Ok(layouts.missing(p)) }
+    }
+
+    ['documentation', 'code-of-conduct', 'community'].into_iter.each fn (p) {
+      site.page("/{p}.md") fn {
+        recover fn (_, p) { Result.Ok(layouts.page(p)) }
+      }
+    }
+
+    site.page('/sponsors.md') fn {
+      recover fn (files, p) { layouts.sponsors(files, p) }
+    }
+
+    site.page('/packages.md') fn {
+      recover fn (files, p) { layouts.packages(files, p) }
+    }
+
+    site.page('/news.md') fn {
+      recover fn (files, p) { layouts.news_index(files, p) }
+    }
+
+    site.page('/news/*.md') fn {
+      recover fn (_, p) { layouts.news(p) }
+    }
+
+    site.generate('feed.xml') fn (files) { layouts.feed(files) }
+  }
+}

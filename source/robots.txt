@@ -1,8 +1,2 @@
 User-agent: *
-
-Disallow: /documentation/*
-Disallow: /install/*
-Disallow: /manual/*
-Disallow: /about/*
-
 Allow: /

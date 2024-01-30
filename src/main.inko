@@ -1,0 +1,17 @@
+import site.cli.build
+import site.cli.news
+import site.cli.packages
+import site.cli.sponsors
+import std.env
+
+class async Main {
+  fn async main {
+    match env.arguments.opt(0) {
+      case Some('build') or None -> build.run
+      case Some('sponsors') -> sponsors.run
+      case Some('packages') -> packages.run
+      case Some('news') -> news.run
+      case Some(v) -> panic("unknown command: {v}")
+    }
+  }
+}

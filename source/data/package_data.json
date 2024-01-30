@@ -1,0 +1,137 @@
+[
+  {
+    "owner": "dusty-phillips",
+    "name": "inko-http",
+    "url": "https://github.com/dusty-phillips/inko-http",
+    "description": "Rudimentary HTTP Server exploring the Inko programming language",
+    "stars": 3,
+    "license": "MIT",
+    "version": "0.0.4"
+  },
+  {
+    "owner": "dusty-phillips",
+    "name": "inko-argparse",
+    "url": "https://github.com/dusty-phillips/inko-argparse",
+    "description": "Argument parsing library for the Inko programming language",
+    "stars": 1,
+    "license": "MIT",
+    "version": "0.2.0"
+  },
+  {
+    "owner": "dusty-phillips",
+    "name": "inko-regex",
+    "url": "https://github.com/dusty-phillips/inko-regex",
+    "description": "Basic regular expression parser in pure inko",
+    "stars": 3,
+    "license": "MIT",
+    "version": "0.0.4"
+  },
+  {
+    "owner": "dusty-phillips",
+    "name": "inko-tui",
+    "url": "https://github.com/dusty-phillips/inko-tui",
+    "description": "Basic Terminal Ui for Inko",
+    "stars": 0,
+    "license": "MIT",
+    "version": "0.0.1"
+  },
+  {
+    "owner": "yorickpeterse",
+    "name": "inko-builder",
+    "url": "https://github.com/yorickpeterse/inko-builder",
+    "description": "An Inko library for generating XML and HTML",
+    "stars": 2,
+    "license": "MPL-2.0",
+    "version": "0.11.0"
+  },
+  {
+    "owner": "roetlich",
+    "name": "inko-html",
+    "url": "https://github.com/roetlich/inko-html",
+    "description": "HTML library written in Inko.",
+    "stars": 0,
+    "license": "",
+    "version": "0.0.1"
+  },
+  {
+    "owner": "uasi",
+    "name": "inko-blake3",
+    "url": "https://github.com/uasi/inko-blake3",
+    "description": "A BLAKE3 hasher for Inko.",
+    "stars": 2,
+    "license": "MPL-2.0",
+    "version": "0.1.0"
+  },
+  {
+    "owner": "uasi",
+    "name": "inko-hmac",
+    "url": "https://github.com/uasi/inko-hmac",
+    "description": "An HMAC implementation for Inko.",
+    "stars": 1,
+    "license": "MPL-2.0",
+    "version": "0.2.1"
+  },
+  {
+    "owner": "uasi",
+    "name": "inko-totp",
+    "url": "https://github.com/uasi/inko-totp",
+    "description": "A TOTP token generator and validator for Inko.",
+    "stars": 2,
+    "license": "MPL-2.0",
+    "version": "0.1.0"
+  },
+  {
+    "owner": "uasi",
+    "name": "inko-url_search_params",
+    "url": "https://github.com/uasi/inko-url_search_params",
+    "description": "A URLSearchParams implementation.",
+    "stars": 0,
+    "license": "MPL-2.0",
+    "version": "0.1.0"
+  },
+  {
+    "owner": "uasi",
+    "name": "inko-uuid",
+    "url": "https://github.com/uasi/inko-uuid",
+    "description": "A UUID generator for Inko.",
+    "stars": 1,
+    "license": "MPL-2.0",
+    "version": "0.1.0"
+  },
+  {
+    "owner": "yorickpeterse",
+    "name": "inko-markdown",
+    "url": "https://github.com/yorickpeterse/inko-markdown",
+    "description": "An Inko library for parsing an opinionated dialect of Markdown",
+    "stars": 3,
+    "license": "MPL-2.0",
+    "version": "0.13.0"
+  },
+  {
+    "owner": "yorickpeterse",
+    "name": "inko-optparse",
+    "url": "https://github.com/yorickpeterse/inko-optparse",
+    "description": "An Inko library for parsing command-line arguments and options",
+    "stars": 1,
+    "license": "MPL-2.0",
+    "version": "0.3.0"
+  },
+  {
+    "owner": "yorickpeterse",
+    "name": "inko-syntax",
+    "url": "https://github.com/yorickpeterse/inko-syntax",
+    "description": "A syntax highlighting library for Inko",
+    "stars": 2,
+    "license": "MPL-2.0",
+    "version": "0.7.0"
+  },
+  {
+    "owner": "yorickpeterse",
+    "name": "inko-wobsite",
+    "url": "https://github.com/yorickpeterse/inko-wobsite",
+    "description": "A small and opinionated static site generation library",
+    "stars": 1,
+    "license": "MPL-2.0",
+    "version": "0.10.0"
+  }
+]

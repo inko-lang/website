@@ -1,4 +1,3 @@
-/.bundle
 /build
-/.sass-cache
-/vendor
+/dep
+/public
