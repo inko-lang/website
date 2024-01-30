@@ -533,7 +533,6 @@ table tr:last-child td {
   font-size: 0.8rem;
   font-weight: normal;
   margin: 0;
-  min-width: max-content;
   padding: 5px;
 }
 
