@@ -32,11 +32,12 @@ jobs:
           key: ${{ runner.os }}
       - run: git config --global --add safe.directory $PWD
       - name: Update package data
-        run: bash ./scripts/packages.sh
+        run: |
+          bash ./scripts/packages.sh
         env:
           GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
       - name: Deploy website
-        run: make deploy
+        run: make setup build deploy
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
