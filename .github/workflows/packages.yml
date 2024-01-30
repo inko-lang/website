@@ -30,6 +30,7 @@ jobs:
             build
             ~/.local/share/inko/packages
           key: ${{ runner.os }}
+      - run: git config --global --add safe.directory $PWD
       - name: Update package data
         run: bash ./scripts/packages.sh
         env:

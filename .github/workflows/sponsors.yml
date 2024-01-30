@@ -28,6 +28,7 @@ jobs:
             dep
             ~/.local/share/inko/packages
           key: ${{ runner.os }}
+      - run: git config --global --add safe.directory $PWD
       - name: Update sponsors data
         run: bash ./scripts/sponsors.sh
         env:
