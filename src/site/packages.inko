@@ -56,10 +56,6 @@ class Package {
       .then fn (f) { f.read_all(data) }
       .map_error fn (e) { ParseError.Io(e) }
 
-    let root = try Json
-      .parse(data)
-      .map_error fn (e) { ParseError.InvalidJson(e.to_string) }
-
     let root = match Json.parse(data) {
       case Ok(Array(v)) -> v
       case Ok(_) -> {

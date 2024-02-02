@@ -54,10 +54,6 @@ class Sponsor {
       .then fn (f) { f.read_all(data) }
       .map_error fn (e) { ParseError.Io(e) }
 
-    let root = try Json
-      .parse(data)
-      .map_error fn (e) { ParseError.InvalidJson(e.to_string) }
-
     let root = match Json.parse(data) {
       case Ok(Array(v)) -> v
       case Ok(_) -> {
@@ -111,10 +107,6 @@ class CorporateSponsor {
       .then fn (f) { f.read_all(data) }
       .map_error fn (e) { ParseError.Io(e) }
 
-    let root = try Json
-      .parse(data)
-      .map_error fn (e) { ParseError.InvalidJson(e.to_string) }
-
     let root = match Json.parse(data) {
       case Ok(Array(v)) -> v
       case Ok(_) -> {
@@ -129,7 +121,7 @@ class CorporateSponsor {
       let desc = match val.query.key('description').as_string {
         case Some(v) -> match markdown.Document.parse(v) {
           case Ok(v) -> v
-          case Error(e) -> throw ParseError.InvalidKey('description')
+          case Error(_) -> throw ParseError.InvalidKey('description')
         }
         case _ -> throw ParseError.InvalidKey('description')
       }

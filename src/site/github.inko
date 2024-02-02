@@ -6,7 +6,7 @@ import std.sys.(Command, Stream)
 let URL = 'https://api.github.com/graphql'
 
 class enum Error {
-  case InvalidCommand(io.Error)
+  case InvalidCommand(String)
   case InvalidRead(io.Error)
   case InvalidJson(json.Error)
 }
@@ -51,8 +51,15 @@ fn get(
   cmd.stdout(Stream.Piped)
   cmd.stderr(Stream.Null)
 
-  let child = try cmd.spawn.map_error fn (e) { Error.InvalidCommand(e) }
-  let status = try child.wait.map_error fn (e) { Error.InvalidCommand(e) }
+  let child =
+    try cmd.spawn.map_error fn (e) { Error.InvalidCommand(e.to_string) }
+  let status =
+    try child.wait.map_error fn (e) { Error.InvalidCommand(e.to_string) }
+
+  if status.success?.false? {
+    throw Error.InvalidCommand("the process exited with status {status.to_int}")
+  }
+
   let stdout = ByteArray.new
 
   try child.stdout.read_all(stdout).map_error fn (e) { Error.InvalidRead(e) }
