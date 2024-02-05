@@ -15,7 +15,7 @@ compilation, cross compilation, faster linking, and more!
 :::
 
 For the full list of changes, refer to the
-[changelog](https://github.com/inko-lang/inko/blob/main/CHANGELOG.md#0140-2024-02-03).
+[changelog](https://github.com/inko-lang/inko/blob/v0.14.0/CHANGELOG.md#0140-2024-02-05).
 
 A special thanks to the following people for contributing changes included in
 this release:
