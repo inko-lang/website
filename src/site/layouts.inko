@@ -22,7 +22,7 @@ let BUTTONS = [
     'Get started',
     'icon-rocket',
     'green',
-    'https://docs.inko-lang.org/manual/main/setup/installation/'
+    'https://docs.inko-lang.org/manual/latest/setup/installation/'
   ],
   ['Discord', 'icon-discord', 'purple', 'https://discord.gg/seeURxHxCb'],
   ['GitHub', 'icon-github', '', 'https://github.com/inko-lang/inko'],
