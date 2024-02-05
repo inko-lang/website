@@ -5,7 +5,7 @@
 }
 ---
 
-We're pleased to announce the release of Inko 0.13.1. This release contains a
+We're pleased to announce the release of Inko 0.14.0. This release contains a
 variety of exciting changes, such as support for parallel and incremental
 compilation, cross compilation, faster linking, and more!
 
