@@ -142,8 +142,7 @@ To cross compile this to AMD64 macOS using Zig, all we need to do is:
 Of course without Zig cross compilation is still supported, but the process is a
 bit more difficult depending on what target you're compiling to. For more
 details, refer to the [cross compilation
-documentation](https://docs.inko-lang.org/manual/v0.14.0/guides/cross
-compilation/)
+documentation](https://docs.inko-lang.org/manual/v0.14.0/guides/cross-compilation/)
 
 Inko supports cross compiling to AMD64 and ARM64 macOS and Linux, and AMD64
 FreeBSD. ARM64 FreeBSD is supported at the compiler level, but we don't provide
