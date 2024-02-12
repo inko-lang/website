@@ -130,7 +130,7 @@
     "name": "inko-wobsite",
     "url": "https://github.com/yorickpeterse/inko-wobsite",
     "description": "A small and opinionated static site generation library",
-    "stars": 1,
+    "stars": 2,
     "license": "MPL-2.0",
     "version": "0.11.0"
   }
