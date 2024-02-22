@@ -15,7 +15,7 @@ jobs:
   packages:
     runs-on: ubuntu-latest
     container:
-      image: ghcr.io/inko-lang/inko:main
+      image: ghcr.io/inko-lang/inko:latest
     permissions:
       contents: write
     if: |
