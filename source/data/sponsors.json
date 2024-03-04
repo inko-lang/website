@@ -5,5 +5,12 @@
     "website": "https://github.com/Verdagon",
     "amount": 10,
     "created_at": "2022-01-31T18:25:50Z"
+  },
+  {
+    "name": "Axel Pahl",
+    "image": "https://avatars.githubusercontent.com/u/9406836?u=3aa8243cc1b6b6fc383c0b5fed256c671d81b034&v=4&size=64",
+    "website": "https://github.com/apahl",
+    "amount": 25,
+    "created_at": "2024-02-26T15:14:32Z"
   }
 ]
