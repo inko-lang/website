@@ -4,7 +4,7 @@
     "name": "inko-http",
     "url": "https://github.com/dusty-phillips/inko-http",
     "description": "Rudimentary HTTP Server exploring the Inko programming language",
-    "stars": 3,
+    "stars": 4,
     "license": "MIT",
     "version": "0.0.4"
   },
@@ -130,7 +130,7 @@
     "name": "inko-wobsite",
     "url": "https://github.com/yorickpeterse/inko-wobsite",
     "description": "A small and opinionated static site generation library",
-    "stars": 2,
+    "stars": 3,
     "license": "MPL-2.0",
     "version": "0.12.0"
   }
