@@ -14,37 +14,36 @@ fn pub run {
     site.copy('*.svg')
     site.copy('*.css')
     site.copy('*.js')
-    site.copy('/_headers')
 
-    site.page('/index.md') fn {
+    site.page('/index.md', index: false) fn {
       recover fn (files, page) {
         layouts.home(files, page)
       }
     }
 
-    site.page('/404.md') fn {
+    site.page('/404.md', index: false) fn {
       recover fn (_, p) { Result.Ok(layouts.missing(p)) }
     }
 
     ['documentation', 'code-of-conduct', 'community'].into_iter.each fn (p) {
-      site.page("/{p}.md") fn {
+      site.page("/{p}.md", index: true) fn {
         recover fn (_, p) { Result.Ok(layouts.page(p)) }
       }
     }
 
-    site.page('/sponsors.md') fn {
+    site.page('/sponsors.md', index: true) fn {
       recover fn (files, p) { layouts.sponsors(files, p) }
     }
 
-    site.page('/packages.md') fn {
+    site.page('/packages.md', index: true) fn {
       recover fn (files, p) { layouts.packages(files, p) }
     }
 
-    site.page('/news.md') fn {
+    site.page('/news.md', index: true) fn {
       recover fn (files, p) { layouts.news_index(files, p) }
     }
 
-    site.page('/news/*.md') fn {
+    site.page('/news/*.md', index: true) fn {
       recover fn (_, p) { layouts.news(p) }
     }
 
