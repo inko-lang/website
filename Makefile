@@ -1,8 +1,5 @@
-# The S3 bucket to upload the files to.
-BUCKET := inko-lang.org
-
-# The Cloudfront distribution.
-DIST := E2461OP4YFCUOQ
+# The Cloudflare Pages project to deploy to.
+PROJECT := inko-lang-org
 
 build:
 	@inko build
@@ -26,14 +23,6 @@ clean:
 	@rm -rf public
 
 deploy:
-	@rclone sync \
-		--config rclone.conf \
-		--checksum \
-		--header-upload 'Cache-Control:max-age=604800' \
-		--s3-acl 'public-read' \
-		public "production:${BUCKET}"
-	@aws cloudfront create-invalidation \
-		--distribution-id "${DIST}" \
-		--paths '/*'
+	@npx wrangler pages deploy --project-name ${PROJECT} public
 
 .PHONY: setup build watch clean deploy sponsors packages

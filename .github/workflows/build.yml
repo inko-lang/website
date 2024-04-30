@@ -29,15 +29,16 @@ jobs:
       github.repository == 'inko-lang/website' && github.ref_name == 'main'
     steps:
       - name: Installing dependencies
-        run: microdnf install --quiet --assumeyes rclone make awscli2 git tar
+        run: microdnf install --quiet --assumeyes make git tar npm
       - uses: actions/checkout@v4
       - uses: actions/cache@v4
         with:
           path: |
             build
             ~/.local/share/inko/packages
+            ~/.npm
           key: ${{ runner.os }}
       - run: make setup build deploy
         env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
