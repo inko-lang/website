@@ -8,9 +8,6 @@ on:
     paths:
       - 'source/data/packages.json'
 
-env:
-  AWS_DEFAULT_REGION: eu-west-1
-
 jobs:
   packages:
     runs-on: ubuntu-latest

@@ -5,9 +5,6 @@ on:
     - cron: '15 1 * * 1'
   workflow_dispatch:
 
-env:
-  AWS_DEFAULT_REGION: eu-west-1
-
 jobs:
   sponsors:
     runs-on: ubuntu-latest
