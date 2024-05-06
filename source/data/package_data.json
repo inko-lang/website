@@ -31,7 +31,7 @@
     "name": "inko-tui",
     "url": "https://github.com/dusty-phillips/inko-tui",
     "description": "Basic Terminal Ui for Inko",
-    "stars": 0,
+    "stars": 1,
     "license": "MIT",
     "version": "0.0.1"
   },
@@ -132,6 +132,6 @@
     "description": "A small and opinionated static site generation library",
     "stars": 3,
     "license": "MPL-2.0",
-    "version": "0.12.0"
+    "version": "0.13.0"
   }
 ]
