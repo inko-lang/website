@@ -14,5 +14,4 @@ syntax, reference guides, and more.
 
 ## Standard library
 
-Standard library documentation is not yet available, as we have yet to build a
-documentation generator. Sorry!
+- [Unstable (main)](https://docs.inko-lang.org/std/main/)
