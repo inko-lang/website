@@ -11,7 +11,7 @@ class async Main {
       case Some('sponsors') -> sponsors.run
       case Some('packages') -> packages.run
       case Some('news') -> news.run
-      case Some(v) -> panic("unknown command: {v}")
+      case Some(v) -> panic('unknown command: ${v}')
     }
   }
 }

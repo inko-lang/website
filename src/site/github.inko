@@ -1,7 +1,7 @@
 import std.io
-import std.json.(self, Json)
-import std.string.ToString
-import std.sys.(Command, Stream)
+import std.json (self, Json)
+import std.string (ToString)
+import std.sys (Command, Stream)
 
 let URL = 'https://api.github.com/graphql'
 
@@ -14,9 +14,9 @@ class enum Error {
 impl ToString for Error {
   fn pub to_string -> String {
     match self {
-      case InvalidCommand(e) -> "failed to run the curl command: {e}"
-      case InvalidRead(e) -> "failed to read the curl output: {e}"
-      case InvalidJson(e) -> "failed to parse the JSON response: {e}"
+      case InvalidCommand(e) -> 'failed to run the curl command: ${e}'
+      case InvalidRead(e) -> 'failed to read the curl output: ${e}'
+      case InvalidJson(e) -> 'failed to parse the JSON response: ${e}'
     }
   }
 }
@@ -28,40 +28,46 @@ fn get(
 ) -> Result[Json, Error] {
   let cmd = Command.new('curl')
   let root = Map.new
-  let vars = variables.into_iter.reduce(Map.new) fn (map, pair) {
+  let vars = variables.into_iter.reduce(Map.new, fn (map, pair) {
     map.set(pair.key, Json.String(pair.value))
     map
-  }
+  })
 
   root.set('query', Json.String(query))
   root.set('variables', Json.Object(vars))
-  cmd.arguments([
-    '-H',
-    'Content-Type: application/json',
-    '-H',
-    "Authorization: bearer {token}",
-    '-X',
-    'POST',
-    '-d',
-    Json.Object(root).to_string,
-    URL
-  ])
+  cmd.arguments(
+    [
+      '-H',
+      'Content-Type: application/json',
+      '-H',
+      'Authorization: bearer ${token}',
+      '-X',
+      'POST',
+      '-d',
+      Json.Object(root).to_string,
+      URL,
+    ],
+  )
 
   cmd.stdin(Stream.Null)
   cmd.stdout(Stream.Piped)
   cmd.stderr(Stream.Null)
 
-  let child =
-    try cmd.spawn.map_error fn (e) { Error.InvalidCommand(e.to_string) }
-  let status =
-    try child.wait.map_error fn (e) { Error.InvalidCommand(e.to_string) }
+  let child = try cmd.spawn.map_error(fn (e) {
+    Error.InvalidCommand(e.to_string)
+  })
+  let status = try child.wait.map_error(fn (e) {
+    Error.InvalidCommand(e.to_string)
+  })
 
   if status.success?.false? {
-    throw Error.InvalidCommand("the process exited with status {status.to_int}")
+    throw Error.InvalidCommand(
+      'the process exited with status ${status.to_int}',
+    )
   }
 
   let stdout = ByteArray.new
 
-  try child.stdout.read_all(stdout).map_error fn (e) { Error.InvalidRead(e) }
-  Json.parse(stdout).map_error fn (e) { Error.InvalidJson(e) }
+  try child.stdout.read_all(stdout).map_error(fn (e) { Error.InvalidRead(e) })
+  Json.parse(stdout).map_error(fn (e) { Error.InvalidJson(e) })
 }

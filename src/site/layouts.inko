@@ -1,14 +1,14 @@
 import builder.html
 import builder.xml
-import markdown.html.(Filter, TableOfContents)
-import site.examples.Example
-import site.packages.Package
-import site.sponsors.(CorporateSponsor, Sponsor)
-import std.fs.file.ReadOnlyFile
-import std.io.BufferedReader
-import wobsite.(Files, Page)
-import wobsite.markdown.(Admonitions, SyntaxHighlight)
-import wobsite.time.(human_readable_date, iso_date)
+import markdown.html (Filter, TableOfContents)
+import site.examples (Example)
+import site.packages (Package)
+import site.sponsors (CorporateSponsor, Sponsor)
+import std.fs.file (ReadOnlyFile)
+import std.io (BufferedReader)
+import wobsite (Files, Page)
+import wobsite.markdown (Admonitions, SyntaxHighlight)
+import wobsite.time (human_readable_date, iso_date)
 
 # The base URL of the website.
 let URL = 'https://inko-lang.org'
@@ -22,7 +22,7 @@ let BUTTONS = [
     'Get started',
     'icon-rocket',
     'green',
-    'https://docs.inko-lang.org/manual/latest/setup/installation/'
+    'https://docs.inko-lang.org/manual/latest/setup/installation/',
   ],
   ['Discord', 'icon-discord', 'purple', 'https://discord.gg/seeURxHxCb'],
   ['GitHub', 'icon-github', '', 'https://github.com/inko-lang/inko'],
@@ -35,7 +35,7 @@ let MENU = [
   ['Learn', 'icon-book', '/documentation/'],
   ['Packages', 'icon-archive', '/packages/'],
   ['Community', 'icon-users', '/community/'],
-  ['News', 'icon-newspaper-o', '/news/']
+  ['News', 'icon-newspaper-o', '/news/'],
 ]
 
 fn filters -> Array[Filter] {
@@ -61,18 +61,17 @@ fn toggle_menu(query: String, open: String, close: String) -> html.Element {
 }
 
 fn articles(files: ref Files) -> Result[Array[Page], String] {
-  let pages =
-    try files.matching('/news/*.md').try_reduce([]) fn (ary, path) {
-      match Page.parse_file(files.source, path) {
-        case Ok(page) -> {
-          ary.push(page)
-          Result.Ok(ary)
-        }
-        case Error(e) -> Result.Error(e.to_string)
+  let pages = try files.matching('/news/*.md').try_reduce([], fn (ary, path) {
+    match Page.parse_file(files.source, path) {
+      case Ok(page) -> {
+        ary.push(page)
+        Result.Ok(ary)
       }
+      case Error(e) -> Result.Error(e.to_string)
     }
+  })
 
-  pages.sort_by fn (a, b) { b.date.cmp(a.date) }
+  pages.sort_by(fn (a, b) { b.date.cmp(a.date) })
   Result.Ok(pages)
 }
 
@@ -91,29 +90,20 @@ fn head(page: ref Page) -> html.Element {
     .meta
     .attr(
       'content',
-      "\
-        default-src 'self'; \
-        script-src 'self'; \
-        object-src 'none'; \
-        style-src 'self'; \
-        font-src 'self' data:; \
-        img-src 'self' https://avatars.githubusercontent.com; \
-        base-uri 'none'; \
-        form-action 'none'; \
-      "
+      "default-src 'self'; script-src 'self'; object-src 'none'; style-src 'self'; font-src 'self' data:; img-src 'self' https://avatars.githubusercontent.com; base-uri 'none'; form-action 'none';",
     )
     .attr('http-equiv', 'Content-Security-Policy')
 
   head.meta.attr('charset', 'utf-8')
-  head
-    .meta
-    .attr('name', 'google-site-verification')
-    .attr('content', 'C0FiWgdONfvZffO-cciP2CZlMkDMCjfaQrcwPgLG_nw')
+  head.meta.attr('name', 'google-site-verification').attr(
+    'content',
+    'C0FiWgdONfvZffO-cciP2CZlMkDMCjfaQrcwPgLG_nw',
+  )
 
-  head
-    .meta
-    .attr('name', 'viewport')
-    .attr('content', 'width=device-width, initial-scale=1.0')
+  head.meta.attr('name', 'viewport').attr(
+    'content',
+    'width=device-width, initial-scale=1.0',
+  )
 
   head
     .link
@@ -122,18 +112,17 @@ fn head(page: ref Page) -> html.Element {
     .attr('type', 'application/atom+xml')
     .attr('title', TITLE)
 
-  head
-    .link
-    .attr('rel', 'icon')
-    .attr('href', '/favicon.ico')
-    .attr('type', 'image/x-icon')
+  head.link.attr('rel', 'icon').attr('href', '/favicon.ico').attr(
+    'type',
+    'image/x-icon',
+  )
 
   head.script.attr('src', '/js/main.js').attr('defer', 'defer')
 
   head.add(link('/css/reset.css', rel: 'stylesheet'))
-  head.add(link('/css/icons.css',  rel: 'stylesheet'))
+  head.add(link('/css/icons.css', rel: 'stylesheet'))
   head.add(link('/css/main.css', rel: 'stylesheet'))
-  head.add(link("{URL}{page.url}", rel: 'canonical'))
+  head.add(link('${URL}${page.url}', rel: 'canonical'))
   head.title.text(page.title)
   head
 }
@@ -141,31 +130,30 @@ fn head(page: ref Page) -> html.Element {
 fn header(page: ref Page) -> html.Element {
   let root = html.Element.new('div')
 
-  root.attr('class', 'top-bar').header.attr('class', 'grid').with fn (h) {
-    h.div.attr('class', 'logo').with fn (logo) {
-      logo
-        .img
-        .attr('src', '/images/logo.png')
-        .attr('height', '24')
-        .attr('width', '24')
+  root.attr('class', 'top-bar').header.attr('class', 'grid').with(fn (h) {
+    h.div.attr('class', 'logo').with(fn (logo) {
+      logo.img.attr('src', '/images/logo.png').attr('height', '24').attr(
+        'width',
+        '24',
+      )
 
       logo.span.text('Inko')
-    }
+    })
 
-    h.div.attr('class', 'expand-menus').with fn (div) {
+    h.div.attr('class', 'expand-menus').with(fn (div) {
       div.add(toggle_menu('.top-bar nav', 'Show menu', 'Hide menu'))
-    }
+    })
 
-    h.nav.ul.with fn (ul) {
-      MENU.iter.each fn (row) {
-        ul.li.a.attr('href', row.get(2)).with fn (a) {
+    h.nav.ul.with(fn (ul) {
+      MENU.iter.each(fn (row) {
+        ul.li.a.attr('href', row.get(2)).with(fn (a) {
           a.i.attr('class', row.get(1))
           a.text(' ')
           a.text(row.get(0))
-        }
-      }
-    }
-  }
+        })
+      })
+    })
+  })
 
   root
 }
@@ -179,10 +167,10 @@ fn corporate_sponsors(
   sponsors: ref Array[CorporateSponsor],
 ) {
   root.h2.text('Organisations supporting Inko')
-  root.table.attr('class', 'corporate-sponsors-table').with fn (table) {
-    table.tbody.with fn (tbody) {
-      sponsors.iter.each fn (sponsor) {
-        tbody.tr.with fn (tr) {
+  root.table.attr('class', 'corporate-sponsors-table').with(fn (table) {
+    table.tbody.with(fn (tbody) {
+      sponsors.iter.each(fn (sponsor) {
+        tbody.tr.with(fn (tr) {
           tr
             .td
             .attr('class', 'logo')
@@ -193,36 +181,35 @@ fn corporate_sponsors(
             .attr('height', '60')
 
           tr.td.append(sponsor.description.to_html)
-        }
-      }
-    }
-  }
+        })
+      })
+    })
+  })
 }
 
 fn github_sponsors(root: mut html.Element, sponsors: ref Array[Sponsor]) {
   root.h2.text('GitHub sponsors')
-  root.table.attr('class', 'sponsors-table').with fn (table) {
-    table.thead.tr.with fn (tr) {
+  root.table.attr('class', 'sponsors-table').with(fn (table) {
+    table.thead.tr.with(fn (tr) {
       tr.th.attr('class', 'avatar')
       tr.th.text('Sponsor')
       tr.th.text('Amount per month')
       tr.th.text('Sponsor since')
-    }
+    })
 
-    table.tbody.with fn (tbody) {
-      sponsors.iter.each fn (sponsor) {
-        tbody.tr.with fn (tr) {
-          tr.td.attr('class', 'avatar').with fn (td) {
+    table.tbody.with(fn (tbody) {
+      sponsors.iter.each(fn (sponsor) {
+        tbody.tr.with(fn (tr) {
+          tr.td.attr('class', 'avatar').with(fn (td) {
             if sponsor.image.size > 0 {
-              td
-                .img
-                .attr('src', sponsor.image)
-                .attr('alt', sponsor.name)
-                .attr('height', '32')
+              td.img.attr('src', sponsor.image).attr('alt', sponsor.name).attr(
+                'height',
+                '32',
+              )
             }
-          }
+          })
 
-          tr.td.with fn (td) {
+          tr.td.with(fn (td) {
             if sponsor.website.size > 0 {
               td
                 .a
@@ -233,148 +220,153 @@ fn github_sponsors(root: mut html.Element, sponsors: ref Array[Sponsor]) {
             } else {
               td.text(sponsor.name)
             }
-          }
+          })
 
-          tr.td.text("${sponsor.amount}")
+          tr.td.text('${sponsor.amount}')
           tr.td.text(human_readable_date(sponsor.created_at))
-        }
-      }
-    }
-  }
+        })
+      })
+    })
+  })
 }
 
 fn package_list(root: mut html.Element, packages: ref Array[Package]) {
-  root.div.attr('class', 'copy-notice admonition info').with fn (div) {
+  root.div.attr('class', 'copy-notice admonition info').with(fn (div) {
     div.div.attr('class', 'left').i.attr('class', 'icon')
-    div
-      .div
-      .attr('class', 'text')
-      .p
-      .text('The command to install the package into your project has been copied to your clipboard.')
-  }
+    div.div.attr('class', 'text').p.text(
+      'The command to install the package into your project has been copied to your clipboard.',
+    )
+  })
 
-  root.table.attr('class', 'packages-table').with fn (table) {
-    table.thead.with fn (thead) {
-      thead.tr.with fn (tr) {
+  root.table.attr('class', 'packages-table').with(fn (table) {
+    table.thead.with(fn (thead) {
+      thead.tr.with(fn (tr) {
         tr.th.text('Package')
         tr.th.attr('class', 'hide-if-narrow').text('License')
         tr.th.attr('class', 'hide-if-narrow').text('Stars')
         tr.th.attr('class', 'hide-if-narrow').text('Version')
         tr.th
-      }
-    }
+      })
+    })
 
-    table.tbody.with fn (tbody) {
-      packages.iter.each fn (pkg) {
-        tbody.tr.with fn (tr) {
-          tr.td.with fn (td) {
+    table.tbody.with(fn (tbody) {
+      packages.iter.each(fn (pkg) {
+        tbody.tr.with(fn (tr) {
+          tr.td.with(fn (td) {
             td
               .a
               .attr('class', 'name')
               .attr('href', pkg.url)
               .attr('rel', 'nofollow')
               .attr('title', pkg.description)
-              .text("{pkg.owner}/{pkg.name}")
+              .text('${pkg.owner}/${pkg.name}')
 
             td.br
             td.text(pkg.description)
-          }
+          })
 
-          tr.td.attr('class', 'hide-if-narrow').with fn (td) {
+          tr.td.attr('class', 'hide-if-narrow').with(fn (td) {
             if packages.size > 0 {
               td
                 .a
                 .attr('title', pkg.license)
                 .attr(
                   'href',
-                  "https://choosealicense.com/licenses/{pkg.license.to_lower}"
+                  'https://choosealicense.com/licenses/${pkg.license.to_lower}',
                 )
                 .text(pkg.license)
             }
-          }
+          })
 
           tr.td.attr('class', 'hide-if-narrow').text(pkg.stars.to_string)
           tr.td.attr('class', 'hide-if-narrow').text(pkg.version)
-          tr.td.a.attr('href', '#').with fn (a) {
+          tr.td.a.attr('href', '#').with(fn (a) {
             a.i.attr('class', 'icon-clipboard')
             a
               .attr('class', 'button install-package')
               .attr(
                 'data-copy',
-                "inko pkg add github.com/{pkg.owner}/{pkg.name} {pkg.version} && inko pkg sync"
+                'inko pkg add github.com/${pkg.owner}/${pkg.name} ${pkg.version} && inko pkg sync',
               )
-              .attr('title', 'Click to copy the command to install this package')
+              .attr(
+                'title',
+                'Click to copy the command to install this package',
+              )
               .text(' Install')
-          }
-        }
-      }
-    }
-  }
+          })
+        })
+      })
+    })
+  })
 }
 
 fn pub home(files: ref Files, page: Page) -> Result[html.Document, String] {
   let examples = try Example.parse_all(files)
   let jumbo = try Page
     .parse_file(files.source, files.source.join('jumbotron.md'))
-    .map_error fn (e) { "failed to parse jumbotron.md: {e}" }
+    .map_error(fn (e) { 'failed to parse jumbotron.md: ${e}' })
 
-  let doc = html.Document.html('en') fn (html) {
+  let doc = html.Document.html('en', fn (html) {
     html.add(head(page))
-    html.body.with fn (body) {
+    html.body.with(fn (body) {
       body.add(header(page))
-      body.div.attr('class', 'jumbotron').div.attr('class', 'grid').with fn (d) {
-        d.div.attr('class', 'introduction').with fn (d) {
-          d.h1.text(jumbo.title)
-          d.append(jumbo.to_html([]))
+      body.div.attr('class', 'jumbotron').div.attr('class', 'grid').with(
+        fn (d) {
+          d.div.attr('class', 'introduction').with(fn (d) {
+            d.h1.text(jumbo.title)
+            d.append(jumbo.to_html([]))
 
-          BUTTONS.iter.each fn (btn) {
-            let cls = "button {btn.get(2)}"
+            BUTTONS.iter.each(fn (btn) {
+              let cls = 'button ${btn.get(2)}'
 
-            d.a.attr('class', cls).attr('href', btn.get(3)).with fn (a) {
-              a.i.attr('class', btn.get(1))
-              a.text(' ')
-              a.text(btn.get(0))
-            }
-          }
-        }
+              d.a.attr('class', cls).attr('href', btn.get(3)).with(fn (a) {
+                a.i.attr('class', btn.get(1))
+                a.text(' ')
+                a.text(btn.get(0))
+              })
+            })
+          })
 
-        d.div.attr('class', 'code-examples').with fn (d) {
-          d.select.attr('title', 'Choose an example to display').with fn (s) {
-            examples.iter.each fn (ex) {
-              s.option.attr('data-example', ex.title).text(ex.title)
-            }
-          }
+          d.div.attr('class', 'code-examples').with(fn (d) {
+            d.select.attr('title', 'Choose an example to display').with(
+              fn (s) {
+                examples.iter.each(fn (ex) {
+                  s.option.attr('data-example', ex.title).text(ex.title)
+                })
+              },
+            )
 
-          examples.iter.each fn (ex) {
-            d
-              .div
-              .attr('class', 'example')
-              .attr('data-example', ex.title)
-              .append(ex.to_html)
-          }
-        }
-      }
+            examples.iter.each(fn (ex) {
+              d
+                .div
+                .attr('class', 'example')
+                .attr('data-example', ex.title)
+                .append(ex.to_html)
+            })
+          })
+        },
+      )
 
-      container(body, 'page') fn (d) { d.append(page.to_html(filters)) }
-    }
-  }
+      container(body, 'page', fn (d) { d.append(page.to_html(filters)) })
+    })
+  })
 
   Result.Ok(doc)
 }
 
 fn pub page(page: Page) -> html.Document {
-  let doc = html.Document.html('en') fn (html) {
+  let doc = html.Document.html('en', fn (html) {
     html.add(head(page))
-    html.body.with fn (body) {
+    html.body.with(fn (body) {
       body.add(header(page))
-      container(body, 'page') fn (d) {
-        d.article.with fn (article) {
+      container(body, 'page', fn (d) {
+        d.article.with(fn (article) {
           article.header.h1.text(page.title)
           article.append(page.to_html(filters))
-        }
-      }
-    }
-  }
+        })
+      })
+    })
+  })
 
   doc
 }
@@ -382,26 +374,28 @@ fn pub page(page: Page) -> html.Document {
 fn pub sponsors(files: ref Files, page: Page) -> Result[html.Document, String] {
   let sponsors = try Sponsor
     .parse_all(files.source.join('data').join('sponsors.json'))
-    .map_error fn (e) { e.to_string }
+    .map_error(fn (e) { e.to_string })
 
   let corporate = try CorporateSponsor
     .parse_all(files.source.join('data').join('corporate_sponsors.json'))
-    .map_error fn (e) { e.to_string }
+    .map_error(fn (e) { e.to_string })
 
-  let doc = html.Document.html('en') fn (html) {
+  let doc = html.Document.html('en', fn (html) {
     html.add(head(page))
-    html.body.with fn (body) {
+    html.body.with(fn (body) {
       body.add(header(page))
-      container(body, 'page') fn (d) {
-        d.article.with fn (article) {
+      container(body, 'page', fn (d) {
+        d.article.with(fn (article) {
           article.header.h1.text(page.title)
           article.append(page.to_html(filters))
+
           if corporate.size > 0 { corporate_sponsors(article, corporate) }
+
           if sponsors.size > 0 { github_sponsors(article, sponsors) }
-        }
-      }
-    }
-  }
+        })
+      })
+    })
+  })
 
   Result.Ok(doc)
 }
@@ -409,14 +403,14 @@ fn pub sponsors(files: ref Files, page: Page) -> Result[html.Document, String] {
 fn pub packages(files: ref Files, page: Page) -> Result[html.Document, String] {
   let packages = try Package
     .parse_all(files.source.join('data').join('package_data.json'))
-    .map_error fn (e) { e.to_string }
+    .map_error(fn (e) { e.to_string })
 
-  let doc = html.Document.html('en') fn (html) {
+  let doc = html.Document.html('en', fn (html) {
     html.add(head(page))
-    html.body.with fn (body) {
+    html.body.with(fn (body) {
       body.add(header(page))
-      container(body, 'page packages') fn (d) {
-        d.article.with fn (article) {
+      container(body, 'page packages', fn (d) {
+        d.article.with(fn (article) {
           article.header.h1.text(page.title)
 
           if packages.empty? {
@@ -426,26 +420,29 @@ fn pub packages(files: ref Files, page: Page) -> Result[html.Document, String] {
           }
 
           article.append(page.to_html(filters))
-        }
-      }
-    }
-  }
+        })
+      })
+    })
+  })
 
   Result.Ok(doc)
 }
 
-fn pub news_index(files: ref Files, page: Page) -> Result[html.Document, String] {
+fn pub news_index(
+  files: ref Files,
+  page: Page,
+) -> Result[html.Document, String] {
   let news = try articles(files)
-  let doc = html.Document.html('en') fn (html) {
+  let doc = html.Document.html('en', fn (html) {
     html.add(head(page))
-    html.body.with fn (body) {
+    html.body.with(fn (body) {
       body.add(header(page))
-      container(body, 'page') fn (d) {
-        d.article.with fn (article) {
+      container(body, 'page', fn (d) {
+        d.article.with(fn (article) {
           article.header.h1.text(page.title)
-          article.table.attr('class', 'news-index').tbody.with fn (tbody) {
-            news.iter.each fn (page) {
-              tbody.tr.with fn (tr) {
+          article.table.attr('class', 'news-index').tbody.with(fn (tbody) {
+            news.iter.each(fn (page) {
+              tbody.tr.with(fn (tr) {
                 tr
                   .td
                   .attr('class', 'news-meta')
@@ -453,104 +450,104 @@ fn pub news_index(files: ref Files, page: Page) -> Result[html.Document, String]
                   .attr('datetime', iso_date(page.date))
                   .text(human_readable_date(page.date))
 
-                tr
-                  .td
-                  .a
-                  .attr('href', page.url)
-                  .attr('title', page.title).text(page.title)
-              }
-            }
-          }
-        }
-      }
-    }
-  }
+                tr.td.a.attr('href', page.url).attr('title', page.title).text(
+                  page.title,
+                )
+              })
+            })
+          })
+        })
+      })
+    })
+  })
 
   Result.Ok(doc)
 }
 
 fn pub news(page: Page) -> Result[html.Document, String] {
-  let doc = html.Document.html('en') fn (html) {
+  let doc = html.Document.html('en', fn (html) {
     html.add(head(page))
-    html.body.with fn (body) {
+    html.body.with(fn (body) {
       body.add(header(page))
-      container(body, 'page') fn (d) {
-        d.article.attr('class', 'news-article').with fn (article) {
-          article.header.with fn (h) {
+      container(body, 'page', fn (d) {
+        d.article.attr('class', 'news-article').with(fn (article) {
+          article.header.with(fn (h) {
             h.h1.text(page.title)
-            h.p.attr('class', 'news-meta').with fn (p) {
+            h.p.attr('class', 'news-meta').with(fn (p) {
               p.text('Published on ')
               p
                 .time
                 .attr('class', 'news-meta')
                 .attr('datetime', iso_date(page.date))
                 .text(human_readable_date(page.date))
-            }
-          }
+            })
+          })
 
           article.append(page.to_html(filters))
-        }
-      }
-    }
-  }
+        })
+      })
+    })
+  })
 
   Result.Ok(doc)
 }
 
 fn pub missing(page: Page) -> html.Document {
-  html.Document.html('en') fn (html) {
+  html.Document.html('en', fn (html) {
     html.add(head(page))
-    html.body.with fn (body) {
+    html.body.with(fn (body) {
       body.add(header(page))
-      container(body, 'missing-page') fn (div) {
-        div.article.with fn (article) {
-          article.header.with fn (h) {
+      container(body, 'missing-page', fn (div) {
+        div.article.with(fn (article) {
+          article.header.with(fn (h) {
             h.img.attr('src', '/images/404.gif').attr('height', '255')
             h.h1.text(page.title)
-          }
+          })
 
           article.append(page.to_html(filters))
-        }
-      }
-    }
-  }
+        })
+      })
+    })
+  })
 }
 
 fn pub feed(files: ref Files) -> Result[String, String] {
   let articles = try articles(files)
   let doc = xml.Document.new
 
-  doc.element('feed').attr('xmlns', 'http://www.w3.org/2005/Atom').with fn (f) {
-    f.element('id').text("{URL}/")
-    f.element('title').text(TITLE)
+  doc.element('feed').attr('xmlns', 'http://www.w3.org/2005/Atom').with(
+    fn (f) {
+      f.element('id').text('${URL}/')
+      f.element('title').text(TITLE)
 
-    match articles.opt(0) {
-      case None -> {}
-      case Some(article) -> f.element('updated').text(iso_date(article.date))
-    }
-
-    f.element('link').attr('href', URL).attr('rel', 'alternate')
-    f.element('link').attr('href', "{URL}/feed.xml").attr('rel', 'self')
-    f.element('author').with fn (a) {
-      a.element('name').text(TITLE)
-      a.element('uri').text(URL)
-    }
-
-    articles.iter.each fn (article) {
-      f.element('entry').with fn (e) {
-        let date = iso_date(article.date)
-        let html = article.to_html(filters).to_string
-        let url = "{URL}{article.url}"
-
-        e.element('id').text(url)
-        e.element('title').text(article.title)
-        e.element('published').text(date)
-        e.element('updated').text(date)
-        e.element('link').attr('href', url).attr('rel', 'alternate')
-        e.element('content').attr('type', 'html').text(html)
+      match articles.opt(0) {
+        case None -> {}
+        case Some(article) -> f.element('updated').text(iso_date(article.date))
       }
-    }
-  }
+
+      f.element('link').attr('href', URL).attr('rel', 'alternate')
+      f.element('link').attr('href', '${URL}/feed.xml').attr('rel', 'self')
+      f.element('author').with(fn (a) {
+        a.element('name').text(TITLE)
+        a.element('uri').text(URL)
+      })
+
+      articles.iter.each(fn (article) {
+        f.element('entry').with(fn (e) {
+          let date = iso_date(article.date)
+          let html = article.to_html(filters).to_string
+          let url = '${URL}${article.url}'
+
+          e.element('id').text(url)
+          e.element('title').text(article.title)
+          e.element('published').text(date)
+          e.element('updated').text(date)
+          e.element('link').attr('href', url).attr('rel', 'alternate')
+          e.element('content').attr('type', 'html').text(html)
+        })
+      })
+    },
+  )
 
   Result.Ok(doc.to_string)
 }

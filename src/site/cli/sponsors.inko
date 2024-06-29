@@ -1,8 +1,8 @@
 import site.github
 import std.env
-import std.fs.file.WriteOnlyFile
-import std.fs.path.Path
-import std.json.Json
+import std.fs.file (WriteOnlyFile)
+import std.fs.path (Path)
+import std.json (Json)
 
 let ENV = 'GITHUB_TOKEN'
 let QUERY = '
@@ -52,8 +52,9 @@ fn sponsors(token: String) -> Result[Json, String] {
       case Some(v) -> vars.set('after', v)
     }
 
-    let page =
-      try github.get(QUERY, token, vars).map_error fn (e) { e.to_string }
+    let page = try github.get(QUERY, token, vars).map_error(fn (e) {
+      e.to_string
+    })
     let nodes = page
       .query
       .key('data')
@@ -67,17 +68,14 @@ fn sponsors(token: String) -> Result[Json, String] {
       case _ -> break
     }
 
-    try vals.iter.try_each fn (val) {
+    try vals.iter.try_each(fn (val) {
       let date = match val.query.key('createdAt').as_string {
         case Some(v) -> v
         case _ -> throw 'the sponsorship creation date is invalid'
       }
 
-      let amount = match val
-        .query
-        .key('tier')
-        .key('monthlyPriceInDollars')
-        .as_int
+      let amount = match
+        val.query.key('tier').key('monthlyPriceInDollars').as_int
       {
         case Some(v) -> v
         case _ -> throw 'the tier price is invalid'
@@ -88,22 +86,17 @@ fn sponsors(token: String) -> Result[Json, String] {
         case _ -> throw 'the sponsor name is invalid'
       }
 
-      let image = match val
-        .query
-        .key('sponsorEntity')
-        .key('avatarUrl')
-        .as_string
+      let image = match
+        val.query.key('sponsorEntity').key('avatarUrl').as_string
       {
-        case Some(v) -> "{v}&size=64"
+        case Some(v) -> '${v}&size=64'
         case _ -> throw 'the sponsor image URL is invalid'
       }
 
-      let website = match val
-        .query
-        .key('sponsorEntity')
-        .key('websiteUrl')
-        .as_string
-        .else(fn { val.query.key('sponsorEntity').key('url').as_string })
+      let website = match
+        val.query.key('sponsorEntity').key('websiteUrl').as_string.else(fn {
+          val.query.key('sponsorEntity').key('url').as_string
+        })
       {
         case Some(v) -> v
         case _ -> throw 'The sponsor website is invalid'
@@ -118,24 +111,27 @@ fn sponsors(token: String) -> Result[Json, String] {
       row.set('created_at', Json.String(date))
       rows.push(Json.Object(row))
       Result.Ok(nil)
-    }
+    })
 
-    let info = match page
-      .query
-      .key('data')
-      .key('user')
-      .key('sponsorshipsAsMaintainer')
-      .key('pageInfo')
-      .as_object
+    let info = match
+      page
+        .query
+        .key('data')
+        .key('user')
+        .key('sponsorshipsAsMaintainer')
+        .key('pageInfo')
+        .as_object
     {
       case Some(v) -> v
       case _ -> break
     }
 
     match info.opt('hasNextPage') {
-      case Some(Bool(true)) -> match info.opt('endCursor') {
-        case Some(String(v)) -> after = Option.Some(v)
-        case _ -> break
+      case Some(Bool(true)) -> {
+        match info.opt('endCursor') {
+          case Some(String(v)) -> after = Option.Some(v)
+          case _ -> break
+        }
       }
       case _ -> break
     }
@@ -147,18 +143,18 @@ fn sponsors(token: String) -> Result[Json, String] {
 fn pub run {
   let token = match env.opt(ENV) {
     case Some(v) if v.size > 0 -> v
-    case _ -> panic("the {ENV} environment variable must be non-empty")
+    case _ -> panic('the ${ENV} environment variable must be non-empty')
   }
 
   let rows = match sponsors(token) {
     case Ok(v) -> v
-    case Error(e) -> panic("failed to get the sponsors data: {e}")
+    case Error(e) -> panic('failed to get the sponsors data: ${e}')
   }
 
   let file = Path.new('source').join('data').join('sponsors.json')
 
   WriteOnlyFile
     .new(file)
-    .then fn (f) { f.write_string(rows.to_pretty_string) }
-    .expect('failed to write the sponsors data')
+    .then(fn (f) { f.write_string(rows.to_pretty_string) })
+    .or_panic('failed to write the sponsors data')
 }

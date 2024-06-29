@@ -1,11 +1,11 @@
-import std.fs.file.ReadOnlyFile
-import std.fs.path.Path
-import std.int.Format
-import std.io.Error
-import std.json.Json
-import std.string.ToString
-import std.time.DateTime
-import wobsite.time.(parse_date)
+import std.fs.file (ReadOnlyFile)
+import std.fs.path (Path)
+import std.int (Format)
+import std.io (Error)
+import std.json (Json)
+import std.string (ToString)
+import std.time (DateTime)
+import wobsite.time (parse_date)
 
 fn string(value: ref Json, key: String) -> Result[String, ParseError] {
   match value.query.key(key).as_string {
@@ -30,9 +30,9 @@ class enum ParseError {
 impl ToString for ParseError {
   fn pub to_string -> String {
     match self {
-      case Io(e) -> "failed to read the packages data: {e}"
-      case InvalidJson(e) -> "failed to parse the packages JSON: {e}"
-      case InvalidKey(k) -> "the JSON key '{k}' is invalid or missing"
+      case Io(e) -> 'failed to read the packages data: ${e}'
+      case InvalidJson(e) -> 'failed to parse the packages JSON: ${e}'
+      case InvalidKey(k) -> "the JSON key '${k}' is invalid or missing"
     }
   }
 }
@@ -46,15 +46,13 @@ class Package {
   let @license: String
   let @version: String
 
-  fn static parse_all(
-    path: ref Path,
-  ) -> Result[Array[Package], ParseError] {
+  fn static parse_all(path: ref Path) -> Result[Array[Package], ParseError] {
     let data = ByteArray.new
 
     try ReadOnlyFile
-      .new(path)
-      .then fn (f) { f.read_all(data) }
-      .map_error fn (e) { ParseError.Io(e) }
+      .new(path.clone)
+      .then(fn (f) { f.read_all(data) })
+      .map_error(fn (e) { ParseError.Io(e) })
 
     let root = match Json.parse(data) {
       case Ok(Array(v)) -> v
@@ -64,28 +62,30 @@ class Package {
       case Error(e) -> throw ParseError.InvalidJson(e.to_string)
     }
 
-    let rows = try root.into_iter.try_reduce([]) fn (packages, val) {
+    let rows = try root.into_iter.try_reduce([], fn (packages, val) {
       let owner = try string(val, 'owner')
       let name = try string(val, 'name')
       let url = try string(val, 'url')
       let desc = try string(val, 'description')
       let stars = try int(val, 'stars')
-      let license = string(val, 'license').unwrap_or('')
+      let license = string(val, 'license').or('')
       let version = try string(val, 'version')
 
-      packages.push(Package {
-        @owner = owner,
-        @name = name,
-        @url = url,
-        @description = desc,
-        @stars = stars,
-        @license = license,
-        @version = version,
-      })
+      packages.push(
+        Package(
+          owner: owner,
+          name: name,
+          url: url,
+          description: desc,
+          stars: stars,
+          license: license,
+          version: version,
+        ),
+      )
       Result.Ok(packages)
-    }
+    })
 
-    rows.sort_by fn (a, b) { b.stars.cmp(a.stars) }
+    rows.sort_by(fn (a, b) { b.stars.cmp(a.stars) })
     Result.Ok(rows)
   }
 }

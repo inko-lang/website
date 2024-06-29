@@ -1,11 +1,11 @@
-import std.fs.file.ReadOnlyFile
 import markdown
-import std.fs.path.Path
-import std.io.Error
-import std.json.Json
-import std.string.ToString
-import std.time.DateTime
-import wobsite.time.(parse_date)
+import std.fs.file (ReadOnlyFile)
+import std.fs.path (Path)
+import std.io (Error)
+import std.json (Json)
+import std.string (ToString)
+import std.time (DateTime)
+import wobsite.time (parse_date)
 
 fn string(value: ref Json, key: String) -> Result[String, ParseError] {
   match value.query.key(key).as_string {
@@ -30,9 +30,9 @@ class enum ParseError {
 impl ToString for ParseError {
   fn pub to_string -> String {
     match self {
-      case Io(e) -> "failed to read the sponsors data: {e}"
-      case InvalidJson(e) -> "failed to parse the sponsors JSON: {e}"
-      case InvalidKey(k) -> "the JSON key '{k}' is invalid or missing"
+      case Io(e) -> 'failed to read the sponsors data: ${e}'
+      case InvalidJson(e) -> 'failed to parse the sponsors JSON: ${e}'
+      case InvalidKey(k) -> "the JSON key '${k}' is invalid or missing"
     }
   }
 }
@@ -44,15 +44,13 @@ class Sponsor {
   let @amount: Int
   let @created_at: DateTime
 
-  fn static parse_all(
-    path: ref Path,
-  ) -> Result[Array[Sponsor], ParseError] {
+  fn static parse_all(path: ref Path) -> Result[Array[Sponsor], ParseError] {
     let data = ByteArray.new
 
     try ReadOnlyFile
-      .new(path)
-      .then fn (f) { f.read_all(data) }
-      .map_error fn (e) { ParseError.Io(e) }
+      .new(path.clone)
+      .then(fn (f) { f.read_all(data) })
+      .map_error(fn (e) { ParseError.Io(e) })
 
     let root = match Json.parse(data) {
       case Ok(Array(v)) -> v
@@ -62,32 +60,31 @@ class Sponsor {
       case Error(e) -> throw ParseError.InvalidJson(e.to_string)
     }
 
-    let rows = try root.into_iter.try_reduce([]) fn (sponsors, val) {
+    let rows = try root.into_iter.try_reduce([], fn (sponsors, val) {
       let name = try string(val, 'name')
       let img = try string(val, 'image')
       let site = try string(val, 'website')
       let amount = try int(val, 'amount')
-      let date = match val
-        .query
-        .key('created_at')
-        .as_string
-        .then(fn (v) { parse_date(v) })
+      let date = match
+        val.query.key('created_at').as_string.then(fn (v) { parse_date(v) })
       {
         case Some(v) -> v
         case _ -> throw ParseError.InvalidKey('created_at')
       }
 
-      sponsors.push(Sponsor {
-        @name = name,
-        @image = img,
-        @website = site,
-        @amount = amount,
-        @created_at = date,
-      })
+      sponsors.push(
+        Sponsor(
+          name: name,
+          image: img,
+          website: site,
+          amount: amount,
+          created_at: date,
+        ),
+      )
       Result.Ok(sponsors)
-    }
+    })
 
-    rows.sort_by fn (a, b) { a.created_at.cmp(b.created_at) }
+    rows.sort_by(fn (a, b) { a.created_at.cmp(b.created_at) })
     Result.Ok(rows)
   }
 }
@@ -103,9 +100,9 @@ class CorporateSponsor {
     let data = ByteArray.new
 
     try ReadOnlyFile
-      .new(path)
-      .then fn (f) { f.read_all(data) }
-      .map_error fn (e) { ParseError.Io(e) }
+      .new(path.clone)
+      .then(fn (f) { f.read_all(data) })
+      .map_error(fn (e) { ParseError.Io(e) })
 
     let root = match Json.parse(data) {
       case Ok(Array(v)) -> v
@@ -115,23 +112,21 @@ class CorporateSponsor {
       case Error(e) -> throw ParseError.InvalidJson(e.to_string)
     }
 
-    root.into_iter.try_reduce([]) fn (sponsors, val) {
+    root.into_iter.try_reduce([], fn (sponsors, val) {
       let name = try string(val, 'name')
       let img = try string(val, 'image')
       let desc = match val.query.key('description').as_string {
-        case Some(v) -> match markdown.Document.parse(v) {
-          case Ok(v) -> v
-          case Error(_) -> throw ParseError.InvalidKey('description')
+        case Some(v) -> {
+          match markdown.Document.parse(v) {
+            case Ok(v) -> v
+            case Error(_) -> throw ParseError.InvalidKey('description')
+          }
         }
         case _ -> throw ParseError.InvalidKey('description')
       }
 
-      sponsors.push(CorporateSponsor {
-        @name = name,
-        @image = img,
-        @description = desc,
-      })
+      sponsors.push(CorporateSponsor(name: name, image: img, description: desc))
       Result.Ok(sponsors)
-    }
+    })
   }
 }
