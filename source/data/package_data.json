@@ -109,15 +109,6 @@
   },
   {
     "owner": "yorickpeterse",
-    "name": "inko-optparse",
-    "url": "https://github.com/yorickpeterse/inko-optparse",
-    "description": "An Inko library for parsing command-line arguments and options",
-    "stars": 2,
-    "license": "MPL-2.0",
-    "version": "0.4.0"
-  },
-  {
-    "owner": "yorickpeterse",
     "name": "inko-syntax",
     "url": "https://github.com/yorickpeterse/inko-syntax",
     "description": "A syntax highlighting library for Inko",
