@@ -14,4 +14,5 @@ syntax, reference guides, and more.
 
 ## Standard library
 
+- [Latest stable release](https://docs.inko-lang.org/std/latest/)
 - [Unstable (main)](https://docs.inko-lang.org/std/main/)
