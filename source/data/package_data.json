@@ -40,7 +40,7 @@
     "name": "inko-builder",
     "url": "https://github.com/yorickpeterse/inko-builder",
     "description": "An Inko library for generating XML and HTML",
-    "stars": 2,
+    "stars": 3,
     "license": "MPL-2.0",
     "version": "0.12.0"
   },
@@ -103,7 +103,7 @@
     "name": "inko-markdown",
     "url": "https://github.com/yorickpeterse/inko-markdown",
     "description": "An Inko library for parsing an opinionated dialect of Markdown",
-    "stars": 3,
+    "stars": 4,
     "license": "MPL-2.0",
     "version": "0.20.0"
   },
