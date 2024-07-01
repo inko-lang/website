@@ -3,7 +3,7 @@ class Stack[T] {
   let @values: Array[T]
 
   fn static new -> Stack[T] {
-    Stack { @values = [] }
+    Stack([])
   }
 
   fn mut push(value: T) {
@@ -31,6 +31,6 @@ class async Main {
     let stack = Stack.new
     let value = stack.pop # The exact type isn't known yet
 
-    10 + value.unwrap # `value` inferred as `Option[Int]`
+    10 + value.get # `value` inferred as `Option[Int]`
   }
 }

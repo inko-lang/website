@@ -75,7 +75,7 @@ class async Counter {
 
 class async Main {
   fn async main {
-    let counter = Counter { @value = 0 }
+    let counter = Counter(value: 0)
     let output = Channel.new(size: 1)
 
     counter.increment
@@ -99,16 +99,16 @@ For example, here's how you'd handle errors when opening a file and calculating
 its size:
 
 ```inko
-import std.fs.file.ReadOnlyFile
-import std.stdio.STDOUT
+import std.fs.file (ReadOnlyFile)
+import std.stdio (STDOUT)
 
 class async Main {
   fn async main {
     let size =
       ReadOnlyFile
-        .new('README.md')             # => Result[ReadOnlyFile, Error]
+        .new('README.md'.to_path)     # => Result[ReadOnlyFile, Error]
         .then fn (file) { file.size } # => Result[Int, Error]
-        .unwrap_or(0)                 # => Int
+        .or(0)                        # => Int
 
     STDOUT.new.print(size.to_string) # => 1099
   }
@@ -154,7 +154,7 @@ class Person {
   let @age: Int
 }
 
-let alice = Person { @name = 'Alice', @age = 42 }
+let alice = Person(name: 'Alice', age: 42)
 
 match alice {
   case { @name = name } -> name # => 'Alice'

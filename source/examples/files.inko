@@ -1,20 +1,20 @@
 # Reading from a file
-import std.fs.file.ReadOnlyFile
+import std.fs.file (ReadOnlyFile)
 
 class async Main {
   fn async main {
-    # expect() unwraps the Result, panicking with
-    # the given error message when encountering an
-    # `Error`.
+    # or_panic() gets the Result value, panicking 
+    # with the given error message when 
+    # encountering a `Result.Error`.
     let file = ReadOnlyFile
-      .new('README.md')
-      .expect("the file doesn't exist")
+      .new('README.md'.to_path)
+      .or_panic("the file doesn't exist")
 
     let bytes = ByteArray.new
 
     file
       .read_all(bytes)
-      .expect('failed to read the file')
+      .or_panic('failed to read the file')
 
     bytes.to_string # => "# README ..."
   }

@@ -28,8 +28,8 @@ class async Main {
       case Error(err) -> panic(err)
     }
 
-    # We can also just unwrap the Ok value if we're
+    # We can also just get the Ok value if we're
     # certain we'll never get an `Error` case:
-    div(10, 2).unwrap # => 5
+    div(10, 2).get # => 5
   }
 }

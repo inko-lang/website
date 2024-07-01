@@ -12,7 +12,7 @@ class async Calculator {
 
 class async Main {
   fn async main {
-    let calc = Calculator {}
+    let calc = Calculator()
     let out = Channel.new(size: 1)
 
     # This calculates the factorial of 15 in the

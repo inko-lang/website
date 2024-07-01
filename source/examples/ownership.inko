@@ -3,13 +3,13 @@ fn moves {
   let numbers = [10, 20, 30]
 
   # This is OK, and returns a `ref 10`.
-  numbers[0]
+  numbers.get(0)
 
   let nums = numbers
 
   # This is no longer OK, as `numbers` gave up ownership to
   # `nums`.
-  numbers[0]
+  numbers.get(0)
 }
 
 fn refs {
@@ -19,8 +19,8 @@ fn refs {
   let borrowed = ref owned
 
   # Both are OK and produce the same value: `ref 10`.
-  owned[0]
-  borrowed[0]
+  owned.get(0)
+  borrowed.get(0)
 
   # This isn't OK, as `ref T` doesn't allow mutation:
   borrowed.push(42)
