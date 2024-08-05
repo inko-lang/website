@@ -69,7 +69,7 @@
     "description": "An HMAC implementation for Inko.",
     "stars": 1,
     "license": "MPL-2.0",
-    "version": "0.2.1"
+    "version": "0.3.1"
   },
   {
     "owner": "uasi",
@@ -78,7 +78,7 @@
     "description": "A TOTP token generator and validator for Inko.",
     "stars": 2,
     "license": "MPL-2.0",
-    "version": "0.1.0"
+    "version": "0.2.0"
   },
   {
     "owner": "uasi",
@@ -87,7 +87,7 @@
     "description": "A URLSearchParams implementation.",
     "stars": 0,
     "license": "MPL-2.0",
-    "version": "0.1.0"
+    "version": "0.2.0"
   },
   {
     "owner": "uasi",
@@ -96,7 +96,7 @@
     "description": "A UUID generator for Inko.",
     "stars": 1,
     "license": "MPL-2.0",
-    "version": "0.1.0"
+    "version": "0.2.0"
   },
   {
     "owner": "yorickpeterse",
