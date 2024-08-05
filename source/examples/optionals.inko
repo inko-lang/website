@@ -5,6 +5,6 @@ class async Main {
 
     numbers
       .opt(2)
-      .map fn (n) { n.to_string } # => Option.Some('30')
+      .map(fn (n) { n.to_string }) # => Option.Some('30')
   }
 }
