@@ -42,7 +42,7 @@
     "description": "An Inko library for generating XML and HTML",
     "stars": 3,
     "license": "MPL-2.0",
-    "version": "0.12.0"
+    "version": "0.13.0"
   },
   {
     "owner": "roetlich",
@@ -96,7 +96,7 @@
     "description": "A UUID generator for Inko.",
     "stars": 1,
     "license": "MPL-2.0",
-    "version": "0.2.0"
+    "version": "0.2.1"
   },
   {
     "owner": "yorickpeterse",
@@ -105,7 +105,7 @@
     "description": "An Inko library for parsing an opinionated dialect of Markdown",
     "stars": 4,
     "license": "MPL-2.0",
-    "version": "0.20.0"
+    "version": "0.20.1"
   },
   {
     "owner": "yorickpeterse",
@@ -114,7 +114,7 @@
     "description": "A syntax highlighting library for Inko",
     "stars": 2,
     "license": "MPL-2.0",
-    "version": "0.10.0"
+    "version": "0.11.0"
   },
   {
     "owner": "yorickpeterse",
@@ -123,6 +123,6 @@
     "description": "A small and opinionated static site generation library",
     "stars": 3,
     "license": "MPL-2.0",
-    "version": "0.17.0"
+    "version": "0.18.0"
   }
 ]
