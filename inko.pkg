@@ -2,3 +2,4 @@ require https://github.com/yorickpeterse/inko-wobsite 0.17.0 1078263e2219842fcfe
 require https://github.com/yorickpeterse/inko-builder 0.12.0 dfb7877ca9dec2109b0fa940190c210dd3fe4059
 require https://github.com/yorickpeterse/inko-markdown 0.20.0 f3e1021ac8eb00ddca6490d26c49b4c82524d23c
 require https://github.com/yorickpeterse/inko-syntax 0.10.0 c131fcf9099428b3fcc47bffd605dd5ad94c8766
+require inko 0.16.0

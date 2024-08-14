@@ -24,7 +24,9 @@ class Example {
         .then(fn (file) {
           let reader = BufferedReader.new(file)
 
-          reader.read_line(title).then(fn (_) { reader.read_all(body) })
+          reader.read_line(title, inclusive: true).then(fn (_) {
+            reader.read_all(body)
+          })
         })
         .map_error(fn (e) { 'failed to read example ${path}: ${e}' })
 
