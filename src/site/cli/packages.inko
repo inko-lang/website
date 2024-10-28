@@ -1,12 +1,9 @@
 import site.github
 import std.env
-import std.fmt (fmt)
 import std.fs.file (ReadOnlyFile, WriteOnlyFile)
 import std.fs.path (Path)
 import std.int (Format)
-import std.io (Error)
 import std.json (Json)
-import std.stdio (STDOUT)
 
 let ENV = 'GITHUB_TOKEN'
 let QUERY = '

@@ -35,7 +35,7 @@ fn get(
 
   root.set('query', Json.String(query))
   root.set('variables', Json.Object(vars))
-  cmd.arguments(
+  cmd.arguments.append(
     [
       '-H',
       'Content-Type: application/json',
@@ -49,9 +49,9 @@ fn get(
     ],
   )
 
-  cmd.stdin(Stream.Null)
-  cmd.stdout(Stream.Piped)
-  cmd.stderr(Stream.Null)
+  cmd.stdin = Stream.Null
+  cmd.stdout = Stream.Piped
+  cmd.stderr = Stream.Null
 
   let child = try cmd.spawn.map_error(fn (e) {
     Error.InvalidCommand(e.to_string)
@@ -68,6 +68,8 @@ fn get(
 
   let stdout = ByteArray.new
 
-  try child.stdout.read_all(stdout).map_error(fn (e) { Error.InvalidRead(e) })
+  try child.stdout.as_mut.get.read_all(stdout).map_error(fn (e) {
+    Error.InvalidRead(e)
+  })
   Json.parse(stdout).map_error(fn (e) { Error.InvalidJson(e) })
 }
