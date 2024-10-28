@@ -58,9 +58,11 @@ data, and makes data races impossible. Inko also supports multi-producer
 multi-consumer channels, allowing processes to communicate with each other
 without needing explicit references to each other.
 
- Here's how you'd implement a simple concurrent counter:
+Here's how you'd implement a simple concurrent counter:
 
 ```inko
+import std.sync (Future, Promise)
+
 class async Counter {
   let @value: Int
 
@@ -68,20 +70,24 @@ class async Counter {
     @value += 1
   }
 
-  fn async send_to(channel: Channel[Int]) {
-    channel.send(@value)
+  fn async get(promise: uni Promise[Int]) {
+    promise.set(@value)
   }
 }
 
 class async Main {
   fn async main {
     let counter = Counter(value: 0)
-    let output = Channel.new(size: 1)
 
     counter.increment
     counter.increment
-    counter.send_to(output)
-    output.receive # => 2
+
+    match Future.new {
+      case (future, promise) -> {
+        counter.get(promise)
+        future.get # => 2
+      }
+    }
   }
 }
 ```
@@ -100,7 +106,7 @@ its size:
 
 ```inko
 import std.fs.file (ReadOnlyFile)
-import std.stdio (STDOUT)
+import std.stdio (Stdout)
 
 class async Main {
   fn async main {
@@ -110,7 +116,7 @@ class async Main {
         .then fn (file) { file.size } # => Result[Int, Error]
         .or(0)                        # => Int
 
-    STDOUT.new.print(size.to_string) # => 1099
+    Stdout.new.print(size.to_string) # => 1099
   }
 }
 ```

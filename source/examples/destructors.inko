@@ -1,12 +1,12 @@
 # Destructors
 import std.drop (Drop)
-import std.stdio (STDOUT)
+import std.stdio (Stdout)
 
 class Thing {}
 
 impl Drop for Thing {
   fn mut drop {
-    STDOUT.new.print('Thing is dropped')
+    Stdout.new.print('Thing is dropped')
   }
 }
 
