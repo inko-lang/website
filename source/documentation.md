@@ -11,6 +11,7 @@ syntax, reference guides, and more.
 
 - [Unstable (main)](https://docs.inko-lang.org/manual/main/)
 - [Latest stable release](https://docs.inko-lang.org/manual/latest/)
+- [v0.17.0](https://docs.inko-lang.org/manual/v0.17.0/)
 - [v0.16.0](https://docs.inko-lang.org/manual/v0.16.0/)
 - [v0.15.0](https://docs.inko-lang.org/manual/v0.15.0/)
 
@@ -18,5 +19,6 @@ syntax, reference guides, and more.
 
 - [Unstable (main)](https://docs.inko-lang.org/std/main/)
 - [Latest stable release](https://docs.inko-lang.org/std/latest/)
+- [v0.17.0](https://docs.inko-lang.org/std/v0.17.0/)
 - [v0.16.0](https://docs.inko-lang.org/std/v0.16.0/)
 - [v0.15.0](https://docs.inko-lang.org/std/v0.15.0/)
