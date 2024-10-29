@@ -9,6 +9,13 @@ We're pleased to announce the release of Inko 0.17.0. This release includes
 support for inlining method calls, changes to built-in concurrency types,
 support for working with CSV files, and more.
 
+::: note
+After releasing 0.17.0, [a bug resulting in a compiler
+crash](https://github.com/inko-lang/inko/issues/774) was revealed. We published
+a fix for this bug in version 0.17.1 and recommend users to use that version
+instead of 0.17.0.
+:::
+
 ## [Table of contents]{toc-ignore}
 
 ::: toc
