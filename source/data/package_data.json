@@ -105,7 +105,7 @@
     "description": "An Inko library for parsing an opinionated dialect of Markdown",
     "stars": 4,
     "license": "MPL-2.0",
-    "version": "0.20.1"
+    "version": "0.21.0"
   },
   {
     "owner": "yorickpeterse",
@@ -114,7 +114,7 @@
     "description": "A syntax highlighting library for Inko",
     "stars": 2,
     "license": "MPL-2.0",
-    "version": "0.11.0"
+    "version": "0.14.0"
   },
   {
     "owner": "yorickpeterse",
@@ -123,6 +123,6 @@
     "description": "A small and opinionated static site generation library",
     "stars": 3,
     "license": "MPL-2.0",
-    "version": "0.18.0"
+    "version": "0.19.0"
   }
 ]
