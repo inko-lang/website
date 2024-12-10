@@ -2,8 +2,9 @@ import builder.html
 import builder.xml
 import markdown.html (Filter, TableOfContents)
 import site.examples (Example)
-import site.packages (Package)
-import site.sponsors (CorporateSponsor, Sponsor)
+import site.packages (Package, Packages)
+import site.sponsors (CorporateSponsor, Sponsor, Sponsors)
+import std.time (DateTime)
 import wobsite (Files, Page)
 import wobsite.markdown (Admonitions, SyntaxHighlight)
 import wobsite.time (human_readable_date, iso_date)
@@ -56,6 +57,14 @@ fn toggle_menu(query: String, open: String, close: String) -> html.Element {
 
   a.attr('data-toggle-text', close).attr('data-toggle', query).text(open)
   a
+}
+
+fn last_updated(date: ref DateTime) -> html.Element {
+  let p = html.Element.new('p')
+  let txt = 'Last updated: ${human_readable_date(date)}'
+
+  p.attr('class', 'last-updated').text(txt)
+  p
 }
 
 fn articles(files: ref Files) -> Result[Array[Page], String] {
@@ -187,6 +196,12 @@ fn corporate_sponsors(
 
 fn github_sponsors(root: mut html.Element, sponsors: ref Array[Sponsor]) {
   root.h2.text('GitHub sponsors')
+
+  if sponsors.empty? {
+    root.p.text('Nobody is sponsoring the development of Inko at this time 😞')
+    return
+  }
+
   root.table.attr('class', 'sponsors-table').with(fn (table) {
     table.thead.tr.with(fn (tr) {
       tr.th.attr('class', 'avatar')
@@ -370,8 +385,8 @@ fn pub page(page: Page) -> html.Document {
 }
 
 fn pub sponsors(files: ref Files, page: Page) -> Result[html.Document, String] {
-  let sponsors = try Sponsor
-    .parse_all(files.source.join('data').join('sponsors.json'))
+  let sponsors = try Sponsors
+    .parse(files.source.join('data').join('sponsors.json'))
     .map_error(fn (e) { e.to_string })
 
   let corporate = try CorporateSponsor
@@ -389,7 +404,8 @@ fn pub sponsors(files: ref Files, page: Page) -> Result[html.Document, String] {
 
           if corporate.size > 0 { corporate_sponsors(article, corporate) }
 
-          if sponsors.size > 0 { github_sponsors(article, sponsors) }
+          github_sponsors(article, sponsors.sponsors)
+          article.add(last_updated(sponsors.updated_at))
         })
       })
     })
@@ -399,8 +415,8 @@ fn pub sponsors(files: ref Files, page: Page) -> Result[html.Document, String] {
 }
 
 fn pub packages(files: ref Files, page: Page) -> Result[html.Document, String] {
-  let packages = try Package
-    .parse_all(files.source.join('data').join('package_data.json'))
+  let packages = try Packages
+    .parse(files.source.join('data').join('package_data.json'))
     .map_error(fn (e) { e.to_string })
 
   let doc = html.Document.html('en', fn (html) {
@@ -411,13 +427,14 @@ fn pub packages(files: ref Files, page: Page) -> Result[html.Document, String] {
         d.article.with(fn (article) {
           article.header.h1.text(page.title)
 
-          if packages.empty? {
-            article.p.text('No packages have been created yet :(')
+          if packages.packages.empty? {
+            article.p.text('No packages have been created yet 😞')
           } else {
-            package_list(article, packages)
+            package_list(article, packages.packages)
           }
 
           article.append(page.to_html(filters))
+          article.add(last_updated(packages.updated_at))
         })
       })
     })

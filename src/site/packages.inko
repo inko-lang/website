@@ -3,6 +3,8 @@ import std.fs.path (Path)
 import std.io (Error)
 import std.json (Json)
 import std.string (ToString)
+import std.time (DateTime)
+import wobsite.time (parse_date)
 
 fn string(value: ref Json, key: String) -> Result[String, ParseError] {
   match value.query.key(key).as_string {
@@ -34,16 +36,11 @@ impl ToString for ParseError {
   }
 }
 
-class Package {
-  let @owner: String
-  let @name: String
-  let @url: String
-  let @description: String
-  let @stars: Int
-  let @license: String
-  let @version: String
+class Packages {
+  let @packages: Array[Package]
+  let @updated_at: DateTime
 
-  fn static parse_all(path: ref Path) -> Result[Array[Package], ParseError] {
+  fn static parse(path: ref Path) -> Result[Packages, ParseError] {
     let data = ByteArray.new
 
     try ReadOnlyFile
@@ -52,14 +49,28 @@ class Package {
       .map_error(fn (e) { ParseError.Io(e) })
 
     let root = match Json.parse(data) {
-      case Ok(Array(v)) -> v
+      case Ok(Object(v)) -> v
       case Ok(_) -> {
-        throw ParseError.InvalidJson('the top-level value must be an array')
+        throw ParseError.InvalidJson('the top-level value must be an object')
       }
       case Error(e) -> throw ParseError.InvalidJson(e.to_string)
     }
-
-    let rows = try root.into_iter.try_reduce([], fn (packages, val) {
+    let updated_at = match root.remove('updated_at') {
+      case Some(String(v)) -> {
+        match parse_date(v) {
+          case Some(v) -> v
+          case _ -> {
+            throw ParseError.InvalidJson('the "updated_at" date is invalid')
+          }
+        }
+      }
+      case _ -> throw ParseError.InvalidJson('the "updated_at" key is missing')
+    }
+    let raw_rows = match root.remove('packages') {
+      case Some(Array(v)) -> v
+      case _ -> throw ParseError.InvalidJson('the "packages" key is missing')
+    }
+    let rows = try raw_rows.into_iter.try_reduce([], fn (packages, val) {
       let owner = try string(val, 'owner')
       let name = try string(val, 'name')
       let url = try string(val, 'url')
@@ -83,6 +94,16 @@ class Package {
     })
 
     rows.sort_by(fn (a, b) { b.stars.cmp(a.stars) })
-    Result.Ok(rows)
+    Result.Ok(Packages(packages: rows, updated_at: updated_at))
   }
+}
+
+class Package {
+  let @owner: String
+  let @name: String
+  let @url: String
+  let @description: String
+  let @stars: Int
+  let @license: String
+  let @version: String
 }

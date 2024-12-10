@@ -37,14 +37,11 @@ impl ToString for ParseError {
   }
 }
 
-class Sponsor {
-  let @name: String
-  let @image: String
-  let @website: String
-  let @amount: Int
-  let @created_at: DateTime
+class Sponsors {
+  let @updated_at: DateTime
+  let @sponsors: Array[Sponsor]
 
-  fn static parse_all(path: ref Path) -> Result[Array[Sponsor], ParseError] {
+  fn static parse(path: ref Path) -> Result[Sponsors, ParseError] {
     let data = ByteArray.new
 
     try ReadOnlyFile
@@ -53,14 +50,29 @@ class Sponsor {
       .map_error(fn (e) { ParseError.Io(e) })
 
     let root = match Json.parse(data) {
-      case Ok(Array(v)) -> v
+      case Ok(Object(v)) -> v
       case Ok(_) -> {
-        throw ParseError.InvalidJson('the top-level value must be an array')
+        throw ParseError.InvalidJson('the top-level value must be an object')
       }
       case Error(e) -> throw ParseError.InvalidJson(e.to_string)
     }
 
-    let rows = try root.into_iter.try_reduce([], fn (sponsors, val) {
+    let updated_at = match root.remove('updated_at') {
+      case Some(String(v)) -> {
+        match parse_date(v) {
+          case Some(v) -> v
+          case _ -> {
+            throw ParseError.InvalidJson('the "updated_at" date is invalid')
+          }
+        }
+      }
+      case _ -> throw ParseError.InvalidJson('the "updated_at" key is missing')
+    }
+    let raw_rows = match root.remove('sponsors') {
+      case Some(Array(v)) -> v
+      case _ -> throw ParseError.InvalidJson('the "sponsors" key is missing')
+    }
+    let rows = try raw_rows.into_iter.try_reduce([], fn (sponsors, val) {
       let name = try string(val, 'name')
       let img = try string(val, 'image')
       let site = try string(val, 'website')
@@ -85,8 +97,16 @@ class Sponsor {
     })
 
     rows.sort_by(fn (a, b) { a.created_at.cmp(b.created_at) })
-    Result.Ok(rows)
+    Result.Ok(Sponsors(sponsors: rows, updated_at: updated_at))
   }
+}
+
+class Sponsor {
+  let @name: String
+  let @image: String
+  let @website: String
+  let @amount: Int
+  let @created_at: DateTime
 }
 
 class CorporateSponsor {

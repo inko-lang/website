@@ -4,6 +4,8 @@ import std.fs.file (ReadOnlyFile, WriteOnlyFile)
 import std.fs.path (Path)
 import std.int (Format)
 import std.json (Json)
+import std.time (DateTime)
+import wobsite.time (iso_date)
 
 let ENV = 'GITHUB_TOKEN'
 let QUERY = '
@@ -166,7 +168,11 @@ fn packages(
     Result.Ok(ary)
   })
 
-  Result.Ok(Json.Array(rows))
+  let map = Map.new
+
+  map.set('updated_at', Json.String(iso_date(DateTime.utc)))
+  map.set('packages', Json.Array(rows))
+  Result.Ok(Json.Object(map))
 }
 
 fn pub run {

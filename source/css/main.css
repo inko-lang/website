@@ -571,6 +571,13 @@ table tr:last-child td {
   margin-bottom: 0;
 }
 
+.last-updated {
+  border-top: 1px solid var(--grey);
+  color: var(--dimmed);
+  font-size: 0.8rem;
+  padding-top: calc(var(--margin) / 2);
+}
+
 @media only screen and (max-width: 760px) {
   .top-bar .expand-menus {
     display: block;
