@@ -1,5 +1,5 @@
 {
-  "updated_at": "2024-12-23T06:37:52Z",
+  "updated_at": "2024-12-30T06:37:43Z",
   "packages": [
     {
       "owner": "dusty-phillips",
@@ -116,7 +116,7 @@
       "description": "A syntax highlighting library for Inko",
       "stars": 2,
       "license": "MPL-2.0",
-      "version": "0.14.0"
+      "version": "0.16.0"
     },
     {
       "owner": "yorickpeterse",
