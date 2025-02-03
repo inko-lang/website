@@ -1,12 +1,12 @@
 {
-  "updated_at": "2025-01-27T06:36:00Z",
+  "updated_at": "2025-02-03T06:35:38Z",
   "packages": [
     {
       "owner": "dusty-phillips",
       "name": "inko-http",
       "url": "https://github.com/dusty-phillips/inko-http",
       "description": "Rudimentary HTTP Server exploring the Inko programming language",
-      "stars": 4,
+      "stars": 5,
       "license": "MIT",
       "version": "0.0.4"
     },
@@ -15,7 +15,7 @@
       "name": "inko-argparse",
       "url": "https://github.com/dusty-phillips/inko-argparse",
       "description": "Argument parsing library for the Inko programming language",
-      "stars": 1,
+      "stars": 2,
       "license": "MIT",
       "version": "0.2.0"
     },
@@ -24,7 +24,7 @@
       "name": "inko-regex",
       "url": "https://github.com/dusty-phillips/inko-regex",
       "description": "Basic regular expression parser in pure inko",
-      "stars": 3,
+      "stars": 4,
       "license": "MIT",
       "version": "0.0.4"
     },
@@ -33,7 +33,7 @@
       "name": "inko-tui",
       "url": "https://github.com/dusty-phillips/inko-tui",
       "description": "Basic Terminal Ui for Inko",
-      "stars": 1,
+      "stars": 2,
       "license": "MIT",
       "version": "0.0.1"
     },
@@ -51,7 +51,7 @@
       "name": "inko-html",
       "url": "https://github.com/roetlich/inko-html",
       "description": "HTML library written in Inko.",
-      "stars": 0,
+      "stars": 1,
       "license": "",
       "version": "0.0.1"
     },
@@ -60,7 +60,7 @@
       "name": "inko-blake3",
       "url": "https://github.com/uasi/inko-blake3",
       "description": "A BLAKE3 hasher for Inko.",
-      "stars": 2,
+      "stars": 3,
       "license": "MPL-2.0",
       "version": "0.1.0"
     },
@@ -69,7 +69,7 @@
       "name": "inko-hmac",
       "url": "https://github.com/uasi/inko-hmac",
       "description": "An HMAC implementation for Inko.",
-      "stars": 1,
+      "stars": 2,
       "license": "MPL-2.0",
       "version": "0.3.1"
     },
@@ -78,7 +78,7 @@
       "name": "inko-totp",
       "url": "https://github.com/uasi/inko-totp",
       "description": "A TOTP token generator and validator for Inko.",
-      "stars": 2,
+      "stars": 3,
       "license": "MPL-2.0",
       "version": "0.2.0"
     },
@@ -87,7 +87,7 @@
       "name": "inko-url_search_params",
       "url": "https://github.com/uasi/inko-url_search_params",
       "description": "A URLSearchParams implementation.",
-      "stars": 0,
+      "stars": 1,
       "license": "MPL-2.0",
       "version": "0.2.0"
     },
@@ -96,7 +96,7 @@
       "name": "inko-uuid",
       "url": "https://github.com/uasi/inko-uuid",
       "description": "A UUID generator for Inko.",
-      "stars": 1,
+      "stars": 2,
       "license": "MPL-2.0",
       "version": "0.2.1"
     },
@@ -114,7 +114,7 @@
       "name": "inko-syntax",
       "url": "https://github.com/yorickpeterse/inko-syntax",
       "description": "A syntax highlighting library for Inko",
-      "stars": 2,
+      "stars": 3,
       "license": "MPL-2.0",
       "version": "0.16.0"
     },
