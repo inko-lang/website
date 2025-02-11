@@ -5,7 +5,7 @@ import syntax.format (Html)
 import syntax.lexer.inko (Lexer)
 import wobsite (Files)
 
-class Example {
+type Example {
   let @title: String
   let @body: ByteArray
 

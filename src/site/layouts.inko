@@ -4,10 +4,10 @@ import markdown.html (Filter, TableOfContents)
 import site.examples (Example)
 import site.packages (Package, Packages)
 import site.sponsors (CorporateSponsor, Sponsor, Sponsors)
+import std.locale.en (Locale)
 import std.time (DateTime)
 import wobsite (Files, Page)
 import wobsite.markdown (Admonitions, SyntaxHighlight)
-import wobsite.time (human_readable_date, iso_date)
 
 # The base URL of the website.
 let URL = 'https://inko-lang.org'
@@ -36,6 +36,10 @@ let MENU = [
   ['Community', 'icon-users', '/community/'],
   ['News', 'icon-newspaper-o', '/news/'],
 ]
+
+fn human_readable_date(date: ref DateTime) -> String {
+  date.format(how: '%B %d, %Y', locale: Locale.new)
+}
 
 fn filters -> Array[Filter] {
   [
@@ -462,7 +466,7 @@ fn pub news_index(
                   .td
                   .attr('class', 'news-meta')
                   .time
-                  .attr('datetime', iso_date(page.date))
+                  .attr('datetime', page.date.to_iso8601)
                   .text(human_readable_date(page.date))
 
                 tr.td.a.attr('href', page.url).attr('title', page.title).text(
@@ -493,7 +497,7 @@ fn pub news(page: Page) -> Result[html.Document, String] {
               p
                 .time
                 .attr('class', 'news-meta')
-                .attr('datetime', iso_date(page.date))
+                .attr('datetime', page.date.to_iso8601)
                 .text(human_readable_date(page.date))
             })
           })
@@ -537,7 +541,7 @@ fn pub feed(files: ref Files) -> Result[String, String] {
 
       match articles.opt(0) {
         case None -> {}
-        case Some(article) -> f.element('updated').text(iso_date(article.date))
+        case Some(article) -> f.element('updated').text(article.date.to_iso8601)
       }
 
       f.element('link').attr('href', URL).attr('rel', 'alternate')
@@ -549,7 +553,7 @@ fn pub feed(files: ref Files) -> Result[String, String] {
 
       articles.iter.each(fn (article) {
         f.element('entry').with(fn (e) {
-          let date = iso_date(article.date)
+          let date = article.date.to_iso8601
           let html = article.to_html(filters).to_string
           let url = '${URL}${article.url}'
 

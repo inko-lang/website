@@ -4,7 +4,7 @@ import site.cli.packages
 import site.cli.sponsors
 import std.env
 
-class async Main {
+type async Main {
   fn async main {
     match env.arguments.opt(0) {
       case Some('build') or None -> build.run

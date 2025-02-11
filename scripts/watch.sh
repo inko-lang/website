@@ -1,12 +1,7 @@
 #!/usr/bin/env bash
 
-function build {
-    echo 'Building website...'
-    inko run src/main.inko build
-}
-
 # Perform the initial build.
-build
+make build
 
 python -m http.server -d public &
 python_pid=$!
@@ -22,7 +17,7 @@ while inotifywait --recursive \
     --exclude '^\.\/(build|public)' \
     .
 do
-    build
+    make build
 done
 
 wait "${python_pid}"

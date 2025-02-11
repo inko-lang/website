@@ -5,7 +5,7 @@ import std.sys (Command, Stream)
 
 let URL = 'https://api.github.com/graphql'
 
-class enum Error {
+type enum Error {
   case InvalidCommand(String)
   case InvalidRead(io.Error)
   case InvalidJson(json.Error)
@@ -66,10 +66,5 @@ fn get(
     )
   }
 
-  let stdout = ByteArray.new
-
-  try child.stdout.as_mut.get.read_all(stdout).map_error(fn (e) {
-    Error.InvalidRead(e)
-  })
-  Json.parse(stdout).map_error(fn (e) { Error.InvalidJson(e) })
+  Json.parse(child.stdout.as_mut.get).map_error(fn (e) { Error.InvalidJson(e) })
 }

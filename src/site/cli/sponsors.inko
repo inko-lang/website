@@ -4,7 +4,6 @@ import std.fs.file (WriteOnlyFile)
 import std.fs.path (Path)
 import std.json (Json)
 import std.time (DateTime)
-import wobsite.time (iso_date)
 
 let ENV = 'GITHUB_TOKEN'
 let QUERY = '
@@ -141,7 +140,7 @@ fn sponsors(token: String) -> Result[Json, String] {
 
   let obj = Map.new
 
-  obj.set('updated_at', Json.String(iso_date(DateTime.utc)))
+  obj.set('updated_at', Json.String(DateTime.utc.to_iso8601))
   obj.set('sponsors', Json.Array(rows))
   Result.Ok(Json.Object(obj))
 }

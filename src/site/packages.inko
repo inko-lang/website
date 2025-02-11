@@ -1,6 +1,6 @@
 import std.fs.file (ReadOnlyFile)
 import std.fs.path (Path)
-import std.io (Error)
+import std.io (Buffer, Error)
 import std.json (Json)
 import std.string (ToString)
 import std.time (DateTime)
@@ -20,7 +20,7 @@ fn int(value: ref Json, key: String) -> Result[Int, ParseError] {
   }
 }
 
-class enum ParseError {
+type enum ParseError {
   case Io(Error)
   case InvalidJson(String)
   case InvalidKey(String)
@@ -36,7 +36,7 @@ impl ToString for ParseError {
   }
 }
 
-class Packages {
+type Packages {
   let @packages: Array[Package]
   let @updated_at: DateTime
 
@@ -48,7 +48,7 @@ class Packages {
       .then(fn (f) { f.read_all(data) })
       .map_error(fn (e) { ParseError.Io(e) })
 
-    let root = match Json.parse(data) {
+    let root = match Json.parse(Buffer.new(data)) {
       case Ok(Object(v)) -> v
       case Ok(_) -> {
         throw ParseError.InvalidJson('the top-level value must be an object')
@@ -98,7 +98,7 @@ class Packages {
   }
 }
 
-class Package {
+type Package {
   let @owner: String
   let @name: String
   let @url: String

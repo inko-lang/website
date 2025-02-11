@@ -5,7 +5,6 @@ import std.fs.path (Path)
 import std.int (Format)
 import std.json (Json)
 import std.time (DateTime)
-import wobsite.time (iso_date)
 
 let ENV = 'GITHUB_TOKEN'
 let QUERY = '
@@ -53,13 +52,8 @@ fn version_tag?(name: String) -> Bool {
 
 fn registered(path: ref Path) -> Result[Array[(String, String)], String] {
   let path = Path.new('source').join('data').join('packages.json')
-  let data = ByteArray.new
-
-  try ReadOnlyFile.new(path).then(fn (f) { f.read_all(data) }).map_error(
-    fn (e) { e.to_string },
-  )
-
-  let vals = match Json.parse(data) {
+  let file = try ReadOnlyFile.new(path).map_error(fn (e) { e.to_string })
+  let vals = match Json.parse(file) {
     case Ok(Array(v)) -> v
     case Ok(_) -> throw 'the top-level value must be an array'
     case Error(e) -> throw e.to_string
@@ -170,7 +164,7 @@ fn packages(
 
   let map = Map.new
 
-  map.set('updated_at', Json.String(iso_date(DateTime.utc)))
+  map.set('updated_at', Json.String(DateTime.utc.to_iso8601))
   map.set('packages', Json.Array(rows))
   Result.Ok(Json.Object(map))
 }

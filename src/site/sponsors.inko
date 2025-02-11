@@ -21,7 +21,7 @@ fn int(value: ref Json, key: String) -> Result[Int, ParseError] {
   }
 }
 
-class enum ParseError {
+type enum ParseError {
   case Io(Error)
   case InvalidJson(String)
   case InvalidKey(String)
@@ -37,19 +37,13 @@ impl ToString for ParseError {
   }
 }
 
-class Sponsors {
+type Sponsors {
   let @updated_at: DateTime
   let @sponsors: Array[Sponsor]
 
   fn static parse(path: ref Path) -> Result[Sponsors, ParseError] {
-    let data = ByteArray.new
-
-    try ReadOnlyFile
-      .new(path.clone)
-      .then(fn (f) { f.read_all(data) })
-      .map_error(fn (e) { ParseError.Io(e) })
-
-    let root = match Json.parse(data) {
+    let file = try ReadOnlyFile.new(path).map_error(fn (e) { ParseError.Io(e) })
+    let root = match Json.parse(file) {
       case Ok(Object(v)) -> v
       case Ok(_) -> {
         throw ParseError.InvalidJson('the top-level value must be an object')
@@ -101,7 +95,7 @@ class Sponsors {
   }
 }
 
-class Sponsor {
+type Sponsor {
   let @name: String
   let @image: String
   let @website: String
@@ -109,7 +103,7 @@ class Sponsor {
   let @created_at: DateTime
 }
 
-class CorporateSponsor {
+type CorporateSponsor {
   let @name: String
   let @image: String
   let @description: markdown.Document
@@ -117,14 +111,8 @@ class CorporateSponsor {
   fn static parse_all(
     path: ref Path,
   ) -> Result[Array[CorporateSponsor], ParseError] {
-    let data = ByteArray.new
-
-    try ReadOnlyFile
-      .new(path.clone)
-      .then(fn (f) { f.read_all(data) })
-      .map_error(fn (e) { ParseError.Io(e) })
-
-    let root = match Json.parse(data) {
+    let file = try ReadOnlyFile.new(path).map_error(fn (e) { ParseError.Io(e) })
+    let root = match Json.parse(file) {
       case Ok(Array(v)) -> v
       case Ok(_) -> {
         throw ParseError.InvalidJson('the top-level value must be an array')

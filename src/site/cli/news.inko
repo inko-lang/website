@@ -3,7 +3,6 @@ import std.fs.file (WriteOnlyFile)
 import std.fs.path (Path)
 import std.json (Json)
 import std.time (DateTime)
-import wobsite.time (iso_date)
 import wobsite.url
 
 fn pub run {
@@ -13,7 +12,7 @@ fn pub run {
   let meta = Map.new
 
   meta.set('title', Json.String(title))
-  meta.set('date', Json.String(iso_date(DateTime.utc)))
+  meta.set('date', Json.String(DateTime.utc.to_iso8601))
 
   let data = '---\n${Json.Object(meta).to_pretty_string}\n---\n\n'
 
