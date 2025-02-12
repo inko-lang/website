@@ -9,6 +9,14 @@ We're pleased to announce the release of Inko 0.18.1. This release includes
 support for stack allocated types, parsing and formatting of dates and times,
 the enabling of LLVM optimizations, and more.
 
+If you're new to Inko: Inko is a programming language for building concurrent
+software, but without the usual headaches such as data race conditions and
+non-deterministic garbage collectors. Inko features deterministic automatic
+memory management, compiles to machine code using LLVM, supports different
+platforms (Linux, macOS and FreeBSD, and potentially any other Unix based
+platform), and is easy to get started with. For more information, refer to the
+[homepage](/) or the [manual](https://docs.inko-lang.org/manual/v0.18.1/).
+
 ## [Table of contents]{toc-ignore}
 
 ::: toc
