@@ -1,7 +1,7 @@
 # Concurrent programming
 import std.sync (Future, Promise)
 
-class async Calculator {
+type async Calculator {
   fn async fact(size: Int, promise: uni Promise[Int]) {
     let result = 1
       .to(size)
@@ -12,7 +12,7 @@ class async Calculator {
   }
 }
 
-class async Main {
+type async Main {
   fn async main {
     let calc = Calculator()
 

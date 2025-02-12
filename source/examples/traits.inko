@@ -3,7 +3,7 @@ trait ToString {
   fn to_string -> String
 }
 
-class Person {
+type Person {
   let @name: String
 }
 
@@ -14,7 +14,7 @@ impl ToString for Person {
 }
 
 # Traits can also be implemented conditionally:
-class List[T] {
+type List[T] {
   # ...
 }
 

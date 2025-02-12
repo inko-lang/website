@@ -1,7 +1,7 @@
 # Unit testing
 import std.test (Tests)
 
-class async Main {
+type async Main {
   fn async main {
     let tests = Tests.new
 

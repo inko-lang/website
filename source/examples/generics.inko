@@ -1,8 +1,8 @@
 # Generic data types
-class Stack[T] {
+type Stack[T] {
   let @values: Array[T]
 
-  fn static new -> Stack[T] {
+  fn static new -> Self {
     Stack([])
   }
 
@@ -15,7 +15,7 @@ class Stack[T] {
   }
 }
 
-class async Main {
+type async Main {
   fn async main {
     let stack = Stack.new
 

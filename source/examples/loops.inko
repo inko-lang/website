@@ -1,5 +1,5 @@
 # Loops
-class async Main {
+type async Main {
   fn async main {
     let mut num = 0
 

@@ -1,7 +1,7 @@
 # Reading from a file
 import std.fs.file (ReadOnlyFile)
 
-class async Main {
+type async Main {
   fn async main {
     # or_panic() gets the Result value, panicking 
     # with the given error message when 

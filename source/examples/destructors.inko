@@ -2,7 +2,7 @@
 import std.drop (Drop)
 import std.stdio (Stdout)
 
-class Thing {}
+type Thing {}
 
 impl Drop for Thing {
   fn mut drop {
@@ -10,7 +10,7 @@ impl Drop for Thing {
   }
 }
 
-class async Main {
+type async Main {
   fn async main {
     let thing = Thing()
 

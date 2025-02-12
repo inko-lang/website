@@ -63,8 +63,8 @@ Here's how you'd implement a simple concurrent counter:
 ```inko
 import std.sync (Future, Promise)
 
-class async Counter {
-  let @value: Int
+type async Counter {
+  let mut @value: Int
 
   fn async mut increment {
     @value += 1
@@ -75,7 +75,7 @@ class async Counter {
   }
 }
 
-class async Main {
+type async Main {
   fn async main {
     let counter = Counter(value: 0)
 
@@ -108,13 +108,13 @@ its size:
 import std.fs.file (ReadOnlyFile)
 import std.stdio (Stdout)
 
-class async Main {
+type async Main {
   fn async main {
-    let size =
-      ReadOnlyFile
-        .new('README.md'.to_path)     # => Result[ReadOnlyFile, Error]
-        .then fn (file) { file.size } # => Result[Int, Error]
-        .or(0)                        # => Int
+    let size = ReadOnlyFile
+      .new('README.md'.to_path)          # => Result[ReadOnlyFile, Error]
+      .then(fn (file) { file.metadata }) # => Result[Metadata, Error]
+      .map(fn (meta) { meta.size })      # => Result[Int, Error]
+      .or(0)
 
     Stdout.new.print(size.to_string) # => 1099
   }
@@ -139,15 +139,19 @@ Inko supports pattern matching on a variety of types, such as tuples and
 algebraic data types:
 
 ```inko
-match [10, 20].opt(1) {
-  case Some(number) -> number # => 20
-  case None -> 0
-}
+type async Main {
+  fn async main {
+    match [10, 20].opt(1) {
+      case Some(number) -> number # => 20
+      case None -> 0
+    }
 
-match (10, 'hello') {
-  case (10, 'hello') -> 'foo'
-  case (20, _) -> 'bar'
-  case _ -> 'baz'
+    match (10, 'hello') {
+      case (10, 'hello') -> 'foo'
+      case (20, _) -> 'bar'
+      case _ -> 'baz'
+    }
+  }
 }
 ```
 
@@ -155,15 +159,19 @@ You can also match against literals such as integers and strings, and against
 regular classes:
 
 ```inko
-class Person {
+type Person {
   let @name: String
   let @age: Int
 }
 
-let alice = Person(name: 'Alice', age: 42)
+type async Main {
+  fn async main {
+    let alice = Person(name: 'Alice', age: 42)
 
-match alice {
-  case { @name = name } -> name # => 'Alice'
+    match alice {
+      case { @name = name } -> name # => 'Alice'
+    }
+  }
 }
 ```
 

@@ -18,7 +18,7 @@ fn div2(left: Int, right: Int) -> Result[Int, String] {
   if res == 5 { Result.Ok(50) } else { Result.Ok(res) }
 }
 
-class async Main {
+type async Main {
   fn async main {
     # `Result` is just an algebraic data type, so we can
     # pattern match against it to get the underlying

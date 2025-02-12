@@ -1,5 +1,5 @@
 # Optional values
-class async Main {
+type async Main {
   fn async main {
     let numbers = [10, 20, 30]
 

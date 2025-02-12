@@ -1,5 +1,5 @@
 # Pattern matching
-class async Main {
+type async Main {
   fn async main {
     match Option.Some(42) {
       case Some(number) -> number
