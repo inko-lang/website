@@ -1,4 +1,12 @@
 {
-  "updated_at": "2025-02-10T02:30:37Z",
-  "sponsors": [  ]
+  "updated_at": "2025-02-17T02:33:06.312Z",
+  "sponsors": [
+    {
+      "name": "Bang Nguyen Huu",
+      "image": "https://avatars.githubusercontent.com/u/15852849?u=abab1c30ad6289a75abe13843e5e5b18d6d3f7c0&v=4&size=64",
+      "website": "https://hucanco.de/",
+      "amount": 5,
+      "created_at": "2025-02-14T00:38:54Z"
+    }
+  ]
 }
