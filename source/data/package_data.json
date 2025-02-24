@@ -1,5 +1,5 @@
 {
-  "updated_at": "2025-02-17T06:38:01.208Z",
+  "updated_at": "2025-02-24T06:38:44.47Z",
   "packages": [
     {
       "owner": "dusty-phillips",
@@ -71,7 +71,7 @@
       "description": "An HMAC implementation for Inko.",
       "stars": 2,
       "license": "MPL-2.0",
-      "version": "0.3.1"
+      "version": "0.4.0"
     },
     {
       "owner": "uasi",
@@ -89,7 +89,7 @@
       "description": "A URLSearchParams implementation.",
       "stars": 1,
       "license": "MPL-2.0",
-      "version": "0.2.0"
+      "version": "0.3.0"
     },
     {
       "owner": "uasi",
@@ -98,7 +98,7 @@
       "description": "A UUID generator for Inko.",
       "stars": 2,
       "license": "MPL-2.0",
-      "version": "0.2.1"
+      "version": "0.3.0"
     },
     {
       "owner": "yorickpeterse",
@@ -107,7 +107,7 @@
       "description": "An Inko library for parsing an opinionated dialect of Markdown",
       "stars": 4,
       "license": "MPL-2.0",
-      "version": "0.22.0"
+      "version": "0.23.0"
     },
     {
       "owner": "yorickpeterse",
@@ -116,7 +116,7 @@
       "description": "A syntax highlighting library for Inko",
       "stars": 3,
       "license": "MPL-2.0",
-      "version": "0.17.0"
+      "version": "0.18.0"
     },
     {
       "owner": "yorickpeterse",
@@ -125,7 +125,7 @@
       "description": "A small and opinionated static site generation library",
       "stars": 4,
       "license": "MPL-2.0",
-      "version": "0.20.0"
+      "version": "0.21.0"
     }
   ]
 }
