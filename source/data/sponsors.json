@@ -1,5 +1,5 @@
 {
-  "updated_at": "2025-03-10T02:10:50.499Z",
+  "updated_at": "2025-03-17T02:39:47.251Z",
   "sponsors": [
     {
       "name": "Luke Puchner-Hardman",
@@ -7,13 +7,6 @@
       "website": "https://github.com/lupuchard",
       "amount": 10,
       "created_at": "2025-03-09T18:48:27Z"
-    },
-    {
-      "name": "Bang Nguyen Huu",
-      "image": "https://avatars.githubusercontent.com/u/15852849?u=abab1c30ad6289a75abe13843e5e5b18d6d3f7c0&v=4&size=64",
-      "website": "https://hucanco.de/",
-      "amount": 5,
-      "created_at": "2025-02-14T00:38:54Z"
     }
   ]
 }
