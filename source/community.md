@@ -24,7 +24,9 @@ For more information, see the [code of conduct](/code-of-conduct).
 
 ## Projects using Inko
 
-- [OpenFlow](https://github.com/yorickpeterse/openflow): controls your [Itho
-  Daalderop](https://www.ithodaalderop.nl/) ventilation unit.
 - [clogs](https://github.com/yorickpeterse/clogs): a changelog generator using
   Git trailers.
+- [KVI](https://github.com/yorickpeterse/kvi): a simple key-value database using
+  the Redis serialization protocol
+- [OpenFlow](https://github.com/yorickpeterse/openflow): controls your [Itho
+  Daalderop](https://www.ithodaalderop.nl/) ventilation unit.
