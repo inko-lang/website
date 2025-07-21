@@ -1,6 +1,13 @@
 {
-  "updated_at": "2025-07-14T03:12:31.904Z",
+  "updated_at": "2025-07-21T03:15:56.244Z",
   "sponsors": [
+    {
+      "name": "Thad Guidry",
+      "image": "https://avatars.githubusercontent.com/u/986438?u=0398b4be0a2459487b25a8303423992b9fc6474a&v=4&size=64",
+      "website": "https://github.com/thadguidry",
+      "amount": 25,
+      "created_at": "2025-07-15T21:36:14Z"
+    },
     {
       "name": "Luke Puchner-Hardman",
       "image": "https://avatars.githubusercontent.com/u/2514990?v=4&size=64",
