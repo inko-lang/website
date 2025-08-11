@@ -1,5 +1,5 @@
 {
-  "updated_at": "2025-08-04T06:56:27.635Z",
+  "updated_at": "2025-08-11T06:51:13.307Z",
   "packages": [
     {
       "owner": "dusty-phillips",
@@ -105,7 +105,7 @@
       "name": "inko-markdown",
       "url": "https://github.com/yorickpeterse/inko-markdown",
       "description": "An Inko library for parsing an opinionated dialect of Markdown",
-      "stars": 6,
+      "stars": 7,
       "license": "MPL-2.0",
       "version": "0.23.0"
     },
