@@ -1,5 +1,5 @@
 {
-  "updated_at": "2025-09-01T06:46:50.914Z",
+  "updated_at": "2025-09-08T06:44:44.584Z",
   "packages": [
     {
       "owner": "dusty-phillips",
@@ -44,7 +44,7 @@
       "description": "An Inko library for generating XML and HTML",
       "stars": 3,
       "license": "MPL-2.0",
-      "version": "0.14.0"
+      "version": "0.15.0"
     },
     {
       "owner": "roetlich",
