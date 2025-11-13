@@ -3,6 +3,7 @@ import std.env
 import std.fs.file (WriteOnlyFile)
 import std.fs.path (Path)
 import std.json (Json)
+import std.net.http.client (Client)
 import std.time (DateTime)
 
 let ENV = 'GITHUB_TOKEN'
@@ -44,6 +45,7 @@ let QUERY = '
 fn sponsors(token: String) -> Result[Json, String] {
   let mut after = Option.None
   let rows = []
+  let client = Client.new
 
   loop {
     let vars = Map.new
@@ -53,9 +55,7 @@ fn sponsors(token: String) -> Result[Json, String] {
       case Some(v) -> vars.set('after', v)
     }
 
-    let page = try github.get(QUERY, token, vars).map_error(fn (e) {
-      e.to_string
-    })
+    let page = try github.get(client, QUERY, token, vars)
     let nodes = page
       .query
       .key('data')
@@ -69,7 +69,7 @@ fn sponsors(token: String) -> Result[Json, String] {
       case _ -> break
     }
 
-    try vals.iter.try_each(fn (val) {
+    for val in vals.iter {
       let date = match val.query.key('createdAt').as_string {
         case Some(v) -> v
         case _ -> throw 'the sponsorship creation date is invalid'
@@ -111,8 +111,7 @@ fn sponsors(token: String) -> Result[Json, String] {
       row.set('amount', Json.Int(amount))
       row.set('created_at', Json.String(date))
       rows.push(Json.Object(row))
-      Result.Ok(nil)
-    })
+    }
 
     let info = match
       page
@@ -127,10 +126,10 @@ fn sponsors(token: String) -> Result[Json, String] {
       case _ -> break
     }
 
-    match info.opt('hasNextPage') {
-      case Some(Bool(true)) -> {
-        match info.opt('endCursor') {
-          case Some(String(v)) -> after = Option.Some(v)
+    match info.get('hasNextPage') {
+      case Ok(Bool(true)) -> {
+        match info.get('endCursor') {
+          case Ok(String(v)) -> after = Option.Some(v)
           case _ -> break
         }
       }
@@ -146,8 +145,8 @@ fn sponsors(token: String) -> Result[Json, String] {
 }
 
 fn pub run {
-  let token = match env.opt(ENV) {
-    case Some(v) if v.size > 0 -> v
+  let token = match env.get(ENV) {
+    case Ok(v) if v.size > 0 -> v
     case _ -> panic('the ${ENV} environment variable must be non-empty')
   }
 
@@ -160,6 +159,6 @@ fn pub run {
 
   WriteOnlyFile
     .new(file)
-    .then(fn (f) { f.write_string(rows.to_pretty_string) })
-    .or_panic('failed to write the sponsors data')
+    .then(fn (f) { f.write(rows.to_pretty_string) })
+    .or_panic_with('failed to write the sponsors data')
 }

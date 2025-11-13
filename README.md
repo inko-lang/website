@@ -5,7 +5,7 @@ website](https://inko-lang.org/).
 
 ## Requirements
 
-- Inko 0.17.0 or newer
+- Inko 0.19.1 or newer
 
 ## Development
 

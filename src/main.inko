@@ -6,12 +6,12 @@ import std.env
 
 type async Main {
   fn async main {
-    match env.arguments.opt(0) {
-      case Some('build') or None -> build.run
-      case Some('sponsors') -> sponsors.run
-      case Some('packages') -> packages.run
-      case Some('news') -> news.run
-      case Some(v) -> panic('unknown command: ${v}')
+    match env.arguments.get(0) {
+      case Ok('build') or Error(_) -> build.run
+      case Ok('sponsors') -> sponsors.run
+      case Ok('packages') -> packages.run
+      case Ok('news') -> news.run
+      case Ok(v) -> panic('unknown command: ${v}')
     }
   }
 }

@@ -1,70 +1,39 @@
-import std.io
-import std.json (self, Json)
-import std.string (ToString)
-import std.sys (Command, Stream)
+import std.json (Json)
+import std.net.http (Header, Status)
+import std.net.http.client (Client)
+import std.uri (Uri)
 
 let URL = 'https://api.github.com/graphql'
 
-type enum Error {
-  case InvalidCommand(String)
-  case InvalidRead(io.Error)
-  case InvalidJson(json.Error)
-}
-
-impl ToString for Error {
-  fn pub to_string -> String {
-    match self {
-      case InvalidCommand(e) -> 'failed to run the curl command: ${e}'
-      case InvalidRead(e) -> 'failed to read the curl output: ${e}'
-      case InvalidJson(e) -> 'failed to parse the JSON response: ${e}'
-    }
-  }
-}
-
 fn get(
+  client: mut Client,
   query: String,
   token: String,
   variables: Map[String, String],
-) -> Result[Json, Error] {
-  let cmd = Command.new('curl')
+) -> Result[Json, String] {
   let root = Map.new
-  let vars = variables.into_iter.reduce(Map.new, fn (map, pair) {
-    map.set(pair.key, Json.String(pair.value))
-    map
-  })
+  let vars = Map.new
+
+  for (key, val) in variables { vars.set(key, Json.String(val)) }
 
   root.set('query', Json.String(query))
   root.set('variables', Json.Object(vars))
-  cmd.arguments.append(
-    [
-      '-H',
-      'Content-Type: application/json',
-      '-H',
-      'Authorization: bearer ${token}',
-      '-X',
-      'POST',
-      '-d',
-      Json.Object(root).to_string,
-      URL,
-    ],
-  )
 
-  cmd.stdin = Stream.Null
-  cmd.stdout = Stream.Piped
-  cmd.stderr = Stream.Null
-
-  let child = try cmd.spawn.map_error(fn (e) {
-    Error.InvalidCommand(e.to_string)
-  })
-  let status = try child.wait.map_error(fn (e) {
-    Error.InvalidCommand(e.to_string)
-  })
-
-  if status.success?.false? {
-    throw Error.InvalidCommand(
-      'the process exited with status ${status.to_int}',
-    )
+  let body = Json.Object(root).to_string
+  let resp = match
+    client
+      .post(Uri.parse(URL).or_panic)
+      .header(Header.content_type, 'application/json')
+      .header(Header.authorization, 'bearer ${token}')
+      .body(body)
+  {
+    case Ok(v) -> v
+    case Error(e) -> throw 'failed to send the request: ${e}'
   }
 
-  Json.parse(child.stdout.as_mut.get).map_error(fn (e) { Error.InvalidJson(e) })
+  if resp.status != Status.ok {
+    throw 'the server returned a ${resp.status} response'
+  }
+
+  Json.parse(resp.body).map_error(fn (e) { 'failed to parse the body: ${e}' })
 }

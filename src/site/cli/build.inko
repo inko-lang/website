@@ -23,11 +23,11 @@ fn pub run {
       recover fn (_, p) { Result.Ok(layouts.missing(p)) }
     })
 
-    ['documentation', 'code-of-conduct', 'community'].into_iter.each(fn (p) {
+    for p in ['documentation', 'code-of-conduct', 'community'] {
       site.page('/${p}.md', fn {
         recover fn (_, p) { Result.Ok(layouts.page(p)) }
       })
-    })
+    }
 
     site.page('/sponsors.md', fn {
       recover fn (files, p) { layouts.sponsors(files, p) }

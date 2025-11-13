@@ -20,7 +20,7 @@ function update() {
     fi
 
     info 'Updating sponsors data'
-    make setup sponsors
+    make sponsors
     info 'Committing changes (if any)'
 
     git checkout --quiet main

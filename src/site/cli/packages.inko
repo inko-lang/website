@@ -4,6 +4,7 @@ import std.fs.file (ReadOnlyFile, WriteOnlyFile)
 import std.fs.path (Path)
 import std.int (Format)
 import std.json (Json)
+import std.net.http.client (Client)
 import std.time (DateTime)
 
 let ENV = 'GITHUB_TOKEN'
@@ -79,51 +80,50 @@ fn packages(
   token: String,
   packages: Array[(String, String)],
 ) -> Result[Json, String] {
+  let client = Client.new
   let rows = try packages.into_iter.try_reduce([], fn (ary, owner_name) {
     let vars = Map.new
 
     vars.set('owner', owner_name.0)
     vars.set('name', owner_name.1)
 
-    let resp = try github.get(QUERY, token, vars).map_error(fn (e) {
-      e.to_string
-    })
+    let resp = try github.get(client, QUERY, token, vars)
     let repo = match resp.query.key('data').key('tags').as_object {
       case Some(v) -> v
       case _ -> return Result.Ok(ary)
     }
 
-    let url = match repo.opt('url') {
-      case Some(String(v)) -> v
+    let url = match repo.get('url') {
+      case Ok(String(v)) -> v
       case _ -> ''
     }
 
-    let desc = match repo.opt('description') {
-      case Some(String(v)) -> v
+    let desc = match repo.get('description') {
+      case Ok(String(v)) -> v
       case _ -> ''
     }
 
-    let stars = match repo.opt('stargazerCount') {
-      case Some(Int(v)) -> v
+    let stars = match repo.get('stargazerCount') {
+      case Ok(Int(v)) -> v
       case _ -> 0
     }
 
-    let license = match repo.opt('licenseInfo') {
-      case Some(Object(m)) -> {
-        match m.opt('spdxId') {
-          case Some(String(v)) -> v
+    let license = match repo.get('licenseInfo') {
+      case Ok(Object(m)) -> {
+        match m.get('spdxId') {
+          case Ok(String(v)) -> v
           case _ -> ''
         }
       }
       case _ -> ''
     }
 
-    let tag = match repo.opt('refs') {
-      case Some(Object(m)) -> {
-        match m.opt('nodes') {
-          case Some(Array(v)) -> {
-            match v.opt(0) {
-              case Some(Object(v)) -> v
+    let tag = match repo.get('refs') {
+      case Ok(Object(m)) -> {
+        match m.get('nodes') {
+          case Ok(Array(v)) -> {
+            match v.get(0) {
+              case Ok(Object(v)) -> v
               case _ -> return Result.Ok(ary)
             }
           }
@@ -133,15 +133,15 @@ fn packages(
       case _ -> return Result.Ok(ary)
     }
 
-    let version = match tag.opt('name') {
-      case Some(String(v)) -> {
+    let version = match tag.get('name') {
+      case Ok(String(v)) -> {
         let name = if v.starts_with?('v') {
-          v.slice(start: 1, size: v.size - 1).into_string
+          v.slice(1, v.size).to_string
         } else {
           v
         }
 
-        if version_tag?(name).false? { return Result.Ok(ary) }
+        if !version_tag?(name) { return Result.Ok(ary) }
 
         name
       }
@@ -172,8 +172,8 @@ fn packages(
 fn pub run {
   let in_path = Path.new('source').join('data').join('packages.json')
   let out_path = Path.new('source').join('data').join('package_data.json')
-  let token = match env.opt(ENV) {
-    case Some(v) if v.size > 0 -> v
+  let token = match env.get(ENV) {
+    case Ok(v) if v.size > 0 -> v
     case _ -> panic('the ${ENV} environment variable must be non-empty')
   }
 
@@ -189,6 +189,6 @@ fn pub run {
 
   WriteOnlyFile
     .new(out_path)
-    .then(fn (f) { f.write_string(output.to_pretty_string) })
-    .or_panic('failed to write the packages')
+    .then(fn (f) { f.write(output.to_pretty_string) })
+    .or_panic_with('failed to write the packages')
 }

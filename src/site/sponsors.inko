@@ -52,7 +52,7 @@ type Sponsors {
     }
 
     let updated_at = match root.remove('updated_at') {
-      case Some(String(v)) -> {
+      case Ok(String(v)) -> {
         match parse_date(v) {
           case Some(v) -> v
           case _ -> {
@@ -63,7 +63,7 @@ type Sponsors {
       case _ -> throw ParseError.InvalidJson('the "updated_at" key is missing')
     }
     let raw_rows = match root.remove('sponsors') {
-      case Some(Array(v)) -> v
+      case Ok(Array(v)) -> v
       case _ -> throw ParseError.InvalidJson('the "sponsors" key is missing')
     }
     let rows = try raw_rows.into_iter.try_reduce([], fn (sponsors, val) {

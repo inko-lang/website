@@ -20,7 +20,7 @@ function update() {
     fi
 
     info 'Updating package data'
-    make setup packages
+    make packages
     info 'Committing changes (if any)'
 
     git checkout --quiet main

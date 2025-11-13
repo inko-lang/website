@@ -37,7 +37,7 @@ let MENU = [
   ['News', 'icon-newspaper-o', '/news/'],
 ]
 
-fn human_readable_date(date: ref DateTime) -> String {
+fn human_readable_date(date: DateTime) -> String {
   date.format(how: '%B %d, %Y', locale: Locale.new)
 }
 
@@ -63,7 +63,7 @@ fn toggle_menu(query: String, open: String, close: String) -> html.Element {
   a
 }
 
-fn last_updated(date: ref DateTime) -> html.Element {
+fn last_updated(date: DateTime) -> html.Element {
   let p = html.Element.new('p')
   let txt = 'Last updated: ${human_readable_date(date)}'
 
@@ -156,13 +156,13 @@ fn header(page: ref Page) -> html.Element {
     })
 
     h.nav.ul.with(fn (ul) {
-      MENU.iter.each(fn (row) {
-        ul.li.a.attr('href', row.get(2)).with(fn (a) {
-          a.i.attr('class', row.get(1))
+      for row in MENU.iter {
+        ul.li.a.attr('href', row.get(2).or_panic).with(fn (a) {
+          a.i.attr('class', row.get(1).or_panic)
           a.text(' ')
-          a.text(row.get(0))
+          a.text(row.get(0).or_panic)
         })
-      })
+      }
     })
   })
 
@@ -180,7 +180,7 @@ fn corporate_sponsors(
   root.h2.text('Organisations supporting Inko')
   root.table.attr('class', 'corporate-sponsors-table').with(fn (table) {
     table.tbody.with(fn (tbody) {
-      sponsors.iter.each(fn (sponsor) {
+      for sponsor in sponsors.iter {
         tbody.tr.with(fn (tr) {
           tr
             .td
@@ -193,7 +193,7 @@ fn corporate_sponsors(
 
           tr.td.append(sponsor.description.to_html)
         })
-      })
+      }
     })
   })
 }
@@ -215,7 +215,7 @@ fn github_sponsors(root: mut html.Element, sponsors: ref Array[Sponsor]) {
     })
 
     table.tbody.with(fn (tbody) {
-      sponsors.iter.each(fn (sponsor) {
+      for sponsor in sponsors.iter {
         tbody.tr.with(fn (tr) {
           tr.td.attr('class', 'avatar').with(fn (td) {
             if sponsor.image.size > 0 {
@@ -242,7 +242,7 @@ fn github_sponsors(root: mut html.Element, sponsors: ref Array[Sponsor]) {
           tr.td.text('${sponsor.amount}')
           tr.td.text(human_readable_date(sponsor.created_at))
         })
-      })
+      }
     })
   })
 }
@@ -267,7 +267,7 @@ fn package_list(root: mut html.Element, packages: ref Array[Package]) {
     })
 
     table.tbody.with(fn (tbody) {
-      packages.iter.each(fn (pkg) {
+      for pkg in packages.iter {
         tbody.tr.with(fn (tr) {
           tr.td.with(fn (td) {
             td
@@ -312,7 +312,7 @@ fn package_list(root: mut html.Element, packages: ref Array[Package]) {
               .text(' Install')
           })
         })
-      })
+      }
     })
   })
 }
@@ -333,33 +333,35 @@ fn pub home(files: ref Files, page: Page) -> Result[html.Document, String] {
             d.h1.text(jumbo.title)
             d.append(jumbo.to_html([]))
 
-            BUTTONS.iter.each(fn (btn) {
-              let cls = 'button ${btn.get(2)}'
+            for btn in BUTTONS.iter {
+              let cls = 'button ${btn.get(2).or_panic}'
 
-              d.a.attr('class', cls).attr('href', btn.get(3)).with(fn (a) {
-                a.i.attr('class', btn.get(1))
-                a.text(' ')
-                a.text(btn.get(0))
-              })
-            })
+              d.a.attr('class', cls).attr('href', btn.get(3).or_panic).with(
+                fn (a) {
+                  a.i.attr('class', btn.get(1).or_panic)
+                  a.text(' ')
+                  a.text(btn.get(0).or_panic)
+                },
+              )
+            }
           })
 
           d.div.attr('class', 'code-examples').with(fn (d) {
             d.select.attr('title', 'Choose an example to display').with(
               fn (s) {
-                examples.iter.each(fn (ex) {
+                for ex in examples.iter {
                   s.option.attr('data-example', ex.title).text(ex.title)
-                })
+                }
               },
             )
 
-            examples.iter.each(fn (ex) {
+            for ex in examples.iter {
               d
                 .div
                 .attr('class', 'example')
                 .attr('data-example', ex.title)
                 .append(ex.to_html)
-            })
+            }
           })
         },
       )
@@ -460,7 +462,7 @@ fn pub news_index(
         d.article.with(fn (article) {
           article.header.h1.text(page.title)
           article.table.attr('class', 'news-index').tbody.with(fn (tbody) {
-            news.iter.each(fn (page) {
+            for page in news.iter {
               tbody.tr.with(fn (tr) {
                 tr
                   .td
@@ -473,7 +475,7 @@ fn pub news_index(
                   page.title,
                 )
               })
-            })
+            }
           })
         })
       })
@@ -539,9 +541,9 @@ fn pub feed(files: ref Files) -> Result[String, String] {
       f.element('id').text('${URL}/')
       f.element('title').text(TITLE)
 
-      match articles.opt(0) {
-        case None -> {}
-        case Some(article) -> f.element('updated').text(article.date.to_iso8601)
+      match articles.get(0) {
+        case Error(_) -> {}
+        case Ok(article) -> f.element('updated').text(article.date.to_iso8601)
       }
 
       f.element('link').attr('href', URL).attr('rel', 'alternate')
@@ -551,7 +553,7 @@ fn pub feed(files: ref Files) -> Result[String, String] {
         a.element('uri').text(URL)
       })
 
-      articles.iter.each(fn (article) {
+      for article in articles.iter {
         f.element('entry').with(fn (e) {
           let date = article.date.to_iso8601
           let html = article.to_html(filters).to_string
@@ -564,7 +566,7 @@ fn pub feed(files: ref Files) -> Result[String, String] {
           e.element('link').attr('href', url).attr('rel', 'alternate')
           e.element('content').attr('type', 'html').text(html)
         })
-      })
+      }
     },
   )
 

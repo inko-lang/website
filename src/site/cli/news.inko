@@ -7,7 +7,7 @@ import std.time (DateTime)
 import wobsite.url
 
 fn pub run {
-  let title = env.arguments.get(1)
+  let title = env.arguments.get(1).or_panic
   let name = url.normalize(title)
   let path = Path.new('source').join('news').join('${name}.md')
   let meta = Map.new
@@ -17,5 +17,5 @@ fn pub run {
 
   let data = '---\n${Json.Object(meta).to_pretty_string}\n---\n\n'
 
-  WriteOnlyFile.new(path).then(fn (f) { f.write_string(data) }).get
+  WriteOnlyFile.new(path).then(fn (f) { f.write(data) }).get
 }

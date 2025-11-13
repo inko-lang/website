@@ -1,28 +1,26 @@
 # The Cloudflare Pages project to deploy to.
 PROJECT := inko-lang-org
+EXE := ./build/debug/main
 
-build:
+exe:
 	@inko build
-	@./build/main build
 
-sponsors:
-	@inko build
-	@./build/main sponsors
+build: exe
+	@${EXE} build
 
-packages:
-	@inko build
-	@./build/main packages
+sponsors: exe
+	@${EXE} sponsors
 
-setup:
-	@inko pkg sync
+packages: exe
+	@${EXE} packages
 
 watch:
 	@bash scripts/watch.sh
 
 clean:
-	@rm -rf public
+	@rm -rf public build
 
-deploy:
+deploy: build
 	@npx wrangler pages deploy --project-name ${PROJECT} public
 
-.PHONY: setup build watch clean deploy sponsors packages
+.PHONY: exe build watch clean deploy sponsors packages

@@ -1,6 +1,6 @@
 import builder.html
 import std.fs.file (ReadOnlyFile)
-import std.io (BufferedReader)
+import std.io (BufferedReader, SeekFrom)
 import syntax.format (Html)
 import syntax.lexer.inko (Lexer)
 import wobsite (Files)
@@ -18,7 +18,7 @@ type Example {
         .new(path.clone)
         .then(fn (file) {
           # Skip the `# ` of the first line.
-          try file.seek(2)
+          try file.seek(SeekFrom.Start(2))
           Result.Ok(file)
         })
         .then(fn (file) {
