@@ -283,6 +283,68 @@ implemented by types such as `String`, `ByteArray`, `Slice[String]` and
 these different types to an IO stream. Just like the `Read` trait the `Write`
 trait is also generic over the error type.
 
+## A new indexing API
+
+Types such as `Array`, `Map` can be indexed using different values (integers for
+`Array`, the keys for a `Map`, etc). For this these types offered various
+methods such as `Map.get`, `Map.get_mut`, `Map.opt`, `Map.opt_mut`, and possibly
+more.
+
+As part of this release these methods are unified into the following methods:
+
+- `get`: returns an immutable borrow of an index as a `Result[T, E]` where `T`
+  is the type of the value and `E` an error type (which varies based on what
+  you're indexing)
+- `get_mut`: does the same but returns a mutable borrow
+
+This means these types no longer provide a method to perform the operation and
+panic if the index is out of bounds or the key doesn't exist. Not only does this
+reduce the amount of methods each type needs to provide, it also makes it more
+explicit when code may panic. For example, instead of this:
+
+```inko
+[10, 20, 30].get(1) # => 20
+```
+
+You now write this:
+
+```inko
+[10, 20, 30].get(1).or_panic # => 20
+```
+
+The changes you may need to make to update your code are as follows:
+
+|=
+| Before
+| After
+|-
+| `x.get(y)`
+| `x.get(y).or_panic`
+|-
+| `x.get_mut(y)`
+| `x.get_mut(y).or_panic`
+|-
+| `x.opt(y)`
+| `x.get(y)`
+|-
+| `x.opt_mut(y)`
+| `x.get_mut(y)`
+|-
+| `x.remove_at(y)`
+| `x.remove_at(y).or_panic`
+|-
+| `x.remove(y)`
+| `x.remove(y).or_panic`
+|-
+| `x.byte(y)`
+| `x.get(y).or_panic`
+
+Since the `get` and `get_mut` methods return a `Result` instead of an `Option`,
+you may also need to use `Result.ok` to transform the `Result` into an `Option`
+(if you actually need an `Option` that is). The reason this new API uses a
+`Result` is so we can encode extra information into the error type, such as the
+index or key that was accessed.
+
 ## A new slicing API
 
 This release introduces a new API for slicing `String`, `ByteArray` and `Array`.
