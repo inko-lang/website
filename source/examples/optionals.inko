@@ -4,7 +4,7 @@ type async Main {
     let numbers = [10, 20, 30]
 
     numbers
-      .opt(2)
-      .map(fn (n) { n.to_string }) # => Option.Some('30')
+      .get(2)
+      .map(fn (n) { n.to_string }) # => Result.Ok('30')
   }
 }

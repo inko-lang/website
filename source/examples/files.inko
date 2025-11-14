@@ -8,13 +8,12 @@ type async Main {
     # encountering a `Result.Error`.
     let file = ReadOnlyFile
       .new('README.md'.to_path)
-      .or_panic("the file doesn't exist")
+      .or_panic_with("the file doesn't exist")
 
     let bytes = ByteArray.new
-
-    file
+    let _ = file
       .read_all(bytes)
-      .or_panic('failed to read the file')
+      .or_panic_with('failed to read the file')
 
     bytes.to_string # => "# README ..."
   }

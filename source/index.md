@@ -35,7 +35,7 @@ compared to languages such as Rust. The use of single ownership also means more
 predictable behaviour and performance, and not having to spend a long time
 adjusting different garbage collection settings.
 
-# Inko is safe
+# Memory safety
 
 With Inko you never again have to worry about NULL pointers, use-after-free
 errors, unexpected runtime errors, data races, and other types of errors
@@ -61,7 +61,7 @@ without needing explicit references to each other.
 Here's how you'd implement a simple concurrent counter:
 
 ```inko
-import std.sync (Future, Promise)
+import std.sync (Promise)
 
 type async Counter {
   let mut @value: Int
@@ -82,12 +82,51 @@ type async Main {
     counter.increment
     counter.increment
 
-    match Future.new {
-      case (future, promise) -> {
-        counter.get(promise)
-        future.get # => 2
-      }
-    }
+    await counter.get # => 2
+  }
+}
+```
+
+# Batteries included
+
+Inko provides a "batteries included" standard library, reducing the amount of
+third-party dependencies necessary. For example, here's a simple HTTP server
+that only depends on the standard library:
+
+```inko
+import std.net.http.server (Handle, Request, Response, Server)
+
+type async Main {
+  fn async main {
+    Server.new(fn { recover App() }).start(8_000).or_panic
+  }
+}
+
+type App {}
+
+impl Handle for App {
+  fn pub mut handle(request: mut Request) -> Response {
+    Response.new.string('Hello, world!')
+  }
+}
+```
+
+HTTP clients are also provided, with transparent support for HTTP and HTTPS:
+
+```inko
+import std.net.http.client (Client)
+import std.stdio (Stdout)
+import std.uri (Uri)
+
+type async Main {
+  fn async main {
+    let client = Client.new
+    let uri = Uri.parse('https://inko-lang.org').or_panic
+    let res = client.get(uri).send.or_panic
+    let buf = ByteArray.new
+    let _ = res.body.read_all(buf).or_panic
+
+    Stdout.new.print(buf)
   }
 }
 ```
@@ -141,9 +180,9 @@ algebraic data types:
 ```inko
 type async Main {
   fn async main {
-    match [10, 20].opt(1) {
-      case Some(number) -> number # => 20
-      case None -> 0
+    match [10, 20].get(1) {
+      case Ok(number) -> number # => 20
+      case _ -> 0
     }
 
     match (10, 'hello') {
@@ -171,6 +210,23 @@ type async Main {
     match alice {
       case { @name = name } -> name # => 'Alice'
     }
+  }
+}
+```
+
+Or using `let`:
+
+```inko
+type Person {
+  let @name: String
+  let @age: Int
+}
+
+type async Main {
+  fn async main {
+    let { @name = name } = Person(name: 'Alice', age: 42)
+
+    name # => 'Alice'
   }
 }
 ```
