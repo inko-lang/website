@@ -1,5 +1,5 @@
 {
-  "updated_at": "2025-11-10T06:47:02.916Z",
+  "updated_at": "2025-11-17T06:46:20.495Z",
   "packages": [
     {
       "owner": "dusty-phillips",
@@ -42,9 +42,9 @@
       "name": "inko-builder",
       "url": "https://github.com/yorickpeterse/inko-builder",
       "description": "An Inko library for generating XML and HTML",
-      "stars": 3,
+      "stars": 4,
       "license": "MPL-2.0",
-      "version": "0.15.0"
+      "version": "0.16.0"
     },
     {
       "owner": "roetlich",
@@ -71,7 +71,7 @@
       "description": "An HMAC implementation for Inko.",
       "stars": 2,
       "license": "MPL-2.0",
-      "version": "0.4.0"
+      "version": "0.5.0"
     },
     {
       "owner": "uasi",
@@ -105,9 +105,9 @@
       "name": "inko-markdown",
       "url": "https://github.com/yorickpeterse/inko-markdown",
       "description": "An Inko library for parsing an opinionated dialect of Markdown",
-      "stars": 9,
+      "stars": 10,
       "license": "MPL-2.0",
-      "version": "0.23.0"
+      "version": "0.24.0"
     },
     {
       "owner": "yorickpeterse",
@@ -116,16 +116,16 @@
       "description": "A syntax highlighting library for Inko",
       "stars": 3,
       "license": "MPL-2.0",
-      "version": "0.20.0"
+      "version": "0.23.0"
     },
     {
       "owner": "yorickpeterse",
       "name": "inko-wobsite",
       "url": "https://github.com/yorickpeterse/inko-wobsite",
       "description": "A small and opinionated static site generation library",
-      "stars": 4,
+      "stars": 5,
       "license": "MPL-2.0",
-      "version": "0.21.0"
+      "version": "0.22.0"
     }
   ]
 }
