@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-01-26T06:55:45.854Z",
+  "updated_at": "2026-02-02T07:17:22.163Z",
   "packages": [
     {
       "owner": "dusty-phillips",
@@ -33,7 +33,7 @@
       "name": "inko-tui",
       "url": "https://github.com/dusty-phillips/inko-tui",
       "description": "Basic Terminal Ui for Inko",
-      "stars": 2,
+      "stars": 3,
       "license": "MIT",
       "version": "0.0.1"
     },
