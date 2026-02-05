@@ -1,6 +1,5 @@
-# The Cloudflare Pages project to deploy to.
-PROJECT := inko-lang-org
 EXE := ./build/debug/main
+SITE := inko-lang.org
 
 exe:
 	@inko build
@@ -21,6 +20,6 @@ clean:
 	@rm -rf public build
 
 deploy: build
-	@npx wrangler pages deploy --project-name ${PROJECT} public
+	scripts/rclone.sh public "/var/lib/shost/${SITE}"
 
 .PHONY: exe build watch clean deploy sponsors packages

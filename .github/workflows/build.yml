@@ -26,16 +26,16 @@ jobs:
       github.repository == 'inko-lang/website' && github.ref_name == 'main'
     steps:
       - name: Installing dependencies
-        run: microdnf install --quiet --assumeyes make git tar npm
+        run: microdnf install --quiet --assumeyes make rclone hcloud
       - uses: actions/checkout@v4
       - uses: actions/cache@v4
         with:
           path: |
             build
             ~/.local/share/inko/packages
-            ~/.npm
           key: ${{ runner.os }}
-      - run: make deploy
+      - name: Deploy website
+        run: make deploy
         env:
-          CLOUDFLARE_ACCOUNT_ID: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
-          CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          HCLOUD_TOKEN: ${{ secrets.HCLOUD_TOKEN }}
