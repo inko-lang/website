@@ -17,8 +17,8 @@ jobs:
     steps:
       - name: Installing dependencies
         run: microdnf install --quiet --assumeyes make rclone
-      - uses: actions/checkout@v4
-      - uses: actions/cache@v4
+      - uses: actions/checkout@v6
+      - uses: actions/cache@v5
         with:
           path: |
             build
