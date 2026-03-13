@@ -11,6 +11,7 @@ upload() {
         --multi-thread-streams 8 \
         --transfers 8 \
         --metadata \
+        --checksum \
         --no-update-dir-modtime \
         --sftp-host "${SERVER}" \
         --sftp-user "${USER}" \
