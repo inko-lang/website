@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-06T08:01:48.960Z",
+  "updated_at": "2026-04-09T22:37:42.312Z",
   "packages": [
     {
       "owner": "dusty-phillips",
@@ -126,6 +126,24 @@
       "stars": 5,
       "license": "MPL-2.0",
       "version": "0.22.0"
+    },
+    {
+      "owner": "jhult",
+      "name": "inko-tantivy",
+      "url": "https://github.com/jhult/inko-tantivy",
+      "description": "Tantivy FFI bindings for full-text search in Inko.",
+      "stars": 1,
+      "license": "NOASSERTION",
+      "version": "0.2.0"
+    },
+    {
+      "owner": "jhult",
+      "name": "inko-emailparser",
+      "url": "https://github.com/jhult/inko-emailparser",
+      "description": "A comprehensive email parsing library for Inko, implementing RFC 5322 (Internet Message Format) and RFC 2045 (MIME).",
+      "stars": 1,
+      "license": "MPL-2.0",
+      "version": "0.2.0"
     }
   ]
 }
