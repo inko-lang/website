@@ -54,5 +54,13 @@
   {
     "owner": "yorickpeterse",
     "name": "inko-wobsite"
+  },
+  {
+    "owner": "jhult",
+    "name": "inko-tantivy"
+  },
+  {
+    "owner": "jhult",
+    "name": "inko-emailparser"
   }
 ]
