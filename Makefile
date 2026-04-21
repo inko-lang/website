@@ -1,8 +1,8 @@
-EXE := ./build/debug/main
+EXE := ./build/release/main
 SITE := inko-lang.org
 
 exe:
-	@inko build
+	@inko build --release
 
 build: exe
 	@${EXE} build

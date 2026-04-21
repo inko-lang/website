@@ -1,0 +1,38 @@
+import std.env
+import std.log (Logger)
+import std.net.http.server (
+  Directory, Handle, Logger as HttpLogger, Request, Response, Server,
+)
+
+type inline Handler {
+  let @logger: HttpLogger
+  let @directory: Directory
+}
+
+impl Handle for Handler {
+  fn pub mut handle(request: mut Request) -> Response {
+    let resp = @directory.handle(request, request.path.to_slice)
+
+    @logger.log(request, resp)
+    resp
+  }
+}
+
+fn pub run {
+  let dir = env.working_directory.or_panic.join('public')
+  let log = Logger.text
+  let hlog = log.clone
+  let srv = Server.new(fn move {
+    recover {
+      Handler(
+        logger: HttpLogger.new(hlog.clone),
+        directory: Directory.new(dir.clone),
+      )
+    }
+  })
+
+  srv.before_start(fn (addr, _not) {
+    log.event('started').with('address', addr.to_string).submit
+  })
+  srv.start(8_000).or_panic
+}

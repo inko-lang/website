@@ -2,6 +2,7 @@ import site.cli.build
 import site.cli.news
 import site.cli.packages
 import site.cli.sponsors
+import site.cli.watch
 import std.env
 
 type async Main {
@@ -11,6 +12,7 @@ type async Main {
       case Ok('sponsors') -> sponsors.run
       case Ok('packages') -> packages.run
       case Ok('news') -> news.run
+      case Ok('watch') -> watch.run
       case Ok(v) -> panic('unknown command: ${v}')
     }
   }
