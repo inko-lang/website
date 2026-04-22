@@ -537,6 +537,10 @@ table tr:last-child td {
   padding: 5px;
 }
 
+.packages-table tr td:last-child {
+  min-width: 80px;
+}
+
 .copy-notice {
   display: none;
 }
