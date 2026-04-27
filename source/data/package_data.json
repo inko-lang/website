@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-04-20T08:26:38.991Z",
+  "updated_at": "2026-04-27T08:40:36.53Z",
   "packages": [
     {
       "owner": "dusty-phillips",
@@ -114,9 +114,9 @@
       "name": "inko-syntax",
       "url": "https://github.com/yorickpeterse/inko-syntax",
       "description": "A syntax highlighting library for Inko",
-      "stars": 4,
+      "stars": 5,
       "license": "MPL-2.0",
-      "version": "0.23.0"
+      "version": "0.24.0"
     },
     {
       "owner": "yorickpeterse",
@@ -125,7 +125,7 @@
       "description": "A small and opinionated static site generation library",
       "stars": 5,
       "license": "MPL-2.0",
-      "version": "0.22.0"
+      "version": "0.23.0"
     },
     {
       "owner": "jhult",
@@ -133,7 +133,7 @@
       "url": "https://github.com/jhult/inko-tantivy",
       "description": "Tantivy FFI bindings for full-text search in Inko.",
       "stars": 1,
-      "license": "NOASSERTION",
+      "license": "MPL-2.0",
       "version": "0.2.0"
     },
     {
