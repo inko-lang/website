@@ -1,12 +1,12 @@
 {
-  "updated_at": "2026-04-27T08:40:36.53Z",
+  "updated_at": "2026-05-04T08:42:14.901Z",
   "packages": [
     {
       "owner": "dusty-phillips",
       "name": "inko-http",
       "url": "https://github.com/dusty-phillips/inko-http",
       "description": "Rudimentary HTTP Server exploring the Inko programming language",
-      "stars": 5,
+      "stars": 6,
       "license": "MIT",
       "version": "0.0.4"
     },
@@ -24,7 +24,7 @@
       "name": "inko-regex",
       "url": "https://github.com/dusty-phillips/inko-regex",
       "description": "Basic regular expression parser in pure inko",
-      "stars": 4,
+      "stars": 5,
       "license": "MIT",
       "version": "0.0.4"
     },
@@ -125,7 +125,7 @@
       "description": "A small and opinionated static site generation library",
       "stars": 5,
       "license": "MPL-2.0",
-      "version": "0.23.0"
+      "version": "0.24.0"
     },
     {
       "owner": "jhult",
