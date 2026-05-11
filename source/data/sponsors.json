@@ -1,4 +1,12 @@
 {
-  "updated_at": "2026-05-04T04:49:45.436Z",
-  "sponsors": []
+  "updated_at": "2026-05-11T05:07:00.355Z",
+  "sponsors": [
+    {
+      "name": "Artsiom",
+      "image": "https://avatars.githubusercontent.com/u/224387579?v=4&size=64",
+      "website": "https://github.com/adzen4",
+      "amount": 5,
+      "created_at": "2026-05-05T12:10:06Z"
+    }
+  ]
 }
