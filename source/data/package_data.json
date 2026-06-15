@@ -1,12 +1,12 @@
 {
-  "updated_at": "2026-06-08T11:20:42.885Z",
+  "updated_at": "2026-06-15T12:42:29.702Z",
   "packages": [
     {
       "owner": "dusty-phillips",
       "name": "inko-http",
       "url": "https://github.com/dusty-phillips/inko-http",
       "description": "Rudimentary HTTP Server exploring the Inko programming language",
-      "stars": 6,
+      "stars": 5,
       "license": "MIT",
       "version": "0.0.4"
     },
