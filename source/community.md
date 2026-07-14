@@ -30,3 +30,5 @@ For more information, see the [code of conduct](/code-of-conduct).
   the Redis serialization protocol
 - [OpenFlow](https://github.com/yorickpeterse/openflow): controls your [Itho
   Daalderop](https://www.ithodaalderop.nl/) ventilation unit.
+- [shost](https://github.com/yorickpeterse/shost): an HTTP server for
+  self-hosting static websites
