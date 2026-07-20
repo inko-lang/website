@@ -2,7 +2,6 @@ import site.github
 import std.env
 import std.fs.file (ReadOnlyFile, WriteOnlyFile)
 import std.fs.path (Path)
-import std.int (Format)
 import std.json (Json)
 import std.net.http.client (Client)
 import std.time (DateTime)
@@ -45,7 +44,7 @@ query ($owner: String!, $name: String!) {
 fn version_tag?(name: String) -> Bool {
   let vals = name
     .split('.')
-    .map(fn (v) { Int.parse(v, Format.Decimal).some? })
+    .map(fn (v) { Int.parse(v, base: 10).some? })
     .to_array
 
   vals == [true, true, true]
