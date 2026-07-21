@@ -8,6 +8,11 @@
 We're pleased to announce the release of Inko 0.21.1. This release includes
 support for Argon2, BLAKE2b, various bug fixes and performance improvements.
 
+::: note
+During the release we encountered a bug that meant we had to start the release
+process over again, hence the jump from 0.20.0 to 0.21.1.
+:::
+
 If you're new to Inko: Inko is a programming language for building concurrent
 software, but without the usual headaches such as data race conditions and
 non-deterministic garbage collectors. Inko features deterministic automatic
