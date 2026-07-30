@@ -62,5 +62,9 @@
   {
     "owner": "jhult",
     "name": "inko-emailparser"
+  },
+  {
+    "owner": "yorickpeterse",
+    "name": "inko-sqlite"
   }
 ]
