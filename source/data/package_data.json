@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-07-27T10:08:27.177Z",
+  "updated_at": "2026-07-30T16:21:23.810Z",
   "packages": [
     {
       "owner": "dusty-phillips",
@@ -142,6 +142,15 @@
       "url": "https://github.com/jhult/inko-emailparser",
       "description": "A comprehensive email parsing library for Inko, implementing RFC 5322 (Internet Message Format) and RFC 2045 (MIME).",
       "stars": 1,
+      "license": "MPL-2.0",
+      "version": "0.2.0"
+    },
+    {
+      "owner": "yorickpeterse",
+      "name": "inko-sqlite",
+      "url": "https://github.com/yorickpeterse/inko-sqlite",
+      "description": "SQLite bindings for Inko",
+      "stars": 0,
       "license": "MPL-2.0",
       "version": "0.2.0"
     }
