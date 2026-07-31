@@ -16,8 +16,8 @@ jobs:
       github.repository == 'inko-lang/website' && github.ref_name == 'main'
     steps:
       - name: Installing dependencies
-        run: microdnf install --quiet --assumeyes make rclone
-      - uses: actions/checkout@v6
+        run: microdnf install --quiet --assumeyes just rsync
+      - uses: actions/checkout@v7
       - uses: actions/cache@v5
         with:
           path: |
@@ -31,6 +31,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GH_ACCESS_TOKEN }}
       - name: Deploy website
-        run: make deploy
+        run: bash scripts/deploy.sh
         env:
           SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}

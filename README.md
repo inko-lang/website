@@ -5,31 +5,31 @@ website](https://inko-lang.org/).
 
 ## Requirements
 
-- Inko 0.19.1 or newer
+- Inko
 
 ## Development
 
 Install the necessary packages:
 
 ```bash
-inko pkg sync
+sudo dnf install just rsync
 ```
 
 Build the website:
 
 ```bash
-inko run
+just build
 ```
 
 If you want to start a server and automatically build the website upon any
 changes, run the following:
 
 ```bash
-make watch
+just watch
 ```
 
-This requires [inotify-tools](https://github.com/inotify-tools/inotify-tools)
-and [Python 3](https://www.python.org/) to be installed.
+This requires [inotify-tools](https://github.com/inotify-tools/inotify-tools) to
+be installed.
 
 ## License
 

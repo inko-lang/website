@@ -10,30 +10,36 @@ type Example {
   let @body: ByteArray
 
   fn static parse_all(files: ref Files) -> Result[Array[Example], String] {
-    files.matching('/examples/*.inko').try_reduce([], fn (ary, path) {
-      let title = ByteArray.new
-      let body = ByteArray.new
+    let ex = try files.matching('/examples/*.inko').try_reduce(
+      [],
+      fn (ary, path) {
+        let title = ByteArray.new
+        let body = ByteArray.new
 
-      try ReadOnlyFile
-        .new(path.clone)
-        .then(fn (file) {
-          # Skip the `# ` of the first line.
-          try file.seek(SeekFrom.Start(2))
-          Result.Ok(file)
-        })
-        .then(fn (file) {
-          let reader = BufferedReader.new(file)
-
-          reader.read_line(title, inclusive: true).then(fn (_) {
-            reader.read_all(body)
+        try ReadOnlyFile
+          .new(path.clone)
+          .then(fn (file) {
+            # Skip the `# ` of the first line.
+            try file.seek(SeekFrom.Start(2))
+            Result.Ok(file)
           })
-        })
-        .map_error(fn (e) { 'failed to read example ${path}: ${e}' })
+          .then(fn (file) {
+            let reader = BufferedReader.new(file)
 
-      title.pop # Remove the trailing newline
-      ary.push((Example(title: title.into_string, body: body)))
-      Result.Ok(ary)
-    })
+            reader.read_line(title, inclusive: true).then(fn (_) {
+              reader.read_all(body)
+            })
+          })
+          .map_error(fn (e) { 'failed to read example ${path}: ${e}' })
+
+        title.pop # Remove the trailing newline
+        ary.push((Example(title: title.into_string, body: body)))
+        Result.Ok(ary)
+      },
+    )
+
+    ex.sort_by(fn (a, b) { a.title.cmp(b.title) })
+    Result.Ok(ex)
   }
 
   fn to_html -> html.Document {
