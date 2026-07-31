@@ -32,7 +32,6 @@ clean:
 [arg("flags", long)]
 deploy flags="": build
     rsync \
-        --dry-run \
         --archive \
         --checksum \
         --delete \
