@@ -1,5 +1,5 @@
 {
-  "updated_at": "2026-10-12T15:24:40.696Z",
+  "updated_at": "2026-10-19T13:14:07.606Z",
   "packages": [
     {
       "owner": "dusty-phillips",
@@ -60,7 +60,7 @@
       "name": "inko-blake3",
       "url": "https://github.com/uasi/inko-blake3",
       "description": "A BLAKE3 hasher for Inko.",
-      "stars": 3,
+      "stars": 4,
       "license": "MPL-2.0",
       "version": "0.1.0"
     },
